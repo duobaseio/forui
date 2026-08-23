@@ -4,46 +4,36 @@ import 'package:flutter/painting.dart';
 import 'package:meta/meta.dart';
 
 /// Tokens for the various border radius sizes.
-final class FBorderRadius with Diagnosticable {
+final class const FBorderRadius({
   /// The extra-extra-small border radius. Defaults to 4px.
-  final BorderRadius xs2;
+  final BorderRadius xs2 = const .all(.circular(4)),
 
   /// The extra-small border radius. Defaults to 6px.
-  final BorderRadius xs;
+  final BorderRadius xs = const .all(.circular(6)),
 
   /// The small border radius. Defaults to 8px.
-  final BorderRadius sm;
+  final BorderRadius sm = const .all(.circular(8)),
 
   /// The medium border radius. Defaults to 10px.
-  final BorderRadius md;
+  final BorderRadius md = const .all(.circular(10)),
 
   /// The large border radius. Defaults to 14px.
-  final BorderRadius lg;
+  final BorderRadius lg = const .all(.circular(14)),
 
   /// The extra-large border radius. Defaults to 18px.
-  final BorderRadius xl;
+  final BorderRadius xl = const .all(.circular(18)),
 
   /// The extra-large border radius. Defaults to 22px.
-  final BorderRadius xl2;
+  final BorderRadius xl2 = const .all(.circular(22)),
 
   /// The extra-large border radius. Defaults to 26px.
-  final BorderRadius xl3;
+  final BorderRadius xl3 = const .all(.circular(26)),
 
   /// The pill border radius. Defaults to 100px.
-  final BorderRadius pill;
-
+  final BorderRadius pill = const .all(.circular(100)),
+}) with Diagnosticable {
   /// Creates an [FBorderRadius].
-  const FBorderRadius({
-    this.xs2 = const .all(.circular(4)),
-    this.xs = const .all(.circular(6)),
-    this.sm = const .all(.circular(8)),
-    this.md = const .all(.circular(10)),
-    this.lg = const .all(.circular(14)),
-    this.xl = const .all(.circular(18)),
-    this.xl2 = const .all(.circular(22)),
-    this.xl3 = const .all(.circular(26)),
-    this.pill = const .all(.circular(100)),
-  });
+  this;
 
   /// Scales all border radii by the given [scalar].
   ///

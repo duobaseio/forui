@@ -7,7 +7,7 @@
   "shortDateSuffix": "",
   "dateFieldHint": "তাৰিখ বাছনি কৰক",
   "dateFieldInvalidDateError": "অমান্য তাৰিখ।",
-  "timeFieldPeriodSeparator": "",
+  "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "সময় বাছনি কৰক",

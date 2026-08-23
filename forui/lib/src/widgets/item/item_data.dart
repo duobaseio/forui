@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
@@ -60,14 +61,7 @@ class FInheritedItemCallbacks extends InheritedWidget {
   final VoidCallback? onLongPress;
 
   /// Creates a [FInheritedItemCallbacks].
-  const FInheritedItemCallbacks({
-    required super.child,
-    super.key,
-    this.onHoverEnter,
-    this.onHoverExit,
-    this.onPress,
-    this.onLongPress,
-  });
+  const new({required super.child, super.key, this.onHoverEnter, this.onHoverExit, this.onPress, this.onLongPress});
 
   @override
   bool updateShouldNotify(FInheritedItemCallbacks old) =>
@@ -100,7 +94,7 @@ final class FInheritedItemData extends InheritedWidget {
   final FItemData? data;
 
   /// Creates a [FInheritedItemData].
-  const FInheritedItemData({required super.child, this.data, super.key});
+  const new({required super.child, this.data, super.key});
 
   /// Creates a [FInheritedItemData] that merges the given fields with the current [FInheritedItemData].
   static Widget merge({
@@ -189,7 +183,7 @@ final class FItemData with Diagnosticable {
   final bool intrinsicWidth;
 
   /// Creates a new [FItemData].
-  const FItemData({
+  const new({
     this.styles,
     this.spacing = 0,
     this.dividerColor = const .all(Colors.transparent),

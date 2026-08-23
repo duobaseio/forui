@@ -41,7 +41,7 @@ class FProgress extends StatefulWidget {
   final String? semanticsLabel;
 
   /// Creates a determinate [FProgress].
-  const FProgress({this.style = const .context(), this.semanticsLabel, super.key});
+  const new({this.style = const .context(), this.semanticsLabel, super.key});
 
   @override
   State<FProgress> createState() => _ProgressState();
@@ -144,33 +144,24 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
 }
 
 /// A [FProgress]'s style.
-class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
-  /// The linear progress's constraints. Defaults to a height of 6.0 and no horizontal constraint.
-  @override
-  final BoxConstraints constraints;
-
+class const FProgressStyle({
   /// The track's decoration.
-  @override
-  final Decoration trackDecoration;
+  @override required final Decoration trackDecoration,
 
   /// The fill's decoration.
-  @override
-  final Decoration fillDecoration;
+  @override required final Decoration fillDecoration,
 
-  /// The motion-related properties for an indeterminate [FProgress].
-  @override
-  final FProgressMotion motion;
+  /// The linear progress's constraints. Defaults to a height of 6.0 and no horizontal constraint.
+  @override final BoxConstraints constraints = const .tightFor(height: 6.0),
 
+  /// The motion-related properties for an indeterminate [FProgress]. Defaults to [FProgressMotion].
+  @override final FProgressMotion motion = const FProgressMotion(),
+}) with Diagnosticable, _$FProgressStyleFunctions {
   /// Creates a [FProgressStyle].
-  const FProgressStyle({
-    required this.trackDecoration,
-    required this.fillDecoration,
-    this.constraints = const .tightFor(height: 6.0),
-    this.motion = const FProgressMotion(),
-  });
+  this;
 
   /// Creates a [FProgressStyle] that inherits its properties.
-  FProgressStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         trackDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
@@ -186,31 +177,22 @@ class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
 /// Motion-related properties for an indeterminate [FProgress].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
-class FProgressMotion with Diagnosticable, _$FProgressMotionFunctions {
+class const FProgressMotion({
   /// The animation's period. Defaults to 1s.
-  @override
-  final Duration period;
+  @override final Duration period = const Duration(milliseconds: 1000),
 
   /// The interval between animations. Defaults to 500ms.
-  @override
-  final Duration interval;
+  @override final Duration interval = const Duration(milliseconds: 500),
 
   /// The animation curve. Defaults to [Curves.ease].
-  @override
-  final Curve curve;
+  @override final Curve curve = Curves.ease,
 
   /// The percentage of the filled progress. Defaults to 0.4.
   ///
   /// ## Contract
   /// Throws [AssertionError] if outside the range of 0.0 to 1.0.
-  @override
-  final double value;
-
+  @override final double value = 0.4,
+}) with Diagnosticable, _$FProgressMotionFunctions {
   /// Creates a [FProgressMotion].
-  const FProgressMotion({
-    this.period = const Duration(milliseconds: 1000),
-    this.interval = const Duration(milliseconds: 500),
-    this.curve = Curves.ease,
-    this.value = 0.4,
-  }) : assert(value >= 0.0 && value <= 1.0, 'value ($value) must be between 0.0 and 1.0');
+  this : assert(value >= 0.0 && value <= 1.0, 'value ($value) must be between 0.0 and 1.0');
 }

@@ -12,16 +12,13 @@ import 'package:meta/meta.dart';
 ///   `shape` — [BoxBorder.getInnerPath] is not used because it ignores `BoxDecoration.borderRadius`.
 /// * For other [Decoration] types, falls back to the outer path via [Decoration.getClipPath].
 @internal
-class InnerPathClipper extends CustomClipper<Path> {
+class const InnerPathClipper({
   /// The decoration whose inner path is used as the clip.
-  final Decoration decoration;
+  required final Decoration decoration,
 
   /// The text direction used to resolve directional shapes.
-  final TextDirection direction;
-
-  /// Creates an [InnerPathClipper].
-  const InnerPathClipper({required this.decoration, this.direction = .ltr});
-
+  final TextDirection direction = .ltr,
+}) extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
     final rect = Offset.zero & size;

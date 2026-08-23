@@ -6,7 +6,7 @@ import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/otp_field/caret.dart';
 
 /// A marker interface which denotes that mixed-in widgets are items in an OTP field.
-mixin FOtpItemMixin on Widget {}
+mixin FOtpItemMixin on Widget;
 
 /// Provides the state of an individual item in an [FOtpField] to its descendants.
 class FOtpItemScope extends InheritedWidget {
@@ -29,7 +29,7 @@ class FOtpItemScope extends InheritedWidget {
   final bool end;
 
   /// Creates an [FOtpItemScope].
-  const FOtpItemScope({
+  const new({
     required this.character,
     required this.focused,
     required this.start,
@@ -56,7 +56,7 @@ class FOtpItemScope extends InheritedWidget {
 /// An item in an [FOtpField].
 class FOtpItem extends StatefulWidget with FOtpItemMixin {
   /// Creates an [FOtpItem].
-  const FOtpItem({super.key});
+  const new({super.key});
 
   @override
   State<FOtpItem> createState() => _FOtpItemState();
@@ -129,7 +129,7 @@ class _FOtpItemState extends State<FOtpItem> {
 /// `start`/`end` boundaries on adjacent [FOtpItem]s.
 class FOtpDivider extends StatelessWidget {
   /// Creates an [FOtpDivider].
-  const FOtpDivider({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {

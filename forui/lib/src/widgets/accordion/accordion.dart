@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -51,7 +51,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.children, this.control = const .managed(), this.style = const .context(), super.key});
+  const new({required this.children, this.control = const .managed(), this.style = const .context(), super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -122,13 +122,8 @@ class InheritedAccordionData extends InheritedWidget {
   final int index;
   final Set<int> expanded;
 
-  InheritedAccordionData({
-    required this.controller,
-    required this.style,
-    required this.index,
-    required super.child,
-    super.key,
-  }) : expanded = controller.expanded;
+  new({required this.controller, required this.style, required this.index, required super.child, super.key})
+    : expanded = controller.expanded;
 
   @override
   bool updateShouldNotify(covariant InheritedAccordionData old) =>
@@ -146,80 +141,59 @@ class InheritedAccordionData extends InheritedWidget {
 }
 
 /// The [FAccordion]'s style.
-class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
+class const FAccordionStyle({
   /// The title's text style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> titleTextStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> titleTextStyle,
 
   /// The child's default text style.
-  @override
-  final TextStyle childTextStyle;
-
-  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 16)`.
-  @override
-  final EdgeInsetsGeometry titlePadding;
-
-  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 16)`.
-  @override
-  final EdgeInsetsGeometry childPadding;
+  @override required final TextStyle childTextStyle,
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The divider's color.
-  @override
-  final FDividerStyle dividerStyle;
+  @override required final FDividerStyle dividerStyle,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
-  /// The motion-related properties.
-  @override
-  final FAccordionMotion motion;
+  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 16)`.
+  @override final EdgeInsetsGeometry titlePadding = const .symmetric(vertical: 16),
 
+  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 16)`.
+  @override final EdgeInsetsGeometry childPadding = const .only(bottom: 16),
+
+  /// The motion-related properties. Defaults to [FAccordionMotion].
+  @override final FAccordionMotion motion = const FAccordionMotion(),
+}) with Diagnosticable, _$FAccordionStyleFunctions {
   /// Creates a [FAccordionStyle].
-  const FAccordionStyle({
-    required this.titleTextStyle,
-    required this.childTextStyle,
-    required this.iconStyle,
-    required this.focusedOutlineStyle,
-    required this.dividerStyle,
-    required this.tappableStyle,
-    this.titlePadding = const .symmetric(vertical: 16),
-    this.childPadding = const .only(bottom: 16),
-    this.motion = const FAccordionMotion(),
-  });
+  this;
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         titleTextStyle: .from(
-           typography.display.sm.copyWith(fontWeight: .w500, color: colors.foreground),
-           variants: {
-             [.hovered, .pressed]: .delta(decoration: () => .underline),
-           },
-         ),
-         childTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-         iconStyle: .all(
-           IconThemeData(
-             color: colors.mutedForeground,
-             size: touch ? typography.display.lg.fontSize : typography.display.md.fontSize,
-           ),
-         ),
-         focusedOutlineStyle: style.focusedOutlineStyle,
-         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        titleTextStyle: .from(
+          typography.display.sm.copyWith(fontWeight: .w500, color: colors.foreground),
+          variants: {
+            [.hovered, .pressed]: .delta(decoration: () => .underline),
+          },
+        ),
+        childTextStyle: typography.body.sm.copyWith(color: colors.foreground),
+        iconStyle: .all(
+          IconThemeData(
+            color: colors.mutedForeground,
+            size: touch ? typography.display.lg.fontSize : typography.display.md.fontSize,
+          ),
+        ),
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      );
 }
 
 /// Motion-related properties for [FAccordion].
@@ -227,57 +201,40 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only the fade transition is applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
-  /// A [FAccordionMotion] with no motion effects.
-  static const FAccordionMotion none = FAccordionMotion(
-    revealTween: FImmutableTween(begin: 1, end: 1),
-    iconTween: FImmutableTween(begin: 1, end: 1),
-  );
-
+class const FAccordionMotion({
   /// The expand animation's duration. Defaults to 200ms.
-  @override
-  final Duration expandDuration;
-
-  /// The collapse animation's duration. Defaults to 200ms.
-  @override
-  final Duration collapseDuration;
+  @override final Duration expandDuration = const Duration(milliseconds: 200),
 
   /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
   ///
   /// It is recommended to change this and [collapseCurve] to [Curves.linear] if there is a max number of items shown
   /// at once to avoid the height jumping effect.
-  @override
-  final Curve expandCurve;
+  @override final Curve expandCurve = Curves.easeOutCubic,
+
+  /// The collapse animation's duration. Defaults to 200ms.
+  @override final Duration collapseDuration = const Duration(milliseconds: 200),
 
   /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
+  @override final Curve collapseCurve = Curves.easeInCubic,
 
   /// The icon's animation curve when expanding. Defaults to [Curves.easeOut].
-  @override
-  final Curve iconExpandCurve;
+  @override final Curve iconExpandCurve = Curves.easeOut,
 
   /// The icon's animation curve when collapsing. Defaults to [Curves.easeOut].
-  @override
-  final Curve iconCollapseCurve;
+  @override final Curve iconCollapseCurve = Curves.easeOut,
 
   /// The reveal animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
-  @override
-  final Animatable<double> revealTween;
+  @override final Animatable<double> revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
 
   /// The icon animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 0.5)`.
-  @override
-  final Animatable<double> iconTween;
-
+  @override final Animatable<double> iconTween = const FImmutableTween(begin: 0.0, end: 0.50),
+}) with Diagnosticable, _$FAccordionMotionFunctions {
   /// Creates a [FAccordionMotion].
-  const FAccordionMotion({
-    this.expandDuration = const Duration(milliseconds: 200),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseDuration = const Duration(milliseconds: 200),
-    this.collapseCurve = Curves.easeInCubic,
-    this.iconExpandCurve = Curves.easeOut,
-    this.iconCollapseCurve = Curves.easeOut,
-    this.revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
-    this.iconTween = const FImmutableTween(begin: 0.0, end: 0.50),
-  });
+  this;
+
+  /// A [FAccordionMotion] with no motion effects.
+  static const FAccordionMotion none = FAccordionMotion(
+    revealTween: FImmutableTween(begin: 1, end: 1),
+    iconTween: FImmutableTween(begin: 1, end: 1),
+  );
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
@@ -24,7 +25,7 @@ class Sheet extends StatefulWidget {
   final ValueChanged<Size>? onChange;
   final VoidCallback? onClosing;
 
-  const Sheet({
+  const new({
     required this.controller,
     required this.animation,
     required this.style,
@@ -278,21 +279,21 @@ extension on GlobalKey {
 }
 
 /// A sheet's style.
-abstract class FSheetStyle {
+abstract class const FSheetStyle({
   /// The minimum velocity to initiate a fling. Defaults to 700.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the value is not positive.
-  final double flingVelocity;
+  final double flingVelocity = 700,
 
   /// The threshold for determining whether the sheet is closing. Defaults to 0.5.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the value is not in the range `[0, 1]`.
-  final double closeProgressThreshold;
-
+  final double closeProgressThreshold = 0.5,
+}) {
   /// Creates a [FSheetStyle].
-  const FSheetStyle({this.flingVelocity = 700, this.closeProgressThreshold = 0.5});
+  this;
 
   /// The motion-related properties for a sheet.
   FSheetMotion get motion;
@@ -303,20 +304,16 @@ abstract class FSheetStyle {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only fade transitions are applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-abstract class FSheetMotion {
+abstract class const FSheetMotion({
   /// The duration of the sheet's expansion animation. Defaults to 200ms.
-  final Duration expandDuration;
+  final Duration expandDuration = const Duration(milliseconds: 200),
 
   /// The duration of the sheet's collapsing animation. Defaults to 200ms.
-  final Duration collapseDuration;
+  final Duration collapseDuration = const Duration(milliseconds: 200),
 
   /// The curve of the sheet's expansion and collapse. Defaults to [Curves.easeOutCubic].
-  final Curve curve;
-
+  final Curve curve = Curves.easeOutCubic,
+}) {
   /// Creates a [FSheetMotion].
-  const FSheetMotion({
-    this.expandDuration = const Duration(milliseconds: 200),
-    this.collapseDuration = const Duration(milliseconds: 200),
-    this.curve = Curves.easeOutCubic,
-  });
+  this;
 }

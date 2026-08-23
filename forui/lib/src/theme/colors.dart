@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 /// The color tokens.
@@ -25,7 +25,121 @@ import 'package:meta/meta.dart';
 /// can be adjusted with [disabledOpacity].
 ///
 /// Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom color scheme.
-final class FColors with Diagnosticable {
+final class const FColors._({
+  /// The system brightness.
+  ///
+  /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
+  required final Brightness brightness,
+
+  /// The system overlay style.
+  ///
+  /// This is typically used to determine the appearance of native system overlays such as status bars.
+  required final SystemUiOverlayStyle systemOverlayStyle,
+
+  /// The barrier color.
+  ///
+  /// Typically used as a background for modal/pop-up routes.
+  required final Color barrier,
+
+  /// The background color.
+  ///
+  /// Typically used as a background for [foreground] colored widgets.
+  required final Color background,
+
+  /// The foreground color.
+  ///
+  /// Typically used to color widgets against a [background].
+  required final Color foreground,
+
+  /// The primary color.
+  ///
+  /// Typically used as a background for [primaryForeground] colored widgets.
+  required final Color primary,
+
+  /// The primary foreground color.
+  ///
+  /// Typically used to color widgets against a [primary] colored background.
+  required final Color primaryForeground,
+
+  /// The secondary color.
+  ///
+  /// Typically used as a background for [secondaryForeground] colored widgets.
+  required final Color secondary,
+
+  /// The secondary foreground color.
+  ///
+  /// Typically used to color widgets against a [secondary] colored background.
+  required final Color secondaryForeground,
+
+  /// The muted color.
+  ///
+  /// Typically used as a background for [mutedForeground] colored widgets.
+  required final Color muted,
+
+  /// The muted foreground color.
+  ///
+  /// Typically used to color widgets against a [muted] colored background.
+  required final Color mutedForeground,
+
+  /// The destructive color.
+  ///
+  /// Typically used as a background for [destructiveForeground] colored widgets.
+  required final Color destructive,
+
+  /// The destructive foreground color.
+  ///
+  /// Typically used to color widgets against a [destructive] colored background.
+  required final Color destructiveForeground,
+
+  /// The error color.
+  ///
+  /// Typically used as a background for [errorForeground] colored widgets.
+  required final Color error,
+
+  /// The error foreground color.
+  ///
+  /// Typically used to color widgets against a [error] colored background.
+  required final Color errorForeground,
+
+  /// The card color.
+  ///
+  /// Typically used as a background for card widgets.
+  required final Color card,
+
+  /// The border color.
+  required final Color border,
+
+  /// The percentage to lighten dark colors by. A higher value will result in a more pronounced lightening effect.
+  ///
+  /// Defaults to 0.075.
+  ///
+  /// ## Contract
+  /// `0.0 <= hoverLighten <= 1.0`
+  final double hoverLighten = 0.075,
+
+  /// The percentage to darken light colors by. A higher value will result in a more pronounced darkening effect.
+  ///
+  /// Defaults to 0.05.
+  ///
+  /// ## Contract
+  /// `0.0 <= hoverDarken <= 1.0`
+  final double hoverDarken = 0.05,
+
+  /// The factor by which to multiply a color's opacity when a widget is disabled. Defaults to 0.5.
+  ///
+  /// For example, a fully opaque color will become 50% transparent, and a color at 80% opacity will become 40%.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if the value is less than 0 or greater than 1.
+  final double disabledOpacity = 0.5,
+
+  final Map<Object, ThemeExtension<dynamic>> _extensions = const {},
+}) with Diagnosticable {
+  this
+    : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'hoverLighten must be between 0 and 1.'),
+      assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'hoverDarken must be between 0 and 1.'),
+      assert(0 <= disabledOpacity && disabledOpacity <= 1, 'disabledOpacity must be between 0 and 1.');
+
   /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) light color scheme.
   static const neutralLight = FColors._(
     brightness: .light,
@@ -80,120 +194,11 @@ final class FColors with Diagnosticable {
     return Color.lerp(a, b, t);
   }
 
-  /// The system brightness.
-  ///
-  /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
-  final Brightness brightness;
-
-  /// The system overlay style.
-  ///
-  /// This is typically used to determine the appearance of native system overlays such as status bars.
-  final SystemUiOverlayStyle systemOverlayStyle;
-
-  /// The barrier color.
-  ///
-  /// Typically used as a background for modal/pop-up routes.
-  final Color barrier;
-
-  /// The background color.
-  ///
-  /// Typically used as a background for [foreground] colored widgets.
-  final Color background;
-
-  /// The foreground color.
-  ///
-  /// Typically used to color widgets against a [background].
-  final Color foreground;
-
-  /// The primary color.
-  ///
-  /// Typically used as a background for [primaryForeground] colored widgets.
-  final Color primary;
-
-  /// The primary foreground color.
-  ///
-  /// Typically used to color widgets against a [primary] colored background.
-  final Color primaryForeground;
-
-  /// The secondary color.
-  ///
-  /// Typically used as a background for [secondaryForeground] colored widgets.
-  final Color secondary;
-
-  /// The secondary foreground color.
-  ///
-  /// Typically used to color widgets against a [secondary] colored background.
-  final Color secondaryForeground;
-
-  /// The muted color.
-  ///
-  /// Typically used as a background for [mutedForeground] colored widgets.
-  final Color muted;
-
-  /// The muted foreground color.
-  ///
-  /// Typically used to color widgets against a [muted] colored background.
-  final Color mutedForeground;
-
-  /// The destructive color.
-  ///
-  /// Typically used as a background for [destructiveForeground] colored widgets.
-  final Color destructive;
-
-  /// The destructive foreground color.
-  ///
-  /// Typically used to color widgets against a [destructive] colored background.
-  final Color destructiveForeground;
-
-  /// The error color.
-  ///
-  /// Typically used as a background for [errorForeground] colored widgets.
-  final Color error;
-
-  /// The error foreground color.
-  ///
-  /// Typically used to color widgets against a [error] colored background.
-  final Color errorForeground;
-
-  /// The card color.
-  ///
-  /// Typically used as a background for card widgets.
-  final Color card;
-
-  /// The border color.
-  final Color border;
-
-  /// The percentage to lighten dark colors by. A higher value will result in a more pronounced lightening effect.
-  ///
-  /// Defaults to 0.075.
-  ///
-  /// ## Contract
-  /// `0.0 <= hoverLighten <= 1.0`
-  final double hoverLighten;
-
-  /// The percentage to darken light colors by. A higher value will result in a more pronounced darkening effect.
-  ///
-  /// Defaults to 0.05.
-  ///
-  /// ## Contract
-  /// `0.0 <= hoverDarken <= 1.0`
-  final double hoverDarken;
-
-  /// The factor by which to multiply a color's opacity when a widget is disabled. Defaults to 0.5.
-  ///
-  /// For example, a fully opaque color will become 50% transparent, and a color at 80% opacity will become 40%.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if the value is less than 0 or greater than 1.
-  final double disabledOpacity;
-
-  final Map<Object, ThemeExtension<dynamic>> _extensions;
-
   /// Creates a [FColors].
   ///
   /// **Note:**
   /// Consider generating a [FColors] using [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) instead.
-  FColors({
+  new({
     required Brightness brightness,
     required SystemUiOverlayStyle systemOverlayStyle,
     required Color barrier,
@@ -239,34 +244,8 @@ final class FColors with Diagnosticable {
          extensions: extensions.isEmpty ? const {} : {for (final extension in extensions) extension.type: extension},
        );
 
-  const FColors._({
-    required this.brightness,
-    required this.systemOverlayStyle,
-    required this.barrier,
-    required this.background,
-    required this.foreground,
-    required this.primary,
-    required this.primaryForeground,
-    required this.secondary,
-    required this.secondaryForeground,
-    required this.muted,
-    required this.mutedForeground,
-    required this.destructive,
-    required this.destructiveForeground,
-    required this.error,
-    required this.errorForeground,
-    required this.card,
-    required this.border,
-    this.hoverLighten = 0.075,
-    this.hoverDarken = 0.05,
-    this.disabledOpacity = 0.5,
-    this._extensions = const {},
-  }) : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'hoverLighten must be between 0 and 1.'),
-       assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'hoverDarken must be between 0 and 1.'),
-       assert(0 <= disabledOpacity && disabledOpacity <= 1, 'disabledOpacity must be between 0 and 1.');
-
   /// Creates a linear interpolation between two [FColors] using the given factor [t].
-  factory FColors.lerp(FColors a, FColors b, double t) => .new(
+  factory lerp(FColors a, FColors b, double t) => .new(
     brightness: t < 0.5 ? a.brightness : b.brightness,
     systemOverlayStyle: t < 0.5 ? a.systemOverlayStyle : b.systemOverlayStyle,
     barrier: FColors.lerpColor(a.barrier, b.barrier, t)!,

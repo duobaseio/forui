@@ -25,7 +25,7 @@ class FTooltipController extends FChangeNotifier {
   FTooltipMotion _motion;
 
   /// Creates a [FTooltipController] with the given [vsync] and [shown].
-  FTooltipController({required TickerProvider vsync, bool shown = false}) : _motion = const FTooltipMotion() {
+  new({required TickerProvider vsync, bool shown = false}) : _motion = const FTooltipMotion() {
     if (shown) {
       _overlay.show();
     }
@@ -134,7 +134,7 @@ class _ProxyController extends FTooltipController {
   int _monotonic;
   ValueChanged<bool> _onChange;
 
-  _ProxyController(this._onChange, {required super.vsync, super.shown}) : _monotonic = 0;
+  new(this._onChange, {required super.vsync, super.shown}) : _monotonic = 0;
 
   void update(bool shown, ValueChanged<bool> onChange) {
     _onChange = onChange;
@@ -169,16 +169,16 @@ class _ProxyController extends FTooltipController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
   /// Creates a [FTooltipControl].
-  const factory FTooltipControl.managed({FTooltipController? controller, bool? initial, ValueChanged<bool>? onChange}) =
+  const factory managed({FTooltipController? controller, bool? initial, ValueChanged<bool>? onChange}) =
       FTooltipManagedControl;
 
   /// Creates a [FTooltipControl] for controlling a tooltip using lifted state.
   ///
   /// The [shown] parameter indicates whether the tooltip is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
-  const factory FTooltipControl.lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
+  const factory lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
 
-  const FTooltipControl._();
+  const new _();
 
   (FTooltipController, bool) _update(
     FTooltipControl old,
@@ -209,7 +209,7 @@ class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FToo
   final ValueChanged<bool>? onChange;
 
   /// Creates a [FTooltipControl].
-  const FTooltipManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both initially shown and controller. Pass initially shown to the controller instead.',
@@ -227,7 +227,7 @@ class _Lifted extends FTooltipControl with _$_LiftedMixin {
   @override
   final ValueChanged<bool> onChange;
 
-  const _Lifted({required this.shown, required this.onChange}) : super._();
+  const new({required this.shown, required this.onChange}) : super._();
 
   @override
   FTooltipController createController(TickerProvider vsync) => _ProxyController(vsync: vsync, shown: shown, onChange);

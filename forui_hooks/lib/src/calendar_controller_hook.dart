@@ -105,7 +105,7 @@ class _CalendarControllerHook<C extends FCalendarController> extends Hook<C> {
   final String _debugLabel;
   final _Create<C> _create;
 
-  const _CalendarControllerHook({
+  const new({
     required this.selectable,
     required this.start,
     required this.today,

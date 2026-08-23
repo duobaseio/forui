@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The themes.
 final themes = {'neutral-light': FTheme.neutral.light.desktop, 'neutral-dark': FTheme.neutral.dark.desktop};

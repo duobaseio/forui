@@ -3,7 +3,7 @@ part of 'select.dart';
 class _BasicSelect<T> extends FSelect<T> {
   final List<FSelectItemMixin> children;
 
-  const _BasicSelect({
+  const new({
     required this.children,
     required super.format,
     super.control,

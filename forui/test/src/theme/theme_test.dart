@@ -1,13 +1,12 @@
-import 'package:flutter/material.dart';
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
 class Foo extends StatelessWidget {
   final Widget child;
 
-  const Foo({required this.child, super.key});
+  const new({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) => FBasicTheme(data: FTheme.neutral.dark.touch, textDirection: .ltr, child: child);

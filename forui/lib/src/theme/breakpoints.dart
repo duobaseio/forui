@@ -42,28 +42,28 @@ import 'package:flutter/foundation.dart';
 ///   };
 /// }
 /// ```
-final class FBreakpoints with Diagnosticable {
+final class const FBreakpoints({
   /// The minimum width of the small breakpoint, inclusive. Defaults to 640.
   ///
   /// Mobile devices are typically smaller than [sm].
-  final double sm;
+  final double sm = 640,
 
   /// The minimum width of the medium breakpoint, inclusive. Defaults to 768.
   ///
   /// Tablet decides are typically larger than [md].
-  final double md;
+  final double md = 768,
 
   /// The minimum width of the large breakpoint, inclusive. Defaults to 1024.
-  final double lg;
+  final double lg = 1024,
 
   /// The minimum width of the extra large breakpoint, inclusive. Defaults to 1280.
-  final double xl;
+  final double xl = 1280,
 
   /// The minimum width of the extra extra large breakpoint, inclusive. Defaults to 1536.
-  final double xl2;
-
+  final double xl2 = 1536,
+}) with Diagnosticable {
   /// Creates a [FBreakpoints].
-  const FBreakpoints({this.sm = 640, this.md = 768, this.lg = 1024, this.xl = 1280, this.xl2 = 1536});
+  this;
 
   @override
   bool operator ==(Object other) =>

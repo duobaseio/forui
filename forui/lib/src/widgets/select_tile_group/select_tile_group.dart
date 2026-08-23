@@ -119,7 +119,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   /// {@template forui.widgets.FSelectTileGroup.new}
   /// Creates a [FSelectTileGroup].
   /// {@endtemplate}
-  FSelectTileGroup({
+  new({
     required List<FSelectTile<T>> this._children,
     this.control,
     this.scrollController,
@@ -150,7 +150,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   ///
   /// {@macro forui.widgets.FTileGroup.builder}
   /// {@endtemplate}
-  FSelectTileGroup.builder({
+  new builder({
     required FSelectTile<T>? Function(BuildContext context, int index) this._tileBuilder,
     this._count,
     this.control,

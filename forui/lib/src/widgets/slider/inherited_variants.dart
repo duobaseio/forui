@@ -13,7 +13,7 @@ class InheritedVariants extends InheritedWidget {
 
   final Set<FVariant> variants;
 
-  const InheritedVariants({required this.variants, required super.child, super.key});
+  const new({required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(InheritedVariants old) => !setEquals(variants, old.variants);

@@ -11,70 +11,53 @@ import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
 import 'package:forui/src/widgets/toast/toaster_stack.dart';
 
 @internal
-class AnimatedToast extends StatefulWidget {
+class const AnimatedToast({
   /// The style.
-  final FToastStyle style;
+  required final FToastStyle style,
 
   /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
   ///
   /// For example, `Offset(0, -1)` indicates that the top-center of this toast's protrusion should be aligned to the
   /// top-center of the toast in front of it.
-  final Offset alignTransform;
+  required final Offset alignTransform,
 
   /// The toast's index starting from the back.
-  final int index;
+  required final int index,
 
   /// The total number of toasts.
-  final int length;
+  required final int length,
 
   /// The directions which to swipe to dismiss the toast.
-  final List<AxisDirection> swipeToDismiss;
+  required final List<AxisDirection> swipeToDismiss,
 
   /// The threshold for determining whether the toast should be dismissed when swiped.
-  final double dismissThreshold;
+  required final double dismissThreshold,
 
   /// The toast's show duration.
-  final Duration? duration;
+  required final Duration? duration,
 
   /// The expansion animation, between `[0, 1]`.
-  final double expand;
+  required final double expand,
 
   /// True if the toast is visible.
-  final bool visible;
+  required final bool visible,
 
   /// True if the toast should be auto dismissed.
-  final bool autoDismiss;
+  required final bool autoDismiss,
 
   /// A value that indicates whether a toast is current being swiping.
-  final ValueNotifier<Swipe> swiping;
+  required final ValueNotifier<Swipe> swiping,
 
   /// A value that indicates whether the toast is dismissing.
-  final ValueListenable<bool> dismissing;
+  required final ValueListenable<bool> dismissing,
 
   /// A callback that is called when the toast is closed.
-  final VoidCallback onDismiss;
+  required final VoidCallback onDismiss,
 
   /// The content.
-  final Widget child;
-
-  const AnimatedToast({
-    required this.style,
-    required this.alignTransform,
-    required this.index,
-    required this.length,
-    required this.swipeToDismiss,
-    required this.dismissThreshold,
-    required this.duration,
-    required this.expand,
-    required this.visible,
-    required this.autoDismiss,
-    required this.swiping,
-    required this.dismissing,
-    required this.onDismiss,
-    required this.child,
-    super.key,
-  });
-
+  required final Widget child,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<AnimatedToast> createState() => _AnimatedToastState();
 

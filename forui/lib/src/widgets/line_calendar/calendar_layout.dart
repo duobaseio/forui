@@ -11,34 +11,20 @@ import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_scroll_controller.dart';
 
 @internal
-class CalendarLayout extends StatefulWidget {
-  final FLineCalendarControl control;
-  final FLineCalendarScrollControl scrollControl;
-  final FLineCalendarStyle style;
-  final ScrollPhysics? physics;
-  final ScrollCacheExtent? scrollCacheExtent;
-  final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
-  final TextScaler scale;
-  final TextStyle textStyle;
-  final bool Function(DateTime) selectable;
-  final ValueWidgetBuilder<FLineCalendarItemData> builder;
-  final BoxConstraints constraints;
-
-  const CalendarLayout({
-    required this.control,
-    required this.scrollControl,
-    required this.style,
-    required this.physics,
-    required this.scrollCacheExtent,
-    required this.keyboardDismissBehavior,
-    required this.scale,
-    required this.textStyle,
-    required this.selectable,
-    required this.builder,
-    required this.constraints,
-    super.key,
-  });
-
+class const CalendarLayout({
+  required final FLineCalendarControl control,
+  required final FLineCalendarScrollControl scrollControl,
+  required final FLineCalendarStyle style,
+  required final ScrollPhysics? physics,
+  required final ScrollCacheExtent? scrollCacheExtent,
+  required final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior,
+  required final TextScaler scale,
+  required final TextStyle textStyle,
+  required final bool Function(DateTime) selectable,
+  required final ValueWidgetBuilder<FLineCalendarItemData> builder,
+  required final BoxConstraints constraints,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<CalendarLayout> createState() => _CalendarLayoutState();
 
@@ -164,7 +150,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
 
 @internal
 class SpeculativeLayout extends MultiChildRenderObjectWidget {
-  const SpeculativeLayout({required super.children, super.key});
+  const new({required super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext _) => _SpeculativeBox();

@@ -13,8 +13,8 @@ import 'package:forui_cli/src/terminal/text.dart';
 import 'package:forui_cli/src/terminal/theme.dart';
 
 const _unnamespaced = '''
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
@@ -69,8 +69,8 @@ import 'package:forui/forui.dart';
 /// See https://forui.dev/docs/guides/customizing-themes for more information.''';
 
 const _namespaced = '''
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
@@ -157,7 +157,7 @@ class StyleCreateCommand extends ForuiCommand {
 
   final Configuration configuration;
 
-  StyleCreateCommand(this.configuration) {
+  new(this.configuration) {
     argParser
       ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
@@ -285,7 +285,8 @@ class StyleCreateCommand extends ForuiCommand {
       if (terminal.interactive) {
         final prefix = '${configuration.root.path}${Platform.pathSeparator}';
         final relative = [
-          for (final path in existing.toList()..sort()) path.startsWith(prefix) ? path.substring(prefix.length) : path,
+          for (final path in existing.toList()..sort())
+            if (path.startsWith(prefix)) path.substring(prefix.length) else path,
         ];
         terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
       }

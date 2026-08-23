@@ -20,7 +20,7 @@ final class FDateTimePickerController extends ValuePickerController<DateTime> {
   int? _minuteInterval;
 
   /// Creates a [FDateTimePickerController].
-  FDateTimePickerController({DateTime? dateTime}) : super(dateTime ?? LocalDateTime.now().toNative());
+  new({DateTime? dateTime}) : super(dateTime ?? LocalDateTime.now().toNative());
 
   @override
   @internal
@@ -103,7 +103,7 @@ final class _ProxyController extends FDateTimePickerController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(dateTime: _unsynced);
+  new(this._unsynced, this._onChange, this._duration, this._curve) : super(dateTime: _unsynced);
 
   void update(
     DateTime newValue,
@@ -158,11 +158,8 @@ final class _ProxyController extends FDateTimePickerController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FDateTimePickerControl with Diagnosticable, _$FDateTimePickerControlMixin {
   /// Creates a [FDateTimePickerControl].
-  const factory FDateTimePickerControl.managed({
-    FDateTimePickerController? controller,
-    DateTime? initial,
-    ValueChanged<DateTime>? onChange,
-  }) = FDateTimePickerManagedControl;
+  const factory managed({FDateTimePickerController? controller, DateTime? initial, ValueChanged<DateTime>? onChange}) =
+      FDateTimePickerManagedControl;
 
   /// Creates a [FDateTimePickerControl] for controlling date time picker using lifted state.
   ///
@@ -173,14 +170,14 @@ sealed class FDateTimePickerControl with Diagnosticable, _$FDateTimePickerContro
   /// The [onChange] callback is invoked when the user selects a date and time.
   /// The [duration] when animating to [dateTime] from an invalid/different value. Defaults to 200 milliseconds.
   /// The [curve] when animating to [dateTime] from an invalid/different value. Defaults to [Curves.easeOutCubic].
-  const factory FDateTimePickerControl.lifted({
+  const factory lifted({
     required DateTime dateTime,
     required ValueChanged<DateTime> onChange,
     Duration duration,
     Curve curve,
   }) = _Lifted;
 
-  const FDateTimePickerControl._();
+  const new _();
 
   (FDateTimePickerController, bool) _update(
     FDateTimePickerControl old,
@@ -192,7 +189,6 @@ sealed class FDateTimePickerControl with Diagnosticable, _$FDateTimePickerContro
     int minuteInterval,
   );
 
-  @override
   FDateTimePickerController _default(
     FDateTimePickerControl old,
     FDateTimePickerController controller,
@@ -226,7 +222,7 @@ class FDateTimePickerManagedControl extends FDateTimePickerControl
   final ValueChanged<DateTime>? onChange;
 
   /// Creates a [FDateTimePickerControl].
-  const FDateTimePickerManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial date time. Pass initial date time to the controller instead.',
@@ -252,7 +248,7 @@ class _Lifted extends FDateTimePickerControl with _$_LiftedMixin {
   @override
   final Curve curve;
 
-  const _Lifted({
+  const new({
     required this.dateTime,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),

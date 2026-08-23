@@ -35,14 +35,14 @@ class Verifier extends RecursiveAstVisitor<void> {
     };
     final providedNamed = {
       for (final arg in arguments.arguments)
-        if (arg is NamedExpression) arg.name.label.name,
+        if (arg is NamedArgument) arg.name.lexeme,
     };
 
     final declaredPositional = [
       for (final p in element.formalParameters)
         if (p.isPositional && p.name != null) p.name!,
     ];
-    final providedPositionalCount = arguments.arguments.where((arg) => arg is! NamedExpression).length;
+    final providedPositionalCount = arguments.arguments.where((arg) => arg is! NamedArgument).length;
 
     final missing = [...declaredNamed.difference(providedNamed), ...declaredPositional.skip(providedPositionalCount)]
       ..remove('key');

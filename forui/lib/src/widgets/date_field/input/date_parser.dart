@@ -10,14 +10,14 @@ class DateParser extends Parser {
   final NumberFormat _year;
   final int _initialYear;
 
-  DateParser(String locale, int initialYear)
+  new(String locale, int initialYear)
     : this._(
         RegExp('(y|MM|M|dd|d)').allMatches(DateFormat.yMd(locale).pattern!).map((e) => e.group(1)!).toList(),
         initialYear,
         locale,
       );
 
-  DateParser._(super.pattern, this._initialYear, String locale)
+  new _(super.pattern, this._initialYear, String locale)
     : _day = NumberFormat(pattern.contains('d') ? '#0' : '00', locale),
       _month = NumberFormat(pattern.contains('M') ? '#0' : '00', locale),
       _year = NumberFormat('0000', locale);

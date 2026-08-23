@@ -5,7 +5,7 @@ import 'package:forui/src/theme/delta/delta.dart';
 /// A delta that applies modifications to an [IconThemeData].
 abstract class IconThemeDataDelta with Delta {
   /// Creates a partial modification of an [IconThemeData].
-  const factory IconThemeDataDelta.delta({
+  const factory delta({
     Color? color,
     double? opacity,
     double? size,
@@ -18,35 +18,23 @@ abstract class IconThemeDataDelta with Delta {
   }) = _IconThemeDataDelta;
 
   /// Creates a complete replacement of an [IconThemeData].
-  const factory IconThemeDataDelta.value(IconThemeData data) = _IconThemeDataValue;
+  const factory value(IconThemeData data) = _IconThemeDataValue;
 
   @override
   IconThemeData call(IconThemeData? data);
 }
 
-class _IconThemeDataDelta implements IconThemeDataDelta {
-  final Color? color;
-  final double? opacity;
-  final double? size;
-  final double? fill;
-  final double? weight;
-  final double? grade;
-  final double? opticalSize;
-  final List<Shadow>? shadows;
-  final bool? Function()? applyTextScaling;
-
-  const _IconThemeDataDelta({
-    this.color = Sentinels.color,
-    this.opacity = .infinity,
-    this.size = .infinity,
-    this.fill = .infinity,
-    this.weight = .infinity,
-    this.grade = .infinity,
-    this.opticalSize = .infinity,
-    this.shadows,
-    this.applyTextScaling,
-  });
-
+class const _IconThemeDataDelta({
+  final Color? color = Sentinels.color,
+  final double? opacity = .infinity,
+  final double? size = .infinity,
+  final double? fill = .infinity,
+  final double? weight = .infinity,
+  final double? grade = .infinity,
+  final double? opticalSize = .infinity,
+  final List<Shadow>? shadows,
+  final bool? Function()? applyTextScaling,
+}) implements IconThemeDataDelta {
   @override
   IconThemeData call(IconThemeData? data) => IconThemeData(
     color: identical(color, Sentinels.color) ? data?.color : color,
@@ -61,11 +49,7 @@ class _IconThemeDataDelta implements IconThemeDataDelta {
   );
 }
 
-class _IconThemeDataValue implements IconThemeDataDelta {
-  final IconThemeData _data;
-
-  const _IconThemeDataValue(this._data);
-
+class const _IconThemeDataValue(final IconThemeData _data) implements IconThemeDataDelta {
   @override
   IconThemeData call(IconThemeData? data) => _data;
 }

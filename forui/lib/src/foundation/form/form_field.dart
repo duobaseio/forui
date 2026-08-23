@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class Field<T> extends FormField<T> {
   final ValueNotifier<T?> controller;
 
-  Field({
+  new({
     required this.controller,
     required super.enabled,
     required super.autovalidateMode,

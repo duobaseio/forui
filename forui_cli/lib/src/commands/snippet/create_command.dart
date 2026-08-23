@@ -27,7 +27,7 @@ class SnippetCreateCommand extends ForuiCommand {
 
   final Configuration configuration;
 
-  SnippetCreateCommand(this.configuration) {
+  new(this.configuration) {
     argParser
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption(

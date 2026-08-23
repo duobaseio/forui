@@ -48,20 +48,16 @@ extension Sentinels on Never {
 }
 
 final class _ColorSentinel extends Color {
-  const _ColorSentinel() : super(0);
+  const new() : super(0);
 }
 
-final class _ImageFilterSentinel implements ImageFilter {
-  const _ImageFilterSentinel();
-
+final class const _ImageFilterSentinel() implements ImageFilter {
   @override
   String get debugShortDescription => throw UnimplementedError();
 }
 
 // ignore: avoid_implementing_value_types
-final class _FocusedOutlineStyleSentinel implements FFocusedOutlineStyle {
-  const _FocusedOutlineStyleSentinel();
-
+final class const _FocusedOutlineStyleSentinel() implements FFocusedOutlineStyle {
   @override
   BorderRadiusGeometry get borderRadius => throw UnimplementedError();
 
@@ -90,9 +86,7 @@ final class _FocusedOutlineStyleSentinel implements FFocusedOutlineStyle {
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) => throw UnimplementedError();
 }
 
-final class _BorderRadiusSentinel extends BorderRadiusGeometry {
-  const _BorderRadiusSentinel();
-
+final class const _BorderRadiusSentinel() extends BorderRadiusGeometry {
   @override
   BorderRadiusGeometry add(BorderRadiusGeometry other) => throw UnimplementedError();
 
@@ -118,9 +112,7 @@ final class _BorderRadiusSentinel extends BorderRadiusGeometry {
   BorderRadius resolve(TextDirection? direction) => throw UnimplementedError();
 }
 
-final class _BoxBorderSentinel extends BoxBorder {
-  const _BoxBorderSentinel();
-
+class const _BoxBorderSentinel() extends BoxBorder {
   @override
   BorderSide get bottom => throw UnimplementedError();
 
@@ -147,18 +139,16 @@ final class _BoxBorderSentinel extends BoxBorder {
 }
 
 final class _DecorationImageSentinel extends DecorationImage {
-  const _DecorationImageSentinel() : super(image: const _ImageProvider());
+  const new() : super(image: const _ImageProvider());
 }
 
-final class _ImageProvider extends ImageProvider {
-  const _ImageProvider();
-
+class const _ImageProvider() extends ImageProvider {
   @override
   Future<Object> obtainKey(ImageConfiguration configuration) => throw UnimplementedError();
 }
 
 final class _GradientSentinel extends Gradient {
-  const _GradientSentinel() : super(colors: const []);
+  const new() : super(colors: const []);
 
   @override
   Gradient scale(double factor) => throw UnimplementedError();
@@ -171,9 +161,7 @@ final class _GradientSentinel extends Gradient {
 }
 
 // ignore: avoid_implementing_value_types
-final class _FontWeightSentinel implements FontWeight {
-  const _FontWeightSentinel();
-
+class const _FontWeightSentinel() implements FontWeight {
   @override
   int get index => throw UnimplementedError();
 
@@ -181,9 +169,7 @@ final class _FontWeightSentinel implements FontWeight {
   int get value => throw UnimplementedError();
 }
 
-final class _ShapeBorderSentinel extends ShapeBorder {
-  const _ShapeBorderSentinel();
-
+class const _ShapeBorderSentinel() extends ShapeBorder {
   @override
   EdgeInsetsGeometry get dimensions => throw UnimplementedError();
 

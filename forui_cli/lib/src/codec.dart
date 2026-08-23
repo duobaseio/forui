@@ -8,24 +8,15 @@
 /// for the web. forui_cli is a pure-Dart package, which enforces this.
 library;
 
-final class Preset {
-  final BaseColor base;
-  final PrimaryColor? primary;
-  final FontFamily display;
-  final FontFamily body;
-  final IconLibrary icon;
-  final Radius radius;
-
-  const Preset({
-    this.base = .neutral,
-    this.primary,
-    this.display = .inter,
-    this.body = .inter,
-    this.icon = .lucide,
-    this.radius = .medium,
-  });
-
-  factory Preset.decode(String? encoded) {
+final class const Preset({
+  final BaseColor base = .neutral,
+  final PrimaryColor? primary,
+  final FontFamily display = .inter,
+  final FontFamily body = .inter,
+  final IconLibrary icon = .lucide,
+  final Radius radius = .medium,
+}) {
+  factory decode(String? encoded) {
     if (encoded == null) {
       return const Preset();
     }
@@ -68,7 +59,12 @@ extension Options<T extends Option> on Iterable<T> {
   Map<String, T> get named => {for (final value in this) value.name: value};
 }
 
-enum BaseColor implements Option {
+enum BaseColor({
+  @override required final String code,
+  @override required final String name,
+  required final BaseColors light,
+  required final BaseColors dark,
+}) implements Option {
   neutral(
     code: 'a',
     name: 'Neutral',
@@ -335,54 +331,32 @@ enum BaseColor implements Option {
       border: 0x1AFFFFFF,
     ),
   );
-
-  @override
-  final String code;
-  @override
-  final String name;
-  final BaseColors light;
-  final BaseColors dark;
-
-  const BaseColor({required this.code, required this.name, required this.light, required this.dark});
 }
 
-final class BaseColors {
-  final int barrier;
-  final int background;
-  final int foreground;
-  final int primary;
-  final int primaryForeground;
-  final int secondary;
-  final int secondaryForeground;
-  final int muted;
-  final int mutedForeground;
-  final int destructive;
-  final int destructiveForeground;
-  final int error;
-  final int errorForeground;
-  final int card;
-  final int border;
+final class const BaseColors({
+  required final int barrier,
+  required final int background,
+  required final int foreground,
+  required final int primary,
+  required final int primaryForeground,
+  required final int secondary,
+  required final int secondaryForeground,
+  required final int muted,
+  required final int mutedForeground,
+  required final int destructive,
+  required final int destructiveForeground,
+  required final int error,
+  required final int errorForeground,
+  required final int card,
+  required final int border,
+});
 
-  const BaseColors({
-    required this.barrier,
-    required this.background,
-    required this.foreground,
-    required this.primary,
-    required this.primaryForeground,
-    required this.secondary,
-    required this.secondaryForeground,
-    required this.muted,
-    required this.mutedForeground,
-    required this.destructive,
-    required this.destructiveForeground,
-    required this.error,
-    required this.errorForeground,
-    required this.card,
-    required this.border,
-  });
-}
-
-enum PrimaryColor implements Option {
+enum PrimaryColor({
+  @override required final String code,
+  @override required final String name,
+  required final PrimaryColors light,
+  required final PrimaryColors dark,
+}) implements Option {
   amber(
     code: 'b',
     name: 'Amber',
@@ -485,25 +459,17 @@ enum PrimaryColor implements Option {
     light: PrimaryColors(primary: 0xFFFDC700, primaryForeground: 0xFF733E0A),
     dark: PrimaryColors(primary: 0xFFF0B100, primaryForeground: 0xFF733E0A),
   );
-
-  @override
-  final String code;
-  @override
-  final String name;
-  final PrimaryColors light;
-  final PrimaryColors dark;
-
-  const PrimaryColor({required this.code, required this.name, required this.light, required this.dark});
 }
 
-final class PrimaryColors {
-  final int primary;
-  final int primaryForeground;
+final class const PrimaryColors({required final int primary, required final int primaryForeground});
 
-  const PrimaryColors({required this.primary, required this.primaryForeground});
-}
-
-enum FontFamily implements Option {
+enum FontFamily(
+  @override final String code,
+  @override final String name,
+  final String url,
+  final FontFormat format,
+  final FontFamilyCategory category,
+) implements Option {
   geist(
     'a',
     'Geist',
@@ -711,66 +677,32 @@ enum FontFamily implements Option {
     ),
     .serif,
   );
-
-  @override
-  final String code;
-  @override
-  final String name;
-  final String url;
-  final FontFormat format;
-  final FontFamilyCategory category;
-
-  const FontFamily(this.code, this.name, this.url, this.format, this.category);
 }
 
 enum FontFamilyCategory { sans, serif, mono }
 
-sealed class FontFormat {}
+sealed class FontFormat;
 
-final class VariableFontFormat implements FontFormat {
-  final String normal;
-  final String? italic;
+final class const VariableFontFormat({required final String normal, required final String? italic})
+    implements FontFormat;
 
-  const VariableFontFormat({required this.normal, required this.italic});
-}
+final class const StaticFontFormat({required final Map<int, String> normal, required final Map<int, String> italic})
+    implements FontFormat;
 
-final class StaticFontFormat implements FontFormat {
-  final Map<int, String> normal;
-  final Map<int, String> italic;
-
-  const StaticFontFormat({required this.normal, required this.italic});
-}
-
-enum IconLibrary implements Option {
+enum IconLibrary(@override final String code, @override final String name, final String package, final String url)
+    implements Option {
   hugeicons('a', 'Hugeicons', 'hugeicons', 'https://hugeicons.com'),
   lucide('b', 'Lucide', 'forui_assets', 'https://lucide.dev'),
   tabler('c', 'Tabler', 'tabler_icons_plus', 'https://tabler.io/icons'),
   remix('d', 'Remix', 'remixicon', 'https://remixicon.com'),
   iconoir('e', 'Iconoir', 'iconoir_flutter', 'https://iconoir.com');
-
-  @override
-  final String code;
-  @override
-  final String name;
-  final String package;
-  final String url;
-
-  const IconLibrary(this.code, this.name, this.package, this.url);
 }
 
-enum Radius implements Option {
+enum Radius(@override final String code, @override final String name, final BorderRadii radius) implements Option {
   none('a', 'None', (xs2: 0, xs: 0, sm: 0, md: 0, lg: 0, xl: 0, xl2: 0, xl3: 0, pill: 0)),
   small('b', 'Small', (xs2: 3, xs: 4, sm: 6, md: 7, lg: 10, xl: 13, xl2: 16, xl3: 19, pill: 100)),
   medium('c', 'Medium', (xs2: 4, xs: 6, sm: 8, md: 10, lg: 14, xl: 18, xl2: 22, xl3: 26, pill: 100)),
   large('d', 'Large', (xs2: 6, xs: 8, sm: 11, md: 14, lg: 20, xl: 25, xl2: 31, xl3: 36, pill: 100));
-
-  @override
-  final String code;
-  @override
-  final String name;
-  final BorderRadii radius;
-
-  const Radius(this.code, this.name, this.radius);
 }
 
 typedef BorderRadii = ({

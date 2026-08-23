@@ -22,7 +22,7 @@ class InheritedController extends InheritedModel<UniqueKey> {
   final FTooltipController? maxTooltipController;
   final FSliderValue _value;
 
-  InheritedController({
+  new({
     required this.controller,
     required this.minTooltipController,
     required this.maxTooltipController,

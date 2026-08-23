@@ -11,7 +11,7 @@ FPickerController useFPickerController({required List<int> indexes, List<Object?
 class _PickerControllerHook extends Hook<FPickerController> {
   final List<int> indexes;
 
-  const _PickerControllerHook({required this.indexes, super.keys});
+  const new({required this.indexes, super.keys});
 
   @override
   _PickerControllerHookState createState() => .new();

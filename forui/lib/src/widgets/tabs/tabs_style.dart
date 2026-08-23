@@ -1,7 +1,7 @@
 part of 'tabs.dart';
 
 /// Defines how the bounds of the selected tab indicator are computed.
-enum FTabBarIndicatorSize {
+enum FTabBarIndicatorSize(final TabBarIndicatorSize _value) {
   /// The tab indicator's bounds are as wide as the space occupied by the tab
   /// in the tab bar: from the right edge of the previous tab to the left edge
   /// of the next tab.
@@ -12,62 +12,41 @@ enum FTabBarIndicatorSize {
   /// This value is used to align the tab's label, typically a [Tab]
   /// widget's text or icon, with the selected tab indicator.
   label(.label);
-
-  final TabBarIndicatorSize _value;
-
-  const FTabBarIndicatorSize(this._value);
 }
 
 /// [FTabs]'s style.
-class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
+class FTabsStyle({
   /// The decoration.
-  @override
-  final Decoration decoration;
-
-  /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final Decoration decoration,
 
   /// The label's [TextStyle].
-  @override
-  final FVariants<FTabVariantConstraint, FTabVariant, TextStyle, TextStyleDelta> labelTextStyle;
+  @override required final FVariants<FTabVariantConstraint, FTabVariant, TextStyle, TextStyleDelta> labelTextStyle,
 
   /// The indicator.
-  @override
-  final Decoration indicatorDecoration;
+  @override required final Decoration indicatorDecoration,
 
-  /// The indicator size.
-  @override
-  final FTabBarIndicatorSize indicatorSize;
+  /// The focused outline style.
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
+
+  /// The padding. Defaults to `EdgeInsets.all(4)`.
+  @override final EdgeInsetsGeometry padding = const .all(4),
+
+  /// The indicator size. Defaults to [FTabBarIndicatorSize.tab].
+  @override final FTabBarIndicatorSize indicatorSize = .tab,
 
   /// The minimum height of each tab. Tabs grow to fit taller labels.
   ///
   /// Defaults to 36.
-  @override
-  final double minHeight;
+  @override final double minHeight = 36,
 
-  /// The spacing between the tab bar and the views.
-  @override
-  final double spacing;
-
-  /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
+  /// The spacing between the tab bar and the views. Defaults to 10.
+  @override final double spacing = 10,
+}) with Diagnosticable, _$FTabsStyleFunctions {
   /// Creates a [FTabsStyle].
-  FTabsStyle({
-    required this.decoration,
-    required this.labelTextStyle,
-    required this.indicatorDecoration,
-    required this.focusedOutlineStyle,
-    this.padding = const .all(4),
-    this.indicatorSize = .tab,
-    this.minHeight = 36,
-    this.spacing = 10,
-  });
+  this;
 
   /// Creates a [FTabsStyle] that inherits its properties.
-  FTabsStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(

@@ -21,7 +21,7 @@ class Card extends StatelessWidget {
   final Widget subtitle;
   final Widget child;
 
-  const Card({required this.title, required this.subtitle, required this.child, super.key});
+  const new({required this.title, required this.subtitle, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class TitleCard extends StatelessWidget {
   final Widget title;
   final Widget subtitle;
 
-  const TitleCard({required this.title, required this.subtitle, super.key});
+  const new({required this.title, required this.subtitle, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -123,7 +123,7 @@ class MediaCard extends StatelessWidget {
   final Widget subtitle;
   final Widget child;
 
-  const MediaCard({required this.image, required this.title, required this.subtitle, required this.child, super.key});
+  const new({required this.image, required this.title, required this.subtitle, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +184,7 @@ class AdaptiveDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const AdaptiveDialog({
+  const new({
     required this.title,
     required this.body,
     required this.actions,
@@ -270,7 +270,7 @@ class AdaptiveTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const AdaptiveTitleDialog({
+  const new({
     required this.title,
     required this.actions,
     this.style = const .context(),
@@ -343,7 +343,7 @@ class AdaptiveMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const AdaptiveMediaDialog({
+  const new({
     required this.image,
     required this.title,
     required this.body,
@@ -435,7 +435,7 @@ class HorizontalDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const HorizontalDialog({
+  const new({
     required this.title,
     required this.body,
     required this.actions,
@@ -494,7 +494,7 @@ class HorizontalTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const HorizontalTitleDialog({
+  const new({
     required this.title,
     required this.actions,
     this.style = const .context(),
@@ -548,7 +548,7 @@ class HorizontalMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const HorizontalMediaDialog({
+  const new({
     required this.image,
     required this.title,
     required this.body,
@@ -610,7 +610,7 @@ class VerticalDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const VerticalDialog({
+  const new({
     required this.title,
     required this.body,
     required this.actions,
@@ -667,7 +667,7 @@ class VerticalTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const VerticalTitleDialog({
+  const new({
     required this.title,
     required this.actions,
     this.style = const .context(),
@@ -717,7 +717,7 @@ class VerticalMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const VerticalMediaDialog({
+  const new({
     required this.image,
     required this.title,
     required this.body,
@@ -769,7 +769,7 @@ class VerticalMediaDialog extends StatelessWidget {
     'main',
     'A minimal Forui app entry point',
     r'''import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 void main() {
@@ -777,7 +777,7 @@ void main() {
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -817,7 +817,7 @@ class Application extends StatelessWidget {
 }
 
 class Example extends StatefulWidget {
-  const Example({super.key});
+  const new({super.key});
 
   @override
   State<Example> createState() => _ExampleState();
@@ -848,7 +848,7 @@ class _ExampleState extends State<Example> {
     'main',
     'A Forui app entry point using MaterialApp.router',
     r'''import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 void main() {
@@ -856,7 +856,7 @@ void main() {
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -893,7 +893,7 @@ class Application extends StatelessWidget {
   'material-theme': (
     'material_theme',
     'An extension mapping your Forui theme to a Material ThemeData',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 extension CustomMaterialTheme on FThemeData {
@@ -3367,7 +3367,7 @@ enum FLucideIconMapping {
 const init = {
   'basic': (
     'main',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 import '../theme.dart';
@@ -3377,7 +3377,7 @@ void main() {
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -3405,7 +3405,7 @@ class Application extends StatelessWidget {
 }
 
 class Example extends StatefulWidget {
-  const Example({super.key});
+  const new({super.key});
 
   @override
   State<Example> createState() => _ExampleState();
@@ -3434,7 +3434,7 @@ class _ExampleState extends State<Example> {
   ),
   'router': (
     'main',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 import '../theme.dart';
@@ -3444,7 +3444,7 @@ void main() {
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(

@@ -50,7 +50,7 @@ class FTappableGroup extends StatefulWidget {
   final Widget child;
 
   /// Creates an [FTappableGroup].
-  const FTappableGroup({required this.child, this.slidePressHapticFeedback = FHapticFeedback.noFeedback, super.key});
+  const new({required this.child, this.slidePressHapticFeedback = FHapticFeedback.noFeedback, super.key});
 
   @override
   State<FTappableGroup> createState() => _FTappableGroupState();
@@ -91,7 +91,7 @@ class TappableGroupScope extends InheritedWidget {
 
   final List<GroupEntry>? entries;
 
-  const TappableGroupScope({required this.entries, required super.child, super.key});
+  const new({required this.entries, required super.child, super.key});
 
   // Comparing using identity is fine as it is tied to the lifecycle of the owning tappable group.
   @override
@@ -105,44 +105,26 @@ class TappableGroupScope extends InheritedWidget {
 }
 
 @internal
-class GroupEntry {
-  final BuildContext context;
-  final Future<void> Function(int) enter;
-  final Future<void> Function() exit;
-  final Future<void> Function() release;
-  GestureTapDownCallback? onPressDown;
-  GestureTapCancelCallback? onPressCancel;
-  GestureTapMoveCallback? onPressMove;
-  GestureTapUpCallback? onPressUp;
-  VoidCallback? onPress;
+class GroupEntry({
+  required final BuildContext context,
+  required final Future<void> Function(int) enter,
+  required final Future<void> Function() exit,
+  required final Future<void> Function() release,
+  required var VoidCallback? onPress,
+  required var VoidCallback? onLongPress,
+  var GestureTapDownCallback? onPressDown,
+  var GestureTapCancelCallback? onPressCancel,
+  var GestureTapMoveCallback? onPressMove,
+  var GestureTapUpCallback? onPressUp,
 
   /// [onLongPressDown] is always called together with [onPressDown] in [TappableGroupGestureRecognizer] but not the
   /// stock [GestureDetector]. We keep this redundant field to simplify callback mapping.
-  GestureLongPressDownCallback? onLongPressDown;
-  GestureLongPressStartCallback? onLongPressStart;
-  GestureLongPressCancelCallback? onLongPressCancel;
-  GestureLongPressMoveUpdateCallback? onLongPressMove;
-  GestureLongPressEndCallback? onLongPressEnd;
-  VoidCallback? onLongPress;
-
-  GroupEntry({
-    required this.context,
-    required this.enter,
-    required this.exit,
-    required this.release,
-    required this.onPress,
-    required this.onLongPress,
-    this.onPressDown,
-    this.onPressCancel,
-    this.onPressMove,
-    this.onPressUp,
-    this.onLongPressDown,
-    this.onLongPressCancel,
-    this.onLongPressStart,
-    this.onLongPressMove,
-    this.onLongPressEnd,
-  });
-
+  var GestureLongPressDownCallback? onLongPressDown,
+  var GestureLongPressCancelCallback? onLongPressCancel,
+  var GestureLongPressStartCallback? onLongPressStart,
+  var GestureLongPressMoveUpdateCallback? onLongPressMove,
+  var GestureLongPressEndCallback? onLongPressEnd,
+}) {
   bool hitTest(Offset globalPosition) {
     final box = context.findRenderObject();
     return box is RenderBox && box.size.contains(box.globalToLocal(globalPosition));

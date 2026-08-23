@@ -11,7 +11,7 @@ FTimePickerController useFTimePickerController({FTime time = const FTime(), List
 class _TimePickerControllerHook extends Hook<FTimePickerController> {
   final FTime time;
 
-  const _TimePickerControllerHook({required this.time, super.keys});
+  const new({required this.time, super.keys});
 
   @override
   _TimePickerControllerHookState createState() => .new();

@@ -10,20 +10,13 @@ import 'package:forui/src/widgets/toast/toaster.dart';
 ///
 /// The actual positioning of toasts is delegated to [AnimatedToaster].
 @internal
-class ToasterStack extends StatefulWidget {
-  final FToasterStyle style;
-  final Offset expandedAlignTransform;
-  final Offset collapsedAlignTransform;
-  final List<ToasterEntry> entries;
-
-  const ToasterStack({
-    required this.style,
-    required this.expandedAlignTransform,
-    required this.collapsedAlignTransform,
-    required this.entries,
-    super.key,
-  });
-
+class const ToasterStack({
+  required final FToasterStyle style,
+  required final Offset expandedAlignTransform,
+  required final Offset collapsedAlignTransform,
+  required final List<ToasterEntry> entries,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<ToasterStack> createState() => _ToasterStackState();
 
@@ -200,9 +193,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
 
 /// A state machine which describes a toast's swipe to dismiss state.
 @internal
-sealed class Swipe {
-  const Swipe();
-
+sealed class const Swipe() {
   // ignore: avoid_returning_this
   Swipe start() => this;
 
@@ -218,18 +209,14 @@ sealed class Swipe {
 
 /// A toast is not being swiped, initial state.
 @internal
-class Unswiped extends Swipe {
-  const Unswiped();
-
+class const Unswiped() extends Swipe {
   @override
   Swipe start() => const InternalSwipe();
 }
 
 /// A toast is being swiped internally, i.e. within the toast region.
 @internal
-class InternalSwipe extends Swipe {
-  const InternalSwipe();
-
+class const InternalSwipe() extends Swipe {
   @override
   Swipe end() => const Unswiped();
 
@@ -239,9 +226,7 @@ class InternalSwipe extends Swipe {
 
 /// A toast is being swiped externally, i.e. outside the toast region.
 @internal
-class ExternalSwipe extends Swipe {
-  const ExternalSwipe();
-
+class const ExternalSwipe() extends Swipe {
   @override
   Swipe end() => const ExternalEndSwipe();
 
@@ -251,9 +236,7 @@ class ExternalSwipe extends Swipe {
 
 /// A toast has been swiped externally, and the swipe has ended outside the toast region.
 @internal
-class ExternalEndSwipe extends Swipe {
-  const ExternalEndSwipe();
-
+class const ExternalEndSwipe() extends Swipe {
   @override
   Swipe end() => const Unswiped();
 

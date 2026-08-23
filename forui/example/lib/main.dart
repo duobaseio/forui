@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui_example/icon_comparison.dart';
@@ -23,7 +23,7 @@ List<Widget> _pages = [
 ];
 
 class Application extends StatefulWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   State<Application> createState() => _ApplicationState();

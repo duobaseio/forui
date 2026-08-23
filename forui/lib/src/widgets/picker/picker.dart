@@ -61,7 +61,7 @@ class FPicker extends StatefulWidget {
   final String debugLabel;
 
   /// Creates a [FPicker] with several wheels, and optionally, separators.
-  const FPicker({
+  const new({
     required this.children,
     this.control = const .managed(),
     this.style = const .context(),
@@ -199,7 +199,7 @@ class PickerData extends InheritedWidget {
   final FixedExtentScrollController controller;
   final FPickerStyle style;
 
-  const PickerData({required this.controller, required this.style, required super.child, super.key});
+  const new({required this.controller, required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(PickerData old) => controller != old.controller || style != old.style;

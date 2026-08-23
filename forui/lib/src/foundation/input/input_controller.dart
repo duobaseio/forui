@@ -35,7 +35,7 @@ abstract class InputController extends TextEditingController {
   final String placeholder;
   bool mutating = false;
 
-  InputController(super.value, this.style, this.parser, this.placeholder)
+  new(super.value, this.style, this.parser, this.placeholder)
     : statesController = WidgetStatesController(),
       super.fromValue();
 

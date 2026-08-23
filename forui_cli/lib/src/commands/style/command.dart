@@ -13,7 +13,7 @@ class StyleCommand extends ForuiCommand {
   @override
   final description = 'Manage your Forui widget styles.';
 
-  StyleCommand(Configuration configuration) {
+  new(Configuration configuration) {
     addSubcommand(StyleCreateCommand(configuration));
     addSubcommand(StyleLsCommand());
   }

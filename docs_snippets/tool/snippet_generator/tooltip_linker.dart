@@ -71,8 +71,8 @@ class TooltipLinker extends DartDocLinker {
       case final PropertyAccessorElement element when _forui(element):
         tooltip(
           element.isStatic ? node : node.identifier,
-          element.nonSynthetic is FieldElement ? .field : .getter,
-          element.nonSynthetic.toString(),
+          _property(element).$1,
+          _property(element).$2,
           element.enclosingElement,
         );
 
@@ -92,12 +92,7 @@ class TooltipLinker extends DartDocLinker {
   @override
   void visitPropertyAccess(PropertyAccess node) {
     if (node.propertyName.element case final element? when _forui(element)) {
-      tooltip(
-        node.propertyName,
-        element.nonSynthetic is FieldElement ? .field : .getter,
-        element.nonSynthetic.toString(),
-        element.enclosingElement,
-      );
+      tooltip(node.propertyName, _property(element).$1, _property(element).$2, element.enclosingElement);
     } else if (node.target?.staticType case final RecordType type) {
       // Record field access - show the field type, link to the parent expression's element.
       // This is messy because record fields have no elements. We only support named fields.
@@ -151,12 +146,7 @@ class TooltipLinker extends DartDocLinker {
   @override
   void visitDotShorthandPropertyAccess(DotShorthandPropertyAccess node) {
     if (node.propertyName.element case final element? when _forui(element)) {
-      tooltip(
-        node.propertyName,
-        element.nonSynthetic is FieldElement ? .field : .getter,
-        element.nonSynthetic.toString(),
-        element.enclosingElement,
-      );
+      tooltip(node.propertyName, _property(element).$1, _property(element).$2, element.enclosingElement);
     }
     super.visitDotShorthandPropertyAccess(node);
   }
@@ -196,30 +186,37 @@ class TooltipLinker extends DartDocLinker {
   ///
   /// Handles named arguments like `onPress:` in `FButton(onPress: () {})`.
   @override
-  void visitNamedExpression(NamedExpression node) {
-    if (node case NamedExpression(:final name, :final FormalParameterElement element) when _forui(element)) {
+  void visitNamedArgument(NamedArgument node) {
+    if (node case NamedArgument(:final name, correspondingParameter: final FormalParameterElement element)
+        when _forui(element)) {
       tooltip(name, .formalParameter, element.toString());
     }
-    super.visitNamedExpression(node);
+    super.visitNamedArgument(node);
   }
 
   /// Adds tooltips for lambda parameters.
   ///
   /// Handles parameters like `controller` in `(_, controller, _) => ...`.
   @override
-  void visitSimpleFormalParameter(SimpleFormalParameter node) {
+  void visitRegularFormalParameter(RegularFormalParameter node) {
     // Only handle parameters in function expressions (lambdas), not in method/function declarations.
     // Top-level functions are also considered function expressions but are part of FunctionDeclarations.
-    if (node.parent?.parent is FunctionExpression && node.parent?.parent?.parent is NamedExpression) {
+    if (node.parent?.parent is FunctionExpression && node.parent?.parent?.parent is NamedArgument) {
       if (node.declaredFragment?.element case final element?) {
         tooltip(node, .formalParameter, element.toString());
       }
     }
 
-    super.visitSimpleFormalParameter(node);
+    super.visitRegularFormalParameter(node);
   }
 
   bool _forui(Element element) => packages.any((p) => p.name == element.library?.uri.pathSegments.first);
+
+  (FragmentSnippetKind, String) _property(Element element) => switch (element.nonSynthetic) {
+    FormalParameterElement(:final type, :final name?) => (.field, '$type $name'),
+    final FieldElement field => (.field, field.toString()),
+    final other => (.getter, other.toString()),
+  };
 
   void tooltip(SyntacticEntity node, FragmentSnippetKind kind, String text, [Element? container]) {
     tooltips.add(

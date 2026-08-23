@@ -34,7 +34,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   final bool error;
 
   /// The [FSelectGroup]'s item data.
-  const FSelectGroupItemData({
+  const new({
     required this.controller,
     required this.style,
     required this.enabled,
@@ -45,7 +45,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(FSelectGroupItemData old) =>
+  bool updateShouldNotify(FSelectGroupItemData<T> old) =>
       controller != old.controller ||
       style != old.style ||
       enabled != old.enabled ||
@@ -141,7 +141,7 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   final Key? formFieldKey;
 
   /// Creates a [FSelectGroup].
-  const FSelectGroup({
+  const new({
     required this.children,
     this.control,
     this.style = const .context(),
@@ -253,36 +253,29 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
 }
 
 /// [FSelectGroup]'s style.
-class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
+class const FSelectGroupStyle({
   /// The [FCheckbox]'s style.
-  @override
-  final FCheckboxStyle checkboxStyle;
+  @override required final FCheckboxStyle checkboxStyle,
 
   /// The [FRadio]'s style.
-  @override
-  final FRadioStyle radioStyle;
+  @override required final FRadioStyle radioStyle,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
 
   /// The padding surrounding an item. Defaults to `EdgeInsets.symmetric(vertical: 4)`.
-  @override
-  final EdgeInsetsGeometry itemPadding;
-
+  @override final EdgeInsetsGeometry itemPadding = const .symmetric(vertical: 4),
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
   /// Creates a [FSelectGroupStyle].
-  const FSelectGroupStyle({
-    required this.checkboxStyle,
-    required this.radioStyle,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.itemPadding = const .symmetric(vertical: 4),
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FSelectGroupStyle] that inherits its properties.
-  factory FSelectGroupStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

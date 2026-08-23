@@ -1,8 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values
 
-import 'package:flutter/material.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 const defaultMotion =
     // {@snippet constructor}

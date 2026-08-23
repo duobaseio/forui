@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 /// This mixin provides:
 /// - `create` method (if not specified in sealed class)
 /// - `_dispose` method (if not specified in sealed class)
-/// - `_default` method (always generated)
+/// - `_default` method (if not specified in sealed class)
 @internal
 class ControlParentMixin {
   /// The sealed parent class.
@@ -24,15 +24,19 @@ class ControlParentMixin {
   /// The `_dispose` method from the sealed parent, if any.
   final MethodElement? dispose;
 
+  /// The `_default` method from the sealed parent, if any.
+  final MethodElement? default_;
+
   /// Whether the controller type implements `Listenable`.
   final bool listenable;
 
   /// Creates a new [ControlParentMixin].
-  ControlParentMixin({
+  new({
     required this.supertype,
     required this.createController,
     required this.update,
     required this.dispose,
+    required this.default_,
     required this.listenable,
   });
 
@@ -44,7 +48,7 @@ class ControlParentMixin {
             ..methods.addAll([
               if (createController == null) _createController,
               if (dispose == null && listenable) _dispose,
-              defaultMethod,
+              if (default_ == null) defaultMethod,
             ]))
           .build();
 
@@ -123,7 +127,6 @@ class ControlParentMixin {
 
   Method get defaultMethod => Method(
     (m) => m
-      ..docs.addAll(['// TODO: https://github.com/dart-lang/sdk/issues/62198', '// ignore: unused_element'])
       ..returns = refer(_returnType)
       ..name = '_default'
       ..requiredParameters.addAll([

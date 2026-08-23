@@ -4,16 +4,16 @@ import 'package:forui_cli/src/terminal/theme.dart';
 
 // Ported from clack/prompts TypeScript package.
 
-sealed class Result<T> {}
+sealed class Result<T>;
 
 final class Value<T> implements Result<T> {
   final T value;
 
-  const Value(this.value);
+  const new(this.value);
 }
 
 final class Cancelled<T> implements Result<T> {
-  const Cancelled();
+  const new();
 }
 
 /// The active step header: a cyan diamond followed by [message].
@@ -126,7 +126,7 @@ class FrameRenderer {
   final Terminal _terminal;
   int _physicalLines = 0;
 
-  FrameRenderer(this._terminal);
+  new(this._terminal);
 
   /// Erases the previous frame and draws [frame] (lines joined by `\n`, no trailing newline).
   void render(String frame) {

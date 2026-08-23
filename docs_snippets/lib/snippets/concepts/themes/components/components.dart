@@ -1,8 +1,7 @@
 // ignore_for_file: unused_local_variable
 
-import 'package:flutter/material.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 // {@snippet}
 @override

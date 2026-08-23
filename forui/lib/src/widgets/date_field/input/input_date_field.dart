@@ -15,7 +15,7 @@ class _InputDateField extends FDateField {
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final int baselineInputYear;
 
-  _InputDateField({
+  new({
     this.popoverControl = const .managed(),
     this.textInputAction,
     this.textAlign = TextAlign.start,
@@ -191,7 +191,7 @@ class _InputOnlyDateField extends FDateField {
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final int baselineInputYear;
 
-  _InputOnlyDateField({
+  new({
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,

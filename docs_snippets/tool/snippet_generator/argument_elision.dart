@@ -38,11 +38,8 @@ class ConstantPropagation extends RecursiveAstVisitor<void> {
 
     // Capture default parameter values.
     for (final parameter in node.constructorName.element!.formalParameters) {
-      if (parameter case FormalParameterElement(
-        :final name?,
-        :final defaultValueCode,
-        :final isOptionalNamed,
-      ) when isOptionalNamed) {
+      if (parameter case FormalParameterElement(:final name?, :final defaultValueCode, :final isOptionalNamed)
+          when isOptionalNamed) {
         substitutions[name] = defaultValueCode ?? 'null';
       }
     }
@@ -51,8 +48,8 @@ class ConstantPropagation extends RecursiveAstVisitor<void> {
     // invocations, each with different arguments.
     for (final argument in node.argumentList.arguments) {
       // We only support named arguments.
-      if (argument case NamedExpression(:final name, :final expression)) {
-        substitutions[name.label.name] = expression.toSource();
+      if (argument case NamedArgument(:final name, :final argumentExpression)) {
+        substitutions[name.lexeme] = argumentExpression.toSource();
       }
     }
   }
@@ -130,19 +127,16 @@ class ArgumentElision extends RecursiveAstVisitor<void> {
     // Capture default parameter values.
     final defaults = <String, String>{};
     for (final parameter in element.formalParameters) {
-      if (parameter case FormalParameterElement(
-        :final name?,
-        :final defaultValueCode,
-        :final isOptionalNamed,
-      ) when isOptionalNamed) {
+      if (parameter case FormalParameterElement(:final name?, :final defaultValueCode, :final isOptionalNamed)
+          when isOptionalNamed) {
         defaults[name] = defaultValueCode ?? 'null';
       }
     }
 
     // Remove arguments that match their defaults.
     for (final argument in arguments.arguments) {
-      if (argument case NamedExpression(:final name, :final expression, :final endToken)) {
-        if (normalize(defaults[name.label.name] ?? '') == normalize(expression.toSource())) {
+      if (argument case NamedArgument(:final name, :final argumentExpression, :final endToken)) {
+        if (normalize(defaults[name.lexeme] ?? '') == normalize(argumentExpression.toSource())) {
           _transformations.removeWithComma(argument, endToken);
         }
       }

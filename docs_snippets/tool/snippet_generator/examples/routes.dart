@@ -29,9 +29,9 @@ class RoutesVisitor extends RecursiveAstVisitor<void> {
 
     String? path;
     String? page;
-    for (final NamedExpression(:name, :expression) in node.argumentList.arguments.whereType<NamedExpression>()) {
+    for (final NamedArgument(:name, :argumentExpression) in node.argumentList.arguments.whereType<NamedArgument>()) {
       // Extract path & page from `AutoRoute(path: '/accordion/default', page: AccordionRoute.page)`,
-      switch ((name.label.name, expression)) {
+      switch ((name.lexeme, argumentExpression)) {
         case ('path', StringLiteral(:final stringValue)):
           path = stringValue;
 

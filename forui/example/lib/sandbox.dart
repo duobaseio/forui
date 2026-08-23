@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 class Sandbox extends StatelessWidget {
-  const Sandbox({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => FScaffold(

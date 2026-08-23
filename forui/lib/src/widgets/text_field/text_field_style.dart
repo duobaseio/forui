@@ -1,9 +1,9 @@
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -26,10 +26,10 @@ part 'text_field_style.design.dart';
 
 /// [FTextFieldStyle]'s size styles.
 extension type FTextFieldSizeStyles(
-  FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> _
+  FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> _,
 ) implements FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> {
   /// Creates a [FTextFieldSizeStyles] that inherits its properties.
-  factory FTextFieldSizeStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -124,53 +124,73 @@ extension type FTextFieldSizeStyles(
 }
 
 /// The text field style.
-class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
+class FTextFieldStyle({
   /// The appearance of the keyboard. Defaults to [FColors.brightness].
   ///
   /// This setting is only honored on iOS devices.
-  @override
-  final Brightness keyboardAppearance;
+  @override required final Brightness keyboardAppearance,
 
   /// The fill color of the text-field.
+  @override required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Color?, Delta> color,
+
+  /// The prefix & suffix icon styles.
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Color?, Delta> color;
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
+
+  /// The clear button's style when [FTextField.clearable] is true.
+  @override required final FButtonStyle clearButtonStyle,
+
+  /// The obscured text toggle's style when enabled in [FTextField.password].
+  @override required final FButtonStyle obscureButtonStyle,
+
+  /// The content's [TextStyle].
+  @override
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> contentTextStyle,
+
+  /// The hint's [TextStyle].
+  @override
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle,
+
+  /// The counter's [TextStyle].
+  @override
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> counterTextStyle,
+
+  /// The border.
+  // TODO: Change this to Decoration once Flutter provides a raw text field, EditableText is awful to work with.
+  @override required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
 
   /// The color of the cursor. Defaults to [CupertinoColors.activeBlue].
   ///
   /// The cursor indicates the current location of text insertion point in the field.
-  @override
-  final Color cursorColor;
+  @override final Color cursorColor = CupertinoColors.activeBlue,
 
   /// The width of the cursor. Defaults to 2.0.
   ///
   /// The cursor indicates the current location of text insertion point in the field.
-  @override
-  final double cursorWidth;
+  @override final double cursorWidth = 2.0,
 
   /// Whether the cursor opacity animates. Defaults to the current platform's behavior (true on iOS and macOS, false on
   /// other platforms).
-  @override
-  final bool? cursorOpacityAnimates;
+  @override final bool? cursorOpacityAnimates,
 
   /// The constraints applied to the text field.
   ///
   /// Defaults to `const BoxConstraints()`.
-  @override
-  final BoxConstraints constraints;
+  @override final BoxConstraints constraints = const BoxConstraints(),
 
   /// The padding surrounding this text field's content.
   ///
   /// Defaults to `const EdgeInsets.symmetric(horizontal: 10, vertical: 9)`.
-  @override
-  final EdgeInsetsGeometry contentPadding;
+  @override final EdgeInsetsGeometry contentPadding = const .symmetric(horizontal: 10, vertical: 9),
 
   /// The padding surrounding the clear button. Defaults to `EdgeInsetsDirectional.only(end: 4)`.
-  @override
-  final EdgeInsetsGeometry clearButtonPadding;
+  @override final EdgeInsetsGeometry clearButtonPadding = const .directional(end: 4),
 
   /// The padding surrounding the obscured text toggle. Defaults to `EdgeInsetsDirectional.only(end: 4)`.
-  @override
-  final EdgeInsetsGeometry obscureButtonPadding;
+  @override final EdgeInsetsGeometry obscureButtonPadding = const .directional(end: 4),
 
   /// Configures padding to edges surrounding a [Scrollable] when this text field scrolls into view.
   ///
@@ -180,69 +200,18 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// overlapped by the keyboard) then it will attempt to make itself visible by scrolling a surrounding [Scrollable],
   /// if one is present. This value controls how far from the edges of a [Scrollable] the TextField will be positioned
   /// after the scroll.
-  @override
-  final EdgeInsets scrollPadding;
-
-  /// The prefix & suffix icon styles.
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
-
-  /// The clear button's style when [FTextField.clearable] is true.
-  @override
-  final FButtonStyle clearButtonStyle;
-
-  /// The obscured text toggle's style when enabled in [FTextField.password].
-  @override
-  final FButtonStyle obscureButtonStyle;
-
-  /// The content's [TextStyle].
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> contentTextStyle;
-
-  /// The hint's [TextStyle].
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle;
-
-  /// The counter's [TextStyle].
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> counterTextStyle;
-
-  /// The border.
-  @override
-  // TODO: Change this to Decoration once Flutter provides a raw text field, EditableText is awful to work with.
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border;
-
+  @override final EdgeInsets scrollPadding = const .all(20),
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// Creates a [FTextFieldStyle].
-  FTextFieldStyle({
-    required this.keyboardAppearance,
-    required this.color,
-    required this.iconStyle,
-    required this.clearButtonStyle,
-    required this.obscureButtonStyle,
-    required this.contentTextStyle,
-    required this.hintTextStyle,
-    required this.counterTextStyle,
-    required this.border,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.cursorColor = CupertinoColors.activeBlue,
-    this.cursorWidth = 2.0,
-    this.cursorOpacityAnimates,
-    this.constraints = const BoxConstraints(),
-    this.contentPadding = const .symmetric(horizontal: 10, vertical: 9),
-    this.clearButtonPadding = const .directional(end: 4),
-    this.obscureButtonPadding = const .directional(end: 4),
-    this.scrollPadding = const .all(20),
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FLabelStyle labelStyle,

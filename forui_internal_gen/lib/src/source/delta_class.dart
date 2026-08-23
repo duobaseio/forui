@@ -13,7 +13,7 @@ class DeltaClass {
   final List<FieldElement> _fields;
   final Map<String, String> _sentinels;
 
-  DeltaClass(this._step, this._class, this._sentinels) : _fields = transitiveInstanceFields(_class);
+  new(this._step, this._class, this._sentinels) : _fields = transitiveInstanceFields(_class);
 
   /// Generates the sealed delta class.
   Future<Class> generateSealed() async {

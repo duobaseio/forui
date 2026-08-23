@@ -40,7 +40,7 @@ class FAdaptiveScope extends InheritedWidget {
   final FPlatformVariant platform;
 
   /// Creates an [FAdaptiveScope].
-  FAdaptiveScope({required super.child, FPlatformVariant? platform, super.key}) : platform = platform ?? _platform;
+  new({required super.child, FPlatformVariant? platform, super.key}) : platform = platform ?? _platform;
 
   @override
   InheritedElement createElement() => AdaptiveScopeElement(this);
@@ -62,7 +62,7 @@ class AdaptiveScopeElement extends InheritedElement {
 
   final ValueNotifier<FPlatformVariant> notifier;
 
-  AdaptiveScopeElement(FAdaptiveScope super.widget) : notifier = ValueNotifier(widget.platform);
+  new(FAdaptiveScope super.widget) : notifier = ValueNotifier(widget.platform);
 
   @override
   void update(covariant FAdaptiveScope current) {

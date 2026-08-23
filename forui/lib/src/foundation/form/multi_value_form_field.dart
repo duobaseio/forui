@@ -14,7 +14,7 @@ class MultiValueFormField<T> extends FormField<Set<T>> {
   final FMultiValueNotifier<T> controller;
 
   /// Creates a [MultiValueFormField].
-  MultiValueFormField({
+  new({
     required this.controller,
     required super.builder,
     super.onSaved,

@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
 
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -97,7 +97,7 @@ class FSwitch extends StatefulWidget {
   final DragStartBehavior dragStartBehavior;
 
   /// Creates a [FSwitch].
-  const FSwitch({
+  const new({
     this.style = const .context(),
     this.leadingLabel = false,
     this.label,
@@ -124,6 +124,7 @@ class FSwitch extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('leadingLabel', value: leadingLabel, ifTrue: 'leadingLabel'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('value', value))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
@@ -204,38 +205,27 @@ class _FSwitchState extends State<FSwitch> {
 }
 
 /// [FSwitch]'s style.
-class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
+class const FSwitchStyle({
   /// This [FSwitch]'s color when focused.
-  @override
-  final Color focusColor;
+  @override required final Color focusColor,
 
   /// The track's color.
-  @override
-  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> trackColor;
+  @override required final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> trackColor,
 
   /// The thumb's color.
-  @override
-  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor;
+  @override required final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor,
 
   /// The label style when [FSwitch.leadingLabel] is true.
-  @override
-  final FLabelStyle leadingLabelStyle;
+  @override required final FLabelStyle leadingLabelStyle,
 
   /// The label style when [FSwitch.leadingLabel] is false (the default).
-  @override
-  final FLabelStyle trailingLabelStyle;
-
+  @override required final FLabelStyle trailingLabelStyle,
+}) with Diagnosticable, _$FSwitchStyleFunctions {
   /// Creates a [FSwitchStyle].
-  const FSwitchStyle({
-    required this.focusColor,
-    required this.trackColor,
-    required this.thumbColor,
-    required this.leadingLabelStyle,
-    required this.trailingLabelStyle,
-  });
+  this;
 
   /// Creates a [FSwitchStyle] that inherits its properties.
-  factory FSwitchStyle.inherit({required FColors colors, required FStyle style}) {
+  factory inherit({required FColors colors, required FStyle style}) {
     final labels = FLabelStyles.inherit(style: style);
     return .new(
       focusColor: colors.primary,

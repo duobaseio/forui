@@ -16,7 +16,7 @@ class TimeInput extends Input<FTime?> {
   final FTimeFieldStyle style;
   final bool? hour24;
 
-  const TimeInput({
+  const new({
     required this.timeController,
     required this.hour24,
     required this.style,

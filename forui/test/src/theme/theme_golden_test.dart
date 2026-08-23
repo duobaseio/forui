@@ -2,11 +2,12 @@
 library;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
+
 import '../test_scaffold.dart';
 
 void main() {
@@ -26,7 +27,7 @@ void main() {
 class Application extends StatelessWidget {
   final FThemeData data;
 
-  const Application({required this.data, super.key});
+  const new({required this.data, super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(

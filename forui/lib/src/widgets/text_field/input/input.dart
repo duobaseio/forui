@@ -1,146 +1,80 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @internal
-class Input extends StatefulWidget {
-  final TextEditingController controller;
-  final FTextFieldSizeVariant size;
-  final FTextFieldStyleDelta style;
-  final FFieldBuilder<FTextFieldStyle> builder;
-  final Widget? label;
-  final String? hint;
-  final Widget? description;
-  final Widget? error;
-  final TextMagnifierConfiguration? magnifierConfiguration;
-  final Object groupId;
-  final FocusNode? focusNode;
-  final TextInputType? keyboardType;
-  final TextInputAction? textInputAction;
-  final TextCapitalization textCapitalization;
-  final TextAlign textAlign;
-  final TextAlignVertical? textAlignVertical;
-  final TextDirection? textDirection;
-  final bool autofocus;
-  final WidgetStatesController? statesController;
-  final String obscuringCharacter;
-  final bool obscureText;
-  final bool autocorrect;
-  final SmartDashesType? smartDashesType;
-  final SmartQuotesType? smartQuotesType;
-  final bool enableSuggestions;
-  final int? minLines;
-  final int? maxLines;
-  final bool expands;
-  final bool readOnly;
-  final bool? showCursor;
-  final int? maxLength;
-  final MaxLengthEnforcement? maxLengthEnforcement;
-  final GestureTapCallback? onTap;
-  final TapRegionCallback? onTapOutside;
-  final bool onTapAlwaysCalled;
-  final VoidCallback? onEditingComplete;
-  final ValueChanged<String>? onSubmit;
-  final AppPrivateCommandCallback? onAppPrivateCommand;
-  final List<TextInputFormatter>? inputFormatters;
-  final bool enabled;
-  final bool? ignorePointers;
-  final bool enableInteractiveSelection;
-  final bool? selectAllOnFocus;
-  final TextSelectionControls? selectionControls;
-  final DragStartBehavior dragStartBehavior;
-  final MouseCursor? mouseCursor;
-  final FTextFieldCounterBuilder? counterBuilder;
-  final ScrollPhysics? scrollPhysics;
-  final ScrollController? scrollController;
-  final Iterable<String>? autofillHints;
-  final String? restorationId;
-  final bool stylusHandwritingEnabled;
-  final bool enableIMEPersonalizedLearning;
-  final ContentInsertionConfiguration? contentInsertionConfiguration;
-  final EditableTextContextMenuBuilder? contextMenuBuilder;
-  final bool canRequestFocus;
-  final UndoHistoryController? undoController;
-  final SpellCheckConfiguration? spellCheckConfiguration;
-  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
-  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
-  final bool Function(TextEditingValue) clearable;
-  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
-
-  const Input({
-    required this.controller,
-    required this.builder,
-    required this.groupId,
-    required this.textCapitalization,
-    required this.textAlign,
-    required this.autofocus,
-    required this.obscuringCharacter,
-    required this.obscureText,
-    required this.autocorrect,
-    required this.enableSuggestions,
-    required this.expands,
-    required this.readOnly,
-    required this.onTapAlwaysCalled,
-    required this.enabled,
-    required this.enableInteractiveSelection,
-    required this.dragStartBehavior,
-    required this.stylusHandwritingEnabled,
-    required this.enableIMEPersonalizedLearning,
-    required this.canRequestFocus,
-    required this.clearable,
-    required this.clearIconBuilder,
-    required this.size,
-    required this.style,
-    this.label,
-    this.hint,
-    this.description,
-    this.error,
-    this.magnifierConfiguration,
-    this.focusNode,
-    this.keyboardType,
-    this.textInputAction,
-    this.textAlignVertical,
-    this.textDirection,
-    this.statesController,
-    this.smartDashesType,
-    this.smartQuotesType,
-    this.minLines,
-    this.maxLines,
-    this.showCursor,
-    this.maxLength,
-    this.maxLengthEnforcement,
-    this.onTap,
-    this.onTapOutside,
-    this.onEditingComplete,
-    this.onSubmit,
-    this.onAppPrivateCommand,
-    this.inputFormatters,
-    this.ignorePointers,
-    this.selectAllOnFocus,
-    this.selectionControls,
-    this.mouseCursor,
-    this.counterBuilder,
-    this.scrollPhysics,
-    this.scrollController,
-    this.autofillHints,
-    this.restorationId,
-    this.contentInsertionConfiguration,
-    this.contextMenuBuilder,
-    this.undoController,
-    this.spellCheckConfiguration,
-    this.prefixBuilder,
-    this.suffixBuilder,
-    super.key,
-  });
-
+class const Input({
+  required final TextEditingController controller,
+  required final FFieldBuilder<FTextFieldStyle> builder,
+  required final Object groupId,
+  required final TextCapitalization textCapitalization,
+  required final TextAlign textAlign,
+  required final bool autofocus,
+  required final String obscuringCharacter,
+  required final bool obscureText,
+  required final bool autocorrect,
+  required final bool enableSuggestions,
+  required final bool expands,
+  required final bool readOnly,
+  required final bool onTapAlwaysCalled,
+  required final bool enabled,
+  required final bool enableInteractiveSelection,
+  required final DragStartBehavior dragStartBehavior,
+  required final bool stylusHandwritingEnabled,
+  required final bool enableIMEPersonalizedLearning,
+  required final bool canRequestFocus,
+  required final bool Function(TextEditingValue) clearable,
+  required final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
+  required final FTextFieldSizeVariant size,
+  required final FTextFieldStyleDelta style,
+  final Widget? label,
+  final String? hint,
+  final Widget? description,
+  final Widget? error,
+  final TextMagnifierConfiguration? magnifierConfiguration,
+  final FocusNode? focusNode,
+  final TextInputType? keyboardType,
+  final TextInputAction? textInputAction,
+  final TextAlignVertical? textAlignVertical,
+  final TextDirection? textDirection,
+  final WidgetStatesController? statesController,
+  final SmartDashesType? smartDashesType,
+  final SmartQuotesType? smartQuotesType,
+  final int? minLines,
+  final int? maxLines,
+  final bool? showCursor,
+  final int? maxLength,
+  final MaxLengthEnforcement? maxLengthEnforcement,
+  final GestureTapCallback? onTap,
+  final TapRegionCallback? onTapOutside,
+  final VoidCallback? onEditingComplete,
+  final ValueChanged<String>? onSubmit,
+  final AppPrivateCommandCallback? onAppPrivateCommand,
+  final List<TextInputFormatter>? inputFormatters,
+  final bool? ignorePointers,
+  final bool? selectAllOnFocus,
+  final TextSelectionControls? selectionControls,
+  final MouseCursor? mouseCursor,
+  final FTextFieldCounterBuilder? counterBuilder,
+  final ScrollPhysics? scrollPhysics,
+  final ScrollController? scrollController,
+  final Iterable<String>? autofillHints,
+  final String? restorationId,
+  final ContentInsertionConfiguration? contentInsertionConfiguration,
+  final EditableTextContextMenuBuilder? contextMenuBuilder,
+  final UndoHistoryController? undoController,
+  final SpellCheckConfiguration? spellCheckConfiguration,
+  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<Input> createState() => _InputState();
 
@@ -383,25 +317,24 @@ class _InputState extends State<Input> {
       child: widget.builder(context, style, variants, textfield),
     );
 
-    field = MergeSemantics(
-      child: Material(
-        color: Colors.transparent,
-        child: Theme(
-          // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
-          // for overriding selectionHandleColor.
-          data: Theme.of(context).copyWith(
-            visualDensity: .standard,
-            textSelectionTheme: TextSelectionThemeData(
-              cursorColor: style.cursorColor,
-              selectionColor: style.cursorColor.withValues(alpha: 0.4),
-              selectionHandleColor: style.cursorColor,
-            ),
+    // TODO: https://github.com/flutter/flutter/issues/191095
+    field = Material(
+      color: Colors.transparent,
+      child: Theme(
+        // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
+        // for overriding selectionHandleColor.
+        data: Theme.of(context).copyWith(
+          visualDensity: .standard,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: style.cursorColor,
+            selectionColor: style.cursorColor.withValues(alpha: 0.4),
+            selectionHandleColor: style.cursorColor,
           ),
-          child: CupertinoTheme(
-            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
-            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
-            child: field,
-          ),
+        ),
+        child: CupertinoTheme(
+          // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
+          data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
+          child: field,
         ),
       ),
     );
@@ -410,11 +343,7 @@ class _InputState extends State<Input> {
     if (materialLocalizations == null) {
       field = Localizations(
         locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-        delegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+        delegates: GlobalMaterialLocalizations.delegates,
         child: field,
       );
     }

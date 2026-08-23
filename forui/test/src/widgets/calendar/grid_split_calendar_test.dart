@@ -9,6 +9,7 @@ import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/header.dart';
 import 'package:forui/src/widgets/calendar/month/month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
+
 import '../../test_scaffold.dart';
 
 void main() {
@@ -27,7 +28,7 @@ void main() {
   );
 
   Widget calendar({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FGridSplitCalendarControl? control,
     FCalendarHeaderBuilder<FGridSplitCalendarController> headerBuilder = FCalendar.defaultHeaderBuilder,
     FCalendarFooterBuilder<FGridSplitCalendarController> footerBuilder = FCalendar.defaultFooterBuilder,

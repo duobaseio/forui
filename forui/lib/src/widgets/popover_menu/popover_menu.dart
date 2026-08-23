@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -24,7 +24,7 @@ class PopoverMenuScope extends InheritedWidget {
 
   final ValueNotifier<(Key?, bool)> active;
 
-  const PopoverMenuScope({
+  const new({
     required this.controller,
     required this.style,
     required this.groupId,
@@ -228,7 +228,7 @@ class FPopoverMenu extends StatefulWidget {
   /// Throws [AssertionError] if:
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
-  FPopoverMenu({
+  new({
     this.control = const .managed(),
     this.scrollController,
     this.style = const .context(),
@@ -296,7 +296,7 @@ class FPopoverMenu extends StatefulWidget {
   /// Throws [AssertionError] if:
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
-  FPopoverMenu.tiles({
+  new tiles({
     this.control = const .managed(),
     this.scrollController,
     this.style = const .context(),
@@ -475,165 +475,146 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
 }
 
 /// A [FPopoverMenuStyle]'s style.
-class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
+class const FPopoverMenuStyle({
   /// The item group's style.
-  @override
-  final FItemGroupStyle itemGroupStyle;
+  @override required final FItemGroupStyle itemGroupStyle,
 
   /// The tile group's style.
-  @override
-  final FTileGroupStyle tileGroupStyle;
+  @override required final FTileGroupStyle tileGroupStyle,
+  required super.decoration,
+
+  /// The haptic feedback for when a submenu is shown via long press.
+  @override required final Future<void> Function() hapticFeedback,
 
   /// The menu's min width. Defaults to 150.
   ///
   /// ## Contract
   /// Throws [AssertionError] if the width is not positive.
-  @override
-  final double minWidth;
+  @override final double minWidth = 150,
 
   /// The menu's max width. Defaults to 250.
   ///
   /// ## Contract
   /// Throws [AssertionError] if the width is not positive.
-  @override
-  final double maxWidth;
+  @override final double maxWidth = 250,
 
   /// The delay before showing a submenu when the pointer enters an item. Defaults to 150ms.
-  @override
-  final Duration hoverEnterDuration;
+  @override final Duration hoverEnterDuration = const Duration(milliseconds: 150),
 
-  /// The popover menu's motion configuration.
-  @override
-  final FPopoverMenuMotion menuMotion;
-
-  /// The haptic feedback for when a submenu is shown via long press.
-  @override
-  final Future<void> Function() hapticFeedback;
-
+  /// The popover menu's motion configuration. Defaults to [FPopoverMenuMotion].
+  @override final FPopoverMenuMotion menuMotion = const FPopoverMenuMotion(),
+  super.barrierFilter,
+  super.backgroundFilter,
+  super.popoverPadding,
+  super.motion,
+}) extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
   /// Creates a [FPopoverMenuStyle].
-  const FPopoverMenuStyle({
-    required this.itemGroupStyle,
-    required this.tileGroupStyle,
-    required super.decoration,
-    required this.hapticFeedback,
-    this.minWidth = 150,
-    this.maxWidth = 250,
-    this.hoverEnterDuration = const Duration(milliseconds: 150),
-    this.menuMotion = const FPopoverMenuMotion(),
-    super.barrierFilter,
-    super.backgroundFilter,
-    super.popoverPadding,
-    super.motion,
-  }) : assert(0 < minWidth, 'minWidth ($minWidth) must be > 0'),
-       assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0'),
-       assert(minWidth <= maxWidth, 'minWidth ($minWidth) must be <= maxWidth ($maxWidth)');
+  this
+    : assert(0 < minWidth, 'minWidth ($minWidth) must be > 0'),
+      assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0'),
+      assert(minWidth <= maxWidth, 'minWidth ($minWidth) must be <= maxWidth ($maxWidth)');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
-  FPopoverMenuStyle.inherit({
-    required super.colors,
-    required super.style,
+  new inherit({
+    required FColors colors,
+    required FStyle style,
     required FTypography typography,
     required FHapticFeedback hapticFeedback,
     required bool touch,
-  }) : itemGroupStyle =
-           .inherit(
-             colors: colors,
-             style: style,
-             typography: typography,
-             hapticFeedback: hapticFeedback,
-             touch: touch,
-           ).copyWith(
-             decoration: .value(
-               ShapeDecoration(
-                 color: colors.card,
-                 shape: RoundedSuperellipseBorder(
-                   side: BorderSide(color: colors.border, width: style.borderWidth),
-                   borderRadius: style.borderRadius.md,
+  }) : this(
+         itemGroupStyle:
+             .inherit(
+               colors: colors,
+               style: style,
+               typography: typography,
+               hapticFeedback: hapticFeedback,
+               touch: touch,
+             ).copyWith(
+               decoration: .value(
+                 ShapeDecoration(
+                   color: colors.card,
+                   shape: RoundedSuperellipseBorder(
+                     side: BorderSide(color: colors.border, width: style.borderWidth),
+                     borderRadius: style.borderRadius.md,
+                   ),
                  ),
                ),
+               itemStyles: .delta([
+                 .all(
+                   .delta(
+                     backgroundColor: FVariants.all(colors.card),
+                     contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
+                   ),
+                 ),
+                 .base(
+                   .delta(
+                     contentStyle: FItemContentStyle.inherit(
+                       colors: colors,
+                       typography: typography,
+                       prefix: colors.foreground,
+                       foreground: colors.foreground,
+                       mutedForeground: colors.mutedForeground,
+                       touch: touch,
+                     ),
+                     rawContentStyle: FRawItemContentStyle.inherit(
+                       colors: colors,
+                       typography: typography,
+                       prefix: colors.foreground,
+                       color: colors.foreground,
+                       touch: touch,
+                     ),
+                   ),
+                 ),
+               ]),
              ),
-             itemStyles: .delta([
-               .all(
-                 .delta(
-                   backgroundColor: FVariants.all(colors.card),
-                   contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
-                 ),
-               ),
-               .base(
-                 .delta(
-                   contentStyle: FItemContentStyle.inherit(
-                     colors: colors,
-                     typography: typography,
-                     prefix: colors.foreground,
-                     foreground: colors.foreground,
-                     mutedForeground: colors.mutedForeground,
-                     touch: touch,
-                   ),
-                   rawContentStyle: FRawItemContentStyle.inherit(
-                     colors: colors,
-                     typography: typography,
-                     prefix: colors.foreground,
-                     color: colors.foreground,
-                     touch: touch,
-                   ),
-                 ),
-               ),
-             ]),
-           ),
-       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback)
-           .copyWith(
-             tileStyles: .delta([
-               .base(
-                 .delta(
-                   contentStyle: .delta(
-                     prefixIconStyle: FVariants.from(
-                       IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
-                       variants: {
-                         [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                       },
+         tileGroupStyle: .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback)
+             .copyWith(
+               tileStyles: .delta([
+                 .base(
+                   .delta(
+                     contentStyle: .delta(
+                       prefixIconStyle: FVariants.from(
+                         IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
+                         variants: {
+                           [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                         },
+                       ),
                      ),
-                   ),
-                   rawContentStyle: .delta(
-                     prefixIconStyle: FVariants.from(
-                       IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
-                       variants: {
-                         [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                       },
+                     rawContentStyle: .delta(
+                       prefixIconStyle: FVariants.from(
+                         IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
+                         variants: {
+                           [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                         },
+                       ),
                      ),
                    ),
                  ),
-               ),
-             ]),
-           ),
-       minWidth = 150,
-       maxWidth = 250,
-       hoverEnterDuration = const Duration(milliseconds: 150),
-       menuMotion = const FPopoverMenuMotion(),
-       hapticFeedback = hapticFeedback.mediumImpact,
-       super.inherit();
+               ]),
+             ),
+         minWidth: 150,
+         maxWidth: 250,
+         hoverEnterDuration: const Duration(milliseconds: 150),
+         menuMotion: const FPopoverMenuMotion(),
+         hapticFeedback: hapticFeedback.mediumImpact,
+         decoration: FPopoverStyle.inherit(colors: colors, style: style).decoration,
+       );
 }
 
 /// Motion-related properties for the submenu fade effect in [FPopoverMenu].
-class FPopoverMenuMotion with Diagnosticable, _$FPopoverMenuMotionFunctions {
-  /// A [FPopoverMenuMotion] with no motion effects.
-  static const FPopoverMenuMotion none = .new(fade: 1.0);
-
+class const FPopoverMenuMotion({
   /// The fade applied to the parent menu when a submenu is active. Defaults to 0.4.
-  @override
-  final double fade;
+  @override final double fade = 0.4,
 
   /// The fade duration. Defaults to 100ms.
-  @override
-  final Duration fadeDuration;
+  @override final Duration fadeDuration = const Duration(milliseconds: 100),
 
   /// The fade curve. Defaults to [Curves.linear].
-  @override
-  final Curve fadeCurve;
-
+  @override final Curve fadeCurve = Curves.linear,
+}) with Diagnosticable, _$FPopoverMenuMotionFunctions {
   /// Creates a [FPopoverMenuMotion].
-  const FPopoverMenuMotion({
-    this.fade = 0.4,
-    this.fadeDuration = const Duration(milliseconds: 100),
-    this.fadeCurve = Curves.linear,
-  });
+  this;
+
+  /// A [FPopoverMenuMotion] with no motion effects.
+  static const FPopoverMenuMotion none = .new(fade: 1.0);
 }

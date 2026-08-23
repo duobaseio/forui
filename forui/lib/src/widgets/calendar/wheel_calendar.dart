@@ -9,48 +9,27 @@ import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/header.dart';
 
 @internal
-class WheelCalendar extends StatelessWidget {
-  final FWheelCalendarController controller;
-  final FDateSelectionController selectionController;
-  final FCalendarStyle style;
-  final FLocalizations localizations;
-  final double width;
-  final double height;
-  final bool fixedWeeks;
-  final ScrollPhysics? dayScrollPhysics;
-  final ScrollCacheExtent? dayScrollCacheExtent;
-  final ScrollBehavior? dayScrollBehavior;
-  final bool loop;
-  final int monthFlex;
-  final int yearFlex;
-  final ValueChanged<DateTime> onDayPress;
-  final ValueChanged<DateTime> onDayLongPress;
-  final FCalendarHeaderBuilder<FWheelCalendarController> headerBuilder;
-  final FCalendarFooterBuilder<FWheelCalendarController> footerBuilder;
-  final FCalendarDayBuilder dayBuilder;
-
-  const WheelCalendar({
-    required this.controller,
-    required this.selectionController,
-    required this.style,
-    required this.localizations,
-    required this.width,
-    required this.height,
-    required this.fixedWeeks,
-    required this.dayScrollPhysics,
-    required this.dayScrollCacheExtent,
-    required this.dayScrollBehavior,
-    required this.loop,
-    required this.monthFlex,
-    required this.yearFlex,
-    required this.onDayPress,
-    required this.onDayLongPress,
-    required this.headerBuilder,
-    required this.footerBuilder,
-    required this.dayBuilder,
-    super.key,
-  });
-
+class const WheelCalendar({
+  required final FWheelCalendarController controller,
+  required final FDateSelectionController<Object?> selectionController,
+  required final FCalendarStyle style,
+  required final FLocalizations localizations,
+  required final double width,
+  required final double height,
+  required final bool fixedWeeks,
+  required final ScrollPhysics? dayScrollPhysics,
+  required final ScrollCacheExtent? dayScrollCacheExtent,
+  required final ScrollBehavior? dayScrollBehavior,
+  required final bool loop,
+  required final int monthFlex,
+  required final int yearFlex,
+  required final ValueChanged<DateTime> onDayPress,
+  required final ValueChanged<DateTime> onDayLongPress,
+  required final FCalendarHeaderBuilder<FWheelCalendarController> headerBuilder,
+  required final FCalendarFooterBuilder<FWheelCalendarController> footerBuilder,
+  required final FCalendarDayBuilder dayBuilder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     mainAxisSize: .min,

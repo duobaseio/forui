@@ -44,9 +44,12 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
 ) async {
   final directory = p.join(Directory.current.parent.path, 'forui_cli', 'tool', 'snippets', 'literals');
 
-  final files = Directory(
-    library,
-  ).listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart')).map((f) => f.path).toList();
+  final files = Directory(library)
+      .listSync(recursive: true)
+      .whereType<File>()
+      .where((f) => f.path.endsWith('.dart'))
+      .map((f) => f.path)
+      .toList();
 
   final approximateMaterialThemeFinder = ToApproximateMaterialThemeFinder();
   for (final file in files) {
@@ -55,9 +58,12 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
     }
   }
 
-  final assetFiles = Directory(
-    assetsLibrary,
-  ).listSync(recursive: true).whereType<File>().where((f) => f.path.endsWith('.dart')).map((f) => f.path).toList();
+  final assetFiles = Directory(assetsLibrary)
+      .listSync(recursive: true)
+      .whereType<File>()
+      .where((f) => f.path.endsWith('.dart'))
+      .map((f) => f.path)
+      .toList();
 
   final iconFinder = IconsFinder();
   for (final file in assetFiles) {

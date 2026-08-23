@@ -63,7 +63,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   /// sweep when competing. [acceptGesture] fires `onPressUp` + `onPress`; [rejectGesture] fires `onPressCancel`.
   (GroupEntry, TapUpDetails)? _pending;
 
-  TappableGroupGestureRecognizer(this.entries, this.slidePressHapticFeedback) : _state = .idle;
+  new(this.entries, this.slidePressHapticFeedback) : _state = .idle;
 
   @override
   @protected

@@ -73,13 +73,15 @@ Result<T> autocomplete<T>({
           if (filtered.isEmpty) {
             continue;
           }
-          renderer.render(submitFrame(message, filtered[cursor].option.label));
-          renderer.commit();
+          renderer
+            ..render(submitFrame(message, filtered[cursor].option.label))
+            ..commit();
           return Value(filtered[cursor].option.value);
         case Control.escape:
         case Control.ctrlC:
-          renderer.render(cancelFrame(message));
-          renderer.commit();
+          renderer
+            ..render(cancelFrame(message))
+            ..commit();
           return Cancelled<T>();
         default:
           continue;

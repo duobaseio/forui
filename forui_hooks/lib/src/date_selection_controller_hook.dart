@@ -86,7 +86,7 @@ class _DateSelectionControllerHook<T> extends Hook<FDateSelectionController<T>> 
   final String _debugLabel;
   final _Create<T> _create;
 
-  const _DateSelectionControllerHook({
+  const new({
     required this.value,
     required this._debugLabel,
     required this._create,

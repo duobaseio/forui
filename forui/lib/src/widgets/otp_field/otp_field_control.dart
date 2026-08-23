@@ -15,14 +15,14 @@ part 'otp_field_control.control.dart';
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FOtpFieldControl with Diagnosticable, _$FOtpFieldControlMixin {
   /// Creates a [FOtpFieldControl].
-  const factory FOtpFieldControl.managed({
+  const factory managed({
     FOtpController? controller,
     List<Widget> children,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
   }) = FOtpFieldManagedControl;
 
-  const FOtpFieldControl._();
+  const new _();
 
   (FOtpController, bool) _update(FOtpFieldControl old, FOtpController controller, VoidCallback callback);
 }
@@ -56,7 +56,7 @@ class FOtpFieldManagedControl extends FOtpFieldControl with _$FOtpFieldManagedCo
   final ValueChanged<TextEditingValue>? onChange;
 
   /// Creates a [FOtpFieldControl].
-  const FOtpFieldManagedControl({
+  const new({
     this.controller,
     this.children = const [FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem()],
     this.initial,
@@ -96,7 +96,7 @@ class FOtpController extends TextEditingController {
   int _focused;
 
   /// Creates a [FOtpController].
-  FOtpController({
+  new({
     this.children = const [FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem()],
     TextEditingValue value = .empty,
   }) : _length = children.whereType<FOtpItemMixin>().length,

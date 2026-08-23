@@ -22,13 +22,12 @@ class FTypeaheadController extends TextEditingController {
   bool _disposed = false;
 
   /// Creates a [FTypeaheadController] with an optional initial text and completion.
-  FTypeaheadController({required this._textStyles, this._suggestions = const [], super.text}) {
+  new({required this._textStyles, this._suggestions = const [], super.text}) {
     findCompletion();
   }
 
   /// Creates a [FTypeaheadController] from a [TextEditingValue].
-  FTypeaheadController.fromValue(super.value, {required this._textStyles, this._suggestions = const []})
-    : super.fromValue() {
+  new fromValue(super.value, {required this._textStyles, this._suggestions = const []}) : super.fromValue() {
     findCompletion();
   }
 

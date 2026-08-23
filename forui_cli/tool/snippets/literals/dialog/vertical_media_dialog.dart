@@ -10,7 +10,7 @@ class VerticalMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const VerticalMediaDialog({
+  const new({
     required this.image,
     required this.title,
     required this.body,

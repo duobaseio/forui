@@ -35,7 +35,7 @@ sealed class FHeader extends StatelessWidget {
   /// The title.
   final Widget title;
 
-  const FHeader._({this.title = const SizedBox(), super.key});
+  const new _({this.title = const SizedBox(), super.key});
 
   /// Creates a header whose title is aligned to the start.
   ///
@@ -47,7 +47,7 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader({Widget title, FHeaderStyleDelta style, List<Widget> suffixes, Key? key}) = _FRootHeader;
+  const factory({Widget title, FHeaderStyleDelta style, List<Widget> suffixes, Key? key}) = _FRootHeader;
 
   /// Creates a nested header whose title is aligned to the center.
   ///
@@ -59,7 +59,7 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader.nested({
+  const factory nested({
     Widget title,
     AlignmentGeometry titleAlignment,
     FHeaderStyleDelta style,
@@ -85,7 +85,7 @@ class FHeaderData extends InheritedWidget {
   final FHeaderActionStyle actionStyle;
 
   /// Creates a [FHeaderData].
-  const FHeaderData({required this.actionStyle, required super.child, super.key});
+  const new({required this.actionStyle, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FHeaderData oldWidget) => actionStyle != oldWidget.actionStyle;
@@ -101,7 +101,7 @@ class FHeaderData extends InheritedWidget {
 extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
     implements FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
-  factory FHeaderStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -151,18 +151,24 @@ extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant,
 }
 
 /// A header's style.
-class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
+class const FHeaderStyle({
   /// The system overlay style.
-  @override
-  final SystemUiOverlayStyle systemOverlayStyle;
+  @override required final SystemUiOverlayStyle systemOverlayStyle,
 
-  /// The layout constraints applied to the header.
-  @override
-  final BoxConstraints constraints;
+  /// The padding.
+  @override required final EdgeInsetsGeometry padding,
 
-  /// The decoration.
-  @override
-  final Decoration decoration;
+  /// The title's [TextStyle].
+  @override required final TextStyle titleTextStyle,
+
+  /// The [FHeaderAction]s' style.
+  @override required final FHeaderActionStyle actionStyle,
+
+  /// The layout constraints applied to the header. Defaults to `BoxConstraints()`.
+  @override final BoxConstraints constraints = const BoxConstraints(),
+
+  /// The decoration. Defaults to `BoxDecoration()`.
+  @override final Decoration decoration = const BoxDecoration(),
 
   /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
   /// background color.
@@ -186,39 +192,15 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
   /// );
   /// ```
-  @override
-  final ImageFilter? backgroundFilter;
-
-  /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override final ImageFilter? backgroundFilter,
 
   /// The spacing between [FHeaderAction]s. Defaults to 0.
-  @override
-  final double actionSpacing;
-
-  /// The title's [TextStyle].
-  @override
-  final TextStyle titleTextStyle;
-
-  /// The [FHeaderAction]s' style.
-  @override
-  final FHeaderActionStyle actionStyle;
+  @override final double actionSpacing = 0,
 
   /// Whether the actions support pressing an action and sliding to another. Defaults to true.
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slidableActions;
-
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slidableActions = const .all(true),
+}) with Diagnosticable, _$FHeaderStyleFunctions {
   /// Creates a [FHeaderStyle].
-  const FHeaderStyle({
-    required this.systemOverlayStyle,
-    required this.padding,
-    required this.titleTextStyle,
-    required this.actionStyle,
-    this.constraints = const BoxConstraints(),
-    this.decoration = const BoxDecoration(),
-    this.backgroundFilter,
-    this.actionSpacing = 0,
-    this.slidableActions = const .all(true),
-  });
+  this;
 }

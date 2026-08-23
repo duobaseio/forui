@@ -167,7 +167,7 @@ class FPersistentSheetController {
   final AnimationController _controller;
   final VoidCallback _onDispose;
 
-  FPersistentSheetController._({
+  new _({
     required TickerProvider vsync,
     required FSheetStyle style,
     required this._onDispose,
@@ -232,7 +232,7 @@ class FSheets extends StatefulWidget {
   final Widget child;
 
   /// Creates a [FSheets].
-  const FSheets({required this.child, super.key});
+  const new({required this.child, super.key});
 
   @override
   State<FSheets> createState() => FSheetsState();
@@ -304,25 +304,24 @@ class FSheetsState extends State<FSheets> with TickerProviderStateMixin {
 }
 
 /// A persistent sheet's style.
-class FPersistentSheetStyle extends FSheetStyle with Diagnosticable, _$FPersistentSheetStyleFunctions {
-  /// The motion-related properties for a persistent sheet.
-  @override
-  final FPersistentSheetMotion motion;
-
+class const FPersistentSheetStyle({
+  /// The motion-related properties for a persistent sheet. Defaults to [FPersistentSheetMotion].
+  @override final FPersistentSheetMotion motion = const FPersistentSheetMotion(),
+  super.flingVelocity,
+  super.closeProgressThreshold,
+}) extends FSheetStyle with Diagnosticable, _$FPersistentSheetStyleFunctions {
   /// Creates a [FSheetStyle].
-  const FPersistentSheetStyle({
-    this.motion = const FPersistentSheetMotion(),
-    super.flingVelocity,
-    super.closeProgressThreshold,
-  });
+  this;
 
   /// Creates a [FPersistentSheetStyle] that inherits its properties from the given arguments.
   // This is needed because the CLI generator scans all style inherit constructors to generate the style mappings.
-  FPersistentSheetStyle.inherit() : this();
+  new inherit() : this();
 }
 
 /// The motion-related properties for a persistent sheet.
-class FPersistentSheetMotion extends FSheetMotion with Diagnosticable, _$FPersistentSheetMotionFunctions {
+class const FPersistentSheetMotion({super.expandDuration, super.collapseDuration, super.curve})
+    extends FSheetMotion
+    with Diagnosticable, _$FPersistentSheetMotionFunctions {
   /// Creates a [FPersistentSheetMotion].
-  const FPersistentSheetMotion({super.expandDuration, super.collapseDuration, super.curve});
+  this;
 }

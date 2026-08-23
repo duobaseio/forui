@@ -3,9 +3,9 @@ import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -128,7 +128,7 @@ class FTooltip extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if neither [builder] nor [child] is both provided.
-  const FTooltip({
+  const new({
     required this.tipBuilder,
     this.control = const .managed(),
     this.style = const .context(),
@@ -379,76 +379,55 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 }
 
 /// A [FTooltip]'s style.
-class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
+class const FTooltipStyle({
+  /// The box decoration.
+  @override required final Decoration decoration,
+
+  /// The tooltip's default text style.
+  @override required final TextStyle textStyle,
+
+  /// The haptic feedback for when the tooltip is shown via long press.
+  @override required final Future<void> Function() hapticFeedback,
+
+  /// An optional background filter applied to the tooltip.
+  ///
+  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
+  @override final ImageFilter? backgroundFilter,
+
+  /// The padding surrounding the tooltip's text. Defaults to `EdgeInsets.symmetric(horizontal: 14, vertical: 10)`.
+  @override final EdgeInsets padding = const .symmetric(horizontal: 14, vertical: 10),
+
+  /// The tooltip's constraints. The height & width is capped at the viewport so large tips wrap.
+  ///
+  /// Defaults to `const BoxConstraints()`.
+  @override final BoxConstraints constraints = const BoxConstraints(),
+
+  /// The tooltip's motion configuration. Defaults to [FTooltipMotion].
+  @override final FTooltipMotion motion = const FTooltipMotion(),
+
+  /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 500ms.
+  @override final Duration hoverEnterDuration = const Duration(milliseconds: 500),
+
+  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
+  ///
+  /// Defaults to 100ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
+  /// the tip may hide before the pointer can move onto it.
+  @override final Duration hoverExitDuration = const Duration(milliseconds: 100),
+
+  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1500ms.
+  @override final Duration longPressExitDuration = const Duration(milliseconds: 1500),
+}) with Diagnosticable, _$FTooltipStyleFunctions {
+  /// Creates a [FTooltipStyle].
+  this;
+
   /// The tooltip's default shadow in [FTooltipStyle.inherit].
   static const shadow = [
     BoxShadow(color: Color(0x1a000000), offset: Offset(0, 4), blurRadius: 6, spreadRadius: -1),
     BoxShadow(color: Color(0x1a000000), offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2),
   ];
 
-  /// The box decoration.
-  @override
-  final Decoration decoration;
-
-  /// An optional background filter applied to the tooltip.
-  ///
-  /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
-  @override
-  final ImageFilter? backgroundFilter;
-
-  /// The padding surrounding the tooltip's text.
-  @override
-  final EdgeInsets padding;
-
-  /// The tooltip's constraints. The height & width is capped at the viewport so large tips wrap.
-  ///
-  /// Defaults to `const BoxConstraints()`.
-  @override
-  final BoxConstraints constraints;
-
-  /// The tooltip's default text style.
-  @override
-  final TextStyle textStyle;
-
-  /// The haptic feedback for when the tooltip is shown via long press.
-  @override
-  final Future<void> Function() hapticFeedback;
-
-  /// The tooltip's motion configuration.
-  @override
-  final FTooltipMotion motion;
-
-  /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 500ms.
-  @override
-  final Duration hoverEnterDuration;
-
-  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
-  ///
-  /// Defaults to 100ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
-  /// the tip may hide before the pointer can move onto it.
-  @override
-  final Duration hoverExitDuration;
-
-  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1500ms.
-  @override
-  final Duration longPressExitDuration;
-
-  /// Creates a [FTooltipStyle].
-  const FTooltipStyle({
-    required this.decoration,
-    required this.textStyle,
-    required this.hapticFeedback,
-    this.backgroundFilter,
-    this.padding = const .symmetric(horizontal: 14, vertical: 10),
-    this.constraints = const BoxConstraints(),
-    this.motion = const FTooltipMotion(),
-    this.hoverEnterDuration = const Duration(milliseconds: 500),
-    this.hoverExitDuration = const Duration(milliseconds: 100),
-    this.longPressExitDuration = const Duration(milliseconds: 1500),
-  });
-
   /// Creates a [FTooltipStyle] that inherits its properties.
-  FTooltipStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -482,54 +461,37 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only the fade transition is applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
+class const FTooltipMotion({
+  /// The tooltip's entrance duration. Defaults to 100ms.
+  @override final Duration entranceDuration = const Duration(milliseconds: 100),
+
+  /// The tooltip's exit duration. Defaults to 100ms.
+  @override final Duration exitDuration = const Duration(milliseconds: 100),
+
+  /// The curve used for the tooltip's expansion animation when entering. Defaults to [Curves.easeOutCubic].
+  @override final Curve expandCurve = Curves.easeOutCubic,
+
+  /// The curve used for the tooltip's collapse animation when exiting. Defaults to [Curves.easeOutCubic].
+  @override final Curve collapseCurve = Curves.easeOutCubic,
+
+  /// The curve used for the tooltip's fade-in animation when entering. Defaults to [Curves.linear].
+  @override final Curve fadeInCurve = Curves.linear,
+
+  /// The curve used for the tooltip's fade-out animation when exiting. Defaults to [Curves.linear].
+  @override final Curve fadeOutCurve = Curves.linear,
+
+  /// The tooltip's scale tween. Defaults to a tween from 0.93 to 1.
+  @override final Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),
+
+  /// The tooltip's fade tween. Defaults to a tween from 0 to 1.
+  @override final Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),
+}) with Diagnosticable, _$FTooltipMotionFunctions {
+  /// Creates a [FTooltipMotion].
+  this;
+
   /// A [FTooltipMotion] with no motion effects.
   static const FTooltipMotion none = .new(
     scaleTween: FImmutableTween(begin: 1, end: 1),
     fadeTween: FImmutableTween(begin: 1, end: 1),
   );
-
-  /// The tooltip's entrance duration. Defaults to 100ms.
-  @override
-  final Duration entranceDuration;
-
-  /// The tooltip's exit duration. Defaults to 100ms.
-  @override
-  final Duration exitDuration;
-
-  /// The curve used for the tooltip's expansion animation when entering. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
-
-  /// The curve used for the tooltip's collapse animation when exiting. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve collapseCurve;
-
-  /// The curve used for the tooltip's fade-in animation when entering. Defaults to [Curves.linear].
-  @override
-  final Curve fadeInCurve;
-
-  /// The curve used for the tooltip's fade-out animation when exiting. Defaults to [Curves.linear].
-  @override
-  final Curve fadeOutCurve;
-
-  /// The tooltip's scale tween. Defaults to a tween from 0.93 to 1.
-  @override
-  final Animatable<double> scaleTween;
-
-  /// The tooltip's fade tween. Defaults to a tween from 0 to 1.
-  @override
-  final Animatable<double> fadeTween;
-
-  /// Creates a [FTooltipMotion].
-  const FTooltipMotion({
-    this.entranceDuration = const Duration(milliseconds: 100),
-    this.exitDuration = const Duration(milliseconds: 100),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeOutCubic,
-    this.fadeInCurve = Curves.linear,
-    this.fadeOutCurve = Curves.linear,
-    this.scaleTween = const FImmutableTween(begin: 0.93, end: 1),
-    this.fadeTween = const FImmutableTween(begin: 0, end: 1),
-  });
 }

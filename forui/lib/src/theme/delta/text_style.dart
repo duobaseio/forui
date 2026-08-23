@@ -5,7 +5,7 @@ import 'package:forui/src/theme/delta/delta.dart';
 /// A delta that applies modifications to a [TextStyle].
 abstract class TextStyleDelta with Delta {
   /// Creates a partial modification of a [TextStyle].
-  const factory TextStyleDelta.delta({
+  const factory delta({
     bool? inherit,
     Color? color,
     Color? backgroundColor,
@@ -35,69 +35,40 @@ abstract class TextStyleDelta with Delta {
   }) = _TextStyleDelta;
 
   /// Creates a complete replacement of a [TextStyle].
-  const factory TextStyleDelta.value(TextStyle style) = _TextStyleValue;
+  const factory value(TextStyle style) = _TextStyleValue;
 
   @override
   TextStyle call(TextStyle? style);
 }
 
-class _TextStyleDelta implements TextStyleDelta {
-  final bool? inherit;
-  final Color? color;
-  final Color? backgroundColor;
-  final double? fontSize;
-  final FontWeight? fontWeight;
-  final FontStyle? Function()? fontStyle;
-  final double? letterSpacing;
-  final double? wordSpacing;
-  final TextBaseline? Function()? textBaseline;
-  final double? height;
-  final TextLeadingDistribution? Function()? leadingDistribution;
-  final Locale? locale;
-  final Paint? Function()? foreground;
-  final Paint? Function()? background;
-  final List<Shadow>? shadows;
-  final List<FontFeature>? fontFeatures;
-  final List<FontVariation>? fontVariations;
-  final TextDecoration? Function()? decoration;
-  final Color? decorationColor;
-  final TextDecorationStyle? Function()? decorationStyle;
-  final double? decorationThickness;
-  final String? debugLabel;
-  final String? fontFamily;
-  final List<String>? fontFamilyFallback;
-  final String? package;
-  final TextOverflow? Function()? overflow;
-
-  const _TextStyleDelta({
-    this.inherit,
-    this.color = Sentinels.color,
-    this.backgroundColor = Sentinels.color,
-    this.fontSize = .infinity,
-    this.fontWeight = Sentinels.fontWeight,
-    this.fontStyle,
-    this.letterSpacing = .infinity,
-    this.wordSpacing = .infinity,
-    this.textBaseline,
-    this.height = .infinity,
-    this.leadingDistribution,
-    this.locale = Sentinels.locale,
-    this.foreground,
-    this.background,
-    this.shadows,
-    this.fontFeatures,
-    this.fontVariations,
-    this.decoration,
-    this.decorationColor = Sentinels.color,
-    this.decorationStyle,
-    this.decorationThickness = .infinity,
-    this.debugLabel = Sentinels.string,
-    this.fontFamily = Sentinels.string,
-    this.fontFamilyFallback,
-    this.package,
-    this.overflow,
-  });
-
+class const _TextStyleDelta({
+  final bool? inherit,
+  final Color? color = Sentinels.color,
+  final Color? backgroundColor = Sentinels.color,
+  final double? fontSize = .infinity,
+  final FontWeight? fontWeight = Sentinels.fontWeight,
+  final FontStyle? Function()? fontStyle,
+  final double? letterSpacing = .infinity,
+  final double? wordSpacing = .infinity,
+  final TextBaseline? Function()? textBaseline,
+  final double? height = .infinity,
+  final TextLeadingDistribution? Function()? leadingDistribution,
+  final Locale? locale = Sentinels.locale,
+  final Paint? Function()? foreground,
+  final Paint? Function()? background,
+  final List<Shadow>? shadows,
+  final List<FontFeature>? fontFeatures,
+  final List<FontVariation>? fontVariations,
+  final TextDecoration? Function()? decoration,
+  final Color? decorationColor = Sentinels.color,
+  final TextDecorationStyle? Function()? decorationStyle,
+  final double? decorationThickness = .infinity,
+  final String? debugLabel = Sentinels.string,
+  final String? fontFamily = Sentinels.string,
+  final List<String>? fontFamilyFallback,
+  final String? package,
+  final TextOverflow? Function()? overflow,
+}) implements TextStyleDelta {
   @override
   TextStyle call(TextStyle? style) => TextStyle(
     inherit: inherit ?? style?.inherit ?? true,
@@ -131,11 +102,7 @@ class _TextStyleDelta implements TextStyleDelta {
   );
 }
 
-class _TextStyleValue implements TextStyleDelta {
-  final TextStyle _style;
-
-  const _TextStyleValue(this._style);
-
+class const _TextStyleValue(final TextStyle _style) implements TextStyleDelta {
   @override
   TextStyle call(TextStyle? style) => _style;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -16,7 +16,8 @@ part 'item.design.dart';
 /// An item that is typically used to group related information together.
 ///
 /// ## Using [FItem] in a [FPopover] when wrapped in a [FItemGroup]
-/// When a [FPopover] is used inside an [FItemGroup], items inside the popover will inherit styling from the parent group.
+/// When a [FPopover] is used inside an [FItemGroup], items inside the popover will inherit styling from the parent
+/// group.
 /// This happens because [FPopover]'s content shares the same `BuildContext` as its child, causing data inheritance
 /// that may lead to unexpected rendering issues.
 ///
@@ -50,7 +51,8 @@ part 'item.design.dart';
 class FItem extends StatelessWidget with FItemMixin {
   /// The variant used to resolve the style from [FItemStyles].
   ///
-  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style resolution.
+  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style
+  /// resolution.
   ///
   /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
@@ -200,7 +202,7 @@ class FItem extends StatelessWidget with FItemMixin {
   ///
   /// Use [FItem.raw] in these cases.
   /// {@endtemplate}
-  FItem({
+  new({
     required Widget title,
     this.variant = .primary,
     this.style = const .context(),
@@ -255,7 +257,7 @@ class FItem extends StatelessWidget with FItemMixin {
   ///
   /// The order is reversed for RTL locales.
   /// {@endtemplate}
-  FItem.raw({
+  new raw({
     required Widget child,
     this.variant = .primary,
     this.style = const .context(),
@@ -433,7 +435,7 @@ class FItem extends StatelessWidget with FItemMixin {
 extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
-  factory FItemStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -487,26 +489,13 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
 /// └──────────────────────────────────────┘
 /// ```
 /// {@endtemplate}
-class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
-  /// The item's shape, only applied when outside an [FItemGroup] or other similar groups.
-  ///
-  /// {@macro forui.widgets.item.ItemStyle}
-  @override
-  final ShapeBorder? shape;
-
+class FItemStyle({
   /// The item's background color, enclosing the [padding] and content, and below [contentDecoration].
   ///
   /// {@macro forui.widgets.item.ItemStyle}
   ///
   /// As it is below [contentDecoration], setting a decoration color will paint over the [backgroundColor].
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor;
-
-  /// The padding around the [contentDecoration].
-  ///
-  /// {@macro forui.widgets.item.ItemStyle}
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor,
 
   /// The content's decoration, enclosed within [padding] and [shape], and above [backgroundColor].
   ///
@@ -514,84 +503,77 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   ///
   /// The content's background color will default to [backgroundColor] if the decoration does not have a color.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> contentDecoration;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> contentDecoration,
 
   /// The content's style.
-  @override
-  final FItemContentStyle contentStyle;
+  @override required final FItemContentStyle contentStyle,
 
   /// The raw content's style.
-  @override
-  final FRawItemContentStyle rawContentStyle;
+  @override required final FRawItemContentStyle rawContentStyle,
 
   /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle? focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle? focusedOutlineStyle,
 
+  /// The padding around the [contentDecoration]. Defaults to `EdgeInsets.symmetric(horizontal: 4)`.
+  ///
+  /// {@macro forui.widgets.item.ItemStyle}
+  @override final EdgeInsetsGeometry padding = const .symmetric(horizontal: 4),
+
+  /// The item's shape, only applied when outside an [FItemGroup] or other similar groups.
+  ///
+  /// {@macro forui.widgets.item.ItemStyle}
+  @override final ShapeBorder? shape,
+}) with Diagnosticable, _$FItemStyleFunctions {
   /// Creates a [FItemStyle].
-  FItemStyle({
-    required this.backgroundColor,
-    required this.contentDecoration,
-    required this.contentStyle,
-    required this.rawContentStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    this.padding = const .symmetric(horizontal: 4),
-    this.shape,
-  });
+  this;
 
   /// Creates a [FItemStyle] that inherits from the given arguments.
-  FItemStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         backgroundColor: FVariants(
-           colors.background,
-           variants: {
-             [.disabled]: colors.background,
-           },
-         ),
-         contentDecoration: .from(
-           ShapeDecoration(
-             shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-             color: colors.background,
-           ),
-           variants: {
-             [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-             //
-             [.disabled]: const .shapeDelta(),
-             //
-             [.selected]: .shapeDelta(color: colors.secondary),
-             [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-           },
-         ),
-         contentStyle: .inherit(
-           colors: colors,
-           typography: typography,
-           prefix: colors.primary,
-           foreground: colors.foreground,
-           mutedForeground: colors.mutedForeground,
-           touch: touch,
-         ),
-         rawContentStyle: .inherit(
-           colors: colors,
-           typography: typography,
-           prefix: colors.foreground,
-           color: colors.foreground,
-           touch: touch,
-         ),
-         tappableStyle: style.tappableStyle.copyWith(
-           motion: FTappableMotion.none,
-           pressedEnterDuration: .zero,
-           pressedExitDuration: const Duration(milliseconds: 25),
-         ),
-         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: -style.borderWidth),
-         padding: const .symmetric(horizontal: 4),
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        backgroundColor: FVariants(
+          colors.background,
+          variants: {
+            [.disabled]: colors.background,
+          },
+        ),
+        contentDecoration: .from(
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+            color: colors.background,
+          ),
+          variants: {
+            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+            //
+            [.disabled]: const .shapeDelta(),
+            //
+            [.selected]: .shapeDelta(color: colors.secondary),
+            [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+          },
+        ),
+        contentStyle: .inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.primary,
+          foreground: colors.foreground,
+          mutedForeground: colors.mutedForeground,
+          touch: touch,
+        ),
+        rawContentStyle: .inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.foreground,
+          color: colors.foreground,
+          touch: touch,
+        ),
+        tappableStyle: style.tappableStyle.copyWith(
+          motion: FTappableMotion.none,
+          pressedEnterDuration: .zero,
+          pressedExitDuration: const Duration(milliseconds: 25),
+        ),
+        focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: -style.borderWidth),
+        padding: const .symmetric(horizontal: 4),
+      );
 }

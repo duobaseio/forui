@@ -3,9 +3,9 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -332,7 +332,7 @@ class FTappable extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const factory FTappable({
+  const factory({
     FTappableStyleDelta style,
     FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
@@ -387,7 +387,7 @@ class FTappable extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FTappable.static({
+  const new static({
     this.style = const .context(),
     this.focusedOutlineStyle,
     this.semanticsLabel,
@@ -770,9 +770,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
                         // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics
                         // which required the child to be a [RenderBox] as well. We use a pattern match anyways just to
                         // be safe.
-                        if (context.findRenderObject() case RenderBox(
-                          :final size,
-                        ) when size.contains(event.localPosition)) {
+                        if (context.findRenderObject() case RenderBox(:final size)
+                            when size.contains(event.localPosition)) {
                           return;
                         }
 
@@ -894,57 +893,57 @@ class _FTappableState<T extends FTappable> extends State<T> {
 }
 
 @internal
-class AnimatedTappable extends FTappable {
-  const AnimatedTappable({
-    super.style,
-    super.focusedOutlineStyle,
-    super.semanticsLabel,
-    super.semanticsButton,
-    super.semanticsChecked,
-    super.semanticsExpanded,
-    super.semanticsInMutuallyExclusiveGroup,
-    super.semanticsHint,
-    super.semanticsTooltip,
-    super.excludeSemantics,
-    super.autofocus,
-    super.focusNode,
-    super.onFocusChange,
-    super.onHoverChange,
-    super.onVariantChange,
-    super.selected,
-    super.selectable,
-    super.behavior,
-    super.onPressDown,
-    super.onPressCancel,
-    super.onPressMove,
-    super.onPressUp,
-    super.onPress,
-    super.onDisabledPress,
-    super.onLongPressDown,
-    super.onLongPressCancel,
-    super.onLongPressStart,
-    super.onLongPressMove,
-    super.onLongPressEnd,
-    super.onLongPress,
-    super.onDoubleTapDown,
-    super.onDoubleTapCancel,
-    super.onDoubleTap,
-    super.onSecondaryPressDown,
-    super.onSecondaryPressCancel,
-    super.onSecondaryPressUp,
-    super.onSecondaryPress,
-    super.onSecondaryLongPressDown,
-    super.onSecondaryLongPressCancel,
-    super.onSecondaryLongPressStart,
-    super.onSecondaryLongPressMove,
-    super.onSecondaryLongPressEnd,
-    super.onSecondaryLongPress,
-    super.shortcuts,
-    super.actions,
-    super.builder,
-    super.child,
-    super.key,
-  }) : super.static();
+class const AnimatedTappable({
+  super.style,
+  super.focusedOutlineStyle,
+  super.semanticsLabel,
+  super.semanticsButton,
+  super.semanticsChecked,
+  super.semanticsExpanded,
+  super.semanticsInMutuallyExclusiveGroup,
+  super.semanticsHint,
+  super.semanticsTooltip,
+  super.excludeSemantics,
+  super.autofocus,
+  super.focusNode,
+  super.onFocusChange,
+  super.onHoverChange,
+  super.onVariantChange,
+  super.selected,
+  super.selectable,
+  super.behavior,
+  super.onPressDown,
+  super.onPressCancel,
+  super.onPressMove,
+  super.onPressUp,
+  super.onPress,
+  super.onDisabledPress,
+  super.onLongPressDown,
+  super.onLongPressCancel,
+  super.onLongPressStart,
+  super.onLongPressMove,
+  super.onLongPressEnd,
+  super.onLongPress,
+  super.onDoubleTapDown,
+  super.onDoubleTapCancel,
+  super.onDoubleTap,
+  super.onSecondaryPressDown,
+  super.onSecondaryPressCancel,
+  super.onSecondaryPressUp,
+  super.onSecondaryPress,
+  super.onSecondaryLongPressDown,
+  super.onSecondaryLongPressCancel,
+  super.onSecondaryLongPressStart,
+  super.onSecondaryLongPressMove,
+  super.onSecondaryLongPressEnd,
+  super.onSecondaryLongPress,
+  super.shortcuts,
+  super.actions,
+  super.builder,
+  super.child,
+  super.key,
+}) extends FTappable {
+  this : super.static();
 
   @override
   State<FTappable> createState() => AnimatedTappableState();
@@ -1027,36 +1026,56 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 }
 
 /// A [FTappable]'s style.
-class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
+class FTappableStyle({
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor = const .all(.defer),
 
   /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 100ms.
-  @override
-  final Duration pressedEnterDuration;
+  @override final Duration pressedEnterDuration = const Duration(milliseconds: 100),
 
-  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 100s.
-  @override
-  final Duration pressedExitDuration;
+  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 100ms.
+  @override final Duration pressedExitDuration = const Duration(milliseconds: 100),
 
-  /// Motion-related properties for the tappable.
+  /// Motion-related properties for the tappable. Defaults to [FTappableMotion].
   ///
   /// Set this to [FTappableMotion.none] to disable the bounce effect.
-  @override
-  final FTappableMotion motion;
-
+  @override final FTappableMotion motion = const FTappableMotion(),
+}) with Diagnosticable, _$FTappableStyleFunctions {
   /// Creates a [FTappableStyle].
-  FTappableStyle({
-    this.cursor = const .all(.defer),
-    this.pressedEnterDuration = const Duration(milliseconds: 100),
-    this.pressedExitDuration = const Duration(milliseconds: 100),
-    this.motion = const FTappableMotion(),
-  });
+  this;
 }
 
 /// Motion-related properties for [FTappable].
-class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
+class const FTappableMotion({
+  /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
+  @override final Duration bounceDownDuration = const Duration(milliseconds: 100),
+
+  /// The bounce animation's duration when the tappable is released (up). Defaults to 100ms.
+  @override final Duration bounceUpDuration = const Duration(milliseconds: 100),
+
+  /// The curve used to animate the scale of the tappable when pressed (down). Defaults to [Curves.easeOutQuart].
+  @override final Curve bounceDownCurve = Curves.easeOutQuart,
+
+  /// The curve used to animate the scale of the tappable when released (up). Defaults to [Curves.easeOutCubic].
+  @override final Curve bounceUpCurve = Curves.easeOutCubic,
+
+  /// The bounce's tween. Defaults to [defaultBounceTween].
+  ///
+  /// Set to [noBounceTween] to disable the bounce effect.
+  @override final Animatable<double> bounceTween = defaultBounceTween,
+
+  /// The maximum number of pixels that the tappable can shrink during the bounce animation regardless of widget size.
+  /// Defaults to 5.
+  ///
+  /// This prevents large widgets from shrinking too much. For example, with the default [bounceFloor]:
+  /// * A 100px widget would shrink to 97px (3% shrink)
+  /// * A 500px widget would shrink to 495px (1% shrink)
+  @override final double? bounceFloor = 5,
+}) with Diagnosticable, _$FTappableMotionFunctions {
+  /// Creates a [FTappableMotion].
+  this;
+
   /// A [FTappableMotion] with no motion effects.
   static const FTappableMotion none = .new(bounceTween: noBounceTween);
 
@@ -1066,45 +1085,4 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
 
   /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
   static const FImmutableTween<double> noBounceTween = .new(begin: 1.0, end: 1.0);
-
-  /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
-  @override
-  final Duration bounceDownDuration;
-
-  /// The bounce animation's duration when the tappable is released (up). Defaults to 100ms.
-  @override
-  final Duration bounceUpDuration;
-
-  /// The curve used to animate the scale of the tappable when pressed (down). Defaults to [Curves.easeOutQuart].
-  @override
-  final Curve bounceDownCurve;
-
-  /// The curve used to animate the scale of the tappable when released (up). Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve bounceUpCurve;
-
-  /// The bounce's tween. Defaults to [defaultBounceTween].
-  ///
-  /// Set to [noBounceTween] to disable the bounce effect.
-  @override
-  final Animatable<double> bounceTween;
-
-  /// The maximum number of pixels that the tappable can shrink during the bounce animation regardless of widget size.
-  /// Defaults to 5.
-  ///
-  /// This prevents large widgets from shrinking too much. For example, with the default [bounceFloor]:
-  /// * A 100px widget would shrink to 97px (3% shrink)
-  /// * A 500px widget would shrink to 495px (1% shrink)
-  @override
-  final double? bounceFloor;
-
-  /// Creates a [FTappableMotion].
-  const FTappableMotion({
-    this.bounceDownDuration = const Duration(milliseconds: 100),
-    this.bounceUpDuration = const Duration(milliseconds: 100),
-    this.bounceDownCurve = Curves.easeOutQuart,
-    this.bounceUpCurve = Curves.easeOutCubic,
-    this.bounceTween = defaultBounceTween,
-    this.bounceFloor = 5,
-  });
 }

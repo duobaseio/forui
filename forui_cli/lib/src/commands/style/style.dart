@@ -27,8 +27,8 @@ enum Style {
     'FAutocompleteContentStyle',
     null,
     <String>['autocomplete-content', 'autocompletecontent'],
-    <String>['FAutocompleteContentStyle'],
-    'FAutocompleteContentStyle autocompleteContentStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FAutocompleteContentStyle.inherit(\n  colors: colors,\n  typography: typography,\n  style: style,\n  touch: touch,\n);\n',
+    <String>['FAutocompleteContentStyle', 'FPopoverStyle'],
+    'FAutocompleteContentStyle autocompleteContentStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FAutocompleteContentStyle(\n  emptyTextStyle: typography.body.sm,\n  progressStyle: .inherit(colors: colors),\n  sectionStyle: .inherit(\n    colors: colors,\n    style: style,\n    typography: typography,\n    touch: touch,\n  ),\n  padding: const .symmetric(vertical: 6),\n  decoration: _popoverStyle(colors: colors, style: style).decoration,\n  popoverPadding: const .all(5),\n  motion: const FPopoverMotion(),\n);\n',
   ),
   fautocompletefieldsizestyles(
     'FAutocompleteFieldSizeStyles',
@@ -303,7 +303,7 @@ enum Style {
     null,
     <String>['label'],
     <String>['FLabelStyle'],
-    'FLabelStyle labelStyle({\n  required FStyle style,\n  EdgeInsetsGeometry labelPadding = .zero,\n  EdgeInsetsGeometry descriptionPadding = .zero,\n  EdgeInsetsGeometry errorPadding = .zero,\n  EdgeInsetsGeometry childPadding = .zero,\n  FLabelMotion labelMotion = const FLabelMotion(),\n}) => FLabelStyle.inherit(\n  style: style,\n  labelPadding: labelPadding,\n  descriptionPadding: descriptionPadding,\n  errorPadding: errorPadding,\n  childPadding: childPadding,\n  labelMotion: labelMotion,\n);\n',
+    'FLabelStyle labelStyle({\n  required FStyle style,\n  EdgeInsetsGeometry labelPadding = .zero,\n  EdgeInsetsGeometry descriptionPadding = .zero,\n  EdgeInsetsGeometry errorPadding = .zero,\n  EdgeInsetsGeometry childPadding = .zero,\n  FLabelMotion labelMotion = const FLabelMotion(),\n}) => FLabelStyle(\n  labelTextStyle: style.formFieldStyle.labelTextStyle,\n  descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,\n  errorTextStyle: style.formFieldStyle.errorTextStyle,\n  labelPadding: labelPadding,\n  descriptionPadding: descriptionPadding,\n  errorPadding: errorPadding,\n  childPadding: childPadding,\n  labelMotion: labelMotion,\n);\n',
   ),
   flabelstyles(
     'FLabelStyles',
@@ -400,8 +400,8 @@ enum Style {
     'FPopoverMenuStyle',
     null,
     <String>['popover-menu', 'popovermenu'],
-    <String>['FPopoverMenuStyle', 'FItemContentStyle', 'FRawItemContentStyle'],
-    'FPopoverMenuStyle popoverMenuStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n  required FHapticFeedback hapticFeedback,\n  required bool touch,\n}) => FPopoverMenuStyle.inherit(\n  colors: colors,\n  style: style,\n  typography: typography,\n  hapticFeedback: hapticFeedback,\n  touch: touch,\n);\n',
+    <String>['FPopoverMenuStyle', 'FItemContentStyle', 'FRawItemContentStyle', 'FPopoverStyle'],
+    'FPopoverMenuStyle popoverMenuStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n  required FHapticFeedback hapticFeedback,\n  required bool touch,\n}) => FPopoverMenuStyle(\n  itemGroupStyle:\n      .inherit(\n        colors: colors,\n        style: style,\n        typography: typography,\n        hapticFeedback: hapticFeedback,\n        touch: touch,\n      ).copyWith(\n        decoration: .value(\n          ShapeDecoration(\n            color: colors.card,\n            shape: RoundedSuperellipseBorder(\n              side: BorderSide(color: colors.border, width: style.borderWidth),\n              borderRadius: style.borderRadius.md,\n            ),\n          ),\n        ),\n        itemStyles: .delta([\n          .all(\n            .delta(\n              backgroundColor: FVariants.all(colors.card),\n              contentDecoration: .delta([\n                .base(.shapeDelta(color: colors.card)),\n              ]),\n            ),\n          ),\n          .base(\n            .delta(\n              contentStyle: _itemContentStyle(\n                colors: colors,\n                typography: typography,\n                prefix: colors.foreground,\n                foreground: colors.foreground,\n                mutedForeground: colors.mutedForeground,\n                touch: touch,\n              ),\n              rawContentStyle: _rawItemContentStyle(\n                colors: colors,\n                typography: typography,\n                prefix: colors.foreground,\n                color: colors.foreground,\n                touch: touch,\n              ),\n            ),\n          ),\n        ]),\n      ),\n  tileGroupStyle:\n      .inherit(\n        colors: colors,\n        style: style,\n        typography: typography,\n        hapticFeedback: hapticFeedback,\n      ).copyWith(\n        tileStyles: .delta([\n          .base(\n            .delta(\n              contentStyle: .delta(\n                prefixIconStyle: FVariants.from(\n                  IconThemeData(\n                    color: colors.foreground,\n                    size: typography.body.md.fontSize,\n                  ),\n                  variants: {\n                    [.disabled]: .delta(\n                      color: colors.disable(colors.foreground),\n                    ),\n                  },\n                ),\n              ),\n              rawContentStyle: .delta(\n                prefixIconStyle: FVariants.from(\n                  IconThemeData(\n                    color: colors.foreground,\n                    size: typography.body.md.fontSize,\n                  ),\n                  variants: {\n                    [.disabled]: .delta(\n                      color: colors.disable(colors.foreground),\n                    ),\n                  },\n                ),\n              ),\n            ),\n          ),\n        ]),\n      ),\n  minWidth: 150,\n  maxWidth: 250,\n  hoverEnterDuration: const Duration(milliseconds: 150),\n  menuMotion: const FPopoverMenuMotion(),\n  hapticFeedback: hapticFeedback.mediumImpact,\n  decoration: _popoverStyle(colors: colors, style: style).decoration,\n  popoverPadding: const .all(5),\n  motion: const FPopoverMotion(),\n);\n',
   ),
   fpopoverstyle(
     'FPopoverStyle',
@@ -456,8 +456,8 @@ enum Style {
     'FSelectContentStyle',
     null,
     <String>['select-content', 'selectcontent'],
-    <String>['FSelectContentStyle'],
-    'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FIcons icons,\n  required FTypography typography,\n  required bool touch,\n}) => FSelectContentStyle.inherit(\n  colors: colors,\n  style: style,\n  icons: icons,\n  typography: typography,\n  touch: touch,\n);\n',
+    <String>['FSelectContentStyle', 'FPopoverStyle'],
+    'FSelectContentStyle selectContentStyle({\n  required FColors colors,\n  required FStyle style,\n  required FIcons icons,\n  required FTypography typography,\n  required bool touch,\n}) => FSelectContentStyle(\n  sectionStyle: .inherit(\n    colors: colors,\n    style: style,\n    typography: typography,\n    touch: touch,\n  ),\n  scrollHandleStyle: .inherit(\n    colors: colors,\n    icons: icons,\n    typography: typography,\n  ),\n  padding: const .symmetric(vertical: 6),\n  decoration: _popoverStyle(colors: colors, style: style).decoration,\n  popoverPadding: const .all(5),\n  motion: const FPopoverMotion(),\n);\n',
   ),
   fselectgroupstyle(
     'FSelectGroupStyle',

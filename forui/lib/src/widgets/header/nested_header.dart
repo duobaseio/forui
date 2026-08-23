@@ -26,7 +26,7 @@ class _FNestedHeader extends FHeader {
   final AlignmentGeometry titleAlignment;
 
   /// Creates a [_FNestedHeader].
-  const _FNestedHeader({
+  const new({
     this.style = const .context(),
     this.prefixes = const [],
     this.suffixes = const [],
@@ -117,7 +117,7 @@ class _FNestedHeader extends FHeader {
 class _NestedHeader extends MultiChildRenderObjectWidget {
   final Alignment alignment;
 
-  _NestedHeader({required this.alignment, required Widget prefixes, required Widget title, required Widget suffixes})
+  new({required this.alignment, required Widget prefixes, required Widget title, required Widget suffixes})
     : super(children: [prefixes, title, suffixes]);
 
   @override
@@ -141,7 +141,7 @@ class _RenderNestedHeader extends RenderBox
   Alignment _alignment;
   TextDirection _direction;
 
-  _RenderNestedHeader({required this._alignment, required TextDirection textDirection}) : _direction = textDirection;
+  new({required this._alignment, required TextDirection textDirection}) : _direction = textDirection;
 
   @override
   void setupParentData(RenderBox child) => child.parentData = DefaultData();

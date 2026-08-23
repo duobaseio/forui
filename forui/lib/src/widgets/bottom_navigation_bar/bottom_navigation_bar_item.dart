@@ -58,7 +58,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final FTappableVariantChangeCallback? onVariantChange;
 
   /// Creates a [FBottomNavigationBarItem].
-  const FBottomNavigationBarItem({
+  const new({
     required this.icon,
     this.label,
     this.semanticsLabel,
@@ -132,62 +132,47 @@ class FBottomNavigationBarItem extends StatelessWidget {
 }
 
 /// [FBottomNavigationBarItem]'s style.
-class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
+class FBottomNavigationBarItemStyle({
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
-
-  /// The padding. Defaults to `EdgeInsets.all(5)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// The spacing between the icon and the label. Defaults to 2.
-  @override
-  final double spacing;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle,
 
   /// The item's tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The item's focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
+  /// The padding. Defaults to `EdgeInsets.all(5)`.
+  @override final EdgeInsetsGeometry padding = const .all(5),
+
+  /// The spacing between the icon and the label. Defaults to 2.
+  @override final double spacing = 2,
+}) with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// Creates a [FBottomNavigationBarItemStyle].
-  FBottomNavigationBarItemStyle({
-    required this.iconStyle,
-    required this.textStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    this.padding = const .all(5),
-    this.spacing = 2,
-  });
+  this;
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties.
-  FBottomNavigationBarItemStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         iconStyle: FVariants.from(
-           IconThemeData(color: colors.mutedForeground, size: 24),
-           variants: {
-             [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
-             [.selected]: .delta(color: colors.primary, weight: 700),
-           },
-         ),
-         textStyle: FVariants.from(
-           typography.body.xs3.copyWith(color: colors.mutedForeground, height: 1.5),
-           variants: {
-             [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
-             [.selected]: .delta(color: colors.primary, fontWeight: .bold),
-           },
-         ),
-         tappableStyle: style.tappableStyle,
-         focusedOutlineStyle: style.focusedOutlineStyle,
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        iconStyle: FVariants.from(
+          IconThemeData(color: colors.mutedForeground, size: 24),
+          variants: {
+            [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
+            [.selected]: .delta(color: colors.primary, weight: 700),
+          },
+        ),
+        textStyle: FVariants.from(
+          typography.body.xs3.copyWith(color: colors.mutedForeground, height: 1.5),
+          variants: {
+            [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
+            [.selected]: .delta(color: colors.primary, fontWeight: .bold),
+          },
+        ),
+        tappableStyle: style.tappableStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+      );
 }

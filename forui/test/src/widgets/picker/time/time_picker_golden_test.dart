@@ -1,12 +1,12 @@
 @Tags(['golden'])
 library;
 
-import 'package:flutter/cupertino.dart';
-
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_wheel.dart';
+
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -27,14 +27,13 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     for (final (name, locale, hour24, hourInterval, minuteInterval, file) in [
-      // Inter doesn't support most non-western digit languages.
       ('Eastern 12-hour', const Locale('ar'), false, 1, 1, 'eastern-12.png'),
       ('Eastern 24-hour', const Locale('ar'), true, 1, 1, 'eastern-24.png'),
       ('Eastern 12-hour interval', const Locale('ar'), false, 2, 5, 'eastern-12-interval.png'),
       ('Eastern 24-hour interval', const Locale('ar'), true, 2, 5, 'eastern-24-interval.png'),
       //
       ('Western 12-hour single digit', const Locale('en'), false, 1, 1, 'western-12-single-digit.png'),
-      // AM/PM is not rendered, this is expected.
+      // zh_HK renders the period column before the hour and minute columns.
       ('Western 12-hour single digit', const Locale('zh', 'HK'), false, 1, 1, 'western-period-first.png'),
       ('Western 24-hour single digit', const Locale('en'), true, 1, 1, 'western-24-single-digit.png'),
       //

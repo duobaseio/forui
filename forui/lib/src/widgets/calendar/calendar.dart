@@ -17,12 +17,19 @@ import 'package:forui/src/widgets/calendar/wheel_calendar.dart';
 part 'calendar.design.dart';
 
 /// Builds a [FCalendar]'s header. The [child] is the always default header for the currently shown picker.
-typedef FCalendarHeaderBuilder<C extends FCalendarController> =
-    Widget Function(BuildContext context, C controller, FDateSelectionController selectionController, Widget child);
+typedef FCalendarHeaderBuilder<C extends FCalendarController> = Widget Function(
+  BuildContext context,
+  C controller,
+  FDateSelectionController<Object?> selectionController,
+  Widget child,
+);
 
 /// Builds a [FCalendar]'s footer, shown below the picker.
-typedef FCalendarFooterBuilder<C extends FCalendarController> =
-    Widget Function(BuildContext context, C controller, FDateSelectionController selectionController);
+typedef FCalendarFooterBuilder<C extends FCalendarController> = Widget Function(
+  BuildContext context,
+  C controller,
+  FDateSelectionController<Object?> selectionController,
+);
 
 /// A calendar.
 ///
@@ -42,7 +49,7 @@ class FCalendar extends StatefulWidget {
   static Widget defaultHeaderBuilder<C extends FCalendarController>(
     BuildContext context,
     C controller,
-    FDateSelectionController selectionController,
+    FDateSelectionController<Object?> selectionController,
     Widget child,
   ) => child;
 
@@ -50,7 +57,7 @@ class FCalendar extends StatefulWidget {
   static Widget defaultFooterBuilder<C extends FCalendarController>(
     BuildContext context,
     C controller,
-    FDateSelectionController selectionController,
+    FDateSelectionController<Object?> selectionController,
   ) => const SizedBox.shrink();
 
   /// The default [FCalendarDayBuilder] for a day picker.
@@ -105,7 +112,7 @@ class FCalendar extends StatefulWidget {
   final FCalendarControl control;
 
   /// Defines how this calendar's date selection is controlled.
-  final FDateSelectionControl selectionControl;
+  final FDateSelectionControl<Object?> selectionControl;
 
   /// The style.
   ///
@@ -141,7 +148,7 @@ class FCalendar extends StatefulWidget {
   final Widget Function(
     BuildContext context,
     FCalendarController controller,
-    FDateSelectionController selectionController,
+    FDateSelectionController<Object?> selectionController,
     FCalendarStyle style,
     FLocalizations localizations,
     double width,
@@ -152,8 +159,8 @@ class FCalendar extends StatefulWidget {
   _builder;
 
   /// Creates a [FCalendar] that cycles through the day, month and year grid pickers.
-  FCalendar.grid({
-    required FDateSelectionControl selectionControl,
+  new grid({
+    required FDateSelectionControl<Object?> selectionControl,
     FGridCalendarControl control = const FGridCalendarControl(),
     FCalendarStyleDelta style = const .context(),
     bool fixedWeeks = false,
@@ -221,8 +228,8 @@ class FCalendar extends StatefulWidget {
        );
 
   /// Creates a [FCalendar] with a split header whose month and year grid pickers are independently togglable.
-  FCalendar.splitGrid({
-    required FDateSelectionControl selectionControl,
+  new splitGrid({
+    required FDateSelectionControl<Object?> selectionControl,
     FGridSplitCalendarControl control = const FGridSplitCalendarControl(),
     FCalendarStyleDelta style = const .context(),
     bool fixedWeeks = false,
@@ -284,8 +291,8 @@ class FCalendar extends StatefulWidget {
        );
 
   /// Creates a [FCalendar] that toggles between a day grid picker and a month-year wheel picker.
-  FCalendar.wheel({
-    required FDateSelectionControl selectionControl,
+  new wheel({
+    required FDateSelectionControl<Object?> selectionControl,
     FWheelCalendarControl control = const FWheelCalendarControl(),
     FCalendarStyleDelta style = const .context(),
     bool fixedWeeks = false,
@@ -342,7 +349,7 @@ class FCalendar extends StatefulWidget {
              ),
        );
 
-  const FCalendar._({
+  const new _({
     required this.control,
     required this.selectionControl,
     required this._builder,
@@ -371,7 +378,7 @@ class FCalendar extends StatefulWidget {
 
 class _State extends State<FCalendar> {
   late FCalendarController _controller;
-  late FDateSelectionController _selectionController;
+  late FDateSelectionController<Object?> _selectionController;
 
   @override
   void initState() {
@@ -406,7 +413,7 @@ class _State extends State<FCalendar> {
   void _handleOnChange() {}
 
   void _handleOnSelectionChange() {
-    if (widget.selectionControl case final FDateSelectionManagedControl control) {
+    if (widget.selectionControl case final FDateSelectionManagedControl<Object?> control) {
       control.handleOnChange(_selectionController);
     }
   }
@@ -461,48 +468,33 @@ class _State extends State<FCalendar> {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only fade transitions are applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
+class FCalendarStyle({
   /// The header's style.
-  @override
-  final FCalendarHeaderStyle headerStyle;
+  @override required final FCalendarHeaderStyle headerStyle,
 
   /// The day picker's style.
-  @override
-  final FCalendarDayPickerStyle dayPickerStyle;
+  @override required final FCalendarDayPickerStyle dayPickerStyle,
 
   /// The month picker's style.
-  @override
-  final FCalendarMonthPickerStyle monthPickerStyle;
+  @override required final FCalendarMonthPickerStyle monthPickerStyle,
 
   /// The year picker's style.
-  @override
-  final FCalendarYearPickerStyle yearPickerStyle;
+  @override required final FCalendarYearPickerStyle yearPickerStyle,
 
   /// The wheel picker's style.
-  @override
-  final FPickerStyle wheelPickerStyle;
+  @override required final FPickerStyle wheelPickerStyle,
 
   /// The decoration surrounding the header & picker.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The padding surrounding the header & picker. Defaults to `EdgeInsets.all(12)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  @override final EdgeInsetsGeometry padding = const .all(12),
+}) with Diagnosticable, _$FCalendarStyleFunctions {
   /// Creates a [FCalendarStyle].
-  FCalendarStyle({
-    required this.headerStyle,
-    required this.dayPickerStyle,
-    required this.monthPickerStyle,
-    required this.yearPickerStyle,
-    required this.wheelPickerStyle,
-    required this.decoration,
-    this.padding = const .all(12),
-  });
+  this;
 
   /// Creates a [FCalendarStyle] that inherits its properties.
-  factory FCalendarStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

@@ -18,7 +18,7 @@ class AnimatedToastData extends ParentDataWidget<AnimatedToasterParentData> {
   /// The signal to indicate that a widget update has occurred.
   final int signal;
 
-  const AnimatedToastData({
+  const new({
     required this.index,
     required this.transition,
     required this.visible,
@@ -114,17 +114,14 @@ class AnimatedToasterParentData extends ContainerBoxParentData<RenderBox> {
 /// This preserves a widget's animation across rebuilds, preventing an animation from restarting from scratch when an
 /// rebuild occurs mid animation.
 @internal
-class AnimationTween<T> {
+class AnimationTween<T>({required final bool Function(T, T) _equal, var T? begin, var T? end}) {
   static const epsilon = 1e-6;
 
   static bool _offset(Offset a, Offset b) => (a.dx - b.dx).abs() < epsilon && (a.dy - b.dy).abs() < epsilon;
 
   static bool _size(Size a, Size b) => (a.width - b.width).abs() < epsilon && (a.height - b.height).abs() < epsilon;
 
-  T? begin;
-  T? end;
   T? _value;
-  final bool Function(T, T) _equal;
 
   static AnimationTween<double> of({double? begin, double? end}) =>
       .new(equal: (a, b) => (a - b).abs() < epsilon, begin: begin, end: end);
@@ -132,8 +129,6 @@ class AnimationTween<T> {
   static AnimationTween<Offset> offset({Offset? begin, Offset? end}) => .new(equal: _offset, begin: begin, end: end);
 
   static AnimationTween<Size> size({Size? begin, Size? end}) => .new(equal: _size, begin: begin, end: end);
-
-  AnimationTween({required this._equal, this.begin, this.end});
 
   void mark() {
     begin = value;

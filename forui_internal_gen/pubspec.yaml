@@ -8,12 +8,12 @@ repository: https://github.com/forus-labs/forui/tree/main/forui_internal_gen
 issue_tracker: https://github.com/forus-labs/forui/issues
 
 environment:
-  sdk: '>=3.12.0-0 <4.0.0'
-  flutter: ">=3.44.0-0"
+  sdk: ">=3.13.0-0 <4.0.0"
+  flutter: ">=3.47.0-0"
 resolution: workspace
 
 dependencies:
-  analyzer: ^10.0.0
+  analyzer: ^13.3.0
   build: ^4.0.0
   code_builder: ^4.10.0
   collection: ^1.18.0

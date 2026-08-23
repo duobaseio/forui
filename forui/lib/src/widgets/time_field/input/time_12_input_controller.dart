@@ -8,8 +8,14 @@ import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 
 @internal
-typedef Select12<T> =
-    T Function(TextEditingValue value, int first, int last, int end, int firstSeparator, int lastSeparator);
+typedef Select12<T> = T Function(
+  TextEditingValue value,
+  int first,
+  int last,
+  int end,
+  int firstSeparator,
+  int lastSeparator,
+);
 
 TextEditingValue _onFirst(TextEditingValue value, int first, int _, int _, int _, int _) =>
     value.copyWith(selection: .new(baseOffset: 0, extentOffset: first));
@@ -28,7 +34,7 @@ class Time12InputController extends TimeInputController {
   @override
   final Time12Selector selector;
 
-  Time12InputController(
+  new(
     FLocalizations localizations,
     super.controller,
     super.format,
@@ -77,7 +83,7 @@ class Time12Selector extends Selector {
   final String _first;
   final String _last;
 
-  Time12Selector(FLocalizations localizations, DateFormat format)
+  new(FLocalizations localizations, DateFormat format)
     : _first = format.pattern!.startsWith('a')
           ? localizations.timeFieldPeriodSeparator
           : localizations.timeFieldTimeSeparator,

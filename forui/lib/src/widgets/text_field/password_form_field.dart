@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/input/form_input.dart';
@@ -8,44 +9,18 @@ import 'package:forui/src/widgets/text_field/text_field_control.dart';
 
 /// Internal password form field implementation used by [FTextFormField.password].
 @internal
-class PasswordFormField extends StatelessWidget with FFormFieldProperties<String> {
-  final FTextFieldControl control;
-
-  final PasswordFieldProperties properties;
-
-  @override
-  final FormFieldSetter<String>? onSaved;
-
-  @override
-  final VoidCallback? onReset;
-
-  @override
-  final FormFieldValidator<String>? validator;
-
-  @override
-  final AutovalidateMode autovalidateMode;
-
-  @override
-  final String? forceErrorText;
-
-  @override
-  final Widget Function(BuildContext context, String message) errorBuilder;
-
-  final Key? formFieldKey;
-
-  PasswordFormField({
-    required this.control,
-    required this.properties,
-    required this.onSaved,
-    required this.onReset,
-    required this.validator,
-    required this.autovalidateMode,
-    required this.forceErrorText,
-    required this.errorBuilder,
-    this.formFieldKey,
-    super.key,
-  });
-
+class PasswordFormField({
+  required final FTextFieldControl control,
+  required final PasswordFieldProperties properties,
+  @override required final FormFieldSetter<String>? onSaved,
+  @override required final VoidCallback? onReset,
+  @override required final FormFieldValidator<String>? validator,
+  @override required final AutovalidateMode autovalidateMode,
+  @override required final String? forceErrorText,
+  @override required final Widget Function(BuildContext context, String message) errorBuilder,
+  final Key? formFieldKey,
+  super.key,
+}) extends StatelessWidget with FFormFieldProperties<String> {
   @override
   Widget build(BuildContext context) => TextFieldControl(
     control: control,

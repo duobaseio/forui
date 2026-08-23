@@ -40,20 +40,10 @@ jobs:
         working-directory: ./docs_snippets
         run: dart run tool/snippet_generator/main.dart
 
-      # Escape branch name and create short SHA for snippets URL
-      - id: escape-branch
-        run: |
-          BRANCH="${{ github.event.pull_request.head.ref }}"
-          ESCAPED="${BRANCH//\//-}"
-          echo "branch=$ESCAPED" >> $GITHUB_OUTPUT
-      - id: short-sha
-        run: |
-          SHA="${{ github.event.pull_request.head.sha }}"
-          echo "sha=${SHA:0:7}" >> $GITHUB_OUTPUT
       - id: snippets-slug
         run: |
-          SLUG="${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}"
-          echo "slug=${SLUG:0:28}" >> $GITHUB_OUTPUT
+          SHA="${{ github.event.pull_request.head.sha }}"
+          echo "slug=pr-${{ github.event.pull_request.number }}-${SHA:0:7}" >> $GITHUB_OUTPUT
 
       # Build docs
       - uses: actions/setup-node@v7
@@ -64,7 +54,7 @@ jobs:
           # Pinned: pnpm 11.12.0 crashes action-setup with "Cannot use 'in' operator to
           # search for 'integrity' in undefined". Hold at the last known-good release.
           # See https://github.com/pnpm/action-setup/issues/276
-          version: '11.19.0'
+          version: '11.22.0'
       - working-directory: ./docs
         run: pnpm install
       - working-directory: ./docs

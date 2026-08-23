@@ -24,7 +24,7 @@ class InheritedData extends InheritedWidget {
   final ValueChanged<FSliderValue>? onEnd;
   final bool enabled;
 
-  const InheritedData({
+  const new({
     required this.style,
     required this.layout,
     required this.marks,

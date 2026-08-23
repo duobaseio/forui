@@ -46,7 +46,7 @@ class FDeterminateProgress extends StatefulWidget {
   final double value;
 
   /// Creates a determinate [FDeterminateProgress].
-  const FDeterminateProgress({required this.value, this.style = const .context(), this.semanticsLabel, super.key})
+  const new({required this.value, this.style = const .context(), this.semanticsLabel, super.key})
     : assert((0.0 <= value && value <= 1.0), 'value ($value) must be between 0.0 and 1.0');
 
   @override
@@ -132,33 +132,25 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
 }
 
 /// A [FDeterminateProgress]'s style.
-class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyleFunctions {
-  /// The linear progress's constraints. Defaults to a height of 6.0 and no horizontal constraint.
-  @override
-  final BoxConstraints constraints;
-
+class const FDeterminateProgressStyle({
   /// The track's decoration.
-  @override
-  final Decoration trackDecoration;
+  @override required final Decoration trackDecoration,
 
   /// The fill's decoration.
-  @override
-  final Decoration fillDecoration;
+  @override required final Decoration fillDecoration,
 
-  /// The motion-related properties for an indeterminate [FDeterminateProgress].
-  @override
-  final FDeterminateProgressMotion motion;
+  /// The linear progress's constraints. Defaults to a height of 6.0 and no horizontal constraint.
+  @override final BoxConstraints constraints = const .tightFor(height: 6.0),
 
+  /// The motion-related properties for an indeterminate [FDeterminateProgress]. Defaults to
+  /// [FDeterminateProgressMotion].
+  @override final FDeterminateProgressMotion motion = const FDeterminateProgressMotion(),
+}) with Diagnosticable, _$FDeterminateProgressStyleFunctions {
   /// Creates a [FDeterminateProgressStyle].
-  const FDeterminateProgressStyle({
-    required this.trackDecoration,
-    required this.fillDecoration,
-    this.constraints = const .tightFor(height: 6.0),
-    this.motion = const FDeterminateProgressMotion(),
-  });
+  this;
 
   /// Creates a [FDeterminateProgressStyle] that inherits its properties.
-  FDeterminateProgressStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         trackDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
@@ -174,15 +166,13 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
 /// Motion-related properties for a [FDeterminateProgress].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
-class FDeterminateProgressMotion with Diagnosticable, _$FDeterminateProgressMotionFunctions {
+class const FDeterminateProgressMotion({
   /// The animation's duration. Defaults to 1s.
-  @override
-  final Duration duration;
+  @override final Duration duration = const Duration(milliseconds: 1000),
 
   /// The animation curve. Defaults to [Curves.linear].
-  @override
-  final Curve curve;
-
+  @override final Curve curve = Curves.linear,
+}) with Diagnosticable, _$FDeterminateProgressMotionFunctions {
   /// Creates a [FDeterminateProgressMotion].
-  const FDeterminateProgressMotion({this.duration = const Duration(milliseconds: 1000), this.curve = Curves.linear});
+  this;
 }

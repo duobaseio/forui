@@ -1,17 +1,17 @@
 import 'dart:ui' show ColorSpace;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
 class _Marker extends ThemeExtension<_Marker> {
   final String id;
 
-  const _Marker(this.id);
+  const new(this.id);
 
   @override
   _Marker copyWith({String? id}) => _Marker(id ?? this.id);

@@ -31,7 +31,7 @@ class MonthPicker extends StatelessWidget {
   final FCalendarMonthBuilder builder;
 
   /// Creates a paged month picker that swipes between years.
-  const MonthPicker({
+  const new({
     required this.controller,
     required this.style,
     required this.localization,
@@ -45,7 +45,7 @@ class MonthPicker extends StatelessWidget {
   });
 
   /// Creates a non-paged month picker that shows a single year and does not scroll.
-  const MonthPicker.single({
+  const new single({
     required this.controller,
     required this.style,
     required this.localization,
@@ -143,7 +143,7 @@ class _Grid extends StatefulWidget {
   final ValueChanged<DateTime> onPress;
   final FCalendarMonthBuilder builder;
 
-  _Grid({
+  new({
     required this.style,
     required this.localization,
     required this.year,
@@ -230,67 +230,50 @@ class _GridState extends State<_Grid> {
 /// Controls a calendar's month picker.
 class FCalendarMonthPickerController extends GridController {
   /// Creates a [FCalendarMonthPickerController].
-  FCalendarMonthPickerController({
-    required super.start,
-    required super.end,
-    required super.selectable,
-    required super.initial,
-    super.focused,
-  }) : super(
-         columns: _columns,
-         focusable: (year, date) {
-           final preferred = DateTime.utc(year.year, date.month);
-           if (selectable(preferred)) {
-             return preferred;
-           }
+  new({required super.start, required super.end, required super.selectable, required super.initial, super.focused})
+    : super(
+        columns: _columns,
+        focusable: (year, date) {
+          final preferred = DateTime.utc(year.year, date.month);
+          if (selectable(preferred)) {
+            return preferred;
+          }
 
-           for (var month = DateTime.utc(year.year); month.year == year.year; month = month.plus(months: 1)) {
-             if (selectable(month)) {
-               return month;
-             }
-           }
+          for (var month = DateTime.utc(year.year); month.year == year.year; month = month.plus(months: 1)) {
+            if (selectable(month)) {
+              return month;
+            }
+          }
 
-           return null;
-         },
-         step: (date, amount) => date.plus(months: amount),
-         from: (date) => date.year - start.year,
-         to: (page) => .utc(start.year + page),
-       );
+          return null;
+        },
+        step: (date, amount) => date.plus(months: amount),
+        from: (date) => date.year - start.year,
+        to: (page) => .utc(start.year + page),
+      );
 }
 
 /// A month picker's style.
-class FCalendarMonthPickerStyle with Diagnosticable, _$FCalendarMonthPickerStyleFunctions {
-  /// The spacing between the header and the month picker. Defaults to 6. Does nothing if there is no header.
-  @override
-  final double headerSpacing;
-
+class const FCalendarMonthPickerStyle({
   /// The styles of the month tiles.
-  @override
-  final FCalendarMonthStyles monthStyles;
+  @override required final FCalendarMonthStyles monthStyles,
 
   /// The size of each month. Defaults to a width that aligns the 3-column grid with the day picker's 7-column grid.
-  @override
-  final Size monthSize;
+  @override required final Size monthSize,
+
+  /// The spacing between the header and the month picker. Defaults to 6. Does nothing if there is no header.
+  @override final double headerSpacing = 6,
 
   /// The vertical spacing between rows of months in the month picker. Defaults to 4.
-  @override
-  final double monthSpacing;
-
+  @override final double monthSpacing = 4,
+}) with Diagnosticable, _$FCalendarMonthPickerStyleFunctions {
   /// Creates a [FCalendarMonthPickerStyle].
-  const FCalendarMonthPickerStyle({
-    required this.monthStyles,
-    required this.monthSize,
-    this.headerSpacing = 6,
-    this.monthSpacing = 4,
-  });
+  this;
 
   /// Creates a [FCalendarMonthPickerStyle] that inherits its properties.
-  factory FCalendarMonthPickerStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => FCalendarMonthPickerStyle(
-    monthStyles: .inherit(colors: colors, typography: typography, style: style),
-    monthSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
-  );
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      FCalendarMonthPickerStyle(
+        monthStyles: .inherit(colors: colors, typography: typography, style: style),
+        monthSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
+      );
 }

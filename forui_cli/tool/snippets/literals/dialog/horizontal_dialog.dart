@@ -9,7 +9,7 @@ class HorizontalDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const HorizontalDialog({
+  const new({
     required this.title,
     required this.body,
     required this.actions,

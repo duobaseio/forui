@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/text_field/input/input.dart';
@@ -14,137 +15,77 @@ import 'package:forui/src/widgets/text_field/obscure_text_control.dart';
 /// [variants] is the current variants.
 ///
 /// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
-typedef FPasswordFieldIconBuilder<T> =
-    Widget Function(BuildContext context, T style, ValueNotifier<bool> obscure, Set<FTextFieldVariant> variants);
+typedef FPasswordFieldIconBuilder<T> = Widget Function(
+  BuildContext context,
+  T style,
+  ValueNotifier<bool> obscure,
+  Set<FTextFieldVariant> variants,
+);
 
 @internal
-class PasswordFieldProperties with Diagnosticable {
-  final FTextFieldSizeVariant size;
-  final FTextFieldStyleDelta style;
-  final FFieldBuilder<FTextFieldStyle> builder;
-  final Widget? label;
-  final String? hint;
-  final Widget? description;
-  final Widget? error;
-  final TextMagnifierConfiguration? magnifierConfiguration;
-  final Object groupId;
-  final FocusNode? focusNode;
-  final TextInputType? keyboardType;
-  final TextInputAction textInputAction;
-  final TextCapitalization textCapitalization;
-  final TextAlign textAlign;
-  final TextAlignVertical? textAlignVertical;
-  final TextDirection? textDirection;
-  final bool autofocus;
-  final WidgetStatesController? statesController;
-  final String obscuringCharacter;
-  final bool autocorrect;
-  final SmartDashesType? smartDashesType;
-  final SmartQuotesType? smartQuotesType;
-  final bool enableSuggestions;
-  final int? minLines;
-  final int maxLines;
-  final bool expands;
-  final bool readOnly;
-  final bool? showCursor;
-  final int? maxLength;
-  final MaxLengthEnforcement? maxLengthEnforcement;
-  final GestureTapCallback? onTap;
-  final TapRegionCallback? onTapOutside;
-  final bool onTapAlwaysCalled;
-  final VoidCallback? onEditingComplete;
-  final ValueChanged<String>? onSubmit;
-  final AppPrivateCommandCallback? onAppPrivateCommand;
-  final List<TextInputFormatter>? inputFormatters;
-  final bool enabled;
-  final bool? ignorePointers;
-  final bool enableInteractiveSelection;
-  final bool? selectAllOnFocus;
-  final TextSelectionControls? selectionControls;
-  final DragStartBehavior dragStartBehavior;
-  final MouseCursor? mouseCursor;
-  final FTextFieldCounterBuilder? counterBuilder;
-  final ScrollPhysics? scrollPhysics;
-  final ScrollController? scrollController;
-  final Iterable<String> autofillHints;
-  final String? restorationId;
-  final bool stylusHandwritingEnabled;
-  final bool enableIMEPersonalizedLearning;
-  final ContentInsertionConfiguration? contentInsertionConfiguration;
-  final EditableTextContextMenuBuilder? contextMenuBuilder;
-  final bool canRequestFocus;
-  final UndoHistoryController? undoController;
-  final SpellCheckConfiguration? spellCheckConfiguration;
-  final FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
-  final FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
-  final bool Function(TextEditingValue) clearable;
-  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
-  final FObscureTextControl obscureTextControl;
-
-  PasswordFieldProperties({
-    required this.size,
-    required this.style,
-    required this.builder,
-    required this.label,
-    required this.hint,
-    required this.description,
-    required this.error,
-    required this.magnifierConfiguration,
-    required this.groupId,
-    required this.focusNode,
-    required this.keyboardType,
-    required this.textInputAction,
-    required this.textCapitalization,
-    required this.textAlign,
-    required this.textAlignVertical,
-    required this.textDirection,
-    required this.autofocus,
-    required this.statesController,
-    required this.obscuringCharacter,
-    required this.autocorrect,
-    required this.smartDashesType,
-    required this.smartQuotesType,
-    required this.enableSuggestions,
-    required this.minLines,
-    required this.maxLines,
-    required this.expands,
-    required this.readOnly,
-    required this.showCursor,
-    required this.maxLength,
-    required this.maxLengthEnforcement,
-    required this.onTap,
-    required this.onTapOutside,
-    required this.onTapAlwaysCalled,
-    required this.onEditingComplete,
-    required this.onSubmit,
-    required this.onAppPrivateCommand,
-    required this.inputFormatters,
-    required this.enabled,
-    required this.ignorePointers,
-    required this.enableInteractiveSelection,
-    required this.selectAllOnFocus,
-    required this.selectionControls,
-    required this.dragStartBehavior,
-    required this.mouseCursor,
-    required this.counterBuilder,
-    required this.scrollPhysics,
-    required this.scrollController,
-    required this.autofillHints,
-    required this.restorationId,
-    required this.stylusHandwritingEnabled,
-    required this.enableIMEPersonalizedLearning,
-    required this.contentInsertionConfiguration,
-    required this.contextMenuBuilder,
-    required this.canRequestFocus,
-    required this.undoController,
-    required this.spellCheckConfiguration,
-    required this.prefixBuilder,
-    required this.suffixBuilder,
-    required this.clearable,
-    required this.clearIconBuilder,
-    required this.obscureTextControl,
-  });
-
+class PasswordFieldProperties({
+  required final FTextFieldSizeVariant size,
+  required final FTextFieldStyleDelta style,
+  required final FFieldBuilder<FTextFieldStyle> builder,
+  required final Widget? label,
+  required final String? hint,
+  required final Widget? description,
+  required final Widget? error,
+  required final TextMagnifierConfiguration? magnifierConfiguration,
+  required final Object groupId,
+  required final FocusNode? focusNode,
+  required final TextInputType? keyboardType,
+  required final TextInputAction textInputAction,
+  required final TextCapitalization textCapitalization,
+  required final TextAlign textAlign,
+  required final TextAlignVertical? textAlignVertical,
+  required final TextDirection? textDirection,
+  required final bool autofocus,
+  required final WidgetStatesController? statesController,
+  required final String obscuringCharacter,
+  required final bool autocorrect,
+  required final SmartDashesType? smartDashesType,
+  required final SmartQuotesType? smartQuotesType,
+  required final bool enableSuggestions,
+  required final int? minLines,
+  required final int maxLines,
+  required final bool expands,
+  required final bool readOnly,
+  required final bool? showCursor,
+  required final int? maxLength,
+  required final MaxLengthEnforcement? maxLengthEnforcement,
+  required final GestureTapCallback? onTap,
+  required final TapRegionCallback? onTapOutside,
+  required final bool onTapAlwaysCalled,
+  required final VoidCallback? onEditingComplete,
+  required final ValueChanged<String>? onSubmit,
+  required final AppPrivateCommandCallback? onAppPrivateCommand,
+  required final List<TextInputFormatter>? inputFormatters,
+  required final bool enabled,
+  required final bool? ignorePointers,
+  required final bool enableInteractiveSelection,
+  required final bool? selectAllOnFocus,
+  required final TextSelectionControls? selectionControls,
+  required final DragStartBehavior dragStartBehavior,
+  required final MouseCursor? mouseCursor,
+  required final FTextFieldCounterBuilder? counterBuilder,
+  required final ScrollPhysics? scrollPhysics,
+  required final ScrollController? scrollController,
+  required final Iterable<String> autofillHints,
+  required final String? restorationId,
+  required final bool stylusHandwritingEnabled,
+  required final bool enableIMEPersonalizedLearning,
+  required final ContentInsertionConfiguration? contentInsertionConfiguration,
+  required final EditableTextContextMenuBuilder? contextMenuBuilder,
+  required final bool canRequestFocus,
+  required final UndoHistoryController? undoController,
+  required final SpellCheckConfiguration? spellCheckConfiguration,
+  required final FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+  required final FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
+  required final bool Function(TextEditingValue) clearable,
+  required final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
+  required final FObscureTextControl obscureTextControl,
+}) with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -221,12 +162,11 @@ class PasswordFieldProperties with Diagnosticable {
 }
 
 @internal
-class PasswordField extends StatefulWidget {
-  final TextEditingController controller;
-  final PasswordFieldProperties properties;
-
-  const PasswordField({required this.controller, required this.properties, super.key});
-
+class const PasswordField({
+  required final TextEditingController controller,
+  required final PasswordFieldProperties properties,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<PasswordField> createState() => _State();
 

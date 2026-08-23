@@ -90,7 +90,7 @@ abstract class FDateSelectionController<T> extends ValueNotifier<T> {
   }) => _OpenRangeController(initial: initial, startFirst: startFirst);
 
   /// Creates a [FDateSelectionController] with the given initial [value].
-  FDateSelectionController(super._value);
+  new(super._value);
 
   /// Returns true if the given [date] is selected.
   bool contains(DateTime date);
@@ -104,8 +104,7 @@ class _LiftedSingleController extends FDateSelectionController<DateTime?> {
   ValueChanged<DateTime?> _onChange;
   bool _toggleable;
 
-  _LiftedSingleController({required DateTime? value, required this._onChange, required this._toggleable})
-    : super(value?._truncate());
+  new({required DateTime? value, required this._onChange, required this._toggleable}) : super(value?._truncate());
 
   void update({required DateTime? value, required ValueChanged<DateTime?> onChange, required bool toggleable}) {
     _onChange = onChange;
@@ -132,8 +131,7 @@ class _LiftedSingleController extends FDateSelectionController<DateTime?> {
 class _LiftedMultiController extends FDateSelectionController<Set<DateTime>> {
   ValueChanged<Set<DateTime>> _onChange;
 
-  _LiftedMultiController({required Set<DateTime> value, required this._onChange})
-    : super(value.map((date) => date._truncate()).toSet());
+  new({required Set<DateTime> value, required this._onChange}) : super(value.map((date) => date._truncate()).toSet());
 
   void update({required Set<DateTime> value, required ValueChanged<Set<DateTime>> onChange}) {
     _onChange = onChange;
@@ -159,7 +157,7 @@ class _LiftedMultiController extends FDateSelectionController<Set<DateTime>> {
 class _LiftedRangeController extends FDateSelectionController<(DateTime, DateTime)?> {
   ValueChanged<(DateTime, DateTime)?> _onChange;
 
-  _LiftedRangeController({required (DateTime, DateTime)? value, required this._onChange})
+  new({required (DateTime, DateTime)? value, required this._onChange})
     : super(value == null ? null : (value.$1._truncate(), value.$2._truncate()));
 
   void update({required (DateTime, DateTime)? value, required ValueChanged<(DateTime, DateTime)?> onChange}) {
@@ -194,11 +192,8 @@ class _LiftedOpenRangeController extends FDateSelectionController<(DateTime?, Da
   ValueChanged<(DateTime?, DateTime?)> _onChange;
   bool _startFirst;
 
-  _LiftedOpenRangeController({
-    required (DateTime?, DateTime?) value,
-    required this._onChange,
-    required this._startFirst,
-  }) : super((value.$1?._truncate(), value.$2?._truncate()));
+  new({required (DateTime?, DateTime?) value, required this._onChange, required this._startFirst})
+    : super((value.$1?._truncate(), value.$2?._truncate()));
 
   void update({
     required (DateTime?, DateTime?) value,
@@ -235,7 +230,7 @@ class _LiftedOpenRangeController extends FDateSelectionController<(DateTime?, Da
 
 // The display-only controller used by [FDateSelectionControl.none]. Nothing is ever selected.
 class _NoneController extends FDateSelectionController<Object?> {
-  _NoneController() : super(null);
+  new() : super(null);
 
   @override
   bool contains(DateTime date) => false;
@@ -248,7 +243,7 @@ class _NoneController extends FDateSelectionController<Object?> {
 class _SingleController extends FDateSelectionController<DateTime?> {
   final bool toggleable;
 
-  _SingleController({required DateTime? initial, required this.toggleable}) : super(initial?._truncate());
+  new({required DateTime? initial, required this.toggleable}) : super(initial?._truncate());
 
   @override
   bool contains(DateTime date) => value == date._truncate();
@@ -268,7 +263,7 @@ class _SingleController extends FDateSelectionController<DateTime?> {
 
 // The multiple dates controller.
 final class _MultiController extends FDateSelectionController<Set<DateTime>> {
-  _MultiController({Set<DateTime> initial = const {}}) : super(initial.map((date) => date._truncate()).toSet());
+  new({Set<DateTime> initial = const {}}) : super(initial.map((date) => date._truncate()).toSet());
 
   @override
   bool contains(DateTime date) => value.contains(date._truncate());
@@ -282,7 +277,7 @@ final class _MultiController extends FDateSelectionController<Set<DateTime>> {
 
 // The range controller.
 final class _RangeController extends FDateSelectionController<(DateTime, DateTime)?> {
-  _RangeController({(DateTime, DateTime)? initial})
+  new({(DateTime, DateTime)? initial})
     : super(initial == null ? null : (initial.$1._truncate(), initial.$2._truncate())) {
     final range = value;
     assert(
@@ -313,7 +308,7 @@ final class _RangeController extends FDateSelectionController<(DateTime, DateTim
 final class _OpenRangeController extends FDateSelectionController<(DateTime?, DateTime?)> {
   final bool startFirst;
 
-  _OpenRangeController({required (DateTime?, DateTime?) initial, required this.startFirst})
+  new({required (DateTime?, DateTime?) initial, required this.startFirst})
     : super((initial.$1?._truncate(), initial.$2?._truncate())) {
     final (start, end) = value;
     assert(start == null || end == null || !end.isBefore(start), 'start ($start) must be <= end ($end)');

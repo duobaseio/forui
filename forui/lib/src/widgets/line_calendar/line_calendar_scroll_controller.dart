@@ -38,7 +38,7 @@ class FLineCalendarScrollController extends ScrollController {
   /// * [end] <= [start].
   /// * [initialDate] < [start] or [end] <= [initialDate].
   /// * [today] < [start] or [end] <= [today].
-  FLineCalendarScrollController({
+  new({
     this.initialAlignment = .center,
     DateTime? start,
     DateTime? end,
@@ -120,7 +120,7 @@ extension InternalFLineCalendarScrollController on FLineCalendarScrollController
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FLineCalendarScrollControl with Diagnosticable, _$FLineCalendarScrollControlMixin {
   /// Creates a managed [FLineCalendarScrollControl].
-  const factory FLineCalendarScrollControl.managed({
+  const factory managed({
     FLineCalendarScrollController? controller,
     DateTime? start,
     DateTime? end,
@@ -130,7 +130,7 @@ sealed class FLineCalendarScrollControl with Diagnosticable, _$FLineCalendarScro
     ValueChanged<double>? onChange,
   }) = FLineCalendarScrollManagedControl;
 
-  const FLineCalendarScrollControl._();
+  const new _();
 
   (FLineCalendarScrollController, bool) _update(
     FLineCalendarScrollControl old,
@@ -178,20 +178,13 @@ class FLineCalendarScrollManagedControl extends FLineCalendarScrollControl
   /// ## Contract
   /// Throws [AssertionError] if [controller] is provided alongside any other parameter (except [onChange]). Pass the
   /// other parameters to the [controller] instead.
-  const FLineCalendarScrollManagedControl({
-    this.controller,
-    this.start,
-    this.end,
-    this.today,
-    this.initialDate,
-    this.initialAlignment,
-    this.onChange,
-  }) : assert(
-         controller == null ||
-             (start == null && end == null && today == null && initialDate == null && initialAlignment == null),
-         'Cannot provide both controller and other parameters. Pass these parameters to the controller instead.',
-       ),
-       super._();
+  const new({this.controller, this.start, this.end, this.today, this.initialDate, this.initialAlignment, this.onChange})
+    : assert(
+        controller == null ||
+            (start == null && end == null && today == null && initialDate == null && initialAlignment == null),
+        'Cannot provide both controller and other parameters. Pass these parameters to the controller instead.',
+      ),
+      super._();
 
   @override
   FLineCalendarScrollController createController() =>
@@ -206,7 +199,7 @@ class FLineCalendarScrollManagedControl extends FLineCalendarScrollControl
 }
 
 class _Lifted extends FLineCalendarScrollControl with _$_LiftedMixin {
-  _Lifted.lifted() : super._();
+  new lifted() : super._();
 
   @override
   FLineCalendarScrollController createController() => throw UnimplementedError();

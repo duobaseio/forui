@@ -30,7 +30,7 @@ abstract interface class FResizableController extends FChangeNotifier {
 
   bool _haptic = false;
 
-  FResizableController._({this.hapticFeedbackVelocity = 6.5})
+  new _({this.hapticFeedbackVelocity = 6.5})
     : assert(0 <= hapticFeedbackVelocity, 'hapticFeedbackVelocity ($hapticFeedbackVelocity) must be >= 0');
 
   /// Creates a [FResizableController].
@@ -41,7 +41,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
   ///
   /// See https://forui.dev/docs/widgets/layout/resizable#no-cascading for a working example.
-  factory FResizableController({
+  factory({
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(List<FResizableRegionData> resized)? onResizeEnd,
     double hapticFeedbackVelocity,
@@ -55,7 +55,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// [onResizeEnd] is called after a resizable region and its neighbours have been resized.
   ///
   /// See https://forui.dev/docs/widgets/layout/resizable for a working example.
-  factory FResizableController.cascade({
+  factory cascade({
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,
     double hapticFeedbackVelocity,
@@ -74,7 +74,7 @@ final class _ResizableController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(List<FResizableRegionData> resized)? onResizeEnd;
 
-  _ResizableController({this.onResizeUpdate, this.onResizeEnd, super.hapticFeedbackVelocity = 6.5}) : super._();
+  new({this.onResizeUpdate, this.onResizeEnd, super.hapticFeedbackVelocity = 6.5}) : super._();
 
   @override
   bool update(int left, int right, double delta) {
@@ -128,7 +128,7 @@ final class _CascadeController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd;
 
-  _CascadeController({this.onResizeUpdate, this.onResizeEnd, super.hapticFeedbackVelocity = 6.5}) : super._();
+  new({this.onResizeUpdate, this.onResizeEnd, super.hapticFeedbackVelocity = 6.5}) : super._();
 
   @override
   bool update(int left, int right, double delta) {

@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart' hide VerticalDivider;
-
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart' hide VerticalDivider;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
+
 import '../../test_scaffold.dart';
 
 void main() {

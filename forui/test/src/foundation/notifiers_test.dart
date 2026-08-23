@@ -7,7 +7,7 @@ import 'package:forui/src/foundation/notifiers.dart';
 class _Notifier<T> extends FMultiValueNotifier<T> {
   int listeners = 0;
 
-  _Notifier({super.value = const {}});
+  new({super.value = const {}});
 
   @override
   void addListener(VoidCallback listener) {

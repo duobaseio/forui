@@ -10,7 +10,7 @@ part 'autocomplete_controller.control.dart';
 /// A controller for managing autocomplete functionality in a text field.
 class FAutocompleteController extends FTypeaheadController {
   /// Creates a [FAutocompleteController] with an optional initial text and suggestions.
-  FAutocompleteController({super.text, super.suggestions})
+  new({super.text, super.suggestions})
     : super(
         textStyles: (context) {
           final AutocompleteFieldScope(:style, :variants) = .of(context);
@@ -23,7 +23,7 @@ class FAutocompleteController extends FTypeaheadController {
       );
 
   /// Creates a [FAutocompleteController] from a [TextEditingValue].
-  FAutocompleteController.fromValue(super.value, {super.suggestions = const []})
+  new fromValue(super.value, {super.suggestions = const []})
     : super.fromValue(
         textStyles: (context) {
           final AutocompleteFieldScope(:style, :variants) = .of(context);
@@ -40,7 +40,7 @@ class _ProxyController extends FAutocompleteController {
   TextEditingValue? _unsynced;
   ValueChanged<TextEditingValue> _onChange;
 
-  _ProxyController(super.value, this._onChange) : _unsynced = value, super.fromValue();
+  new(super.value, this._onChange) : _unsynced = value, super.fromValue();
 
   void update(TextEditingValue newValue, ValueChanged<TextEditingValue> onChange) {
     _onChange = onChange;
@@ -74,7 +74,7 @@ class InheritedAutocompleteController<T> extends InheritedWidget {
   final void Function(T option) onPress;
   final void Function(T option) onFocus;
 
-  const InheritedAutocompleteController({
+  const new({
     required this.popover,
     required this.format,
     required this.onPress,
@@ -103,19 +103,16 @@ class InheritedAutocompleteController<T> extends InheritedWidget {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMixin {
   /// Creates a [FAutocompleteControl].
-  const factory FAutocompleteControl.managed({
+  const factory managed({
     FAutocompleteController? controller,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
   }) = FAutocompleteManagedControl;
 
   /// Creates a [FAutocompleteControl] for controlling an autocomplete using lifted state.
-  const factory FAutocompleteControl.lifted({
-    required TextEditingValue value,
-    required ValueChanged<TextEditingValue> onChange,
-  }) = _Lifted;
+  const factory lifted({required TextEditingValue value, required ValueChanged<TextEditingValue> onChange}) = _Lifted;
 
-  const FAutocompleteControl._();
+  const new _();
 
   (FAutocompleteController, bool) _update(
     FAutocompleteControl old,
@@ -145,7 +142,7 @@ class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompl
   final ValueChanged<TextEditingValue>? onChange;
 
   /// Creates a [FAutocompleteControl].
-  const FAutocompleteManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial value. Pass initial value to the controller instead.',
@@ -162,7 +159,7 @@ class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
   @override
   final ValueChanged<TextEditingValue> onChange;
 
-  const _Lifted({required this.value, required this.onChange}) : super._();
+  const new({required this.value, required this.onChange}) : super._();
 
   @override
   FAutocompleteController createController() => _ProxyController(value, onChange);

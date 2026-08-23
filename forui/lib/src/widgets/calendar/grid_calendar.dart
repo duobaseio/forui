@@ -10,58 +10,32 @@ import 'package:forui/src/widgets/calendar/month/month_picker.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
 
 @internal
-class GridCalendar extends StatelessWidget {
-  final FGridCalendarController controller;
-  final FDateSelectionController selectionController;
-  final FCalendarStyle style;
-  final FLocalizations localizations;
-  final double width;
-  final double height;
-  final bool fixedWeeks;
-  final ScrollPhysics? dayScrollPhysics;
-  final ScrollCacheExtent? dayScrollCacheExtent;
-  final ScrollBehavior? dayScrollBehavior;
-  final ScrollPhysics? monthScrollPhysics;
-  final ScrollCacheExtent? monthScrollCacheExtent;
-  final ScrollBehavior? monthScrollBehavior;
-  final ScrollPhysics? yearScrollPhysics;
-  final ScrollCacheExtent? yearScrollCacheExtent;
-  final ScrollBehavior? yearScrollBehavior;
-  final ValueChanged<DateTime> onDayPress;
-  final ValueChanged<DateTime> onDayLongPress;
-  final FCalendarHeaderBuilder<FGridCalendarController> headerBuilder;
-  final FCalendarFooterBuilder<FGridCalendarController> footerBuilder;
-  final FCalendarDayBuilder dayBuilder;
-  final FCalendarMonthBuilder monthBuilder;
-  final FCalendarYearBuilder yearBuilder;
-
-  const GridCalendar({
-    required this.controller,
-    required this.selectionController,
-    required this.style,
-    required this.localizations,
-    required this.width,
-    required this.height,
-    required this.fixedWeeks,
-    required this.dayScrollPhysics,
-    required this.dayScrollCacheExtent,
-    required this.dayScrollBehavior,
-    required this.monthScrollPhysics,
-    required this.monthScrollCacheExtent,
-    required this.monthScrollBehavior,
-    required this.yearScrollPhysics,
-    required this.yearScrollCacheExtent,
-    required this.yearScrollBehavior,
-    required this.onDayPress,
-    required this.onDayLongPress,
-    required this.headerBuilder,
-    required this.footerBuilder,
-    required this.dayBuilder,
-    required this.monthBuilder,
-    required this.yearBuilder,
-    super.key,
-  });
-
+class const GridCalendar({
+  required final FGridCalendarController controller,
+  required final FDateSelectionController<Object?> selectionController,
+  required final FCalendarStyle style,
+  required final FLocalizations localizations,
+  required final double width,
+  required final double height,
+  required final bool fixedWeeks,
+  required final ScrollPhysics? dayScrollPhysics,
+  required final ScrollCacheExtent? dayScrollCacheExtent,
+  required final ScrollBehavior? dayScrollBehavior,
+  required final ScrollPhysics? monthScrollPhysics,
+  required final ScrollCacheExtent? monthScrollCacheExtent,
+  required final ScrollBehavior? monthScrollBehavior,
+  required final ScrollPhysics? yearScrollPhysics,
+  required final ScrollCacheExtent? yearScrollCacheExtent,
+  required final ScrollBehavior? yearScrollBehavior,
+  required final ValueChanged<DateTime> onDayPress,
+  required final ValueChanged<DateTime> onDayLongPress,
+  required final FCalendarHeaderBuilder<FGridCalendarController> headerBuilder,
+  required final FCalendarFooterBuilder<FGridCalendarController> footerBuilder,
+  required final FCalendarDayBuilder dayBuilder,
+  required final FCalendarMonthBuilder monthBuilder,
+  required final FCalendarYearBuilder yearBuilder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     mainAxisSize: .min,
@@ -217,52 +191,29 @@ class GridCalendar extends StatelessWidget {
 }
 
 @internal
-class GridSplitCalendar extends StatelessWidget {
-  final FGridSplitCalendarController controller;
-  final FDateSelectionController selectionController;
-  final FCalendarStyle style;
-  final FLocalizations localizations;
-  final double width;
-  final double height;
-  final bool fixedWeeks;
-  final ScrollPhysics? dayScrollPhysics;
-  final ScrollCacheExtent? dayScrollCacheExtent;
-  final ScrollBehavior? dayScrollBehavior;
-  final ScrollPhysics? yearScrollPhysics;
-  final ScrollCacheExtent? yearScrollCacheExtent;
-  final ScrollBehavior? yearScrollBehavior;
-  final ValueChanged<DateTime> onPress;
-  final ValueChanged<DateTime> onLongPress;
-  final FCalendarHeaderBuilder<FGridSplitCalendarController> headerBuilder;
-  final FCalendarFooterBuilder<FGridSplitCalendarController> footerBuilder;
-  final FCalendarDayBuilder dayBuilder;
-  final FCalendarMonthBuilder monthBuilder;
-  final FCalendarYearBuilder yearBuilder;
-
-  const GridSplitCalendar({
-    required this.controller,
-    required this.selectionController,
-    required this.style,
-    required this.localizations,
-    required this.width,
-    required this.height,
-    required this.fixedWeeks,
-    required this.dayScrollPhysics,
-    required this.dayScrollCacheExtent,
-    required this.dayScrollBehavior,
-    required this.yearScrollPhysics,
-    required this.yearScrollCacheExtent,
-    required this.yearScrollBehavior,
-    required this.onPress,
-    required this.onLongPress,
-    required this.headerBuilder,
-    required this.footerBuilder,
-    required this.dayBuilder,
-    required this.monthBuilder,
-    required this.yearBuilder,
-    super.key,
-  });
-
+class const GridSplitCalendar({
+  required final FGridSplitCalendarController controller,
+  required final FDateSelectionController<Object?> selectionController,
+  required final FCalendarStyle style,
+  required final FLocalizations localizations,
+  required final double width,
+  required final double height,
+  required final bool fixedWeeks,
+  required final ScrollPhysics? dayScrollPhysics,
+  required final ScrollCacheExtent? dayScrollCacheExtent,
+  required final ScrollBehavior? dayScrollBehavior,
+  required final ScrollPhysics? yearScrollPhysics,
+  required final ScrollCacheExtent? yearScrollCacheExtent,
+  required final ScrollBehavior? yearScrollBehavior,
+  required final ValueChanged<DateTime> onPress,
+  required final ValueChanged<DateTime> onLongPress,
+  required final FCalendarHeaderBuilder<FGridSplitCalendarController> headerBuilder,
+  required final FCalendarFooterBuilder<FGridSplitCalendarController> footerBuilder,
+  required final FCalendarDayBuilder dayBuilder,
+  required final FCalendarMonthBuilder monthBuilder,
+  required final FCalendarYearBuilder yearBuilder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Column(
     mainAxisSize: .min,

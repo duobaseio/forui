@@ -14,7 +14,7 @@ class DateInput extends Input<DateTime?> {
   final FDateFieldStyle style;
   final int baselineYear;
 
-  const DateInput({
+  const new({
     required this.selectionController,
     required this.style,
     required this.baselineYear,

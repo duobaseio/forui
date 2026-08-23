@@ -174,7 +174,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
   final FItemDivider submenuDivider;
 
   /// Creates a [FSubmenuTile].
-  const FSubmenuTile({
+  const new({
     required this.title,
     required this.menu,
     this.control = const .managed(),

@@ -84,7 +84,7 @@ class FAlert extends StatelessWidget {
   /// |          [subtitle]       |
   /// |---------------------------|
   /// ```
-  const FAlert({
+  const new({
     required this.title,
     this.variant = .primary,
     this.style = const .context(),
@@ -164,7 +164,7 @@ class FAlert extends StatelessWidget {
 extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> _)
     implements FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> {
   /// Creates a [FAlertStyles] that inherits its properties.
-  factory FAlertStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -206,33 +206,22 @@ extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FA
 }
 
 /// A [FAlert] style.
-final class FAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
+final class FAlertStyle({
   /// The decoration.
-  @override
-  final Decoration decoration;
-
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final Decoration decoration,
 
   /// The icon's style.
-  @override
-  final IconThemeData iconStyle;
+  @override required final IconThemeData iconStyle,
 
   /// The title's [TextStyle].
-  @override
-  final TextStyle titleTextStyle;
+  @override required final TextStyle titleTextStyle,
 
   /// The subtitle's [TextStyle].
-  @override
-  final TextStyle subtitleTextStyle;
+  @override required final TextStyle subtitleTextStyle,
 
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
+  @override final EdgeInsetsGeometry padding = const .symmetric(horizontal: 16, vertical: 12),
+}) with Diagnosticable, _$FAlertStyleFunctions {
   /// Creates a [FAlertStyle].
-  FAlertStyle({
-    required this.decoration,
-    required this.iconStyle,
-    required this.titleTextStyle,
-    required this.subtitleTextStyle,
-    this.padding = const .symmetric(horizontal: 16, vertical: 12),
-  });
+  this;
 }

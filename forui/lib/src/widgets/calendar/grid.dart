@@ -11,7 +11,7 @@ class _PageIntent extends Intent {
   final int direction;
   final bool large;
 
-  const _PageIntent(this.direction, {this.large = false});
+  const new(this.direction, {this.large = false});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -23,11 +23,7 @@ class _PageIntent extends Intent {
 }
 
 /// Moves focus to the first or last selectable cell of the focused cell's row.
-class _RowEdgeIntent extends Intent {
-  final bool end;
-
-  const _RowEdgeIntent({required this.end});
-
+class const _RowEdgeIntent({required final bool end}) extends Intent {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -36,22 +32,14 @@ class _RowEdgeIntent extends Intent {
 }
 
 @internal
-class GridFocusableActionDetector extends StatefulWidget {
-  final void Function(TraversalDirection, TextDirection) onFocusMove;
-  final void Function(int direction, {bool large}) onFocusPage;
-  final void Function({required bool end}) onFocusRowEdge;
-  final ValueChanged<bool> onFocusChange;
-  final Widget child;
-
-  const GridFocusableActionDetector({
-    required this.onFocusMove,
-    required this.onFocusPage,
-    required this.onFocusRowEdge,
-    required this.onFocusChange,
-    required this.child,
-    super.key,
-  });
-
+class const GridFocusableActionDetector({
+  required final void Function(TraversalDirection, TextDirection) onFocusMove,
+  required final void Function(int direction, {bool large}) onFocusPage,
+  required final void Function({required bool end}) onFocusRowEdge,
+  required final ValueChanged<bool> onFocusChange,
+  required final Widget child,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<GridFocusableActionDetector> createState() => _GridFocusableActionDetectorState();
 
@@ -126,13 +114,7 @@ class _GridFocusableActionDetectorState extends State<GridFocusableActionDetecto
 }
 
 @internal
-class GridDelegate extends SliverGridDelegate {
-  final Size size;
-  final int crossAxisCount;
-  final double spacing;
-
-  const GridDelegate(this.size, this.crossAxisCount, this.spacing);
-
+class const GridDelegate(final Size size, final int crossAxisCount, final double spacing) extends SliverGridDelegate {
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
     childCrossAxisExtent: size.width,
@@ -191,7 +173,7 @@ abstract class GridController extends FChangeNotifier {
   DateTime _current;
   (int, int)? _animation;
 
-  GridController({
+  new({
     required this.start,
     required this.end,
     required this._columns,

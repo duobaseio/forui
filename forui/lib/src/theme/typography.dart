@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
+import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -35,11 +35,11 @@ final class FTypography with Diagnosticable {
   final Map<Object, FScalableExtension<dynamic>> _extensions;
 
   /// Creates a [FTypography].
-  FTypography({required this.display, required this.body, Iterable<FScalableExtension<dynamic>> extensions = const []})
+  new({required this.display, required this.body, Iterable<FScalableExtension<dynamic>> extensions = const []})
     : _extensions = {for (final extension in extensions) extension.type: extension};
 
   /// Creates a [FTypography] that inherits its properties.
-  factory FTypography.inherit({
+  factory inherit({
     required FColors colors,
     required bool touch,
     Iterable<FScalableExtension<dynamic>> extensions = const [],
@@ -49,7 +49,7 @@ final class FTypography with Diagnosticable {
   }
 
   /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
-  factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
+  factory lerp(FTypography a, FTypography b, double t) => .new(
     display: a.display.lerp(b.display, t),
     body: a.body.lerp(b.body, t),
     extensions: (a._extensions.map(
@@ -246,7 +246,7 @@ final class FTypeface extends FScalableExtension<FTypeface> with Diagnosticable 
   final Map<Object, FScalableExtension<dynamic>> _extensions;
 
   /// Creates a [FTypeface] that defaults to touch font sizes.
-  FTypeface({
+  new({
     this.fontFamily = FTypeface.defaultFontFamily,
     List<String>? fontFamilyFallback,
     TextStyle? xs3,
@@ -395,7 +395,7 @@ final class FTypeface extends FScalableExtension<FTypeface> with Diagnosticable 
        assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
 
   /// Creates a [FTypeface] that inherits its properties.
-  factory FTypeface.inherit({
+  factory inherit({
     required FColors colors,
     required bool touch,
     String fontFamily = FTypeface.defaultFontFamily,
@@ -899,7 +899,7 @@ final class FTypeface extends FScalableExtension<FTypeface> with Diagnosticable 
 /// [FTypeface].
 abstract class FScalableExtension<T extends FScalableExtension<T>> extends ThemeExtension<T> {
   /// Creates a [FScalableExtension].
-  const FScalableExtension();
+  const new();
 
   @override
   FScalableExtension<T> lerp(FScalableExtension<T>? other, double t);

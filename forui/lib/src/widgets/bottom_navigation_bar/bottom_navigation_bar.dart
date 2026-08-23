@@ -60,7 +60,7 @@ class FBottomNavigationBar extends StatelessWidget {
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   ///
   /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
-  const FBottomNavigationBar({
+  const new({
     required this.children,
     this.style = const .context(),
     this.safeAreaTop = false,
@@ -138,7 +138,8 @@ class FBottomNavigationBar extends StatelessWidget {
 
 /// A [FBottomNavigationBar]'s data.
 class FBottomNavigationBarData extends InheritedWidget {
-  /// Returns the [FBottomNavigationBarItemStyle] and current states of the [FBottomNavigationBar] in the given [context].
+  /// Returns the [FBottomNavigationBarItemStyle] and current states of the [FBottomNavigationBar] in the given
+  /// [context].
   @useResult
   static FBottomNavigationBarData of(BuildContext context) {
     assert(debugCheckHasAncestor<FBottomNavigationBarData>('$FBottomNavigationBar', context));
@@ -161,7 +162,7 @@ class FBottomNavigationBarData extends InheritedWidget {
   final ValueChanged<int>? onChange;
 
   /// Creates a [FBottomNavigationBarData].
-  const FBottomNavigationBarData({
+  const new({
     required this.itemStyle,
     required this.selected,
     required this.index,
@@ -188,15 +189,17 @@ class FBottomNavigationBarData extends InheritedWidget {
 }
 
 /// [FBottomNavigationBar]'s style.
-class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyleFunctions {
+class const FBottomNavigationBarStyle({
   /// The decoration.
   ///
   /// ## Removing the top border
   /// By default, both [FBottomNavigationBar] and [FScaffold.footer] specify a top border. When used together, the
   /// top border must be removed from both [FBottomNavigationBarStyle.decoration] and [FScaffoldStyle.footerDecoration]
   /// for the changes to take effect.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
+
+  /// The item's style.
+  @override required final FBottomNavigationBarItemStyle itemStyle,
 
   /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
   /// background color.
@@ -220,32 +223,20 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
   /// );
   /// ```
-  @override
-  final ImageFilter? backgroundFilter;
+  @override final ImageFilter? backgroundFilter,
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// The item's style.
-  @override
-  final FBottomNavigationBarItemStyle itemStyle;
+  @override final EdgeInsetsGeometry padding = const .all(5),
 
   /// Whether the items support pressing an item and sliding to another. Defaults to true.
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slideableItems;
-
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slideableItems = const .all(true),
+}) with Diagnosticable, _$FBottomNavigationBarStyleFunctions {
   /// Creates a [FBottomNavigationBarStyle].
-  const FBottomNavigationBarStyle({
-    required this.decoration,
-    required this.itemStyle,
-    this.backgroundFilter,
-    this.padding = const .all(5),
-    this.slideableItems = const .all(true),
-  });
+  this;
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties.
-  FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
           border: Border(

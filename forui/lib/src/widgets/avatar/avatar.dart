@@ -46,7 +46,7 @@ class FAvatar extends StatelessWidget {
   final Widget child;
 
   /// Creates an [FAvatar].
-  FAvatar({
+  new({
     required ImageProvider image,
     this.style = const .context(),
     this.size = 40.0,
@@ -56,7 +56,7 @@ class FAvatar extends StatelessWidget {
   }) : child = Content(style: style, size: size, image: image, semanticsLabel: semanticsLabel, fallback: fallback);
 
   /// Creates a [FAvatar] without a fallback.
-  FAvatar.raw({Widget? child, this.style = const .context(), this.size = 40.0, super.key})
+  new raw({Widget? child, this.style = const .context(), this.size = 40.0, super.key})
     : child = child ?? PlaceholderContent(style: style, size: size);
 
   @override
@@ -84,38 +84,27 @@ class FAvatar extends StatelessWidget {
 /// [FAvatar]'s style.
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
-class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
+class const FAvatarStyle({
   /// The fallback's background color.
-  @override
-  final Color backgroundColor;
+  @override required final Color backgroundColor,
 
   /// The fallback's color.
-  @override
-  final Color foregroundColor;
+  @override required final Color foregroundColor,
 
   /// The text style for the fallback text.
-  @override
-  final TextStyle textStyle;
+  @override required final TextStyle textStyle,
 
   /// The fallback icon builder shown when no image is loaded. Defaults to [FIcons.userRound].
-  @override
-  final FIcon fallbackIcon;
+  @override required final FIcon fallbackIcon,
 
   /// Duration for the transition animation. Defaults to 500ms.
-  @override
-  final Duration fadeInDuration;
-
+  @override final Duration fadeInDuration = const Duration(milliseconds: 500),
+}) with Diagnosticable, _$FAvatarStyleFunctions {
   /// Creates a [FAvatarStyle].
-  const FAvatarStyle({
-    required this.backgroundColor,
-    required this.foregroundColor,
-    required this.textStyle,
-    required this.fallbackIcon,
-    this.fadeInDuration = const Duration(milliseconds: 500),
-  });
+  this;
 
   /// Creates a [FAvatarStyle] that inherits its properties.
-  FAvatarStyle.inherit({required FColors colors, required FIcons icons, required FTypography typography})
+  new inherit({required FColors colors, required FIcons icons, required FTypography typography})
     : this(
         backgroundColor: colors.muted,
         foregroundColor: colors.mutedForeground,

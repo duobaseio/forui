@@ -15,72 +15,65 @@ import 'package:meta/meta.dart';
 /// // Customize a specific effect:
 /// FHapticFeedback(selectionClick: () async => debugPrint('click!'))
 /// ```
-final class FHapticFeedback with Diagnosticable {
-  /// A no-op haptic feedback function.
-  static Future<void> noFeedback() async {}
-
+final class const FHapticFeedback({
   /// Provides a haptic feedback corresponding to a collision impact with a heavy mass.
   ///
   /// Defaults to [HapticFeedback.heavyImpact].
-  final Future<void> Function() heavyImpact;
+  final Future<void> Function() heavyImpact = HapticFeedback.heavyImpact,
 
   /// Provides a haptic feedback corresponding to a collision impact with a light mass.
   ///
   /// Defaults to [HapticFeedback.lightImpact].
-  final Future<void> Function() lightImpact;
+  final Future<void> Function() lightImpact = HapticFeedback.lightImpact,
 
   /// Provides a haptic feedback corresponding to a collision impact with a medium mass.
   ///
   /// Defaults to [HapticFeedback.mediumImpact].
-  final Future<void> Function() mediumImpact;
+  final Future<void> Function() mediumImpact = HapticFeedback.mediumImpact,
 
   /// Provides a haptic feedback corresponding to a UI selection tick.
   ///
   /// Defaults to [HapticFeedback.selectionClick].
-  final Future<void> Function() selectionClick;
+  final Future<void> Function() selectionClick = HapticFeedback.selectionClick,
 
   /// Provides a haptic feedback indicating that a task or action has completed successfully.
   ///
   /// Defaults to [HapticFeedback.successNotification].
-  final Future<void> Function() successNotification;
+  final Future<void> Function() successNotification = HapticFeedback.successNotification,
 
   /// Provides a haptic feedback indicating that a task or action has produced a warning.
   ///
   /// Defaults to [HapticFeedback.warningNotification].
-  final Future<void> Function() warningNotification;
+  final Future<void> Function() warningNotification = HapticFeedback.warningNotification,
 
   /// Provides a haptic feedback indicating that a task or action has failed.
   ///
   /// Defaults to [HapticFeedback.errorNotification].
-  final Future<void> Function() errorNotification;
+  final Future<void> Function() errorNotification = HapticFeedback.errorNotification,
 
   /// Provides vibration haptic feedback to the user.
   ///
   /// Defaults to [HapticFeedback.vibrate].
-  final Future<void> Function() vibrate;
-
+  final Future<void> Function() vibrate = HapticFeedback.vibrate,
+}) with Diagnosticable {
   /// Creates an [FHapticFeedback].
-  const FHapticFeedback({
-    this.heavyImpact = HapticFeedback.heavyImpact,
-    this.lightImpact = HapticFeedback.lightImpact,
-    this.mediumImpact = HapticFeedback.mediumImpact,
-    this.selectionClick = HapticFeedback.selectionClick,
-    this.successNotification = HapticFeedback.successNotification,
-    this.warningNotification = HapticFeedback.warningNotification,
-    this.errorNotification = HapticFeedback.errorNotification,
-    this.vibrate = HapticFeedback.vibrate,
-  });
+  this;
+
+  /// A no-op haptic feedback function.
+  static Future<void> noFeedback() async {}
 
   /// Creates an [FHapticFeedback] with no haptic feedback.
-  const FHapticFeedback.none()
-    : heavyImpact = noFeedback,
-      lightImpact = noFeedback,
-      mediumImpact = noFeedback,
-      selectionClick = noFeedback,
-      successNotification = noFeedback,
-      warningNotification = noFeedback,
-      errorNotification = noFeedback,
-      vibrate = noFeedback;
+  const new none()
+    : this(
+        heavyImpact: noFeedback,
+        lightImpact: noFeedback,
+        mediumImpact: noFeedback,
+        selectionClick: noFeedback,
+        successNotification: noFeedback,
+        warningNotification: noFeedback,
+        errorNotification: noFeedback,
+        vibrate: noFeedback,
+      );
 
   /// Returns a copy of this [FHapticFeedback] with the given properties replaced.
   @useResult

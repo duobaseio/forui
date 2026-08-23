@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -18,6 +19,7 @@ void main() {
       (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
       (Locale('hr'), 'DD. MM. YYYY.'),
       (Locale('bg'), 'DD.MM.YYYY г.'),
+      (Locale('ta'), 'DD/MM/YYYY'), // d/M/y
     ].indexed) {
       testWidgets('placeholder - $description - $index', (tester) async {
         await tester.pumpWidget(TestScaffold.app(locale: locale, child: field()));

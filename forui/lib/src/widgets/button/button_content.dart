@@ -10,47 +10,37 @@ import 'package:forui/forui.dart';
 part 'button_content.design.dart';
 
 /// Builds a [FButton] slot with the resolved styles.
-typedef FButtonContentBuilder =
-    Widget Function(
-      BuildContext context,
-      FButtonStyle style,
-      TextStyle textStyle,
-      IconThemeData iconStyle,
-      FCircularProgressStyle progressStyle,
-      Widget? child,
-    );
+typedef FButtonContentBuilder = Widget Function(
+  BuildContext context,
+  FButtonStyle style,
+  TextStyle textStyle,
+  IconThemeData iconStyle,
+  FCircularProgressStyle progressStyle,
+  Widget? child,
+);
 
 /// Builds a [FButton.icon] content with the resolved icon style.
-typedef FButtonIconContentBuilder =
-    Widget Function(BuildContext context, FButtonStyle style, IconThemeData iconStyle, Widget? child);
+typedef FButtonIconContentBuilder = Widget Function(
+  BuildContext context,
+  FButtonStyle style,
+  IconThemeData iconStyle,
+  Widget? child,
+);
 
 @internal
-class Content extends StatelessWidget {
-  final MainAxisSize mainAxisSize;
-  final MainAxisAlignment mainAxisAlignment;
-  final CrossAxisAlignment crossAxisAlignment;
-  final TextBaseline? textBaseline;
-  final FButtonContentBuilder? prefixBuilder;
-  final Widget? prefix;
-  final FButtonContentBuilder? suffixBuilder;
-  final Widget? suffix;
-  final FButtonContentBuilder builder;
-  final Widget? child;
-
-  const Content({
-    required this.mainAxisSize,
-    required this.mainAxisAlignment,
-    required this.crossAxisAlignment,
-    required this.textBaseline,
-    required this.prefixBuilder,
-    required this.prefix,
-    required this.suffixBuilder,
-    required this.suffix,
-    required this.builder,
-    required this.child,
-    super.key,
-  });
-
+class const Content({
+  required final MainAxisSize mainAxisSize,
+  required final MainAxisAlignment mainAxisAlignment,
+  required final CrossAxisAlignment crossAxisAlignment,
+  required final TextBaseline? textBaseline,
+  required final FButtonContentBuilder? prefixBuilder,
+  required final Widget? prefix,
+  required final FButtonContentBuilder? suffixBuilder,
+  required final Widget? suffix,
+  required final FButtonContentBuilder builder,
+  required final Widget? child,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FButtonData(:style, :variants) = .of(context);
@@ -109,12 +99,8 @@ class Content extends StatelessWidget {
 }
 
 @internal
-class IconContent extends StatelessWidget {
-  final FButtonIconContentBuilder builder;
-  final Widget? child;
-
-  const IconContent({required this.builder, required this.child, super.key});
-
+class const IconContent({required final FButtonIconContentBuilder builder, required final Widget? child, super.key})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FButtonData(:style, :variants) = .of(context);
@@ -141,61 +127,49 @@ class IconContent extends StatelessWidget {
 }
 
 /// [FButton] content's style.
-class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
+class const FButtonContentStyle({
   /// The [TextStyle].
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle,
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The circular progress's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, FCircularProgressStyle, FCircularProgressStyleDelta>
-  circularProgressStyle;
+  required final FVariants<
+    FTappableVariantConstraint,
+    FTappableVariant,
+    FCircularProgressStyle,
+    FCircularProgressStyleDelta
+  >
+  circularProgressStyle,
 
-  /// The constraints applied to the content.
-  @override
-  final BoxConstraints constraints;
+  /// The constraints applied to the content. Defaults to `BoxConstraints()`.
+  @override final BoxConstraints constraints = const BoxConstraints(),
 
-  /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 10, vertical: 11)`.
+  @override final EdgeInsetsGeometry padding = const .symmetric(horizontal: 10, vertical: 11),
 
-  /// The spacing between prefix, child, and suffix.
-  @override
-  final double spacing;
-
+  /// The spacing between prefix, child, and suffix. Defaults to 6.
+  @override final double spacing = 6,
+}) with Diagnosticable, _$FButtonContentStyleFunctions {
   /// Creates a [FButtonContentStyle].
-  const FButtonContentStyle({
-    required this.textStyle,
-    required this.iconStyle,
-    required this.circularProgressStyle,
-    this.constraints = const BoxConstraints(),
-    this.padding = const .symmetric(horizontal: 10, vertical: 11),
-    this.spacing = 6,
-  });
+  this;
 }
 
 /// [FButton] icon content's style.
-class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
+class const FButtonIconContentStyle({
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
-  /// The constraints applied to the icon content.
-  @override
-  final BoxConstraints constraints;
+  /// The constraints applied to the icon content. Defaults to `BoxConstraints()`.
+  @override final BoxConstraints constraints = const BoxConstraints(),
 
   /// The padding. Defaults to `EdgeInsets.all(10)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  @override final EdgeInsetsGeometry padding = const .all(10),
+}) with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({
-    required this.iconStyle,
-    this.constraints = const BoxConstraints(),
-    this.padding = const .all(10),
-  });
+  this;
 }

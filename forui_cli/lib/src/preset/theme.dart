@@ -12,7 +12,7 @@ import 'package:forui_cli/src/terminal/terminal.dart';
 String _themeHeader(String preset, String? iconImport) =>
     '''
 import 'package:forui/forui.dart';
-import 'package:flutter/material.dart';${iconImport == null ? '' : '\n$iconImport'}
+import 'package:material_ui/material_ui.dart';${iconImport == null ? '' : '\n$iconImport'}
 
 part 'colors.dart';
 part 'typography.dart';
@@ -99,7 +99,10 @@ Future<void> create(Configuration configuration, Preset preset, {required bool f
       }
 
       final prefix = '${configuration.root.path}$separator';
-      final relative = [for (final path in existing) path.startsWith(prefix) ? path.substring(prefix.length) : path];
+      final relative = [
+        for (final path in existing)
+          if (path.startsWith(prefix)) path.substring(prefix.length) else path,
+      ];
       terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
 
       if (!confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false)) {

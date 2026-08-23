@@ -9,7 +9,7 @@ class _ProxyController implements FDateSelectionController<DateTime?> {
   ValueChanged<DateTime?> _onChange;
   DateTime? _unsynced;
 
-  _ProxyController(this._unsynced, this._onChange) : _controller = .single(initial: _unsynced, toggleable: false);
+  new(this._unsynced, this._onChange) : _controller = .single(initial: _unsynced, toggleable: false);
 
   void update(DateTime? newValue, ValueChanged<DateTime?> onChange) {
     _onChange = onChange;
@@ -66,7 +66,7 @@ class _ProxyController implements FDateSelectionController<DateTime?> {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMixin {
   /// Creates a [FLineCalendarControl].
-  const factory FLineCalendarControl.managed({
+  const factory managed({
     FDateSelectionController<DateTime?>? controller,
     DateTime? initial,
     bool? toggleable,
@@ -77,10 +77,9 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
   ///
   /// The [date] parameter contains the current selected date.
   /// The [onChange] callback is invoked when the user selects a date.
-  const factory FLineCalendarControl.lifted({required DateTime? date, required ValueChanged<DateTime?> onChange}) =
-      _Lifted;
+  const factory lifted({required DateTime? date, required ValueChanged<DateTime?> onChange}) = _Lifted;
 
-  const FLineCalendarControl._();
+  const new _();
 
   (FDateSelectionController<DateTime?>, bool) _update(
     FLineCalendarControl old,
@@ -117,7 +116,7 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   final ValueChanged<DateTime?>? onChange;
 
   /// Creates a [FLineCalendarControl].
-  const FLineCalendarManagedControl({this.controller, this.initial, this.toggleable, this.onChange})
+  const new({this.controller, this.initial, this.toggleable, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial date. Pass initial date to the controller instead.',
@@ -139,7 +138,7 @@ class _Lifted extends FLineCalendarControl with _$_LiftedMixin {
   @override
   final ValueChanged<DateTime?> onChange;
 
-  const _Lifted({required this.date, required this.onChange}) : super._();
+  const new({required this.date, required this.onChange}) : super._();
 
   @override
   FDateSelectionController<DateTime?> createController() => _ProxyController(date, onChange);

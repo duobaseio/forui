@@ -52,13 +52,15 @@ Result<T> groupedSelect<T>({
         case Control.down:
           selected = (selected + 1) % entries.length;
         case Control.enter:
-          renderer.render(submitFrame(message, entries[selected].option.label));
-          renderer.commit();
+          renderer
+            ..render(submitFrame(message, entries[selected].option.label))
+            ..commit();
           return Value(entries[selected].option.value);
         case Control.escape:
         case Control.ctrlC:
-          renderer.render(cancelFrame(message));
-          renderer.commit();
+          renderer
+            ..render(cancelFrame(message))
+            ..commit();
           return Cancelled<T>();
         default:
           continue;
@@ -135,5 +137,5 @@ final class SelectOption<T> {
   /// An optional ARGB colour (`0xAARRGGBB`) shown as a swatch before the label. Only renders when truecolor is enabled.
   final int? swatch;
 
-  SelectOption(this.value, {String? label, this.hint, this.swatch}) : label = label ?? '$value';
+  new(this.value, {String? label, this.hint, this.swatch}) : label = label ?? '$value';
 }

@@ -91,7 +91,7 @@ class FDateTimePicker extends StatefulWidget {
   final Widget Function(BuildContext context, DateTime date, DateFormat format) dateBuilder;
 
   /// Creates a [FDateTimePicker] that uses a single wheel for the date.
-  const FDateTimePicker({
+  const new({
     this.control = const .managed(),
     this.style = const .context(),
     this.hour24,
@@ -267,52 +267,39 @@ class _FDateTimePickerState extends State<FDateTimePicker> {
 }
 
 /// The style of a date time picker.
-class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunctions {
+class const FDateTimePickerStyle({
+  required super.textStyle,
+  required super.selectionDecoration,
+  required super.focusedOutlineStyle,
+  required super.hapticFeedback,
+  super.diameterRatio,
+  super.squeeze,
+  super.magnification,
+  super.overAndUnderCenterOpacity,
+  super.spacing = 0,
+  super.textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false),
+  super.selectionHeightAdjustment = 5,
+
   /// The date wheel's flex factor. Defaults to 3.
-  @override
-  final int dateFlex;
+  @override final int dateFlex = 3,
 
   /// The hour wheel's flex factor. Defaults to 1.
-  @override
-  final int hourFlex;
+  @override final int hourFlex = 1,
 
   /// The minute wheel's flex factor. Defaults to 1.
-  @override
-  final int minuteFlex;
+  @override final int minuteFlex = 1,
 
   /// The period (AM/PM) wheel's flex factor. Defaults to 1.
-  @override
-  final int periodFlex;
+  @override final int periodFlex = 1,
 
-  /// The padding.
-  @override
-  final EdgeInsetsDirectional padding;
-
+  /// The padding. Defaults to `EdgeInsetsDirectional.only(start: 10, end: 10)`.
+  @override final EdgeInsetsDirectional padding = const .only(start: 10, end: 10),
+}) extends FPickerStyle with _$FDateTimePickerStyleFunctions {
   /// Creates a [FDateTimePickerStyle].
-  const FDateTimePickerStyle({
-    required super.textStyle,
-    required super.selectionDecoration,
-    required super.focusedOutlineStyle,
-    required super.hapticFeedback,
-    super.diameterRatio,
-    super.squeeze,
-    super.magnification,
-    super.overAndUnderCenterOpacity,
-    super.spacing = 0,
-    super.textHeightBehavior = const TextHeightBehavior(
-      applyHeightToFirstAscent: false,
-      applyHeightToLastDescent: false,
-    ),
-    super.selectionHeightAdjustment = 5,
-    this.dateFlex = 3,
-    this.hourFlex = 1,
-    this.minuteFlex = 1,
-    this.periodFlex = 1,
-    this.padding = const .only(start: 10, end: 10),
-  });
+  this;
 
   /// Creates a [FDateTimePickerStyle] that inherits its properties.
-  FDateTimePickerStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,

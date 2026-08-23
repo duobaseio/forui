@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/tappable/tappable.dart';
+
 import '../../test_scaffold.dart';
 
 // ignore: avoid_positional_boolean_parameters
@@ -15,7 +16,7 @@ class _StubTappable extends AnimatedTappable {
   static void _press() {}
 
   // ignore: unused_element_parameter
-  const _StubTappable({super.onPress = _press, super.child = const Text('stub')});
+  const new({super.onPress = _press, super.child = const Text('stub')});
 
   @override
   _StubTappableState createState() => _StubTappableState();

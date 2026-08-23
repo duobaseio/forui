@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
+
 import '../../test_scaffold.dart';
 
 void main() {
@@ -23,7 +24,7 @@ void main() {
       );
 
   Widget calendar({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FWheelCalendarController? controller,
     FutureOr<void> Function(DateTime)? onDayPress,
     FutureOr<void> Function(DateTime)? onDayLongPress,

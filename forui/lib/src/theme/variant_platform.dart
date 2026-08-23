@@ -6,7 +6,7 @@ part of 'variant.dart';
 /// * [FPlatformVariant], which represents individual platform variants.
 extension type const FPlatformVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
   /// Creates a [FPlatformVariantConstraint] that negates [variant].
-  factory FPlatformVariantConstraint.not(FPlatformVariant variant) => FPlatformVariantConstraint._(Not(variant));
+  factory not(FPlatformVariant variant) => FPlatformVariantConstraint._(Not(variant));
 
   /// A platform variant that matches all touch-based platforms, [android], [iOS] and [fuchsia].
   static const touch = FPlatformVariant(Touch());
@@ -92,9 +92,7 @@ extension type const FPlatformVariant(FVariant _) implements FPlatformVariantCon
 }
 
 @internal
-class Touch implements FVariant {
-  const Touch();
-
+class const Touch() implements FVariant {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Touch);
 
@@ -108,9 +106,7 @@ class Touch implements FVariant {
   String toString() => 'touch';
 }
 
-class _Android extends Touch {
-  const _Android();
-
+class const _Android() extends Touch {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Android());
 
@@ -126,9 +122,7 @@ class _Android extends Touch {
   String toString() => '{touch, android}';
 }
 
-class _Ios extends Touch {
-  const _Ios();
-
+class const _Ios() extends Touch {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Ios());
 
@@ -144,9 +138,7 @@ class _Ios extends Touch {
   String toString() => '{touch, iOS}';
 }
 
-class _Fuchsia extends Touch {
-  const _Fuchsia();
-
+class const _Fuchsia() extends Touch {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Fuchsia());
 
@@ -163,9 +155,7 @@ class _Fuchsia extends Touch {
 }
 
 @internal
-class Desktop implements FVariant {
-  const Desktop();
-
+class const Desktop() implements FVariant {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Desktop);
 
@@ -179,9 +169,7 @@ class Desktop implements FVariant {
   String toString() => 'desktop';
 }
 
-class _Windows extends Desktop {
-  const _Windows();
-
+class const _Windows() extends Desktop {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Windows());
 
@@ -197,9 +185,7 @@ class _Windows extends Desktop {
   String toString() => '{desktop, windows}';
 }
 
-class _MacOS extends Desktop {
-  const _MacOS();
-
+class const _MacOS() extends Desktop {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _MacOS());
 
@@ -215,9 +201,7 @@ class _MacOS extends Desktop {
   String toString() => '{desktop, macOS}';
 }
 
-class _Linux extends Desktop {
-  const _Linux();
-
+class const _Linux() extends Desktop {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Linux());
 
@@ -233,9 +217,7 @@ class _Linux extends Desktop {
   String toString() => '{desktop, linux}';
 }
 
-class _Web implements FVariant {
-  const _Web();
-
+class const _Web() implements FVariant {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Web());
 

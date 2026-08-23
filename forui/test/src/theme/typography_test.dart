@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
 class _Styles extends FScalableExtension<_Styles> {
   final TextStyle code;
 
-  const _Styles(this.code);
+  const new(this.code);
 
   @override
   _Styles copyWith({TextStyle? code}) => _Styles(code ?? this.code);
@@ -31,7 +31,7 @@ class _Marker extends FScalableExtension<_Marker> {
   final String id;
   final double size;
 
-  _Marker(this.id, {this.size = 1});
+  new(this.id, {this.size = 1});
 
   @override
   _Marker copyWith({String? id, double? size}) => _Marker(id ?? this.id, size: size ?? this.size);

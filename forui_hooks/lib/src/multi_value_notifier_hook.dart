@@ -19,7 +19,7 @@ class _MultiNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   final int min;
   final int? max;
 
-  const _MultiNotifierHook({required this.value, required this.min, required this.max, super.keys});
+  const new({required this.value, required this.min, required this.max, super.keys});
 
   @override
   _MultiNotifierHookState<T> createState() => .new();
@@ -57,7 +57,7 @@ FMultiValueNotifier<T> useFRadioMultiValueNotifier<T>({T? value, List<Object?>? 
 class _RadioNotifierHook<T> extends Hook<FMultiValueNotifier<T>> {
   final T? value;
 
-  const _RadioNotifierHook({required this.value, super.keys});
+  const new({required this.value, super.keys});
 
   @override
   _RadioNotifierHookState<T> createState() => .new();

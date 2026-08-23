@@ -30,7 +30,7 @@ class DateInputController extends InputController {
   final DateFormat _format;
   late final String _canonicalSpace;
 
-  factory DateInputController(
+  factory(
     FDateSelectionController<DateTime?> controller,
     FLocalizations localizations,
     FTextFieldStyle style,
@@ -48,7 +48,7 @@ class DateInputController extends InputController {
   }
 
   @visibleForTesting
-  DateInputController.test(
+  new test(
     this.controller,
     FLocalizations localizations,
     FTextFieldStyle style,
@@ -149,8 +149,7 @@ class DateInputController extends InputController {
 
 @internal
 class DateSelector extends Selector {
-  DateSelector(FLocalizations localizations)
-    : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
+  new(FLocalizations localizations) : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
 
   @override
   TextEditingValue? navigate(

@@ -82,101 +82,78 @@ import 'package:forui/forui.dart';
 /// ```
 ///
 /// Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom theme.
-final class FIcons with Diagnosticable {
+final class const FIcons({
   /// A left-pointing arrow.
-  final FIcon arrowLeft;
+  required final FIcon arrowLeft,
 
   /// A calendar.
-  final FIcon calendar;
+  required final FIcon calendar,
 
   /// A check mark.
-  final FIcon check;
+  required final FIcon check,
 
   /// A downward-pointing chevron.
-  final FIcon chevronDown;
+  required final FIcon chevronDown,
 
   /// A left-pointing chevron.
-  final FIcon chevronLeft;
+  required final FIcon chevronLeft,
 
   /// A right-pointing chevron.
-  final FIcon chevronRight;
+  required final FIcon chevronRight,
 
   /// An upward-pointing chevron.
-  final FIcon chevronUp;
+  required final FIcon chevronUp,
 
   /// A pair of vertically-stacked chevrons.
-  final FIcon chevronsUpDown;
+  required final FIcon chevronsUpDown,
 
   /// An alert / warning indicator inside a circle.
-  final FIcon circleAlert;
+  required final FIcon circleAlert,
 
   /// A clock with a 4 o'clock indicator.
-  final FIcon clock4;
+  required final FIcon clock4,
 
   /// A horizontal ellipsis (three dots).
-  final FIcon ellipsis;
+  required final FIcon ellipsis,
 
   /// An alert used to denote errors such as form field validation failures.
-  final FIcon error;
+  required final FIcon error,
 
   /// An open eye.
-  final FIcon eye;
+  required final FIcon eye,
 
   /// A closed eye.
-  final FIcon eyeClosed;
+  required final FIcon eyeClosed,
 
   /// A horizontal grip handle.
-  final FIcon gripHorizontal;
+  required final FIcon gripHorizontal,
 
   /// A vertical grip handle.
-  final FIcon gripVertical;
+  required final FIcon gripVertical,
 
   /// A loading indicator (segments).
-  final FIcon loader;
+  required final FIcon loader,
 
   /// A loading indicator (circular).
-  final FIcon loaderCircle;
+  required final FIcon loaderCircle,
 
   /// A loading indicator (pinwheel).
-  final FIcon loaderPinwheel;
+  required final FIcon loaderPinwheel,
 
   /// A search / magnifying glass.
-  final FIcon search;
+  required final FIcon search,
 
   /// A user silhouette in a circle.
-  final FIcon userRound;
+  required final FIcon userRound,
 
   /// An "x" / close mark.
-  final FIcon x;
-
+  required final FIcon x,
+}) with Diagnosticable {
   /// Creates a [FIcons] with the given icons.
-  const FIcons({
-    required this.arrowLeft,
-    required this.calendar,
-    required this.check,
-    required this.chevronDown,
-    required this.chevronLeft,
-    required this.chevronRight,
-    required this.chevronUp,
-    required this.chevronsUpDown,
-    required this.circleAlert,
-    required this.clock4,
-    required this.ellipsis,
-    required this.error,
-    required this.eye,
-    required this.eyeClosed,
-    required this.gripHorizontal,
-    required this.gripVertical,
-    required this.loader,
-    required this.loaderCircle,
-    required this.loaderPinwheel,
-    required this.search,
-    required this.userRound,
-    required this.x,
-  });
+  this;
 
   /// Creates a [FIcons] backed by [FLucideIcons] defaults.
-  const FIcons.lucide()
+  const new lucide()
     : this(
         arrowLeft: const FIcon(FLucideIcons.arrowLeft),
         calendar: const FIcon(FLucideIcons.calendar),
@@ -290,10 +267,9 @@ final class FIcons with Diagnosticable {
 /// ## Contract
 /// Subclasses should implement [==] and [hashCode] so that two icons that render the same glyph are equal. Not doing so
 /// may cause widgets to "flicker" whenever the same [FThemeData] is recreated.
-// ignore: one_member_abstracts
 abstract interface class FIcon {
   /// Creates an [FIcon] with the given [IconData].
-  const factory FIcon(IconData icon) = _Icon;
+  const factory(IconData icon) = _Icon;
 
   /// Builds an icon given a [BuildContext].
   ///
@@ -301,11 +277,7 @@ abstract interface class FIcon {
   Widget call(BuildContext context, {String? semanticsLabel});
 }
 
-class _Icon implements FIcon {
-  final IconData icon;
-
-  const _Icon(this.icon);
-
+class const _Icon(final IconData icon) implements FIcon {
   @override
   Widget call(BuildContext context, {String? semanticsLabel}) => Icon(icon, semanticLabel: semanticsLabel);
 

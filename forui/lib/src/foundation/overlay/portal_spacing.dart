@@ -17,23 +17,20 @@ abstract interface class FPortalSpacing {
   /// [diagonal] determines whether spacing applies to opposite diagonal corners:
   /// * When `false` (default), opposite diagonal corners have no spacing.
   /// * When `true`, spacing applies to opposite diagonal corners.
-  const factory FPortalSpacing(double spacing, {bool diagonal}) = _FPortalSpacing;
+  const factory(double spacing, {bool diagonal}) = _FPortalSpacing;
 
   /// Creates a [FPortalSpacing] that adds spacing between the anchors of the portal and widget when they do not overlap.
   ///
   /// This is identical to [FPortalSpacing.new], allowing dot-shorthand construction.
-  const factory FPortalSpacing.spacing(double spacing, {bool diagonal}) = FPortalSpacing;
+  const factory spacing(double spacing, {bool diagonal}) = FPortalSpacing;
 
   /// Returns the spacing offset for the portal.
   Offset call(Alignment child, Alignment portal);
 }
 
-class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
-  final double spacing;
-  final bool diagonal;
-
-  const _FPortalSpacing(this.spacing, {this.diagonal = false});
-
+class const _FPortalSpacing(final double spacing, {final bool diagonal = false})
+    with Diagnosticable
+    implements FPortalSpacing {
   @override
   Offset call(Alignment child, Alignment portal) {
     // ignore corners that are diagonal.

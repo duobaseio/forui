@@ -104,11 +104,10 @@ mixin _$FGoldenControlMixin {
   @visibleForOverriding
   FGoldenController createController(int children);
   void _dispose(FGoldenController controller, VoidCallback callback);
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FGoldenController _default(FGoldenControl old, FGoldenController controller, VoidCallback callback, int children) =>
       controller;
 }
+
 mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
   bool Function(int) get expanded;
   void Function(int, bool) get onChange;
@@ -170,6 +169,7 @@ mixin _$LiftedMixin on Diagnosticable, FGoldenControl {
   @override
   int get hashCode => expanded.hashCode ^ onChange.hashCode;
 }
+
 mixin _$ManagedMixin on Diagnosticable, FGoldenControl {
   FGoldenController? get controller;
   int? get min;
@@ -339,11 +339,10 @@ mixin _$FGenericControlMixin<T> {
   @visibleForOverriding
   FGenericController<T> createController();
   void _dispose(FGenericController<T> controller, VoidCallback callback);
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FGenericController<T> _default(FGenericControl<T> old, FGenericController<T> controller, VoidCallback callback) =>
       controller;
 }
+
 mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
   T? get value;
   void Function(T?) get onChange;
@@ -404,6 +403,7 @@ mixin _$LiftedMixin<T> on Diagnosticable, FGenericControl<T> {
   @override
   int get hashCode => value.hashCode ^ onChange.hashCode;
 }
+
 mixin _$ManagedMixin<T> on Diagnosticable, FGenericControl<T> {
   FGenericController<T>? get controller;
   T? get initialValue;
@@ -584,11 +584,10 @@ mixin _$FSubclassControlMixin {
   @visibleForOverriding
   FSubclassController createController();
   void _dispose(FSubclassController controller, VoidCallback callback);
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FSubclassController _default(FSubclassControl old, FSubclassController controller, VoidCallback callback) =>
       controller;
 }
+
 mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
   int get value;
   void Function(int) get onChange;
@@ -645,6 +644,7 @@ mixin _$LiftedMixin on Diagnosticable, FSubclassControl {
   @override
   int get hashCode => value.hashCode ^ onChange.hashCode;
 }
+
 mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
   FSubclassController? get controller;
   void Function(int)? get onChange;
@@ -712,6 +712,7 @@ mixin _$ManagedMixin on Diagnosticable, FSubclassControl {
   @override
   int get hashCode => controller.hashCode ^ onChange.hashCode;
 }
+
 mixin _$NormalMixin on Diagnosticable, FSubclassControl {
   FSubclassController? get controller;
   void Function(int)? get onChange;
@@ -726,6 +727,7 @@ mixin _$NormalMixin on Diagnosticable, FSubclassControl {
   @override
   int get hashCode => controller.hashCode ^ onChange.hashCode;
 }
+
 mixin _$CascadeMixin on Diagnosticable, FSubclassControl {
   FSubclassController? get controller;
   void Function(int)? get onChange;
@@ -831,10 +833,9 @@ mixin _$FNonListenableControlMixin {
   /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
   @visibleForOverriding
   FNonListenableController createController();
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FNonListenableController _default(FNonListenableControl old, FNonListenableController controller) => controller;
 }
+
 mixin _$LiftedMixin on Diagnosticable, FNonListenableControl {
   bool get shown;
   ValueChanged<bool> get onChange;
@@ -883,6 +884,7 @@ mixin _$LiftedMixin on Diagnosticable, FNonListenableControl {
   @override
   int get hashCode => shown.hashCode ^ onChange.hashCode;
 }
+
 mixin _$ManagedMixin on Diagnosticable, FNonListenableControl {
   FNonListenableController? get controller;
   bool? get initial;

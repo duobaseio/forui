@@ -13,7 +13,7 @@ class SnippetCommand extends ForuiCommand {
   @override
   final description = 'Manage your code snippets.';
 
-  SnippetCommand(Configuration configuration) {
+  new(Configuration configuration) {
     addSubcommand(SnippetCreateCommand(configuration));
     addSubcommand(SnippetLsCommand());
   }

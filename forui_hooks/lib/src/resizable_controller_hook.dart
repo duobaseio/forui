@@ -40,7 +40,7 @@ class _ResizableControllerHook extends Hook<FResizableController> {
   final String _debugLabel;
   final FResizableController Function(_ResizableControllerHook) _create;
 
-  const _ResizableControllerHook({
+  const new({
     required this.onResizeUpdate,
     required this.onResizeEnd,
     required this._debugLabel,
@@ -60,7 +60,7 @@ class _ResizableControllerHook extends Hook<FResizableController> {
   }
 }
 
-class _ResizableControllerHookState<T> extends HookState<FResizableController, _ResizableControllerHook> {
+class _ResizableControllerHookState extends HookState<FResizableController, _ResizableControllerHook> {
   late final FResizableController _controller;
 
   @override

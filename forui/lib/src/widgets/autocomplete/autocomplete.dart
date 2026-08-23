@@ -16,17 +16,19 @@ import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.da
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 /// A builder for [FAutocomplete]'s results.
-typedef FAutocompleteContentBuilder<T> =
-    List<FAutocompleteItemMixin<T>> Function(BuildContext context, String query, Iterable<T> values);
+typedef FAutocompleteContentBuilder<T> = List<FAutocompleteItemMixin<T>> Function(
+  BuildContext context,
+  String query,
+  Iterable<T> values,
+);
 
 /// A builder that wraps [FAutocomplete]'s popover content.
-typedef FAutocompletePopoverBuilder =
-    Widget Function(
-      BuildContext context,
-      FAutocompleteController controller,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FAutocompletePopoverBuilder = Widget Function(
+  BuildContext context,
+  FAutocompleteController controller,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// An autocomplete provides a list of suggestions based on the user's input and shows typeahead text for the first match.
 ///
@@ -94,6 +96,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autocorrect = true,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
+    bool enableAutocompletion = true,
     bool enableSuggestions = true,
     int? minLines,
     int? maxLines = 1,
@@ -195,6 +198,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     autocorrect: autocorrect,
     smartDashesType: smartDashesType,
     smartQuotesType: smartQuotesType,
+    enableAutocompletion: enableAutocompletion,
     enableSuggestions: enableSuggestions,
     minLines: minLines,
     maxLines: maxLines,
@@ -292,6 +296,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autocorrect = true,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
+    bool enableAutocompletion = true,
     bool enableSuggestions = true,
     int? minLines,
     int? maxLines = 1,
@@ -391,6 +396,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     autocorrect: autocorrect,
     smartDashesType: smartDashesType,
     smartQuotesType: smartQuotesType,
+    enableAutocompletion: enableAutocompletion,
     enableSuggestions: enableSuggestions,
     minLines: minLines,
     maxLines: maxLines,
@@ -549,7 +555,16 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// {@macro forui.text_field.smartQuotesType}
   final SmartQuotesType? smartQuotesType;
 
+  /// Whether the autocomplete shows inline typeahead and the suggestions popover. Defaults to true.
+  ///
+  /// See:
+  /// * [enableSuggestions] to enable and disable the platform's own input suggestions.
+  final bool enableAutocompletion;
+
   /// {@macro forui.text_field.enableSuggestions}
+  ///
+  /// See:
+  /// * [enableAutocompletion] to enable and disable inline typeahead and the suggestions popover.
   final bool enableSuggestions;
 
   /// {@macro forui.text_field.minLines}
@@ -791,7 +806,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// See:
   /// * [FAutocomplete.builder] for more control over the appearance of items.
   /// * [FAutocomplete.text] for a simpler autocomplete for `String` suggestions.
-  FAutocomplete({
+  new({
     required Map<String, T> items,
     String Function(T suggestion)? format,
     T? Function(String? text)? parse,
@@ -818,6 +833,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autocorrect = true,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
+    bool enableAutocompletion = true,
     bool enableSuggestions = true,
     int? minLines,
     int? maxLines = 1,
@@ -924,6 +940,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
          autocorrect: autocorrect,
          smartDashesType: smartDashesType,
          smartQuotesType: smartQuotesType,
+         enableAutocompletion: enableAutocompletion,
          enableSuggestions: enableSuggestions,
          minLines: minLines,
          maxLines: maxLines,
@@ -998,7 +1015,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   ///
   /// See:
   /// * [FAutocomplete.textBuilder] for a simpler autocomplete for `String` suggestions.
-  const FAutocomplete.builder({
+  const new builder({
     required this.filter,
     required this.format,
     required this.parse,
@@ -1026,6 +1043,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.autocorrect = true,
     this.smartDashesType,
     this.smartQuotesType,
+    this.enableAutocompletion = true,
     this.enableSuggestions = true,
     this.minLines,
     this.maxLines = 1,
@@ -1122,6 +1140,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
       ..add(EnumProperty('smartDashesType', smartDashesType))
       ..add(EnumProperty('smartQuotesType', smartQuotesType))
+      ..add(FlagProperty('enableAutocompletion', value: enableAutocompletion, ifTrue: 'enableAutocompletion'))
       ..add(FlagProperty('enableSuggestions', value: enableSuggestions, ifTrue: 'enableSuggestions'))
       ..add(IntProperty('minLines', minLines))
       ..add(IntProperty('maxLines', maxLines))
@@ -1233,7 +1252,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_update);
-    _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
+    _load();
   }
 
   @override
@@ -1250,13 +1269,27 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     }
 
     final (controller, updated) = widget.control.update(old.control, _controller, _update);
-    if (updated) {
+    if (updated || old.enableAutocompletion != widget.enableAutocompletion) {
       _controller = controller;
-      _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
+      _load();
     }
     _popoverController = widget.popoverControl
         .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
         .$1;
+
+    if (old.enableAutocompletion != widget.enableAutocompletion) {
+      if (widget.enableAutocompletion) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted && _fieldFocus.hasFocus) {
+            _toggle();
+          }
+        });
+      } else {
+        ++_monotonic;
+        _count = null;
+        _popoverController.hide();
+      }
+    }
   }
 
   @override
@@ -1283,7 +1316,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
       onChange(_controller.value);
     }
 
-    if (!_mutating) {
+    if (!_mutating && widget.enableAutocompletion) {
       setState(() {
         _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
       });
@@ -1292,6 +1325,15 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
       if (_fieldFocus.hasFocus) {
         _toggle();
       }
+    }
+  }
+
+  void _load() {
+    if (widget.enableAutocompletion) {
+      _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
+    } else {
+      _data = <T>[];
+      _controller.loadSuggestions(const <String>[]).ignore();
     }
   }
 
@@ -1322,6 +1364,10 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
   }
 
   void _toggle() {
+    if (!widget.enableAutocompletion) {
+      return;
+    }
+
     final token = ++_monotonic;
     final data = _data;
 
@@ -1642,7 +1688,7 @@ final class AutocompleteFieldScope extends InheritedWidget {
   /// The current widget variants.
   final Set<FTextFieldVariant> variants;
 
-  const AutocompleteFieldScope({required this.style, required this.variants, required super.child, super.key});
+  const new({required this.style, required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(AutocompleteFieldScope old) => style != old.style || variants != old.variants;

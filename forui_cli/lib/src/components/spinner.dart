@@ -8,7 +8,7 @@ import 'package:forui_cli/src/terminal/theme.dart';
 ///
 /// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 abstract class Spinner {
-  factory Spinner() => terminal.interactive ? _InteractiveSpinner() : _NonInteractiveSpinner();
+  factory() => terminal.interactive ? _InteractiveSpinner() : _NonInteractiveSpinner();
 
   /// Starts the spinner with [message].
   void start([String message = '']);
