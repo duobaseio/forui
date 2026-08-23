@@ -8,13 +8,7 @@ class AdaptiveTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const new({
-    required this.title,
-    required this.actions,
-    this.style = const .context(),
-    this.animation,
-    super.key,
-  });
+  const new({required this.title, required this.actions, this.style = const .context(), this.animation, super.key});
 
   @override
   Widget build(BuildContext context) => FDialog.adaptive(
