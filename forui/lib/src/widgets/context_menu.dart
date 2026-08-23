@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inner_path_clipper.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 

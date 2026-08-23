@@ -31,6 +31,7 @@ Widget _harness(FCalendarMonthPickerController controller, {DateTime? today, Val
           controller: controller,
           style: context.theme.calendarStyle.monthPickerStyle,
           localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+          padding: .zero,
           today: today ?? .utc(2024, 6),
           scrollPhysics: null,
           scrollCacheExtent: null,

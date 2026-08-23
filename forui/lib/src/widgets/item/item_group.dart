@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/foundation/inner_path_clipper.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FItemGroup', {

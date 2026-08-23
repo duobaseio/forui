@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inner_path_clipper.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/tile/tile.dart';
 
 part 'tile_group.design.dart';

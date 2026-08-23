@@ -11,6 +11,7 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/calendar/day/day.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 
@@ -40,7 +41,7 @@ class const DayPicker({
   required final ValueChanged<DateTime> onPress,
   required final ValueChanged<DateTime> onLongPress,
   required final FCalendarDayBuilder builder,
-  final EdgeInsetsGeometry clipPadding = .zero,
+  required final EdgeInsets padding,
   super.key,
 }) extends StatelessWidget {
   @override
@@ -78,13 +79,13 @@ class const DayPicker({
         }
       },
       child: ClipRect(
-        clipper: _HorizontalPaddingClipper(clipPadding.resolve(Directionality.of(context))),
+        clipper: HorizontalClipper(padding),
         child: PageView.builder(
-          clipBehavior: .none,
           controller: controller.controller,
           physics: scrollPhysics,
           scrollCacheExtent: scrollCacheExtent,
           scrollBehavior: scrollBehavior,
+          clipBehavior: .none,
           onPageChanged: (page) {
             controller.onPageChange(page);
             SemanticsService.sendAnnouncement(
@@ -156,8 +157,8 @@ class const DayPicker({
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('clipPadding', clipPadding))
       ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('today', today))
       ..add(ObjectFlagProperty.has('selected', selected))
       ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'))
@@ -168,18 +169,6 @@ class const DayPicker({
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
-}
-
-class _HorizontalPaddingClipper extends CustomClipper<Rect> {
-  final EdgeInsets padding;
-
-  const _HorizontalPaddingClipper(this.padding);
-
-  @override
-  Rect getClip(Size size) => Rect.fromLTRB(-padding.left, 0, size.width + padding.right, size.height);
-
-  @override
-  bool shouldReclip(_HorizontalPaddingClipper old) => padding != old.padding;
 }
 
 class _Viewport extends InheritedWidget {

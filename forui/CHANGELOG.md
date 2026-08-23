@@ -12,7 +12,7 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 * Add `FDateSelectionController.openRange(...)`.
 * Add `FDateSelectionControl.managedOpenRange(...)` and `FDateSelectionControl.liftedOpenRange(...)`.
 
-* Fix day labels being clipped before reaching the calendar edge while paging.
+* Fix day, month and year labels being clipped before reaching the calendar edge while paging.
 
 
 ### `FDateField`

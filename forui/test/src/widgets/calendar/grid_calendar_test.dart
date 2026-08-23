@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -58,7 +57,7 @@ void main() {
   Future<Color> pixel(WidgetTester tester, Finder boundary, Offset global) async {
     final render = tester.renderObject<RenderRepaintBoundary>(boundary);
     final image = await render.toImage();
-    final data = (await image.toByteData(format: ui.ImageByteFormat.rawRgba))!;
+    final data = (await image.toByteData())!;
     final local = render.globalToLocal(global);
     final offset = (local.dy.floor() * image.width + local.dx.floor()) * 4;
     final color = Color.fromARGB(255, data.getUint8(offset), data.getUint8(offset + 1), data.getUint8(offset + 2));

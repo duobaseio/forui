@@ -10,6 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 import 'package:forui/src/widgets/calendar/year/year.dart';
 
@@ -23,6 +24,7 @@ class const YearPicker({
   required final FCalendarYearPickerController controller,
   required final FCalendarYearPickerStyle style,
   required final FLocalizations localization,
+  required final EdgeInsets padding,
   required final DateTime today,
   required final ScrollPhysics? scrollPhysics,
   required final ScrollCacheExtent? scrollCacheExtent,
@@ -62,33 +64,37 @@ class const YearPicker({
             controller.focus(controller.focusable(current, preferred));
           }
         },
-        child: PageView.builder(
-          controller: controller.controller,
-          physics: scrollPhysics,
-          scrollCacheExtent: scrollCacheExtent,
-          scrollBehavior: scrollBehavior,
-          onPageChanged: (page) {
-            controller.onPageChange(page);
-            final decade = controller.to(page);
-            final locale = localization.localeName;
-            SemanticsService.sendAnnouncement(
-              View.of(context),
-              '${DateFormat.y(locale).format(decade)} — ${DateFormat.y(locale).format(.utc(decade.year + 9))}',
-              Directionality.of(context),
-            );
-          },
-          itemCount: controller.pages,
-          itemBuilder: (_, page) => ListenableBuilder(
-            listenable: controller,
-            builder: (_, _) => _Grid(
-              style: style,
-              localization: localization,
-              decade: controller.to(page),
-              today: today,
-              focused: controller.focused,
-              selectable: controller.selectable,
-              onPress: onPress,
-              builder: builder,
+        child: ClipRect(
+          clipper: HorizontalClipper(padding),
+          child: PageView.builder(
+            controller: controller.controller,
+            physics: scrollPhysics,
+            scrollCacheExtent: scrollCacheExtent,
+            scrollBehavior: scrollBehavior,
+            clipBehavior: .none,
+            onPageChanged: (page) {
+              controller.onPageChange(page);
+              final decade = controller.to(page);
+              final locale = localization.localeName;
+              SemanticsService.sendAnnouncement(
+                View.of(context),
+                '${DateFormat.y(locale).format(decade)} — ${DateFormat.y(locale).format(.utc(decade.year + 9))}',
+                Directionality.of(context),
+              );
+            },
+            itemCount: controller.pages,
+            itemBuilder: (_, page) => ListenableBuilder(
+              listenable: controller,
+              builder: (_, _) => _Grid(
+                style: style,
+                localization: localization,
+                decade: controller.to(page),
+                today: today,
+                focused: controller.focused,
+                selectable: controller.selectable,
+                onPress: onPress,
+                builder: builder,
+              ),
             ),
           ),
         ),
@@ -103,6 +109,7 @@ class const YearPicker({
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
       ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))

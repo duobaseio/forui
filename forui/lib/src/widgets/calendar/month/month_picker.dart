@@ -10,6 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 import 'package:forui/src/widgets/calendar/month/month.dart';
 
@@ -23,6 +24,7 @@ class MonthPicker extends StatelessWidget {
   final FCalendarMonthPickerController controller;
   final FCalendarMonthPickerStyle style;
   final FLocalizations localization;
+  final EdgeInsets padding;
   final DateTime today;
   final ScrollPhysics? scrollPhysics;
   final ScrollCacheExtent? scrollCacheExtent;
@@ -35,6 +37,7 @@ class MonthPicker extends StatelessWidget {
     required this.controller,
     required this.style,
     required this.localization,
+    required this.padding,
     required this.today,
     required this.scrollPhysics,
     required this.scrollCacheExtent,
@@ -53,7 +56,8 @@ class MonthPicker extends StatelessWidget {
     required this.onPress,
     required this.builder,
     super.key,
-  }) : scrollPhysics = const NeverScrollableScrollPhysics(),
+  }) : padding = .zero,
+       scrollPhysics = const NeverScrollableScrollPhysics(),
        scrollCacheExtent = null,
        scrollBehavior = null;
 
@@ -85,31 +89,35 @@ class MonthPicker extends StatelessWidget {
             controller.focus(controller.focusable(current, preferred));
           }
         },
-        child: PageView.builder(
-          controller: controller.controller,
-          physics: scrollPhysics,
-          scrollCacheExtent: scrollCacheExtent,
-          scrollBehavior: scrollBehavior,
-          onPageChanged: (page) {
-            controller.onPageChange(page);
-            SemanticsService.sendAnnouncement(
-              View.of(context),
-              DateFormat.y(localization.localeName).format(controller.to(page)),
-              Directionality.of(context),
-            );
-          },
-          itemCount: controller.pages,
-          itemBuilder: (_, page) => ListenableBuilder(
-            listenable: controller,
-            builder: (_, _) => _Grid(
-              style: style,
-              localization: localization,
-              year: controller.to(page),
-              today: today,
-              focused: controller.focused,
-              selectable: controller.selectable,
-              onPress: onPress,
-              builder: builder,
+        child: ClipRect(
+          clipper: HorizontalClipper(padding),
+          child: PageView.builder(
+            controller: controller.controller,
+            physics: scrollPhysics,
+            scrollCacheExtent: scrollCacheExtent,
+            scrollBehavior: scrollBehavior,
+            clipBehavior: .none,
+            onPageChanged: (page) {
+              controller.onPageChange(page);
+              SemanticsService.sendAnnouncement(
+                View.of(context),
+                DateFormat.y(localization.localeName).format(controller.to(page)),
+                Directionality.of(context),
+              );
+            },
+            itemCount: controller.pages,
+            itemBuilder: (_, page) => ListenableBuilder(
+              listenable: controller,
+              builder: (_, _) => _Grid(
+                style: style,
+                localization: localization,
+                year: controller.to(page),
+                today: today,
+                focused: controller.focused,
+                selectable: controller.selectable,
+                onPress: onPress,
+                builder: builder,
+              ),
             ),
           ),
         ),
@@ -124,6 +132,7 @@ class MonthPicker extends StatelessWidget {
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
       ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
