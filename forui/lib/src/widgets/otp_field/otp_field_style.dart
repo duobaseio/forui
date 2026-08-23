@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/foundation.dart';
 
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';

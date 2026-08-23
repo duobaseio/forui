@@ -131,13 +131,15 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
       extension = extension.parent;
     }
 
-    if (extension case ExtensionTypeDeclaration(
-      namePart: PrimaryConstructorDeclaration(
-        formalParameters: FormalParameterList(
-          parameters: [RegularFormalParameter(type: NamedType(:final name, :final typeArguments?))],
-        ),
-      ),
-    ) when name.lexeme == 'FVariants') {
+    if (extension
+        case ExtensionTypeDeclaration(
+          namePart: PrimaryConstructorDeclaration(
+            formalParameters: FormalParameterList(
+              parameters: [RegularFormalParameter(type: NamedType(:final name, :final typeArguments?))],
+            ),
+          ),
+        )
+        when name.lexeme == 'FVariants') {
       final [kAst, eAst, vAst, dAst] = typeArguments.arguments;
       final k = kAst.toSource();
       final e = eAst.toSource();

@@ -9,6 +9,7 @@ import 'package:forui/src/localizations/localizations_bg.dart';
 import 'package:forui/src/localizations/localizations_eu.dart';
 import 'package:forui/src/localizations/localizations_fr.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
+
 import '../../../test_scaffold.dart';
 
 void main() {

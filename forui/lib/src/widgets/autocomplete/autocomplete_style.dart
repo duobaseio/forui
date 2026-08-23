@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart' show InputBorder;
 import 'package:flutter/widgets.dart';
 
+import 'package:material_ui/material_ui.dart' show InputBorder;
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';

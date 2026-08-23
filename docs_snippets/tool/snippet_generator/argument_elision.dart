@@ -38,11 +38,8 @@ class ConstantPropagation extends RecursiveAstVisitor<void> {
 
     // Capture default parameter values.
     for (final parameter in node.constructorName.element!.formalParameters) {
-      if (parameter case FormalParameterElement(
-        :final name?,
-        :final defaultValueCode,
-        :final isOptionalNamed,
-      ) when isOptionalNamed) {
+      if (parameter case FormalParameterElement(:final name?, :final defaultValueCode, :final isOptionalNamed)
+          when isOptionalNamed) {
         substitutions[name] = defaultValueCode ?? 'null';
       }
     }
@@ -130,11 +127,8 @@ class ArgumentElision extends RecursiveAstVisitor<void> {
     // Capture default parameter values.
     final defaults = <String, String>{};
     for (final parameter in element.formalParameters) {
-      if (parameter case FormalParameterElement(
-        :final name?,
-        :final defaultValueCode,
-        :final isOptionalNamed,
-      ) when isOptionalNamed) {
+      if (parameter case FormalParameterElement(:final name?, :final defaultValueCode, :final isOptionalNamed)
+          when isOptionalNamed) {
         defaults[name] = defaultValueCode ?? 'null';
       }
     }

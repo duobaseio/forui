@@ -1,8 +1,8 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:docs_snippets/example.dart';
 

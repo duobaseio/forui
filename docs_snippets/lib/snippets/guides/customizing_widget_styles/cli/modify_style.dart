@@ -1,8 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values
 
-import 'package:material_ui/material_ui.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 // {@snippet}
 FAccordionStyle accordionStyle({

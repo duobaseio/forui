@@ -1,12 +1,13 @@
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/semantics.dart';
 
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/toast/animated_toast.dart';
 import 'package:forui/src/widgets/toast/toaster.dart';
+
 import '../../test_scaffold.dart';
 
 Widget small(
@@ -105,13 +106,11 @@ void main() {
           ),
         );
 
-        final entry =
-            showRawFToast(
-                  context: capturedContext,
-                  alignment: alignment,
-                  builder: (_, _) => const SizedBox(width: 100, height: 50),
-                )
-                as ToasterEntry;
+        final entry = showRawFToast(
+          context: capturedContext,
+          alignment: alignment,
+          builder: (_, _) => const SizedBox(width: 100, height: 50),
+        ) as ToasterEntry;
 
         expect(entry.swipeToDismiss, expected);
       });

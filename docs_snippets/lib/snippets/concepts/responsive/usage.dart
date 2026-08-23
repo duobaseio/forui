@@ -1,6 +1,5 @@
-import 'package:material_ui/material_ui.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MobileWidget extends StatelessWidget {
   const MobileWidget();

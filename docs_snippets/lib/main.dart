@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart' hide DialogRoute, OverlayRoute;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:forui/forui.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
+import 'package:material_ui/material_ui.dart' hide DialogRoute, OverlayRoute;
 
 import 'package:docs_snippets/example.dart';
 import 'package:docs_snippets/main.gr.dart';

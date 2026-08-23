@@ -33,6 +33,7 @@ class ControlGenerator extends Generator {
       final createController = supertype.methods.firstWhereOrNull((m) => m.name == 'createController');
       final update = supertype.methods.firstWhereOrNull((m) => m.name == '_update');
       final dispose = supertype.methods.firstWhereOrNull((m) => m.name == '_dispose');
+      final default_ = supertype.methods.firstWhereOrNull((m) => m.name == '_default');
 
       if (update == null) {
         continue;
@@ -46,6 +47,7 @@ class ControlGenerator extends Generator {
         createController: createController,
         update: update,
         dispose: dispose,
+        default_: default_,
         listenable: listenable,
       );
       final createControllerMethod = parentMixin.createControllerMethod;

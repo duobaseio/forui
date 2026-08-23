@@ -30,13 +30,17 @@ jobs:
         # jq (e.g. forge pr_number, or read env via the env builtin).
         run: |
           echo "full_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
-          echo "sha=${HEAD_SHA:0:7}" >> "$GITHUB_OUTPUT"
-          ESCAPED="${HEAD_BRANCH//\//-}"
-          echo "branch=$ESCAPED" >> "$GITHUB_OUTPUT"
-          
+
           PR=$(gh api "repos/$REPO/commits/$HEAD_SHA/pulls" \
             --jq 'first(.[] | select(.state == "open" and .head.ref == env.HEAD_BRANCH) | .number)')
+
+          if [ -z "$PR" ]; then
+            echo "::error::No open PR found for $HEAD_SHA on branch $HEAD_BRANCH; cannot derive the snippets alias."
+            exit 1
+          fi
           echo "pr_number=$PR" >> "$GITHUB_OUTPUT"
+
+          echo "snippets_slug=pr-$PR-${HEAD_SHA:0:7}" >> "$GITHUB_OUTPUT"
 
       # Deploy Snippets
       - uses: actions/download-artifact@v8
@@ -53,7 +57,7 @@ jobs:
           command: >-
             pages deploy ./docs-snippets--build
             --project-name=${{ vars.CLOUDFLARE_SNIPPETS_PROJECT_NAME }}
-            --branch=${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.sha }}
+            --branch=${{ steps.meta.outputs.snippets_slug }}
 
       # Deploy docs
       - uses: actions/checkout@v7

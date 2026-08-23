@@ -1,9 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:material_ui/material_ui.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
+
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -135,7 +136,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('ta'),
-        child: const FTimeField(key: key, control: .managed(initial: FTime(15, 30))),
+        child: const FTimeField(
+          key: key,
+          control: .managed(initial: FTime(15, 30)),
+        ),
       ),
     );
 

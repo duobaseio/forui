@@ -92,12 +92,7 @@ class TooltipLinker extends DartDocLinker {
   @override
   void visitPropertyAccess(PropertyAccess node) {
     if (node.propertyName.element case final element? when _forui(element)) {
-      tooltip(
-        node.propertyName,
-        _property(element).$1,
-        _property(element).$2,
-        element.enclosingElement,
-      );
+      tooltip(node.propertyName, _property(element).$1, _property(element).$2, element.enclosingElement);
     } else if (node.target?.staticType case final RecordType type) {
       // Record field access - show the field type, link to the parent expression's element.
       // This is messy because record fields have no elements. We only support named fields.
@@ -151,12 +146,7 @@ class TooltipLinker extends DartDocLinker {
   @override
   void visitDotShorthandPropertyAccess(DotShorthandPropertyAccess node) {
     if (node.propertyName.element case final element? when _forui(element)) {
-      tooltip(
-        node.propertyName,
-        _property(element).$1,
-        _property(element).$2,
-        element.enclosingElement,
-      );
+      tooltip(node.propertyName, _property(element).$1, _property(element).$2, element.enclosingElement);
     }
     super.visitDotShorthandPropertyAccess(node);
   }
