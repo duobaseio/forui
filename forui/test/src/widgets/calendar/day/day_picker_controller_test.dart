@@ -39,6 +39,7 @@ Widget _harness(
         firstDayOfWeek: firstDayOfWeek == null ? null : () => firstDayOfWeek,
       ),
       localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+      padding: .zero,
       today: today ?? .utc(2024, 6, 15),
       selected: selected ?? (_) => false,
       scrollPhysics: null,

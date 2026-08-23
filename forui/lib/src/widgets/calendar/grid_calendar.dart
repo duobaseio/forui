@@ -37,127 +37,133 @@ class const GridCalendar({
   super.key,
 }) extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisSize: .min,
-    children: switch (controller.type) {
-      .day => [
-        SizedBox(
-          width: width,
-          child: headerBuilder(
-            context,
-            controller,
-            selectionController,
-            Header.day(
-              style: style.headerStyle,
-              localizations: localizations,
-              monthYear: controller.day.current,
-              semanticsHint: localizations.calendarShowMonthPickerSemanticsHint,
-              shown: false,
-              onPress: controller.cycle,
-              onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
-              onNext: controller.day.hasNext ? controller.day.next : null,
+  Widget build(BuildContext context) {
+    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? .ltr);
+    return Column(
+      mainAxisSize: .min,
+      children: switch (controller.type) {
+        .day => [
+          SizedBox(
+            width: width,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              Header.day(
+                style: style.headerStyle,
+                localizations: localizations,
+                monthYear: controller.day.current,
+                semanticsHint: localizations.calendarShowMonthPickerSemanticsHint,
+                shown: false,
+                onPress: controller.cycle,
+                onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
+                onNext: controller.day.hasNext ? controller.day.next : null,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: style.dayPickerStyle.headerSpacing),
-        DayPicker(
-          controller: controller.day,
-          style: style.dayPickerStyle,
-          localization: localizations,
-          today: controller.today,
-          selected: selectionController.contains,
-          fixedWeeks: fixedWeeks,
-          scrollPhysics: dayScrollPhysics,
-          scrollCacheExtent: dayScrollCacheExtent,
-          scrollBehavior: dayScrollBehavior,
-          onPress: onDayPress,
-          onLongPress: onDayLongPress,
-          builder: dayBuilder,
-        ),
-        footerBuilder(context, controller, selectionController),
-      ],
-      .month => [
-        SizedBox(
-          width: width,
-          child: headerBuilder(
-            context,
-            controller,
-            selectionController,
-            Header.month(
-              style: style.headerStyle,
-              localizations: localizations,
-              year: controller.month.current,
-              semanticsHint: localizations.calendarShowYearPickerSemanticsHint,
-              shown: false,
-              onPress: controller.cycle,
-              onPrevious: controller.month.hasPrevious ? controller.month.previous : null,
-              onNext: controller.month.hasNext ? controller.month.next : null,
+          SizedBox(height: style.dayPickerStyle.headerSpacing),
+          DayPicker(
+            controller: controller.day,
+            style: style.dayPickerStyle,
+            localization: localizations,
+            padding: padding,
+            today: controller.today,
+            selected: selectionController.contains,
+            fixedWeeks: fixedWeeks,
+            scrollPhysics: dayScrollPhysics,
+            scrollCacheExtent: dayScrollCacheExtent,
+            scrollBehavior: dayScrollBehavior,
+            onPress: onDayPress,
+            onLongPress: onDayLongPress,
+            builder: dayBuilder,
+          ),
+          footerBuilder(context, controller, selectionController),
+        ],
+        .month => [
+          SizedBox(
+            width: width,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              Header.month(
+                style: style.headerStyle,
+                localizations: localizations,
+                year: controller.month.current,
+                semanticsHint: localizations.calendarShowYearPickerSemanticsHint,
+                shown: false,
+                onPress: controller.cycle,
+                onPrevious: controller.month.hasPrevious ? controller.month.previous : null,
+                onNext: controller.month.hasNext ? controller.month.next : null,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: style.monthPickerStyle.headerSpacing),
-        SizedBox(
-          width: width,
-          height: height - style.monthPickerStyle.headerSpacing,
-          child: Align(
-            alignment: .topCenter,
-            child: MonthPicker(
-              controller: controller.month,
-              style: style.monthPickerStyle,
-              localization: localizations,
-              today: controller.today,
-              scrollPhysics: monthScrollPhysics,
-              scrollCacheExtent: monthScrollCacheExtent,
-              scrollBehavior: monthScrollBehavior,
-              onPress: controller.jumpToDayPicker,
-              builder: monthBuilder,
+          SizedBox(height: style.monthPickerStyle.headerSpacing),
+          SizedBox(
+            width: width,
+            height: height - style.monthPickerStyle.headerSpacing,
+            child: Align(
+              alignment: .topCenter,
+              child: MonthPicker(
+                controller: controller.month,
+                style: style.monthPickerStyle,
+                localization: localizations,
+                padding: padding,
+                today: controller.today,
+                scrollPhysics: monthScrollPhysics,
+                scrollCacheExtent: monthScrollCacheExtent,
+                scrollBehavior: monthScrollBehavior,
+                onPress: controller.jumpToDayPicker,
+                builder: monthBuilder,
+              ),
             ),
           ),
-        ),
-        footerBuilder(context, controller, selectionController),
-      ],
-      .year => [
-        SizedBox(
-          width: width,
-          child: headerBuilder(
-            context,
-            controller,
-            selectionController,
-            Header.year(
-              style: style.headerStyle,
-              localizations: localizations,
-              decade: controller.year.current,
-              semanticsHint: localizations.calendarShowDaysSemanticsHint,
-              shown: false,
-              onPress: controller.cycle,
-              onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
-              onNext: controller.year.hasNext ? controller.year.next : null,
+          footerBuilder(context, controller, selectionController),
+        ],
+        .year => [
+          SizedBox(
+            width: width,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              Header.year(
+                style: style.headerStyle,
+                localizations: localizations,
+                decade: controller.year.current,
+                semanticsHint: localizations.calendarShowDaysSemanticsHint,
+                shown: false,
+                onPress: controller.cycle,
+                onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
+                onNext: controller.year.hasNext ? controller.year.next : null,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: style.yearPickerStyle.headerSpacing),
-        SizedBox(
-          width: width,
-          height: height - style.yearPickerStyle.headerSpacing,
-          child: Align(
-            alignment: .topCenter,
-            child: YearPicker(
-              controller: controller.year,
-              style: style.yearPickerStyle,
-              localization: localizations,
-              today: controller.today,
-              scrollPhysics: yearScrollPhysics,
-              scrollCacheExtent: yearScrollCacheExtent,
-              scrollBehavior: yearScrollBehavior,
-              onPress: controller.jumpToMonthPicker,
-              builder: yearBuilder,
+          SizedBox(height: style.yearPickerStyle.headerSpacing),
+          SizedBox(
+            width: width,
+            height: height - style.yearPickerStyle.headerSpacing,
+            child: Align(
+              alignment: .topCenter,
+              child: YearPicker(
+                controller: controller.year,
+                style: style.yearPickerStyle,
+                localization: localizations,
+                padding: padding,
+                today: controller.today,
+                scrollPhysics: yearScrollPhysics,
+                scrollCacheExtent: yearScrollCacheExtent,
+                scrollBehavior: yearScrollBehavior,
+                onPress: controller.jumpToMonthPicker,
+                builder: yearBuilder,
+              ),
             ),
           ),
-        ),
-        footerBuilder(context, controller, selectionController),
-      ],
-    },
-  );
+          footerBuilder(context, controller, selectionController),
+        ],
+      },
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -214,130 +220,135 @@ class const GridSplitCalendar({
   super.key,
 }) extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Column(
-    mainAxisSize: .min,
-    children: switch (controller.type) {
-      .day => [
-        SizedBox(
-          width: width,
-          child: headerBuilder(
-            context,
-            controller,
-            selectionController,
-            SplitHeader(
-              style: style.headerStyle,
-              localizations: localizations,
-              date: controller.day.current,
-              previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
-              nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
-              month: false,
-              year: false,
-              onMonth: controller.toggleMonthPicker,
-              onYear: controller.toggleYearPicker,
-              onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
-              onNext: controller.day.hasNext ? controller.day.next : null,
+  Widget build(BuildContext context) {
+    final padding = style.padding.resolve(Directionality.maybeOf(context) ?? .ltr);
+    return Column(
+      mainAxisSize: .min,
+      children: switch (controller.type) {
+        .day => [
+          SizedBox(
+            width: width,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              SplitHeader(
+                style: style.headerStyle,
+                localizations: localizations,
+                date: controller.day.current,
+                previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
+                nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
+                month: false,
+                year: false,
+                onMonth: controller.toggleMonthPicker,
+                onYear: controller.toggleYearPicker,
+                onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
+                onNext: controller.day.hasNext ? controller.day.next : null,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: style.dayPickerStyle.headerSpacing),
-        DayPicker(
-          controller: controller.day,
-          style: style.dayPickerStyle,
-          localization: localizations,
-          today: controller.today,
-          selected: selectionController.contains,
-          fixedWeeks: fixedWeeks,
-          scrollPhysics: dayScrollPhysics,
-          scrollCacheExtent: dayScrollCacheExtent,
-          scrollBehavior: dayScrollBehavior,
-          onPress: onPress,
-          onLongPress: onLongPress,
-          builder: dayBuilder,
-        ),
-        footerBuilder(context, controller, selectionController),
-      ],
-      .month => [
-        SizedBox(
-          width: width,
-          // The month grid shows a single year; the year is changed via the year target.
-          child: headerBuilder(
-            context,
-            controller,
-            selectionController,
-            SplitHeader.single(
-              style: style.headerStyle,
-              localizations: localizations,
-              date: controller.day.current,
-              month: true,
-              year: false,
-              onMonth: controller.toggleMonthPicker,
-              onYear: controller.toggleYearPicker,
+          SizedBox(height: style.dayPickerStyle.headerSpacing),
+          DayPicker(
+            controller: controller.day,
+            style: style.dayPickerStyle,
+            localization: localizations,
+            padding: padding,
+            today: controller.today,
+            selected: selectionController.contains,
+            fixedWeeks: fixedWeeks,
+            scrollPhysics: dayScrollPhysics,
+            scrollCacheExtent: dayScrollCacheExtent,
+            scrollBehavior: dayScrollBehavior,
+            onPress: onPress,
+            onLongPress: onLongPress,
+            builder: dayBuilder,
+          ),
+          footerBuilder(context, controller, selectionController),
+        ],
+        .month => [
+          SizedBox(
+            width: width,
+            // The month grid shows a single year; the year is changed via the year target.
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              SplitHeader.single(
+                style: style.headerStyle,
+                localizations: localizations,
+                date: controller.day.current,
+                month: true,
+                year: false,
+                onMonth: controller.toggleMonthPicker,
+                onYear: controller.toggleYearPicker,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: style.monthPickerStyle.headerSpacing),
-        SizedBox(
-          width: width,
-          height: height - style.monthPickerStyle.headerSpacing,
-          child: Align(
-            alignment: .topCenter,
-            child: MonthPicker.single(
-              controller: controller.month,
-              style: style.monthPickerStyle,
-              localization: localizations,
-              today: controller.today,
-              onPress: controller.jumpToDayPicker,
-              builder: monthBuilder,
+          SizedBox(height: style.monthPickerStyle.headerSpacing),
+          SizedBox(
+            width: width,
+            height: height - style.monthPickerStyle.headerSpacing,
+            child: Align(
+              alignment: .topCenter,
+              child: MonthPicker.single(
+                controller: controller.month,
+                style: style.monthPickerStyle,
+                localization: localizations,
+                today: controller.today,
+                onPress: controller.jumpToDayPicker,
+                builder: monthBuilder,
+              ),
             ),
           ),
-        ),
-        footerBuilder(context, controller, selectionController),
-      ],
-      .year => [
-        SizedBox(
-          width: width,
-          child: headerBuilder(
-            context,
-            controller,
-            selectionController,
-            SplitHeader(
-              style: style.headerStyle,
-              localizations: localizations,
-              date: controller.day.current,
-              previousSemanticsLabel: localizations.calendarPreviousYearsSemanticsLabel,
-              nextSemanticsLabel: localizations.calendarNextYearsSemanticsLabel,
-              month: false,
-              year: true,
-              onMonth: controller.toggleMonthPicker,
-              onYear: controller.toggleYearPicker,
-              onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
-              onNext: controller.year.hasNext ? controller.year.next : null,
+          footerBuilder(context, controller, selectionController),
+        ],
+        .year => [
+          SizedBox(
+            width: width,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              SplitHeader(
+                style: style.headerStyle,
+                localizations: localizations,
+                date: controller.day.current,
+                previousSemanticsLabel: localizations.calendarPreviousYearsSemanticsLabel,
+                nextSemanticsLabel: localizations.calendarNextYearsSemanticsLabel,
+                month: false,
+                year: true,
+                onMonth: controller.toggleMonthPicker,
+                onYear: controller.toggleYearPicker,
+                onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
+                onNext: controller.year.hasNext ? controller.year.next : null,
+              ),
             ),
           ),
-        ),
-        SizedBox(height: style.yearPickerStyle.headerSpacing),
-        SizedBox(
-          width: width,
-          height: height - style.yearPickerStyle.headerSpacing,
-          child: Align(
-            alignment: .topCenter,
-            child: YearPicker(
-              controller: controller.year,
-              style: style.yearPickerStyle,
-              localization: localizations,
-              today: controller.today,
-              scrollPhysics: yearScrollPhysics,
-              scrollCacheExtent: yearScrollCacheExtent,
-              scrollBehavior: yearScrollBehavior,
-              onPress: (year) => controller.jumpToDayPicker(.utc(year.year, controller.currentMonth.month)),
-              builder: yearBuilder,
+          SizedBox(height: style.yearPickerStyle.headerSpacing),
+          SizedBox(
+            width: width,
+            height: height - style.yearPickerStyle.headerSpacing,
+            child: Align(
+              alignment: .topCenter,
+              child: YearPicker(
+                controller: controller.year,
+                style: style.yearPickerStyle,
+                localization: localizations,
+                padding: padding,
+                today: controller.today,
+                scrollPhysics: yearScrollPhysics,
+                scrollCacheExtent: yearScrollCacheExtent,
+                scrollBehavior: yearScrollBehavior,
+                onPress: (year) => controller.jumpToDayPicker(.utc(year.year, controller.currentMonth.month)),
+                builder: yearBuilder,
+              ),
             ),
           ),
-        ),
-        footerBuilder(context, controller, selectionController),
-      ],
-    },
-  );
+          footerBuilder(context, controller, selectionController),
+        ],
+      },
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

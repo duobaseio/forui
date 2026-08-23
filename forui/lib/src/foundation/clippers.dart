@@ -40,3 +40,13 @@ class const InnerPathClipper({
   @override
   bool shouldReclip(covariant InnerPathClipper old) => old.decoration != decoration || old.direction != direction;
 }
+
+/// A [CustomClipper] that extends the clip horizontally by [padding].
+@internal
+class const HorizontalClipper(final EdgeInsets padding) extends CustomClipper<Rect> {
+  @override
+  Rect getClip(Size size) => .fromLTRB(-padding.left, 0, size.width + padding.right, size.height);
+
+  @override
+  bool shouldReclip(covariant HorizontalClipper old) => padding != old.padding;
+}

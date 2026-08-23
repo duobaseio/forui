@@ -40,6 +40,7 @@ Widget _harness(
       controller: controller,
       style: context.theme.calendarStyle.dayPickerStyle,
       localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+      padding: .zero,
       today: today ?? _initial,
       selected: selected ?? (_) => false,
       scrollPhysics: null,

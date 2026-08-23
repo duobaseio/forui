@@ -31,6 +31,7 @@ Widget _harness(FCalendarYearPickerController controller, {DateTime? today, Valu
           controller: controller,
           style: context.theme.calendarStyle.yearPickerStyle,
           localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+          padding: .zero,
           today: today ?? .utc(2024),
           scrollPhysics: null,
           scrollCacheExtent: null,

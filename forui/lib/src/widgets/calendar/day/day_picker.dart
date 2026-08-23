@@ -11,6 +11,7 @@ import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/calendar/day/day.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 
@@ -40,6 +41,7 @@ class const DayPicker({
   required final ValueChanged<DateTime> onPress,
   required final ValueChanged<DateTime> onLongPress,
   required final FCalendarDayBuilder builder,
+  required final EdgeInsets padding,
   super.key,
 }) extends StatelessWidget {
   @override
@@ -76,35 +78,39 @@ class const DayPicker({
           controller.focus(controller.focusable(current, preferred));
         }
       },
-      child: PageView.builder(
-        controller: controller.controller,
-        physics: scrollPhysics,
-        scrollCacheExtent: scrollCacheExtent,
-        scrollBehavior: scrollBehavior,
-        onPageChanged: (page) {
-          controller.onPageChange(page);
-          SemanticsService.sendAnnouncement(
-            View.of(context),
-            DateFormat.yMMMM(localization.localeName).format(controller.to(page)),
-            Directionality.of(context),
-          );
-        },
-        itemCount: controller.pages,
-        itemBuilder: (_, page) => ListenableBuilder(
-          listenable: controller,
-          builder: (_, _) => _Grid(
-            style: style,
-            localization: localization,
-            height: _height(page),
-            month: controller.to(page),
-            today: today,
-            focused: controller.focused,
-            selectable: controller.selectable,
-            selected: selected,
-            fixedWeeks: fixedWeeks,
-            onPress: onPress,
-            onLongPress: onLongPress,
-            builder: builder,
+      child: ClipRect(
+        clipper: HorizontalClipper(padding),
+        child: PageView.builder(
+          controller: controller.controller,
+          physics: scrollPhysics,
+          scrollCacheExtent: scrollCacheExtent,
+          scrollBehavior: scrollBehavior,
+          clipBehavior: .none,
+          onPageChanged: (page) {
+            controller.onPageChange(page);
+            SemanticsService.sendAnnouncement(
+              View.of(context),
+              DateFormat.yMMMM(localization.localeName).format(controller.to(page)),
+              Directionality.of(context),
+            );
+          },
+          itemCount: controller.pages,
+          itemBuilder: (_, page) => ListenableBuilder(
+            listenable: controller,
+            builder: (_, _) => _Grid(
+              style: style,
+              localization: localization,
+              height: _height(page),
+              month: controller.to(page),
+              today: today,
+              focused: controller.focused,
+              selectable: controller.selectable,
+              selected: selected,
+              fixedWeeks: fixedWeeks,
+              onPress: onPress,
+              onLongPress: onLongPress,
+              builder: builder,
+            ),
           ),
         ),
       ),
@@ -152,6 +158,7 @@ class const DayPicker({
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('today', today))
       ..add(ObjectFlagProperty.has('selected', selected))
       ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'))

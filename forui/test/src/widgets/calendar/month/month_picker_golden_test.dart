@@ -31,6 +31,7 @@ Widget _harness(FCalendarMonthPickerController controller, {required FThemeData 
           controller: controller,
           style: context.theme.calendarStyle.monthPickerStyle,
           localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+          padding: .zero,
           today: today ?? _initial,
           scrollPhysics: null,
           scrollCacheExtent: null,

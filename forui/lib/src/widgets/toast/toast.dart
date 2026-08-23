@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/inner_path_clipper.dart';
+import 'package:forui/src/foundation/clippers.dart';
 
 /// A toast.
 ///
