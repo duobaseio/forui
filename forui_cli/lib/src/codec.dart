@@ -695,7 +695,8 @@ enum IconLibrary(@override final String code, @override final String name, final
   lucide('b', 'Lucide', 'forui_lucide', 'https://lucide.dev'),
   tabler('c', 'Tabler', 'tabler_icons_plus', 'https://tabler.io/icons'),
   remix('d', 'Remix', 'remixicon', 'https://remixicon.com'),
-  iconoir('e', 'Iconoir', 'iconoir_flutter', 'https://iconoir.com');
+  iconoir('e', 'Iconoir', 'iconoir_flutter', 'https://iconoir.com'),
+  phosphor('f', 'Phosphor', 'forui_phosphor', 'https://phosphoricons.com');
 }
 
 enum Radius(@override final String code, @override final String name, final BorderRadii radius) implements Option {

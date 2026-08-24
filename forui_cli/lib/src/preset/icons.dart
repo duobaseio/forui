@@ -54,9 +54,11 @@ extension Icons on IconLibrary {
 
   static String _iconoir(String value) => 'const _Icon(iconoir.$value.new)';
 
-  /// The `_Icon` class backing this library's icons, or null for the built-in Lucide.
+  static String _phosphor(String value) => 'const FIcon(FPhosphorIcons.$value)';
+
+  /// The `_Icon` class backing this library's icons, or null if none is needed.
   String? get builder => switch (this) {
-    IconLibrary.lucide => null,
+    IconLibrary.lucide || IconLibrary.phosphor => null,
     IconLibrary.tabler =>
       '''
 class _Icon implements FIcon {
@@ -157,6 +159,7 @@ class _Icon implements FIcon {
     IconLibrary.remix => "import 'package:remixicon/remixicon.dart';",
     IconLibrary.hugeicons => "import 'package:hugeicons/hugeicons.dart';",
     IconLibrary.iconoir => "import 'package:iconoir_flutter/iconoir_flutter.dart' as iconoir;",
+    IconLibrary.phosphor => "import 'package:forui_phosphor/forui_phosphor.dart';",
   };
 
   /// Maps [mapping] to the equivalent icon in this library, or null for the built-in Lucide.
@@ -259,6 +262,30 @@ class _Icon implements FIcon {
       .search => _iconoir('Search'),
       .userRound => _iconoir('UserCircle'),
       .x => _iconoir('Xmark'),
+    },
+    .phosphor => switch (mapping) {
+      .arrowLeft => _phosphor('arrowLeft'),
+      .calendar => _phosphor('calendarBlank'),
+      .check => _phosphor('check'),
+      .chevronDown => _phosphor('caretDown'),
+      .chevronLeft => _phosphor('caretLeft'),
+      .chevronRight => _phosphor('caretRight'),
+      .chevronUp => _phosphor('caretUp'),
+      .chevronsUpDown => _phosphor('caretUpDown'),
+      .circleAlert => _phosphor('warningCircle'),
+      .clock4 => _phosphor('clock'),
+      .ellipsis => _phosphor('dotsThree'),
+      .error => _phosphor('warningCircle'),
+      .eye => _phosphor('eye'),
+      .eyeClosed => _phosphor('eyeClosed'),
+      .gripHorizontal => _phosphor('dotsSix'),
+      .gripVertical => _phosphor('dotsSixVertical'),
+      .loader => _phosphor('spinner'),
+      .loaderCircle => _phosphor('circleNotch'),
+      .loaderPinwheel => _phosphor('spinnerBall'),
+      .search => _phosphor('magnifyingGlass'),
+      .userRound => _phosphor('userCircle'),
+      .x => _phosphor('x'),
     },
   };
 }

@@ -9,7 +9,7 @@
 
 import 'package:flutter/widgets.dart';
 
-/// The Phosphor light icons bundled with Forui.
+/// The Phosphor light icons maintained by the Forui team.
 ///
 /// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g.
 /// [FPhosphorLightIcons.acorn].
@@ -172,16 +172,27 @@ class FPhosphorLightIcons {
   static const armchair = IconData(57362, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-arc-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-arc-left-light.svg)](https://phosphoricons.com/)
-  static const arrowArcLeft = IconData(57364, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowArcLeft = IconData(
+    57364,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-arc-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-arc-right-light.svg)](https://phosphoricons.com/)
-  static const arrowArcRight = IconData(57366, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowArcRight = IconData(
+    57366,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-bend-double-up-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-double-up-left-light.svg)](https://phosphoricons.com/)
   static const arrowBendDoubleUpLeft = IconData(
     57402,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-bend-double-up-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-double-up-right-light.svg)](https://phosphoricons.com/)
@@ -189,6 +200,7 @@ class FPhosphorLightIcons {
     57404,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-bend-down-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-down-left-light.svg)](https://phosphoricons.com/)
@@ -196,6 +208,7 @@ class FPhosphorLightIcons {
     57368,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-bend-down-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-down-right-light.svg)](https://phosphoricons.com/)
@@ -203,6 +216,7 @@ class FPhosphorLightIcons {
     57370,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-bend-left-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-left-down-light.svg)](https://phosphoricons.com/)
@@ -210,26 +224,48 @@ class FPhosphorLightIcons {
     57372,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-bend-left-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-left-up-light.svg)](https://phosphoricons.com/)
-  static const arrowBendLeftUp = IconData(57374, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowBendLeftUp = IconData(
+    57374,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-bend-right-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-right-down-light.svg)](https://phosphoricons.com/)
   static const arrowBendRightDown = IconData(
     57376,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-bend-right-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-right-up-light.svg)](https://phosphoricons.com/)
-  static const arrowBendRightUp = IconData(57378, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowBendRightUp = IconData(
+    57378,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-bend-up-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-up-left-light.svg)](https://phosphoricons.com/)
-  static const arrowBendUpLeft = IconData(57380, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowBendUpLeft = IconData(
+    57380,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-bend-up-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-bend-up-right-light.svg)](https://phosphoricons.com/)
-  static const arrowBendUpRight = IconData(57382, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowBendUpRight = IconData(
+    57382,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-circle-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-circle-down-light.svg)](https://phosphoricons.com/)
   static const arrowCircleDown = IconData(57384, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -249,10 +285,20 @@ class FPhosphorLightIcons {
   );
 
   /// [![`arrow-circle-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-circle-left-light.svg)](https://phosphoricons.com/)
-  static const arrowCircleLeft = IconData(57434, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowCircleLeft = IconData(
+    57434,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-circle-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-circle-right-light.svg)](https://phosphoricons.com/)
-  static const arrowCircleRight = IconData(57390, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowCircleRight = IconData(
+    57390,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-circle-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-circle-up-light.svg)](https://phosphoricons.com/)
   static const arrowCircleUp = IconData(57392, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -295,6 +341,7 @@ class FPhosphorLightIcons {
     57412,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-elbow-down-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-down-right-light.svg)](https://phosphoricons.com/)
@@ -302,29 +349,47 @@ class FPhosphorLightIcons {
     57414,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-elbow-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-left-light.svg)](https://phosphoricons.com/)
-  static const arrowElbowLeft = IconData(57416, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowElbowLeft = IconData(
+    57416,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-elbow-left-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-left-down-light.svg)](https://phosphoricons.com/)
   static const arrowElbowLeftDown = IconData(
     57418,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-elbow-left-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-left-up-light.svg)](https://phosphoricons.com/)
-  static const arrowElbowLeftUp = IconData(57420, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowElbowLeftUp = IconData(
+    57420,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-elbow-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-right-light.svg)](https://phosphoricons.com/)
-  static const arrowElbowRight = IconData(57422, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowElbowRight = IconData(
+    57422,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-elbow-right-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-right-down-light.svg)](https://phosphoricons.com/)
   static const arrowElbowRightDown = IconData(
     57424,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-elbow-right-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-right-up-light.svg)](https://phosphoricons.com/)
@@ -332,35 +397,53 @@ class FPhosphorLightIcons {
     57426,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-elbow-up-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-up-left-light.svg)](https://phosphoricons.com/)
-  static const arrowElbowUpLeft = IconData(57428, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowElbowUpLeft = IconData(
+    57428,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-elbow-up-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-elbow-up-right-light.svg)](https://phosphoricons.com/)
   static const arrowElbowUpRight = IconData(
     57430,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-fat-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-down-light.svg)](https://phosphoricons.com/)
   static const arrowFatDown = IconData(58648, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-fat-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-left-light.svg)](https://phosphoricons.com/)
-  static const arrowFatLeft = IconData(58650, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowFatLeft = IconData(
+    58650,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-fat-line-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-line-down-light.svg)](https://phosphoricons.com/)
   static const arrowFatLineDown = IconData(58652, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-fat-line-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-line-left-light.svg)](https://phosphoricons.com/)
-  static const arrowFatLineLeft = IconData(58654, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowFatLineLeft = IconData(
+    58654,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-fat-line-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-line-right-light.svg)](https://phosphoricons.com/)
   static const arrowFatLineRight = IconData(
     58656,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-fat-line-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-line-up-light.svg)](https://phosphoricons.com/)
@@ -378,6 +461,7 @@ class FPhosphorLightIcons {
     58662,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-fat-lines-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-lines-right-light.svg)](https://phosphoricons.com/)
@@ -385,19 +469,30 @@ class FPhosphorLightIcons {
     58664,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`arrow-fat-lines-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-lines-up-light.svg)](https://phosphoricons.com/)
   static const arrowFatLinesUp = IconData(58666, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-fat-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-right-light.svg)](https://phosphoricons.com/)
-  static const arrowFatRight = IconData(58668, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowFatRight = IconData(
+    58668,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-fat-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-fat-up-light.svg)](https://phosphoricons.com/)
   static const arrowFatUp = IconData(58670, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-left-light.svg)](https://phosphoricons.com/)
-  static const arrowLeft = IconData(57432, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowLeft = IconData(
+    57432,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-line-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-line-down-light.svg)](https://phosphoricons.com/)
   static const arrowLineDown = IconData(57436, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -417,10 +512,20 @@ class FPhosphorLightIcons {
   );
 
   /// [![`arrow-line-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-line-left-light.svg)](https://phosphoricons.com/)
-  static const arrowLineLeft = IconData(57442, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowLineLeft = IconData(
+    57442,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-line-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-line-right-light.svg)](https://phosphoricons.com/)
-  static const arrowLineRight = IconData(57444, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowLineRight = IconData(
+    57444,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-line-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-line-up-light.svg)](https://phosphoricons.com/)
   static const arrowLineUp = IconData(57446, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -432,7 +537,12 @@ class FPhosphorLightIcons {
   static const arrowLineUpRight = IconData(57450, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-right-light.svg)](https://phosphoricons.com/)
-  static const arrowRight = IconData(57452, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowRight = IconData(
+    57452,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-square-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-square-down-light.svg)](https://phosphoricons.com/)
   static const arrowSquareDown = IconData(57454, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -455,13 +565,23 @@ class FPhosphorLightIcons {
   static const arrowSquareIn = IconData(58844, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-square-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-square-left-light.svg)](https://phosphoricons.com/)
-  static const arrowSquareLeft = IconData(57460, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowSquareLeft = IconData(
+    57460,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-square-out`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-square-out-light.svg)](https://phosphoricons.com/)
   static const arrowSquareOut = IconData(58846, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`arrow-square-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-square-right-light.svg)](https://phosphoricons.com/)
-  static const arrowSquareRight = IconData(57462, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowSquareRight = IconData(
+    57462,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-square-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-square-up-light.svg)](https://phosphoricons.com/)
   static const arrowSquareUp = IconData(57464, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -481,28 +601,68 @@ class FPhosphorLightIcons {
   );
 
   /// [![`arrow-u-down-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-down-left-light.svg)](https://phosphoricons.com/)
-  static const arrowUDownLeft = IconData(57470, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowUDownLeft = IconData(
+    57470,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-down-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-down-right-light.svg)](https://phosphoricons.com/)
-  static const arrowUDownRight = IconData(57472, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowUDownRight = IconData(
+    57472,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-left-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-left-down-light.svg)](https://phosphoricons.com/)
-  static const arrowULeftDown = IconData(57474, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowULeftDown = IconData(
+    57474,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-left-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-left-up-light.svg)](https://phosphoricons.com/)
-  static const arrowULeftUp = IconData(57476, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowULeftUp = IconData(
+    57476,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-right-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-right-down-light.svg)](https://phosphoricons.com/)
-  static const arrowURightDown = IconData(57478, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowURightDown = IconData(
+    57478,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-right-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-right-up-light.svg)](https://phosphoricons.com/)
-  static const arrowURightUp = IconData(57480, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowURightUp = IconData(
+    57480,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-up-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-up-left-light.svg)](https://phosphoricons.com/)
-  static const arrowUUpLeft = IconData(57482, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowUUpLeft = IconData(
+    57482,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-u-up-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-u-up-right-light.svg)](https://phosphoricons.com/)
-  static const arrowUUpRight = IconData(57484, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const arrowUUpRight = IconData(
+    57484,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/arrow-up-light.svg)](https://phosphoricons.com/)
   static const arrowUp = IconData(57486, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -1088,6 +1248,7 @@ class FPhosphorLightIcons {
     57624,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`caret-circle-double-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-circle-double-right-light.svg)](https://phosphoricons.com/)
@@ -1095,6 +1256,7 @@ class FPhosphorLightIcons {
     57626,
     fontFamily: 'ForuiPhosphorLightIcons',
     fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
   );
 
   /// [![`caret-circle-double-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-circle-double-up-light.svg)](https://phosphoricons.com/)
@@ -1108,10 +1270,20 @@ class FPhosphorLightIcons {
   static const caretCircleDown = IconData(57630, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`caret-circle-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-circle-left-light.svg)](https://phosphoricons.com/)
-  static const caretCircleLeft = IconData(57632, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretCircleLeft = IconData(
+    57632,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-circle-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-circle-right-light.svg)](https://phosphoricons.com/)
-  static const caretCircleRight = IconData(57634, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretCircleRight = IconData(
+    57634,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-circle-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-circle-up-light.svg)](https://phosphoricons.com/)
   static const caretCircleUp = IconData(57636, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -1127,10 +1299,20 @@ class FPhosphorLightIcons {
   static const caretDoubleDown = IconData(57638, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`caret-double-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-double-left-light.svg)](https://phosphoricons.com/)
-  static const caretDoubleLeft = IconData(57640, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretDoubleLeft = IconData(
+    57640,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-double-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-double-right-light.svg)](https://phosphoricons.com/)
-  static const caretDoubleRight = IconData(57642, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretDoubleRight = IconData(
+    57642,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-double-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-double-up-light.svg)](https://phosphoricons.com/)
   static const caretDoubleUp = IconData(57644, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -1139,22 +1321,42 @@ class FPhosphorLightIcons {
   static const caretDown = IconData(57654, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`caret-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-left-light.svg)](https://phosphoricons.com/)
-  static const caretLeft = IconData(57656, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretLeft = IconData(
+    57656,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-line-down`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-line-down-light.svg)](https://phosphoricons.com/)
   static const caretLineDown = IconData(57652, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`caret-line-left`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-line-left-light.svg)](https://phosphoricons.com/)
-  static const caretLineLeft = IconData(57650, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretLineLeft = IconData(
+    57650,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-line-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-line-right-light.svg)](https://phosphoricons.com/)
-  static const caretLineRight = IconData(57648, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretLineRight = IconData(
+    57648,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-line-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-line-up-light.svg)](https://phosphoricons.com/)
   static const caretLineUp = IconData(57646, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`caret-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-right-light.svg)](https://phosphoricons.com/)
-  static const caretRight = IconData(57658, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const caretRight = IconData(
+    57658,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`caret-up`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/caret-up-light.svg)](https://phosphoricons.com/)
   static const caretUp = IconData(57660, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -3539,7 +3741,12 @@ class FPhosphorLightIcons {
   static const paperPlane = IconData(58260, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`paper-plane-right`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/paper-plane-right-light.svg)](https://phosphoricons.com/)
-  static const paperPlaneRight = IconData(58262, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const paperPlaneRight = IconData(
+    58262,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`paper-plane-tilt`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/paper-plane-tilt-light.svg)](https://phosphoricons.com/)
   static const paperPlaneTilt = IconData(58264, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -4128,7 +4335,12 @@ class FPhosphorLightIcons {
   static const share = IconData(58374, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`share-fat`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/share-fat-light.svg)](https://phosphoricons.com/)
-  static const shareFat = IconData(60754, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const shareFat = IconData(
+    60754,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`share-network`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/share-network-light.svg)](https://phosphoricons.com/)
   static const shareNetwork = IconData(58376, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -4214,10 +4426,20 @@ class FPhosphorLightIcons {
   static const sigma = IconData(60088, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`sign-in`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/sign-in-light.svg)](https://phosphoricons.com/)
-  static const signIn = IconData(58408, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const signIn = IconData(
+    58408,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`sign-out`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/sign-out-light.svg)](https://phosphoricons.com/)
-  static const signOut = IconData(58410, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const signOut = IconData(
+    58410,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`signature`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/signature-light.svg)](https://phosphoricons.com/)
   static const signature = IconData(60332, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
@@ -4694,13 +4916,23 @@ class FPhosphorLightIcons {
   static const textHTwo = IconData(59070, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`text-indent`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/text-indent-light.svg)](https://phosphoricons.com/)
-  static const textIndent = IconData(59934, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const textIndent = IconData(
+    59934,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`text-italic`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/text-italic-light.svg)](https://phosphoricons.com/)
   static const textItalic = IconData(58816, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
 
   /// [![`text-outdent`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/text-outdent-light.svg)](https://phosphoricons.com/)
-  static const textOutdent = IconData(59932, fontFamily: 'ForuiPhosphorLightIcons', fontPackage: 'forui_phosphor');
+  static const textOutdent = IconData(
+    59932,
+    fontFamily: 'ForuiPhosphorLightIcons',
+    fontPackage: 'forui_phosphor',
+    matchTextDirection: true,
+  );
 
   /// [![`text-strikethrough`](https://raw.githubusercontent.com/phosphor-icons/core/33fb01d1d33cd0156633ea4d33f4011fabe4d2da/assets/light/text-strikethrough-light.svg)](https://phosphoricons.com/)
   static const textStrikethrough = IconData(

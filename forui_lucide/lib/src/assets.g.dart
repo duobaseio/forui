@@ -9,7 +9,7 @@
 
 import 'package:flutter/widgets.dart';
 
-/// The Lucide icons bundled with Forui.
+/// The Lucide icons maintained by the Forui team.
 ///
 /// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g.
 /// [FLucideIcons.armchair].
@@ -375,7 +375,12 @@ class FLucideIcons {
   static const arrowDown = IconData(57410, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`arrow-left-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-left-circle.svg)](https://lucide.dev/icons/arrow-left-circle)
-  static const arrowLeftCircle = IconData(57465, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const arrowLeftCircle = IconData(
+    57465,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-left-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-left-from-line.svg)](https://lucide.dev/icons/arrow-left-from-line)
   static const arrowLeftFromLine = IconData(
@@ -389,7 +394,12 @@ class FLucideIcons {
   static const arrowLeftRight = IconData(57930, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`arrow-left-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-left-square.svg)](https://lucide.dev/icons/arrow-left-square)
-  static const arrowLeftSquare = IconData(58408, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const arrowLeftSquare = IconData(
+    58408,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-left-to-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-left-to-line.svg)](https://lucide.dev/icons/arrow-left-to-line)
   static const arrowLeftToLine = IconData(
@@ -408,7 +418,12 @@ class FLucideIcons {
   );
 
   /// [![`arrow-right-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-right-circle.svg)](https://lucide.dev/icons/arrow-right-circle)
-  static const arrowRightCircle = IconData(57466, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const arrowRightCircle = IconData(
+    57466,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-right-from-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-right-from-line.svg)](https://lucide.dev/icons/arrow-right-from-line)
   static const arrowRightFromLine = IconData(
@@ -422,7 +437,12 @@ class FLucideIcons {
   static const arrowRightLeft = IconData(58391, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`arrow-right-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-right-square.svg)](https://lucide.dev/icons/arrow-right-square)
-  static const arrowRightSquare = IconData(58409, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const arrowRightSquare = IconData(
+    58409,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`arrow-right-to-line`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/arrow-right-to-line.svg)](https://lucide.dev/icons/arrow-right-to-line)
   static const arrowRightToLine = IconData(
@@ -1329,10 +1349,20 @@ class FLucideIcons {
   );
 
   /// [![`chevron-left-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/chevron-left-circle.svg)](https://lucide.dev/icons/chevron-left-circle)
-  static const chevronLeftCircle = IconData(58590, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const chevronLeftCircle = IconData(
+    58590,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`chevron-left-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/chevron-left-square.svg)](https://lucide.dev/icons/chevron-left-square)
-  static const chevronLeftSquare = IconData(58320, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const chevronLeftSquare = IconData(
+    58320,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`chevron-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/chevron-left.svg)](https://lucide.dev/icons/chevron-left)
   static const chevronLeft = IconData(
@@ -1343,10 +1373,20 @@ class FLucideIcons {
   );
 
   /// [![`chevron-right-circle`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/chevron-right-circle.svg)](https://lucide.dev/icons/chevron-right-circle)
-  static const chevronRightCircle = IconData(58591, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const chevronRightCircle = IconData(
+    58591,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`chevron-right-square`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/chevron-right-square.svg)](https://lucide.dev/icons/chevron-right-square)
-  static const chevronRightSquare = IconData(58321, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const chevronRightSquare = IconData(
+    58321,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`chevron-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/chevron-right.svg)](https://lucide.dev/icons/chevron-right)
   static const chevronRight = IconData(
@@ -1873,28 +1913,68 @@ class FLucideIcons {
   static const copyright = IconData(57504, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`corner-down-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-down-left.svg)](https://lucide.dev/icons/corner-down-left)
-  static const cornerDownLeft = IconData(57505, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerDownLeft = IconData(
+    57505,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-down-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-down-right.svg)](https://lucide.dev/icons/corner-down-right)
-  static const cornerDownRight = IconData(57506, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerDownRight = IconData(
+    57506,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-left-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-left-down.svg)](https://lucide.dev/icons/corner-left-down)
-  static const cornerLeftDown = IconData(57507, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerLeftDown = IconData(
+    57507,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-left-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-left-up.svg)](https://lucide.dev/icons/corner-left-up)
-  static const cornerLeftUp = IconData(57508, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerLeftUp = IconData(
+    57508,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-right-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-right-down.svg)](https://lucide.dev/icons/corner-right-down)
-  static const cornerRightDown = IconData(57509, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerRightDown = IconData(
+    57509,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-right-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-right-up.svg)](https://lucide.dev/icons/corner-right-up)
-  static const cornerRightUp = IconData(57510, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerRightUp = IconData(
+    57510,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-up-left.svg)](https://lucide.dev/icons/corner-up-left)
-  static const cornerUpLeft = IconData(57511, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerUpLeft = IconData(
+    57511,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`corner-up-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/corner-up-right.svg)](https://lucide.dev/icons/corner-up-right)
-  static const cornerUpRight = IconData(57512, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const cornerUpRight = IconData(
+    57512,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`cpu`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/cpu.svg)](https://lucide.dev/icons/cpu)
   static const cpu = IconData(57513, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -2674,7 +2754,12 @@ class FLucideIcons {
   static const form = IconData(59048, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`forward`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/forward.svg)](https://lucide.dev/icons/forward)
-  static const forward = IconData(57897, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const forward = IconData(
+    57897,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`frame`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/frame.svg)](https://lucide.dev/icons/frame)
   static const frame = IconData(58001, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -3137,7 +3222,12 @@ class FLucideIcons {
   );
 
   /// [![`indent`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/indent.svg)](https://lucide.dev/icons/indent)
-  static const indent = IconData(57608, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const indent = IconData(
+    57608,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`indian-rupee`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/indian-rupee.svg)](https://lucide.dev/icons/indian-rupee)
   static const indianRupee = IconData(57592, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -3371,10 +3461,20 @@ class FLucideIcons {
   static const listFilter = IconData(58464, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`list-indent-decrease`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/list-indent-decrease.svg)](https://lucide.dev/icons/list-indent-decrease)
-  static const listIndentDecrease = IconData(57607, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const listIndentDecrease = IconData(
+    57607,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`list-indent-increase`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/list-indent-increase.svg)](https://lucide.dev/icons/list-indent-increase)
-  static const listIndentIncrease = IconData(57608, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const listIndentIncrease = IconData(
+    57608,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`list-minus`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/list-minus.svg)](https://lucide.dev/icons/list-minus)
   static const listMinus = IconData(57918, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -3452,10 +3552,20 @@ class FLucideIcons {
   static const lock = IconData(57611, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`log-in`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/log-in.svg)](https://lucide.dev/icons/log-in)
-  static const logIn = IconData(57613, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const logIn = IconData(
+    57613,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`log-out`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/log-out.svg)](https://lucide.dev/icons/log-out)
-  static const logOut = IconData(57614, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const logOut = IconData(
+    57614,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`logs`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/logs.svg)](https://lucide.dev/icons/logs)
   static const logs = IconData(58868, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -3872,10 +3982,20 @@ class FLucideIcons {
   static const moveHorizontal = IconData(57798, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`move-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/move-left.svg)](https://lucide.dev/icons/move-left)
-  static const moveLeft = IconData(58511, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const moveLeft = IconData(
+    58511,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`move-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/move-right.svg)](https://lucide.dev/icons/move-right)
-  static const moveRight = IconData(58512, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const moveRight = IconData(
+    58512,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`move-up-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/move-up-left.svg)](https://lucide.dev/icons/move-up-left)
   static const moveUpLeft = IconData(58514, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -4481,13 +4601,28 @@ class FLucideIcons {
   static const recycle = IconData(58089, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`redo-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/redo-2.svg)](https://lucide.dev/icons/redo-2)
-  static const redo2 = IconData(58016, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const redo2 = IconData(
+    58016,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`redo-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/redo-dot.svg)](https://lucide.dev/icons/redo-dot)
-  static const redoDot = IconData(58448, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const redoDot = IconData(
+    58448,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`redo`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/redo.svg)](https://lucide.dev/icons/redo)
-  static const redo = IconData(57667, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const redo = IconData(
+    57667,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`refresh-ccw-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/refresh-ccw-dot.svg)](https://lucide.dev/icons/refresh-ccw-dot)
   static const refreshCcwDot = IconData(58546, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -4529,10 +4664,20 @@ class FLucideIcons {
   static const replace = IconData(58331, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`reply-all`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/reply-all.svg)](https://lucide.dev/icons/reply-all)
-  static const replyAll = IconData(57899, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const replyAll = IconData(
+    57899,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`reply`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/reply.svg)](https://lucide.dev/icons/reply)
-  static const reply = IconData(57898, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const reply = IconData(
+    57898,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`rewind`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/rewind.svg)](https://lucide.dev/icons/rewind)
   static const rewind = IconData(57671, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -4761,7 +4906,12 @@ class FLucideIcons {
   static const sendHorizonal = IconData(58610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`send-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/send-horizontal.svg)](https://lucide.dev/icons/send-horizontal)
-  static const sendHorizontal = IconData(58610, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const sendHorizontal = IconData(
+    58610,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`send-to-back`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/send-to-back.svg)](https://lucide.dev/icons/send-to-back)
   static const sendToBack = IconData(58611, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -5158,10 +5308,20 @@ class FLucideIcons {
   static const squareChevronDown = IconData(58319, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`square-chevron-left`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/square-chevron-left.svg)](https://lucide.dev/icons/square-chevron-left)
-  static const squareChevronLeft = IconData(58320, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const squareChevronLeft = IconData(
+    58320,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`square-chevron-right`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/square-chevron-right.svg)](https://lucide.dev/icons/square-chevron-right)
-  static const squareChevronRight = IconData(58321, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const squareChevronRight = IconData(
+    58321,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`square-chevron-up`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/square-chevron-up.svg)](https://lucide.dev/icons/square-chevron-up)
   static const squareChevronUp = IconData(58322, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
@@ -5791,13 +5951,28 @@ class FLucideIcons {
   static const underline = IconData(57754, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
   /// [![`undo-2`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/undo-2.svg)](https://lucide.dev/icons/undo-2)
-  static const undo2 = IconData(58017, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const undo2 = IconData(
+    58017,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`undo-dot`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/undo-dot.svg)](https://lucide.dev/icons/undo-dot)
-  static const undoDot = IconData(58449, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const undoDot = IconData(
+    58449,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`undo`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/undo.svg)](https://lucide.dev/icons/undo)
-  static const undo = IconData(57755, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
+  static const undo = IconData(
+    57755,
+    fontFamily: 'ForuiLucideIcons',
+    fontPackage: 'forui_lucide',
+    matchTextDirection: true,
+  );
 
   /// [![`unfold-horizontal`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.28.0/icons/unfold-horizontal.svg)](https://lucide.dev/icons/unfold-horizontal)
   static const unfoldHorizontal = IconData(58429, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
