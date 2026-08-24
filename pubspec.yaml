@@ -10,6 +10,7 @@ workspace:
   - forui_hooks
   - forui_internal_gen
   - forui_lucide
+  - forui_phosphor
   - spotlight
 
 dev_dependencies:

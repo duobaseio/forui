@@ -130,7 +130,7 @@ void generate(List<(String, String, String)> icons) {
     ..body.addAll([
       (ClassBuilder()
             ..docs.addAll([
-              '/// The Lucide icons bundled with Forui.',
+              '/// The Lucide icons maintained by the Forui team.',
               '/// ',
               '/// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g. ',
               '/// [FLucideIcons.armchair].',

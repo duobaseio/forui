@@ -1,0 +1,48 @@
+name: forui_phosphor
+description: Phosphor icons for Forui, a set of beautifully designed, minimalistic widgets for desktop & touch devices.
+version: 0.26.0
+homepage: https://forui.dev/
+documentation: https://forui.dev/docs
+repository: https://github.com/duobaseio/forui/tree/main/forui_phosphor
+issue_tracker: https://github.com/duobaseio/forui/issues
+topics:
+  - icons
+  - phosphor
+  - ui
+  - widget
+
+environment:
+  sdk: ">=3.13.0-0 <4.0.0"
+  flutter: ">=3.47.0-0"
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  code_builder: ^4.10.0
+  dart_style: ^3.0.0
+  sugar: ^4.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+#
+## The following section is specific to Flutter packages.
+flutter:
+  fonts:
+    - family: ForuiPhosphorIcons
+      fonts:
+        - asset: assets/regular.ttf
+    - family: ForuiPhosphorThinIcons
+      fonts:
+        - asset: assets/thin.ttf
+    - family: ForuiPhosphorLightIcons
+      fonts:
+        - asset: assets/light.ttf
+    - family: ForuiPhosphorBoldIcons
+      fonts:
+        - asset: assets/bold.ttf
+    - family: ForuiPhosphorFillIcons
+      fonts:
+        - asset: assets/fill.ttf

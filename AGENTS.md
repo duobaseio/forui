@@ -9,6 +9,7 @@ Forui is a Flutter widget library. This is a monorepo with the following package
 | `forui_hooks/`       | Flutter Hooks integration                                          |
 | `forui_internal_gen/`| Code generator for styles, controls, and variants (`build_runner`) |
 | `forui_lucide/`      | Lucide icon font and generated `FLucideIcons` class                |
+| `forui_phosphor/`    | Phosphor icon font and generated `FPhosphorIcons` class            |
 | `docs_snippets/`     | Code snippets and examples for [forui.dev](https://forui.dev)      |
 | `docs/`              | Documentation site (Next.js)                                       |
 

@@ -112,9 +112,32 @@
       "automerge": false
     },
     {
+      "groupName": "Forui Phosphor - Major Revisions",
+      "matchFileNames": [
+        "forui_phosphor/**"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
+    },
+    {
       "groupName": "Forui Lucide - Minor Revisions",
       "matchFileNames": [
         "forui_lucide/**"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": false
+    },
+    {
+      "groupName": "Forui Phosphor - Minor Revisions",
+      "matchFileNames": [
+        "forui_phosphor/**"
       ],
       "matchUpdateTypes": [
         "minor",
