@@ -21,13 +21,19 @@ jobs:
       run:
         working-directory: forui
     strategy:
+      fail-fast: false
       matrix:
-        flutter-version: [ 3.x ]
+        include:
+          - flutter-version: 3.x
+            channel: stable
+          - flutter-version: ''
+            channel: main
     steps:
       - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
+          channel: ${{ matrix.channel }}
       - run: flutter pub get
       - run: dart run build_runner build
       - run: flutter analyze
@@ -51,6 +57,7 @@ jobs:
               exit 1
           fi
       - uses: codecov/codecov-action@v7
+        if: matrix.channel == 'stable'
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
