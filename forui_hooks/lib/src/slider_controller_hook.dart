@@ -125,12 +125,7 @@ class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderInteraction interaction;
   final FSliderActiveThumb activeThumb;
 
-  const new({
-    required this.value,
-    required this.interaction,
-    required this.activeThumb,
-    super.keys,
-  });
+  const new({required this.value, required this.interaction, required this.activeThumb, super.keys});
 
   @override
   _DiscreteControllerHookState createState() => .new();
