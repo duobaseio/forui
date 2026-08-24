@@ -3,7 +3,7 @@ REM This file is used by https://github.com/flutter/tests to run forui's tests a
 REM repository.
 REM Changes to this file (and any tests in this repository) are only honored after the commit hash in "forui.test" in
 REM that repository has been updated.
-REM Remember to also update the Posix version (customer_testing.sh) when changing this file.
+REM Remember to also update the Posix version (customer_test.sh) when changing this file.
 
 CD forui || EXIT /B 1
 CALL flutter pub get || EXIT /B 1

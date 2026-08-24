@@ -3,7 +3,7 @@
 # repository.
 # Changes to this file (and any tests in this repository) are only honored after the commit hash in "forui.test" in
 # that repository has been updated.
-# Remember to also update the Windows version (customer_testing.bat) when changing this file.
+# Remember to also update the Windows version (customer_test.bat) when changing this file.
 
 set -e
 
