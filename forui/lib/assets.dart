@@ -1,5 +1,5 @@
-/// The bundled assets in [forui_assets](https://github.com/duobaseio/forui/tree/main/forui_assets), exported for
+/// The bundled icons in [forui_lucide](https://github.com/duobaseio/forui/tree/main/forui_lucide), exported for
 /// convenience.
 library forui.assets;
 
-export 'package:forui_assets/forui_assets.dart';
+export 'package:forui_lucide/forui_lucide.dart';

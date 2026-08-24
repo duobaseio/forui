@@ -58,7 +58,7 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
     }
   }
 
-  final assetFiles = Directory(assetsLibrary)
+  final assetFiles = Directory(lucideLibrary)
       .listSync(recursive: true)
       .whereType<File>()
       .where((f) => f.path.endsWith('.dart'))

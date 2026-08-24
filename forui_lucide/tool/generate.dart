@@ -7,7 +7,7 @@ import 'package:html/parser.dart' as html;
 import 'package:sugar/core.dart';
 
 const family = 'ForuiLucideIcons';
-const package = 'forui_assets';
+const package = 'forui_lucide';
 
 const directional = {
   'arrow-big-left-dash',

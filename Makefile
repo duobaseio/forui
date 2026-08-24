@@ -43,9 +43,6 @@ build_runner:
 	@echo "$(COLOR_BLUE)cd forui && dart run build_runner build$(COLOR_RESET)"
 	@cd forui && dart run build_runner build
 	@echo ""
-	@echo "$(COLOR_BLUE)cd forui_assets && dart run build_runner build$(COLOR_RESET)"
-	@cd forui_assets && dart run build_runner build
-	@echo ""
 	@echo "$(COLOR_BLUE)cd docs_snippets && dart run build_runner build$(COLOR_RESET)"
 	@cd docs_snippets && dart run build_runner build
 	@echo ""
@@ -71,7 +68,7 @@ prepare-all:
 		echo "$(COLOR_RED)Error: usage: make prepare-all version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@$(MAKE) prepare package=forui_assets version=$(version)
+	@$(MAKE) prepare package=forui_lucide version=$(version)
 	@$(MAKE) prepare package=forui version=$(version)
 	@$(MAKE) prepare package=forui_hooks version=$(version)
 	@$(MAKE) prepare package=forui_cli version=$(version)
@@ -82,11 +79,11 @@ pa: prepare-all
 prepare:
 	@# Validate inputs
 	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_assets|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_lucide|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
-		echo "$(COLOR_RED)Error: package must be forui, forui_assets, forui_hooks, or forui_cli$(COLOR_RESET)"; \
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_lucide" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_lucide, forui_hooks, or forui_cli$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog
@@ -136,8 +133,8 @@ prepare:
 	if [ "$$OLD_MAJOR_MINOR" != "$$NEW_MAJOR_MINOR" ]; then \
 		echo ""; \
 		echo "$(COLOR_BLUE)Minor/major version changed ($$OLD_MAJOR_MINOR → $$NEW_MAJOR_MINOR), updating dependents$(COLOR_RESET)"; \
-		if [ "$(package)" = "forui_assets" ]; then \
-			sed -i '' 's/forui_assets: ^.*/forui_assets: ^$(version)/' forui/pubspec.yaml; \
+		if [ "$(package)" = "forui_lucide" ]; then \
+			sed -i '' 's/forui_lucide: ^.*/forui_lucide: ^$(version)/' forui/pubspec.yaml; \
 			echo "  Updated forui/pubspec.yaml"; \
 		elif [ "$(package)" = "forui" ]; then \
 			sed -i '' 's/forui: ^.*/forui: ^$(version)/' forui_hooks/pubspec.yaml; \
@@ -165,7 +162,7 @@ release-all:
 		echo "$(COLOR_RED)Error: usage: make release-all version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@$(MAKE) release package=forui_assets version=$(version)
+	@$(MAKE) release package=forui_lucide version=$(version)
 	@$(MAKE) release package=forui version=$(version)
 	@$(MAKE) release package=forui_hooks version=$(version)
 	@$(MAKE) release package=forui_cli version=$(version)
@@ -176,11 +173,11 @@ ra: release-all
 release:
 	@# Validate inputs
 	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_assets|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_lucide|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
-		echo "$(COLOR_RED)Error: package must be forui, forui_assets, forui_hooks, or forui_cli$(COLOR_RESET)"; \
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_lucide" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_lucide, forui_hooks, or forui_cli$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog

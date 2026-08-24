@@ -1,10 +1,10 @@
-name: Forui Assets Publish
+name: Forui Lucide Publish
 
 on:
   workflow_dispatch: {}
   push:
     tags:
-      - 'forui_assets/**'
+      - 'forui_lucide/**'
 
 jobs:
   publish:
@@ -15,7 +15,7 @@ jobs:
       id-token: write
     defaults:
       run:
-        working-directory: forui_assets
+        working-directory: forui_lucide
     steps:
       - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2.23.0
