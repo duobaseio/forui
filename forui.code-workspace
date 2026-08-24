@@ -13,6 +13,10 @@
 			"path": "forui_lucide"
 		},
 		{
+			"name": "forui_phosphor",
+			"path": "forui_phosphor"
+		},
+		{
 			"name": "forui_hooks",
 			"path": "forui_hooks"
 		},

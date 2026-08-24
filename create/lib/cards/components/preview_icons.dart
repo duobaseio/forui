@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui_cli/forui_cli.dart';
+import 'package:forui_phosphor/forui_phosphor.dart';
 import 'package:hugeicons/hugeicons.dart' as hugeicons;
 import 'package:iconoir_flutter/iconoir_flutter.dart' as iconoir;
 import 'package:remixicon/remixicon.dart' as remix;
@@ -85,6 +86,7 @@ class PreviewIcons extends InheritedWidget {
       .tabler => Icon(_tabler(icon), size: size, color: tint),
       .remix => Icon(_remix(icon), size: size, color: tint),
       .iconoir => SizedBox.square(dimension: size, child: _iconoir(icon, tint, size)),
+      .phosphor => Icon(_phosphor(icon), size: size, color: tint),
     };
   }
 
@@ -335,4 +337,53 @@ Widget _iconoir(PreviewIcon icon, Color color, double size) => switch (icon) {
   .gauge => iconoir.DashboardSpeed(color: color, width: size, height: size),
   .repeat => iconoir.Repeat(color: color, width: size, height: size),
   .refreshCw => iconoir.Refresh(color: color, width: size, height: size),
+};
+
+IconData _phosphor(PreviewIcon icon) => switch (icon) {
+  .home => FPhosphorIcons.house,
+  .search => FPhosphorIcons.magnifyingGlass,
+  .settings => FPhosphorIcons.gearSix,
+  .bell => FPhosphorIcons.bell,
+  .plus => FPhosphorIcons.plus,
+  .ellipsis => FPhosphorIcons.dotsThree,
+  .chevronRight => FPhosphorIcons.caretRight,
+  .play => FPhosphorIcons.play,
+  .skipForward => FPhosphorIcons.skipForward,
+  .music => FPhosphorIcons.musicNotes,
+  .coffee => FPhosphorIcons.coffee,
+  .cart => FPhosphorIcons.shoppingCart,
+  .creditCard => FPhosphorIcons.creditCard,
+  .calendar => FPhosphorIcons.calendarBlank,
+  .clock => FPhosphorIcons.clock,
+  .users => FPhosphorIcons.users,
+  .upload => FPhosphorIcons.uploadSimple,
+  .alertTriangle => FPhosphorIcons.warning,
+  .info => FPhosphorIcons.info,
+  .check => FPhosphorIcons.check,
+  .x => FPhosphorIcons.x,
+  .lightbulb => FPhosphorIcons.lightbulb,
+  .blinds => FPhosphorIcons.rows,
+  .wallet => FPhosphorIcons.wallet,
+  .layoutDashboard => FPhosphorIcons.squaresFour,
+  .arrowLeftRight => FPhosphorIcons.arrowsLeftRight,
+  .trendingUp => FPhosphorIcons.trendUp,
+  .landmark => FPhosphorIcons.bank,
+  .pieChart => FPhosphorIcons.chartPie,
+  .target => FPhosphorIcons.target,
+  .barChart => FPhosphorIcons.chartBar,
+  .fileText => FPhosphorIcons.fileText,
+  .user => FPhosphorIcons.user,
+  .shield => FPhosphorIcons.shield,
+  .paintbrush => FPhosphorIcons.paintBrush,
+  .helpCircle => FPhosphorIcons.question,
+  .messageSquare => FPhosphorIcons.chat,
+  .bookOpen => FPhosphorIcons.bookOpen,
+  .activity => FPhosphorIcons.pulse,
+  .circlePlus => FPhosphorIcons.plusCircle,
+  .camera => FPhosphorIcons.camera,
+  .cloud => FPhosphorIcons.cloud,
+  .globe => FPhosphorIcons.globe,
+  .gauge => FPhosphorIcons.gauge,
+  .repeat => FPhosphorIcons.repeat,
+  .refreshCw => FPhosphorIcons.arrowsClockwise,
 };

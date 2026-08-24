@@ -69,6 +69,7 @@ prepare-all:
 		exit 1; \
 	fi
 	@$(MAKE) prepare package=forui_lucide version=$(version)
+	@$(MAKE) prepare package=forui_phosphor version=$(version)
 	@$(MAKE) prepare package=forui version=$(version)
 	@$(MAKE) prepare package=forui_hooks version=$(version)
 	@$(MAKE) prepare package=forui_cli version=$(version)
@@ -79,11 +80,11 @@ pa: prepare-all
 prepare:
 	@# Validate inputs
 	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_lucide|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_lucide|forui_phosphor|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_lucide" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
-		echo "$(COLOR_RED)Error: package must be forui, forui_lucide, forui_hooks, or forui_cli$(COLOR_RESET)"; \
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_lucide" ] && [ "$(package)" != "forui_phosphor" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_lucide, forui_phosphor, forui_hooks, or forui_cli$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog
@@ -163,6 +164,7 @@ release-all:
 		exit 1; \
 	fi
 	@$(MAKE) release package=forui_lucide version=$(version)
+	@$(MAKE) release package=forui_phosphor version=$(version)
 	@$(MAKE) release package=forui version=$(version)
 	@$(MAKE) release package=forui_hooks version=$(version)
 	@$(MAKE) release package=forui_cli version=$(version)
@@ -173,11 +175,11 @@ ra: release-all
 release:
 	@# Validate inputs
 	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_lucide|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_lucide|forui_phosphor|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_lucide" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
-		echo "$(COLOR_RED)Error: package must be forui, forui_lucide, forui_hooks, or forui_cli$(COLOR_RESET)"; \
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_lucide" ] && [ "$(package)" != "forui_phosphor" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_lucide, forui_phosphor, forui_hooks, or forui_cli$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog

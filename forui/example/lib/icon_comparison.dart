@@ -3,6 +3,7 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui_phosphor/forui_phosphor.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 import 'package:iconoir_flutter/iconoir_flutter.dart' as iconoir_flutter;
@@ -15,7 +16,8 @@ enum _Icons(final String label) {
   tabler('Tabler'),
   remix('Remix'),
   hugeicons('Hugeicons'),
-  iconoir('Iconoir');
+  iconoir('Iconoir'),
+  phosphor('Phosphor');
 
   FIcons get icons => switch (this) {
     .lucide => FIcons.lucide(),
@@ -115,6 +117,30 @@ enum _Icons(final String label) {
       search: const _IconoirIcon(iconoir_flutter.Search.new),
       userRound: const _IconoirIcon(iconoir_flutter.UserCircle.new),
       x: const _IconoirIcon(iconoir_flutter.Xmark.new),
+    ),
+    .phosphor => const FIcons(
+      arrowLeft: FIcon(FPhosphorIcons.arrowLeft),
+      calendar: FIcon(FPhosphorIcons.calendarBlank),
+      check: FIcon(FPhosphorIcons.check),
+      chevronDown: FIcon(FPhosphorIcons.caretDown),
+      chevronLeft: FIcon(FPhosphorIcons.caretLeft),
+      chevronRight: FIcon(FPhosphorIcons.caretRight),
+      chevronUp: FIcon(FPhosphorIcons.caretUp),
+      chevronsUpDown: FIcon(FPhosphorIcons.caretUpDown),
+      circleAlert: FIcon(FPhosphorIcons.warningCircle),
+      clock4: FIcon(FPhosphorIcons.clock),
+      ellipsis: FIcon(FPhosphorIcons.dotsThree),
+      error: FIcon(FPhosphorIcons.warningCircle),
+      eye: FIcon(FPhosphorIcons.eye),
+      eyeClosed: FIcon(FPhosphorIcons.eyeClosed),
+      gripHorizontal: FIcon(FPhosphorIcons.dotsSix),
+      gripVertical: FIcon(FPhosphorIcons.dotsSixVertical),
+      loader: FIcon(FPhosphorIcons.spinner),
+      loaderCircle: FIcon(FPhosphorIcons.circleNotch),
+      loaderPinwheel: FIcon(FPhosphorIcons.spinnerBall),
+      search: FIcon(FPhosphorIcons.magnifyingGlass),
+      userRound: FIcon(FPhosphorIcons.userCircle),
+      x: FIcon(FPhosphorIcons.x),
     ),
   };
 }

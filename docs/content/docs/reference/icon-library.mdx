@@ -1,8 +1,9 @@
 ---
 title: Icons
-description: High-quality Lucide icons bundled with Forui.
+description: High-quality Lucide and Phosphor icons maintained by the Forui team.
 ---
 
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import {Callout} from "fumadocs-ui/components/callout";
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import usageSnippet from '@/snippets/snippets/icon_library/usage.json';
@@ -11,7 +12,8 @@ import usageSnippet from '@/snippets/snippets/icon_library/usage.json';
     To swap the bundled Lucide icons for a different icon set, see the [customizing icons](/docs/guides/customizing-icons) guide.
 </Callout>
 
-Forui Lucide is a Flutter library that provides a set of high-quality icons from [Lucide](https://lucide.dev/).
+Forui Lucide and Phosphor are Flutter libraries that provide high-quality icons from [Lucide](https://lucide.dev/) and
+[Phosphor Icons](https://phosphoricons.com/).
 
 ## Installation
 
@@ -19,18 +21,28 @@ Forui Lucide is a Flutter library that provides a set of high-quality icons from
     Forui Lucide is bundled with the forui package. You don't need to install it separately if you installed `forui`.
 </Callout>
 
-From your Flutter project directory, run the following command to install Forui Lucide.
+From your Flutter project directory, run the following command to install Forui Lucide/Phosphor.
 
-```bash filename="bash" copy
-flutter pub add forui_lucide
-```
+<Tabs items={['Lucide', 'Phosphor']}>
+    <Tab value="Lucide">
+        ```bash filename="bash" copy
+        flutter pub add forui_lucide
+        ```
+    </Tab>
+    <Tab value="Phosphor">
+        ```bash filename="bash" copy
+        flutter pub add forui_phosphor
+        ```
+    </Tab>
+</Tabs>
 
 ## Usage
 
 <Callout type="info">
-    The best way to find a list of icons is to visit the [Lucide](https://lucide.dev/icons/) website.
+    The best way to find a list of icons is to visit the [Lucide](https://lucide.dev/icons/)/
+    [Phosphor Icons](https://phosphoricons.com/). website.
     We update the icons in the Forui Lucide package with each Forui release.
-    If you notice a missing icon in Forui Lucide, please [open an issue](https://github.com/duobaseio/forui/issues/new).
+    If you notice a missing icon, please [open an issue](https://github.com/duobaseio/forui/issues/new).
 </Callout>
 
 <CodeSnippet snippet={usageSnippet} />

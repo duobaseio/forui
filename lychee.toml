@@ -5,6 +5,7 @@ exclude_path = [
     "forui/lib/**",
     "forui/example/**",
     "forui_lucide/lib/**",
+    "forui_phosphor/lib/**",
     "forui_hooks/lib/**",
     "samples/android/**",
     "samples/ios/**",

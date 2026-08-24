@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart' hide Radius;
 
 import 'package:forui/forui.dart';
 import 'package:forui_cli/forui_cli.dart';
+import 'package:forui_phosphor/forui_phosphor.dart';
 import 'package:hugeicons/hugeicons.dart' as hugeicons;
 import 'package:iconoir_flutter/iconoir_flutter.dart' as iconoir;
 import 'package:remixicon/remixicon.dart' as remix;
@@ -189,6 +190,7 @@ Widget _libraryPreview(IconLibrary library, Color color) => switch (library) {
   .tabler => Icon(tabler.TablerIcons.home, size: 18, color: color),
   .remix => Icon(remix.RemixIcons.home_line, size: 18, color: color),
   .iconoir => SizedBox.square(dimension: 18, child: iconoir.Home(color: color, width: 18, height: 18)),
+  .phosphor => Icon(FPhosphorIcons.house, size: 18, color: color),
 };
 
 class RadiusControl extends StatelessWidget {

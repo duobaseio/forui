@@ -30,6 +30,7 @@ dependencies:
     sdk: flutter
   flutter_hooks: ^0.21.0
   forui:
+  forui_phosphor: ^0.26.0
   hugeicons: ^1.1.7
   iconoir_flutter: ^7.11.1
   intl: any
