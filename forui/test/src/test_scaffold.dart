@@ -9,9 +9,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
-final relativePath = Directory.current.path.contains('forui${Platform.pathSeparator}forui')
-    ? '.'
-    : '${Directory.current.path}/forui';
+final relativePath = Directory('assets/fonts/inter').existsSync() ? '.' : '${Directory.current.path}/forui';
 
 Future<void> expectBlueScreen([Object? actual]) =>
     expectLater(actual ?? find.byType(TestScaffold), matchesGoldenFile('blue-screen.png'));
