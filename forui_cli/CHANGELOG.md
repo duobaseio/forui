@@ -1,4 +1,6 @@
 ## 0.26.0
+* Add Phosphor icon library option.
+
 * Fix `forui init --force` writing files to the overwritten `forui.yaml`'s output paths.
 
 
