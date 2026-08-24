@@ -54,6 +54,23 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
+  test-main:
+    name: Build & test (main channel)
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: forui
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2.23.0
+        with:
+          channel: main
+      - run: flutter pub get
+      - run: dart run build_runner build
+      - run: flutter analyze
+        continue-on-error: true
+      - run: flutter test --exclude-tags golden
+
   build-android:
     name: Build Android
     runs-on: ubuntu-latest
