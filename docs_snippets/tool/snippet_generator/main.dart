@@ -40,7 +40,7 @@ class Package {
 }
 
 Future<void> main() async {
-  const paths = ['forui', 'forui_assets', 'forui_hooks'];
+  const paths = ['forui', 'forui_hooks', 'forui_lucide'];
   final provider = OverlayResourceProvider(PhysicalResourceProvider.INSTANCE);
   final collection = AnalysisContextCollection(
     includedPaths: [for (final path in paths) p.join(Directory.current.parent.path, path, 'lib'), lib],

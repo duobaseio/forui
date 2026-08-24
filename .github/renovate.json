@@ -102,9 +102,9 @@
       "automerge": false
     },
     {
-      "groupName": "Forui Assets - Major Revisions",
+      "groupName": "Forui Lucide - Major Revisions",
       "matchFileNames": [
-        "forui_assets/**"
+        "forui_lucide/**"
       ],
       "matchUpdateTypes": [
         "major"
@@ -112,9 +112,9 @@
       "automerge": false
     },
     {
-      "groupName": "Forui Assets- Minor Revisions",
+      "groupName": "Forui Lucide - Minor Revisions",
       "matchFileNames": [
-        "forui_assets/**"
+        "forui_lucide/**"
       ],
       "matchUpdateTypes": [
         "minor",

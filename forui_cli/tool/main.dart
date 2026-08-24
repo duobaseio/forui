@@ -18,7 +18,7 @@ final _icons = p.join(_base, 'preset', 'icon_mapping.dart');
 final _style = p.join(_base, 'commands', 'style', 'style.dart');
 final _theme = p.join(_base, 'commands', 'theme', 'theme.dart');
 
-final assetsLibrary = p.join(Directory.current.parent.path, 'forui_assets', 'lib', 'src');
+final lucideLibrary = p.join(Directory.current.parent.path, 'forui_lucide', 'lib', 'src');
 
 final emitter = DartEmitter();
 
@@ -43,7 +43,7 @@ const header = [
 
 Future<void> main() async {
   final collection = AnalysisContextCollection(
-    includedPaths: [library, assetsLibrary],
+    includedPaths: [library, lucideLibrary],
     resourceProvider: PhysicalResourceProvider.INSTANCE,
   );
 

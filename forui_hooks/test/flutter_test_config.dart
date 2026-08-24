@@ -14,8 +14,8 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     ..addFont(rootBundle.load('packages/forui/assets/fonts/inter/Inter-Italic.ttf'));
   await inter.load();
 
-  final lucide = FontLoader('packages/forui_assets/ForuiLucideIcons')
-    ..addFont(rootBundle.load('packages/forui_assets/assets/lucide.ttf'));
+  final lucide = FontLoader('packages/forui_lucide/ForuiLucideIcons')
+    ..addFont(rootBundle.load('packages/forui_lucide/assets/lucide.ttf'));
   await lucide.load();
 
   await testMain();

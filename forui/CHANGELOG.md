@@ -63,6 +63,8 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 ### Others
 * **Breaking** Migrate from deprecated `flutter/cupertino.dart` to `cupertino_ui` package.
 * **Breaking** Migrate from deprecated `flutter/material.dart` to `material_ui` package.
+* **Breaking** Rename `forui_assets` package to `forui_lucide`. Update direct imports to
+  `package:forui_lucide/forui_lucide.dart`.
 
 
 ## 0.25.0

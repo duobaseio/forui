@@ -9,8 +9,8 @@
 			"path": "forui"
 		},
 		{
-			"name": "forui_assets",
-			"path": "forui_assets"
+			"name": "forui_lucide",
+			"path": "forui_lucide"
 		},
 		{
 			"name": "forui_hooks",

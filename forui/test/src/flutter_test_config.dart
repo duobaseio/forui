@@ -33,8 +33,8 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
     await loader.load();
   }
 
-  final lucide = FontLoader('packages/forui_assets/ForuiLucideIcons')
-    ..addFont(rootBundle.load('packages/forui_assets/assets/lucide.ttf'));
+  final lucide = FontLoader('packages/forui_lucide/ForuiLucideIcons')
+    ..addFont(rootBundle.load('packages/forui_lucide/assets/lucide.ttf'));
   await lucide.load();
 
   goldenFileComparator = LocalFileComparator(

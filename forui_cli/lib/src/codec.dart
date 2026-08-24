@@ -692,7 +692,7 @@ final class const StaticFontFormat({required final Map<int, String> normal, requ
 enum IconLibrary(@override final String code, @override final String name, final String package, final String url)
     implements Option {
   hugeicons('a', 'Hugeicons', 'hugeicons', 'https://hugeicons.com'),
-  lucide('b', 'Lucide', 'forui_assets', 'https://lucide.dev'),
+  lucide('b', 'Lucide', 'forui_lucide', 'https://lucide.dev'),
   tabler('c', 'Tabler', 'tabler_icons_plus', 'https://tabler.io/icons'),
   remix('d', 'Remix', 'remixicon', 'https://remixicon.com'),
   iconoir('e', 'Iconoir', 'iconoir_flutter', 'https://iconoir.com');

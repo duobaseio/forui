@@ -1,9 +1,7 @@
-# Forui Assets
+# Forui Lucide
 
-Companion assets for [Forui](../forui), a UI library for Flutter that provides a set of a set of beautifully designed,
-minimalistic widgets.
-
-It includes icons from [Lucide Icons](https://lucide.dev/icons/).
+[Lucide](https://lucide.dev/icons/) icons for Flutter. Maintained by the team behind [Forui](../forui), a UI library for 
+Flutter that provides a set of beautifully designed, minimalistic widgets.
 
 ## Support Forui
 

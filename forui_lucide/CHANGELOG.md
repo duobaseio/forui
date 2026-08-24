@@ -1,3 +1,7 @@
+## 0.26.0
+* **Breaking** Rename package from `forui_assets` to `forui_lucide`.
+
+
 ## 0.25.0
 * Update icons to Lucide 1.28.0.
 

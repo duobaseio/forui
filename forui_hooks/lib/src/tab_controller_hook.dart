@@ -27,13 +27,7 @@ class _TabControllerHook extends Hook<FTabController> {
   final TickerProvider vsync;
   final FTabMotion motion;
 
-  const new({
-    required this.index,
-    required this.length,
-    required this.vsync,
-    required this.motion,
-    super.keys,
-  });
+  const new({required this.index, required this.length, required this.vsync, required this.motion, super.keys});
 
   @override
   _TabControllerHookState createState() => .new();
