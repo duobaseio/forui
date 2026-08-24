@@ -1,7 +1,13 @@
 ## 0.26.0
 
-This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutter/material.dart` libraries to the
-`cupertino_ui` & `material_ui` packages.
+This update replaces the deprecated `flutter/cupertino.dart` & `flutter/material.dart` libraries with the `cupertino_ui` 
+& `material_ui` packages introduced in Flutter 3.47.
+
+It also includes several QoL improvements, such as a new open range selection controller for `FCalendar`.
+
+Lastly, we have renamed the `forui_assets` package to `forui_lucide` to better reflect its contents, and introduced a
+new `forui_phosphor` package that contains the Phosphor Icons set.
+
 
 ### `FAutocomplete`
 * Add `FAutocomplete.clearIconBuilder`.
@@ -47,7 +53,7 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 * Add `FTappable(selectable: ...)` to control whether descendant text participates in an enclosing `SelectionArea`.
   Defaults to false.
 
-* Fix labelled (`excludeSemantics`) and grouped (`FTappableGroup`) tappables dropping `SemanticsAction.tap`.
+* Fix labeled (`excludeSemantics`) and grouped (`FTappableGroup`) tappables dropping `SemanticsAction.tap`.
 
 
 ### `FTextField`
@@ -63,8 +69,7 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 ### Others
 * **Breaking** Migrate from deprecated `flutter/cupertino.dart` to `cupertino_ui` package.
 * **Breaking** Migrate from deprecated `flutter/material.dart` to `material_ui` package.
-* **Breaking** Rename `forui_assets` package to `forui_lucide`. Update direct imports to
-  `package:forui_lucide/forui_lucide.dart`.
+* **Breaking** Rename `forui_assets` package to `forui_lucide`. Update direct imports to `package:forui_lucide/forui_lucide.dart`.
 
 
 ## 0.25.0
