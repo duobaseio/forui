@@ -3,9 +3,6 @@
 [Phosphor](https://phosphoricons.com/) icons for Flutter. Maintained by the team behind [Forui](../forui), a UI library
 for Flutter that provides a set of beautifully designed, minimalistic widgets.
 
-> [!IMPORTANT]
-> Duotone icons are not supported.
-
 ## Support Forui
 
 If Forui helps you build better apps, please consider supporting it. It only takes a few seconds, and it helps
