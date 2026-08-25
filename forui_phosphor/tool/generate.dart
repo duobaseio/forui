@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
+
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:sugar/core.dart';
@@ -83,7 +84,15 @@ const weights = [
   (name: 'fill', family: 'ForuiPhosphorFillIcons', type: 'FPhosphorFillIcons', ttf: 'Phosphor-Fill.ttf'),
 ];
 
+const duotone = (
+  name: 'duotone',
+  family: 'ForuiPhosphorDuotoneIcons',
+  type: 'FPhosphorDuotoneIcons',
+  ttf: 'Phosphor-Duotone.ttf',
+);
+
 final _pattern = RegExp(r'static const (\w+) = IconData\((\d+),');
+final _duotonePattern = RegExp(r'static const (\w+) = FPhosphorDuotoneIconData\(\s*foreground: IconData\((\d+),');
 
 void main() {
   for (final weight in weights) {
@@ -91,15 +100,25 @@ void main() {
     verify(weight.name, icons);
 
     generate(weight.name, weight.family, weight.type, icons);
-    if (File('./.dart_tool/phosphor-font/${weight.name}/${weight.ttf}') case final file when file.existsSync()) {
-      file.copySync('./assets/${weight.name}.ttf');
-    } else {
-      throw StateError(
-        'Phosphor ${weight.name} font not found. Please download it into .dart_tool/phosphor-font/${weight.name}/',
-      );
-    }
+    copyFont(weight.name, weight.ttf);
 
     print('Generated ${icons.length} ${weight.name} icons.');
+  }
+
+  final icons = parseDuotone();
+  verifyDuotone(icons);
+
+  generateDuotone(icons);
+  copyFont(duotone.name, duotone.ttf);
+
+  print('Generated ${icons.length} duotone icons.');
+}
+
+void copyFont(String weight, String ttf) {
+  if (File('./.dart_tool/phosphor-font/$weight/$ttf') case final file when file.existsSync()) {
+    file.copySync('./assets/$weight.ttf');
+  } else {
+    throw StateError('Phosphor $weight font not found. Please download it into .dart_tool/phosphor-font/$weight/');
   }
 }
 
@@ -132,6 +151,39 @@ List<(String fieldName, String actualName, int codepoint)> parse(String weight) 
   return result;
 }
 
+// Duotone icons render as 2 stacked glyphs at adjacent codepoints, `:before` (background, 0.2 opacity) and `:after`
+// (foreground).
+List<(String fieldName, String actualName, int foreground, int? background)> parseDuotone() {
+  final css = File('./.dart_tool/phosphor-font/duotone/style.css').readAsStringSync();
+  final before = RegExp(r'\.ph-duotone\.ph-([\w-]+):before\s*\{\s*content:\s*"\\([0-9a-fA-F]+)"');
+  final after = RegExp(r'\.ph-duotone\.ph-([\w-]+):after\s*\{\s*content:\s*"\\([0-9a-fA-F]+)"');
+
+  final afters = {for (final match in after.allMatches(css)) match.group(1)!: int.parse(match.group(2)!, radix: 16)};
+
+  final seen = <String, String>{};
+  final result = <(String, String, int, int?)>[];
+  for (final match in before.allMatches(css)) {
+    final actualName = match.group(1)!;
+    final fieldName = actualName.toCamelCase();
+    final before = int.parse(match.group(2)!, radix: 16);
+
+    final existing = seen[fieldName];
+    if (existing != null) {
+      print('Duplicate field name $fieldName for $actualName (already used by $existing), discarding.');
+      continue;
+    }
+
+    seen[fieldName] = actualName;
+    // Paired icons draw `:after` (foreground) over `:before` (background). The 2 icons without an `:after` layer,
+    // cell-signal-none and wifi-none, are a single full-opacity path in phosphor-icons/core's SVGs, so their sole
+    // glyph is treated as the foreground.
+    final after = afters[actualName];
+    result.add((fieldName, actualName, after ?? before, after != null ? before : null));
+  }
+
+  return result;
+}
+
 void verify(String weight, List<(String, String, int)> icons) {
   final file = File('./lib/src/$weight.g.dart');
   if (!file.existsSync()) {
@@ -155,6 +207,53 @@ void verify(String weight, List<(String, String, int)> icons) {
   }
 }
 
+void verifyDuotone(List<(String, String, int, int?)> icons) {
+  final file = File('./lib/src/duotone.g.dart');
+  if (!file.existsSync()) {
+    return;
+  }
+
+  final existing = {
+    for (final match in _duotonePattern.allMatches(file.readAsStringSync())) match.group(1)!: match.group(2),
+  };
+  if (existing.isEmpty) {
+    return;
+  }
+
+  final mismatches = [
+    for (final (fieldName, actualName, foreground, _) in icons)
+      if (existing[fieldName] case final old? when old != '$foreground') '$actualName ($fieldName): $old → $foreground',
+  ];
+
+  if (mismatches.isNotEmpty) {
+    print('ERROR: ${mismatches.length} duotone icon(s) have changed codepoints:\n${mismatches.join('\n')}');
+    print('\nThis may indicate incorrect mappings in style.css.');
+    exit(1);
+  }
+}
+
+
+/// A sentinel constant that forces the icon tree shaker to subset [family]'s font even when an app references no icons
+/// from it. Without at least one `IconData` constant surviving compilation, the entire font is bundled untouched, see
+/// https://github.com/flutter/flutter/issues/190902. The pragma keeps the constant in the AOT kernel; on web, dart2js
+/// kernels retain top-level constants.
+Field sentinel(String family, int codepoint) => (FieldBuilder()
+      ..docs.addAll([
+        '\n// Forces the icon tree shaker to subset this font even when an app references no icons from it. Without at',
+        '// least one surviving IconData constant, the entire font ships untouched.',
+        '// See https://github.com/flutter/flutter/issues/190902.',
+      ])
+      ..annotations.add(refer('pragma').call([literalString('vm:entry-point')]))
+      ..modifier = FieldModifier.constant
+      ..name = '_sentinel'
+      ..assignment = refer('IconData')
+          .newInstance(
+            [literalNum(codepoint)],
+            {'fontFamily': literalString(family), 'fontPackage': literalString(package)},
+          )
+          .code)
+    .build();
+
 const header =
     '''
 // GENERATED CODE - DO NOT MODIFY BY HAND
@@ -165,6 +264,7 @@ const header =
 //
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use
+// ignore_for_file: unused_element
 ''';
 
 void generate(String weight, String family, String type, List<(String, String, int)> icons) {
@@ -172,37 +272,38 @@ void generate(String weight, String family, String type, List<(String, String, i
       ? 'https://raw.githubusercontent.com/phosphor-icons/core/$_commit/assets/regular/$name.svg'
       : 'https://raw.githubusercontent.com/phosphor-icons/core/$_commit/assets/$weight/$name-$weight.svg';
 
-  Class iconClass(String name, List<String> docs, List<(String, String, int)> icons) => (ClassBuilder()
-        ..docs.addAll(docs)
-        ..annotations.add(refer('staticIconProvider'))
-        ..name = name
-        ..fields.addAll([
-          for (final icon in icons)
-            (FieldBuilder()
-                  ..docs.addAll(['/// [![`${icon.$2}`](${svg(icon.$2)})](https://phosphoricons.com/)'])
-                  ..static = true
-                  ..modifier = FieldModifier.constant
-                  ..type
-                  ..name = icon.$1
-                  ..assignment = refer('IconData')
-                      .newInstance(
-                        [literalNum(icon.$3)],
-                        {
-                          'fontFamily': literalString(family),
-                          'fontPackage': literalString(package),
-                          if (directional.contains(icon.$2)) 'matchTextDirection': literalTrue,
-                        },
-                      )
-                      .code)
-                .build(),
-        ])
-        ..constructors.add(
-          (ConstructorBuilder()
-                ..name = '_'
-                ..constant = true)
-              .build(),
-        ))
-      .build();
+  Class iconClass(String name, List<String> docs, List<(String, String, int)> icons) =>
+      (ClassBuilder()
+            ..docs.addAll(docs)
+            ..annotations.add(refer('staticIconProvider'))
+            ..name = name
+            ..fields.addAll([
+              for (final icon in icons)
+                (FieldBuilder()
+                      ..docs.addAll(['/// [![`${icon.$2}`](${svg(icon.$2)})](https://phosphoricons.com/)'])
+                      ..static = true
+                      ..modifier = FieldModifier.constant
+                      ..type
+                      ..name = icon.$1
+                      ..assignment = refer('IconData')
+                          .newInstance(
+                            [literalNum(icon.$3)],
+                            {
+                              'fontFamily': literalString(family),
+                              'fontPackage': literalString(package),
+                              if (directional.contains(icon.$2)) 'matchTextDirection': literalTrue,
+                            },
+                          )
+                          .code)
+                    .build(),
+            ])
+            ..constructors.add(
+              (ConstructorBuilder()
+                    ..name = '_'
+                    ..constant = true)
+                  .build(),
+            ))
+          .build();
 
   final library = LibraryBuilder()
     ..directives.addAll([Directive.import('package:flutter/widgets.dart')])
@@ -218,6 +319,7 @@ void generate(String weight, String family, String type, List<(String, String, i
         '/// Search and find the perfect icon on the [Phosphor Icons](https://phosphoricons.com/) website.',
       ], icons),
     ]);
+  library.body.insert(0, sentinel(family, icons.first.$3));
 
   final code = DartFormatter(
     pageWidth: 120,
@@ -225,4 +327,67 @@ void generate(String weight, String family, String type, List<(String, String, i
   ).format(DartEmitter(orderDirectives: true, useNullSafetySyntax: true).visitLibrary(library.build()).toString());
 
   File('./lib/src/$weight.g.dart').writeAsStringSync(code);
+}
+
+void generateDuotone(List<(String, String, int, int?)> icons) {
+  String svg(String name) =>
+      'https://raw.githubusercontent.com/phosphor-icons/core/$_commit/assets/duotone/$name-duotone.svg';
+
+  Expression iconData(int codepoint, String actualName) => refer('IconData').newInstance(
+    [literalNum(codepoint)],
+    {
+      'fontFamily': literalString(duotone.family),
+      'fontPackage': literalString(package),
+      if (directional.contains(actualName)) 'matchTextDirection': literalTrue,
+    },
+  );
+
+  final type = duotone.type;
+  final iconClass =
+      (ClassBuilder()
+            ..docs.addAll([
+              '/// The Phosphor duotone icons maintained by the Forui team.',
+              '/// ',
+              '/// Use with the [FPhosphorDuotoneIcon] widget to show specific icons. Icons are identified by their name as ',
+              '/// listed below, e.g. [$type.acorn].',
+              '/// ',
+              '/// Search and find the perfect icon on the [Phosphor Icons](https://phosphoricons.com/) website.',
+            ])
+            ..annotations.add(refer('staticIconProvider'))
+            ..name = type
+            ..fields.addAll([
+              for (final (fieldName, actualName, foreground, background) in icons)
+                (FieldBuilder()
+                      ..docs.addAll(['/// [![`$actualName`](${svg(actualName)})](https://phosphoricons.com/)'])
+                      ..static = true
+                      ..modifier = FieldModifier.constant
+                      ..name = fieldName
+                      ..assignment = refer('FPhosphorDuotoneIconData').newInstance([], {
+                        'foreground': iconData(foreground, actualName),
+                        if (background != null) 'background': iconData(background, actualName),
+                      }).code)
+                    .build(),
+            ])
+            ..constructors.add(
+              (ConstructorBuilder()
+                    ..name = '_'
+                    ..constant = true)
+                  .build(),
+            ))
+          .build();
+
+  final library = LibraryBuilder()
+    ..directives.addAll([
+      Directive.import('package:flutter/widgets.dart'),
+      Directive.import('package:forui_phosphor/src/duotone.dart'),
+    ])
+    ..comments.addAll([header])
+    ..body.addAll([sentinel(duotone.family, icons.first.$3), iconClass]);
+
+  final code = DartFormatter(
+    pageWidth: 120,
+    languageVersion: DartFormatter.latestLanguageVersion,
+  ).format(DartEmitter(orderDirectives: true, useNullSafetySyntax: true).visitLibrary(library.build()).toString());
+
+  File('./lib/src/duotone.g.dart').writeAsStringSync(code);
 }

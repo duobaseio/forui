@@ -1,3 +1,7 @@
+## 0.26.1
+* Fix icons not being tree-shaken when unused.
+
+
 ## 0.26.0
 * **Breaking** Rename package from `forui_assets` to `forui_lucide`.
 

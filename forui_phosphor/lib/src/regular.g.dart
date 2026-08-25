@@ -6,8 +6,15 @@
 //
 // ignore_for_file: type=lint
 // ignore_for_file: deprecated_member_use
+// ignore_for_file: unused_element
 
 import 'package:flutter/widgets.dart';
+
+// Forces the icon tree shaker to subset this font even when an app references no icons from it. Without at
+// least one surviving IconData constant, the entire font ships untouched.
+// See https://github.com/flutter/flutter/issues/190902.
+@pragma('vm:entry-point')
+const _sentinel = IconData(60314, fontFamily: 'ForuiPhosphorIcons', fontPackage: 'forui_phosphor');
 
 /// The Phosphor regular icons maintained by the Forui team.
 ///
