@@ -37,12 +37,14 @@
 
 ## Why Choose Forui?
 
-* 🎨 Over 40+ beautifully crafted widgets.
+* 🎨 Over 50 beautifully crafted widgets.
 * 🖌️ Interactive theme builder to visually design and export themes with [Forui Create](https://create.forui.dev).
 * ⚡ Bundled [CLI](https://forui.dev/docs/concepts/themes) to generate themes & styling boilerplate.
-* ✅ [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
 * 🌍 I10n support.
 * 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
+* ✅ [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
+* 🧪 Part of [Flutter's customer test registry](https://github.com/flutter/tests), tested against every Flutter change.
+* 🛠️ Actively maintained since [2024](https://github.com/duobaseio/forui/releases/tag/forui/0.1.0).
 
 ## Support Forui
 
@@ -61,8 +63,8 @@ Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
 <a href="https://github.com/duobaseio/forui/actions/workflows/forui_hooks_build.yaml"><img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/duobaseio/forui/forui_hooks_build.yaml?branch=main&style=flat&logo=github&label=forui_hooks"></a>
 <a href="https://pub.dev/packages/forui_hooks"><img alt="Pub Version" src="https://img.shields.io/pub/v/forui_hooks?style=flat&logo=dart&label=pub.dev:%20forui_hooks&color=00589B"></a>
 
-Forui provides first class integration with [Flutter Hooks](https://pub.dev/packages/flutter_hooks). All controllers
-are exposed as hooks in the companion `forui_hooks` package.
+Forui provides first class integration with [Flutter Hooks](https://pub.dev/packages/flutter_hooks). All controllers are exposed as hooks in the companion 
+`forui_hooks` package.
 
 ## Contributing
 
@@ -86,4 +88,5 @@ Nightly builds are not guaranteed to be stable. Use at your own risk.
 
 ## License
 
-Code is licensed under the [MIT License](LICENSE). Fonts are licensed under [Open Font License](LICENSE). Icons are licensed under [ISC License](https://github.com/duobaseio/forui/blob/main/LICENSE).
+Code is licensed under the [MIT License](LICENSE). Fonts are licensed under [Open Font License](LICENSE). Icons are 
+licensed under [ISC License](https://github.com/duobaseio/forui/blob/main/LICENSE).
