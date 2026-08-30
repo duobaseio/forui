@@ -330,7 +330,7 @@ enum BaseColor({
       card: 0xFF1D1816,
       border: 0x1AFFFFFF,
     ),
-  );
+  ),
 }
 
 final class const BaseColors({
@@ -458,7 +458,7 @@ enum PrimaryColor({
     name: 'Yellow',
     light: PrimaryColors(primary: 0xFFFDC700, primaryForeground: 0xFF733E0A),
     dark: PrimaryColors(primary: 0xFFF0B100, primaryForeground: 0xFF733E0A),
-  );
+  ),
 }
 
 final class const PrimaryColors({required final int primary, required final int primaryForeground});
@@ -676,7 +676,7 @@ enum FontFamily(
       italic: {400: 'Instrument_Serif/InstrumentSerif-Italic.ttf'},
     ),
     .serif,
-  );
+  ),
 }
 
 enum FontFamilyCategory { sans, serif, mono }
@@ -696,14 +696,14 @@ enum IconLibrary(@override final String code, @override final String name, final
   tabler('c', 'Tabler', 'tabler_icons_plus', 'https://tabler.io/icons'),
   remix('d', 'Remix', 'remixicon', 'https://remixicon.com'),
   iconoir('e', 'Iconoir', 'iconoir_flutter', 'https://iconoir.com'),
-  phosphor('f', 'Phosphor', 'forui_phosphor', 'https://phosphoricons.com');
+  phosphor('f', 'Phosphor', 'forui_phosphor', 'https://phosphoricons.com'),
 }
 
 enum Radius(@override final String code, @override final String name, final BorderRadii radius) implements Option {
   none('a', 'None', (xs2: 0, xs: 0, sm: 0, md: 0, lg: 0, xl: 0, xl2: 0, xl3: 0, pill: 0)),
   small('b', 'Small', (xs2: 3, xs: 4, sm: 6, md: 7, lg: 10, xl: 13, xl2: 16, xl3: 19, pill: 100)),
   medium('c', 'Medium', (xs2: 4, xs: 6, sm: 8, md: 10, lg: 14, xl: 18, xl2: 22, xl3: 26, pill: 100)),
-  large('d', 'Large', (xs2: 6, xs: 8, sm: 11, md: 14, lg: 20, xl: 25, xl2: 31, xl3: 36, pill: 100));
+  large('d', 'Large', (xs2: 6, xs: 8, sm: 11, md: 14, lg: 20, xl: 25, xl2: 31, xl3: 36, pill: 100)),
 }
 
 typedef BorderRadii = ({
