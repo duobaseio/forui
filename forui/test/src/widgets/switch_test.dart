@@ -95,7 +95,7 @@ void main() {
       expect(node, findsOne);
       expect(
         tester.getSemantics(node),
-        isSemantics(label: 'Wi-Fi\nNearby networks.', hasToggledState: true, isToggled: true),
+        isSemantics(label: 'Wi-Fi', hint: 'Nearby networks.', hasToggledState: true, isToggled: true),
       );
     });
 

@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/label/horizontal_label.dart';
+import 'package:forui/src/widgets/label/semantics.dart';
 import 'package:forui/src/widgets/label/vertical_label.dart';
 
 part 'label.design.dart';
@@ -302,7 +303,12 @@ abstract class LabelState<T extends Label> extends State<T> with TickerProviderS
             duration: motion.textStyleTransitionDuration,
             curve: motion.textStyleTransitionCurve,
             textHeightBehavior: behavior,
-            child: Semantics(validationResult: .invalid, child: error!),
+            child: Semantics(
+              validationResult: .invalid,
+              liveRegion: !MediaQuery.supportsAnnounceOf(context), // Mimic Material's TextField behavior.
+              tagForChildren: RenderLabelSemantics.errorTag,
+              child: error!,
+            ),
           ),
         ),
       ),

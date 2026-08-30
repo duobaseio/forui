@@ -216,14 +216,6 @@ void main() {
   });
 
   group('accessibility', () {
-    SemanticsData errorNode(WidgetTester tester, String text) {
-      var node = tester.getSemantics(find.text(text));
-      while (node.getSemanticsData().validationResult != SemanticsValidationResult.invalid) {
-        node = node.parent!;
-      }
-      return node.getSemanticsData();
-    }
-
     testWidgets('error marks the field as invalid', (tester) async {
       final semantics = tester.ensureSemantics();
 
@@ -234,7 +226,10 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      expect(errorNode(tester, 'Error').validationResult, SemanticsValidationResult.invalid);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Child')),
+        isSemantics(label: 'Child', hint: 'Error', validationResult: SemanticsValidationResult.invalid),
+      );
 
       semantics.dispose();
     });
@@ -250,8 +245,157 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        tester.getSemantics(find.text('Child')).getSemanticsData().validationResult,
-        SemanticsValidationResult.none,
+        tester.getSemantics(find.bySemanticsLabel('Child')),
+        isSemantics(label: 'Child', hint: 'Description', validationResult: SemanticsValidationResult.none),
+      );
+
+      semantics.dispose();
+    });
+
+    for (final layout in FLabelLayout.values) {
+      testWidgets('merges label into child and description & error into hint - $layout', (tester) async {
+        final semantics = tester.ensureSemantics();
+
+        Widget build(Set<FFormFieldVariant> variants) => TestScaffold(
+          child: FLabel(
+            layout: layout,
+            variants: variants,
+            label: const Text('Label'),
+            description: const Text('Description'),
+            error: const Text('Error'),
+            child: Semantics(textField: true, child: const SizedBox.square(dimension: 10)),
+          ),
+        );
+
+        await tester.pumpWidget(build({.error}));
+        await tester.pumpAndSettle();
+
+        expect(find.bySemanticsLabel('Description'), findsNothing);
+        expect(find.bySemanticsLabel('Error'), findsNothing);
+        expect(
+          tester.getSemantics(find.bySemanticsLabel('Label')),
+          isSemantics(
+            label: 'Label',
+            hint: 'Description\nError',
+            isTextField: true,
+            validationResult: SemanticsValidationResult.invalid,
+          ),
+        );
+
+        await tester.pumpWidget(build({}));
+        await tester.pumpAndSettle();
+
+        expect(
+          tester.getSemantics(find.bySemanticsLabel('Label')),
+          isSemantics(label: 'Label', hint: 'Description', isTextField: true),
+        );
+
+        semantics.dispose();
+      });
+    }
+
+    testWidgets('merges a lone label into the child', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FLabel(
+            layout: .vertical,
+            label: const Text('Label'),
+            child: Semantics(textField: true, child: const SizedBox.square(dimension: 10)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.bySemanticsLabel('Label')), isSemantics(label: 'Label', isTextField: true));
+
+      semantics.dispose();
+    });
+
+    testWidgets("announces the label before the child's own text", (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FLabel(
+            layout: .vertical,
+            label: const Text('Label'),
+            child: Semantics(textField: true, label: 'Child', child: const SizedBox.square(dimension: 10)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Label'))),
+        isSemantics(label: 'Label\nChild', isTextField: true),
+      );
+
+      semantics.dispose();
+    });
+
+    for (final supportsAnnounce in [true, false]) {
+      testWidgets('exposes error as a live region only without announce support - $supportsAnnounce', (tester) async {
+        final semantics = tester.ensureSemantics();
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          supportsAnnounce: supportsAnnounce,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FLabel(
+              layout: .vertical,
+              variants: {.error},
+              label: const Text('Label'),
+              error: const Text('Error'),
+              child: Semantics(textField: true, child: const SizedBox.square(dimension: 10)),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // The error is always merged into the field's hint.
+        expect(
+          tester.getSemantics(find.bySemanticsLabel('Label')),
+          isSemantics(label: 'Label', hint: 'Error', isTextField: true),
+        );
+        // It is additionally kept as a live region node where announcements aren't supported.
+        expect(find.bySemanticsLabel('Error'), supportsAnnounce ? findsNothing : findsOne);
+        if (!supportsAnnounce) {
+          expect(tester.getSemantics(find.bySemanticsLabel('Error')), isSemantics(label: 'Error', isLiveRegion: true));
+        }
+
+        semantics.dispose();
+      });
+    }
+
+    testWidgets('keeps a child that forms its own semantics node separate', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FLabel(
+            layout: .vertical,
+            label: const Text('Label'),
+            description: const Text('Description'),
+            child: Semantics(
+              container: true,
+              button: true,
+              label: 'Button',
+              child: const SizedBox.square(dimension: 10),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.bySemanticsLabel('Label')), isSemantics(label: 'Label', hint: 'Description'));
+      expect(tester.getSemantics(find.bySemanticsLabel('Button')), isSemantics(label: 'Button', isButton: true));
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Button')).parent,
+        tester.getSemantics(find.bySemanticsLabel('Label')),
       );
 
       semantics.dispose();
