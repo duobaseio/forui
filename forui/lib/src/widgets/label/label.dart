@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/label/horizontal_label.dart';
+import 'package:forui/src/widgets/label/vertical_label.dart';
 
 part 'label.design.dart';
 
@@ -130,7 +132,7 @@ class FLabel extends StatelessWidget {
     }
 
     return switch (layout) {
-      .horizontalLeading => _HorizontalLeadingLabel(
+      .horizontalLeading => HorizontalLeadingLabel(
         style: style,
         label: label,
         description: description,
@@ -138,7 +140,7 @@ class FLabel extends StatelessWidget {
         variants: variants,
         child: child,
       ),
-      .horizontalTrailing => _HorizontalTrailingLabel(
+      .horizontalTrailing => HorizontalTrailingLabel(
         style: style,
         label: label,
         description: description,
@@ -146,7 +148,7 @@ class FLabel extends StatelessWidget {
         variants: variants,
         child: child,
       ),
-      .vertical => _VerticalLabel(
+      .vertical => VerticalLabel(
         style: style,
         label: label,
         description: description,
@@ -168,13 +170,15 @@ class FLabel extends StatelessWidget {
   }
 }
 
-abstract class const _Label({
+@internal
+abstract class const Label({
   required final FLabelStyle style,
   required final Widget? label,
   required final Widget? description,
   required final Widget? error,
   required final Set<FFormFieldVariant> variants,
   required final Widget child,
+  super.key,
 }) extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -185,13 +189,14 @@ abstract class const _Label({
   }
 }
 
-abstract class _State<T extends _Label> extends State<T> with TickerProviderStateMixin {
+@internal
+abstract class LabelState<T extends Label> extends State<T> with TickerProviderStateMixin {
   late AnimationController _sizeController;
   late AnimationController _fadeController;
   late CurvedAnimation _curvedSize;
   late CurvedAnimation _curvedFade;
   late Animation<double> _fade;
-  Widget? _error;
+  Widget? error;
 
   @override
   void initState() {
@@ -223,13 +228,13 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
     _fade = motion.errorFadeTween.animate(_fadeController);
 
     if (widget.variants.contains(FFormFieldVariant.error)) {
-      _error = widget.error;
+      error = widget.error;
     }
   }
 
   void _clearError(AnimationStatus status) {
     if (_sizeController.isDismissed && _fadeController.isDismissed) {
-      setState(() => _error = null);
+      setState(() => error = null);
     }
   }
 
@@ -247,7 +252,7 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
     }
 
     if (widget.variants.contains(FFormFieldVariant.error)) {
-      _error = widget.error;
+      error = widget.error;
       _sizeController.forward();
       _fadeController.forward();
     } else {
@@ -282,8 +287,8 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
     super.dispose();
   }
 
-  Widget _animatedError(BuildContext context, [TextHeightBehavior? behavior]) {
-    final motion = _motion;
+  Widget animatedError(BuildContext context, [TextHeightBehavior? behavior]) {
+    final motion = this.motion;
     return AnimatedBuilder(
       animation: _curvedSize,
       builder: (context, child) =>
@@ -297,257 +302,19 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
             duration: motion.textStyleTransitionDuration,
             curve: motion.textStyleTransitionCurve,
             textHeightBehavior: behavior,
-            child: Semantics(validationResult: .invalid, child: _error!),
+            child: Semantics(validationResult: .invalid, child: error!),
           ),
         ),
       ),
     );
   }
 
-  FLabelMotion get _motion => context.accessibility.motion == .all ? widget.style.labelMotion : FLabelMotion.none;
-}
-
-class _HorizontalLeadingLabel extends _Label {
-  const new({
-    required super.style,
-    required super.label,
-    required super.description,
-    required super.error,
-    required super.variants,
-    required super.child,
-  });
-
-  @override
-  State<_HorizontalLeadingLabel> createState() => _HorizontalLeadingState();
-}
-
-class _HorizontalLeadingState extends _State<_HorizontalLeadingLabel> {
-  @override
-  Widget build(BuildContext context) => Table(
-    defaultColumnWidth: const IntrinsicColumnWidth(),
-    defaultVerticalAlignment: .middle,
-    columnWidths: const {0: FlexColumnWidth(), 1: IntrinsicColumnWidth()},
-    children: [
-      TableRow(
-        children: [
-          if (widget.label != null)
-            _cell(
-              padding: widget.style.labelPadding,
-              textStyle: widget.style.labelTextStyle.resolve(widget.variants),
-              child: widget.label,
-            )
-          else
-            _cell(
-              padding: widget.style.descriptionPadding,
-              textStyle: widget.style.descriptionTextStyle.resolve(widget.variants),
-              child: widget.description,
-            ),
-          TableCell(
-            child: Padding(padding: widget.style.childPadding, child: widget.child),
-          ),
-        ],
-      ),
-      if (widget.label != null && widget.description != null)
-        TableRow(
-          children: [
-            _cell(
-              padding: widget.style.descriptionPadding,
-              textStyle: widget.style.descriptionTextStyle.resolve(widget.variants),
-              child: widget.description,
-            ),
-            const TableCell(child: SizedBox()),
-          ],
-        ),
-      if (_error != null)
-        TableRow(
-          children: [
-            TableCell(child: _animatedError(context)),
-            const TableCell(child: SizedBox()),
-          ],
-        ),
-    ],
-  );
-
-  Widget _cell({required EdgeInsetsGeometry padding, required TextStyle textStyle, Widget? child}) {
-    if (child == null) {
-      return const TableCell(child: SizedBox());
-    }
-
-    final motion = _motion;
-    return TableCell(
-      child: Padding(
-        padding: padding,
-        child: AnimatedDefaultTextStyle(
-          style: textStyle,
-          duration: motion.textStyleTransitionDuration,
-          curve: motion.textStyleTransitionCurve,
-          child: child,
-        ),
-      ),
-    );
-  }
-}
-
-class _HorizontalTrailingLabel extends _Label {
-  const new({
-    required super.style,
-    required super.label,
-    required super.description,
-    required super.error,
-    required super.variants,
-    required super.child,
-  });
-
-  @override
-  State<_HorizontalTrailingLabel> createState() => _HorizontalTrailingState();
-}
-
-class _HorizontalTrailingState extends _State<_HorizontalTrailingLabel> {
-  @override
-  Widget build(BuildContext context) => Table(
-    defaultColumnWidth: const IntrinsicColumnWidth(),
-    defaultVerticalAlignment: .middle,
-    columnWidths: const {0: IntrinsicColumnWidth(), 1: FlexColumnWidth()},
-    children: [
-      TableRow(
-        children: [
-          TableCell(
-            child: Padding(padding: widget.style.childPadding, child: widget.child),
-          ),
-          if (widget.label != null)
-            _cell(
-              padding: widget.style.labelPadding,
-              textStyle: widget.style.labelTextStyle.resolve(widget.variants),
-              child: widget.label,
-            )
-          else
-            _cell(
-              padding: widget.style.descriptionPadding,
-              textStyle: widget.style.descriptionTextStyle.resolve(widget.variants),
-              child: widget.description,
-            ),
-        ],
-      ),
-      if (widget.label != null && widget.description != null)
-        TableRow(
-          children: [
-            const TableCell(child: SizedBox()),
-            _cell(
-              padding: widget.style.descriptionPadding,
-              textStyle: widget.style.descriptionTextStyle.resolve(widget.variants),
-              child: widget.description,
-            ),
-          ],
-        ),
-      if (_error != null)
-        TableRow(
-          children: [
-            const TableCell(child: SizedBox()),
-            TableCell(child: _animatedError(context)),
-          ],
-        ),
-    ],
-  );
-
-  Widget _cell({required EdgeInsetsGeometry padding, required TextStyle textStyle, Widget? child}) {
-    if (child == null) {
-      return const TableCell(child: SizedBox());
-    }
-
-    final motion = _motion;
-    return TableCell(
-      child: Padding(
-        padding: padding,
-        child: AnimatedDefaultTextStyle(
-          style: textStyle,
-          duration: motion.textStyleTransitionDuration,
-          curve: motion.textStyleTransitionCurve,
-          child: child,
-        ),
-      ),
-    );
-  }
+  FLabelMotion get motion => context.accessibility.motion == .all ? widget.style.labelMotion : .none;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('style', widget.style.toString()))
-      ..add(IterableProperty('variants', widget.variants));
-  }
-}
-
-class _VerticalLabel extends _Label {
-  final bool expands;
-
-  const new({
-    required super.style,
-    required super.label,
-    required super.description,
-    required super.error,
-    required super.variants,
-    required super.child,
-    required this.expands,
-  });
-
-  @override
-  State<_VerticalLabel> createState() => _VerticalLabelState();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(FlagProperty('expands', value: expands, ifTrue: 'expands'));
-  }
-}
-
-class _VerticalLabelState extends _State<_VerticalLabel> {
-  @override
-  Widget build(BuildContext context) {
-    final motion = _motion;
-    return Column(
-      crossAxisAlignment: .start,
-      mainAxisSize: .min,
-      children: [
-        if (widget.label != null)
-          Padding(
-            padding: widget.style.labelPadding,
-            child: AnimatedDefaultTextStyle(
-              style: widget.style.labelTextStyle.resolve(widget.variants),
-              duration: motion.textStyleTransitionDuration,
-              curve: motion.textStyleTransitionCurve,
-              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-              child: widget.label!,
-            ),
-          ),
-        if (widget.expands)
-          Expanded(
-            child: Padding(padding: widget.style.childPadding, child: widget.child),
-          )
-        else
-          Padding(padding: widget.style.childPadding, child: widget.child),
-        if (widget.description != null)
-          Padding(
-            padding: widget.style.descriptionPadding,
-            child: AnimatedDefaultTextStyle(
-              style: widget.style.descriptionTextStyle.resolve(widget.variants),
-              duration: motion.textStyleTransitionDuration,
-              curve: motion.textStyleTransitionCurve,
-              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-              child: widget.description!,
-            ),
-          ),
-        if (_error != null) _animatedError(context, const TextHeightBehavior(applyHeightToFirstAscent: false)),
-      ],
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(StringProperty('style', widget.style.toString()))
-      ..add(FlagProperty('expands', value: widget.expands, ifTrue: 'expands'))
-      ..add(IterableProperty('variants', widget.variants));
+    properties.add(DiagnosticsProperty('motion', motion));
   }
 }
 
