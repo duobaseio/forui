@@ -11,7 +11,7 @@ enum FTabBarIndicatorSize(final TabBarIndicatorSize _value) {
   ///
   /// This value is used to align the tab's label, typically a [Tab]
   /// widget's text or icon, with the selected tab indicator.
-  label(.label);
+  label(.label),
 }
 
 /// [FTabs]'s style.
