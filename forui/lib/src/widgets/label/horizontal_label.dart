@@ -194,6 +194,7 @@ class _RenderTable extends RenderTable {
     super.defaultVerticalAlignment,
   });
 
+  // RenderTable marks itself as a table with explicit cell nodes, which blocks the cells from merging into the child.
   @override
   void describeSemanticsConfiguration(SemanticsConfiguration config) {}
 }
