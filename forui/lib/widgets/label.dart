@@ -5,4 +5,4 @@
 /// See https://forui.dev/docs/widgets/form/label for working examples.
 library forui.widgets.label;
 
-export '../src/widgets/label.dart';
+export '../src/widgets/label/label.dart' hide Label, LabelState;

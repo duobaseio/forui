@@ -17,7 +17,7 @@ enum FLayout({
   ttb(vertical: true),
 
   /// Lays out the items vertically from bottom to top.
-  btt(vertical: true);
+  btt(vertical: true),
 }
 
 @internal

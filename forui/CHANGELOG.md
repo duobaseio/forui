@@ -1,3 +1,15 @@
+## 0.27.0
+
+### `FLabel`
+* Change error to be a live region on platforms without accessibility announcement support.
+
+* Fix label, description and error not being announced with the form field by screen readers.
+
+
+### `FTappable`
+* Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
+
+
 ## 0.26.0
 
 This update replaces the deprecated `flutter/cupertino.dart` & `flutter/material.dart` libraries with the `cupertino_ui` 

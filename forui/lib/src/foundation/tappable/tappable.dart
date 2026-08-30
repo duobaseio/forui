@@ -682,33 +682,31 @@ class _FTappableState<T extends FTappable> extends State<T> {
       tappable = SelectionContainer.disabled(child: tappable);
     }
 
-    tappable = Shortcuts(
-      shortcuts: widget.shortcuts,
-      child: Actions(
-        actions:
-            widget.actions ??
-            {
-              if (widget._onPress != null)
-                ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget._onPress!.call()),
-            },
-        // When excludeSemantics is true, child GestureDetector tap is omitted from
-        // the tree. When grouped (_entries != null), GestureDetector.onTap is
-        // nullified so the group owns pointer gestures. In both cases, forward
-        // onPress via Semantics.onTap so Voice Control / screen readers can activate
-        // the control. Leave onTap null otherwise to avoid double-numbering.
-        child: Semantics(
-          enabled: !widget._disabled,
-          label: widget.semanticsLabel,
-          hint: widget.semanticsHint,
-          tooltip: widget.semanticsTooltip,
-          container: true,
-          button: widget.semanticsButton,
-          checked: widget.semanticsChecked,
-          expanded: widget.semanticsExpanded,
-          inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
-          selected: widget.semanticsChecked == null ? widget.selected : null,
-          excludeSemantics: widget.excludeSemantics,
-          onTap: (widget.excludeSemantics || _entries != null) ? widget._onPress : null,
+    tappable = Semantics(
+      enabled: !widget._disabled,
+      label: widget.semanticsLabel,
+      hint: widget.semanticsHint,
+      tooltip: widget.semanticsTooltip,
+      container: true,
+      button: widget.semanticsButton,
+      checked: widget.semanticsChecked,
+      expanded: widget.semanticsExpanded,
+      inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
+      selected: widget.semanticsChecked == null ? widget.selected : null,
+      excludeSemantics: widget.excludeSemantics,
+      // When grouped (_entries != null), onTap is nullified so the group owns pointer gestures. We forward onPress
+      // so screen readers can activate the control. Leave onTap null otherwise to avoid double-numbering.
+      onTap: (widget.excludeSemantics || _entries != null) ? widget._onPress : null,
+      // Below Semantics so Shortcuts merge into single container. Workaround a repositioning bug on scroll.
+      child: Shortcuts(
+        shortcuts: widget.shortcuts,
+        child: Actions(
+          actions:
+              widget.actions ??
+              {
+                if (widget._onPress != null)
+                  ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget._onPress!.call()),
+              },
           child: Focus(
             autofocus: widget.autofocus,
             focusNode: _focus,

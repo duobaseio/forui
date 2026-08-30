@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/semantics.dart';
+
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -330,5 +332,43 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(focused(), true);
+  });
+
+  group('accessibility', () {
+    testWidgets('merges label, description and error into the text field node', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(
+            label: const Text('Email'),
+            description: const Text('Work email'),
+            error: const Text('Invalid'),
+            clearable: (_) => true,
+            control: const .managed(initial: TextEditingValue(text: 'abc')),
+            prefixBuilder: (_, _, _) => const Text('@', semanticsLabel: 'at'),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.bySemanticsLabel('Work email'), findsNothing);
+      expect(find.bySemanticsLabel('Invalid'), findsNothing);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Email')),
+        isSemantics(
+          label: 'Email',
+          hint: 'Work email\nInvalid',
+          value: 'abc',
+          isTextField: true,
+          validationResult: SemanticsValidationResult.invalid,
+        ),
+      );
+      // Affixes stay separate so they remain independently focusable.
+      expect(tester.getSemantics(find.bySemanticsLabel('at')), isSemantics(label: 'at', isTextField: false));
+      expect(tester.getSemantics(find.bySemanticsLabel('Clear')), isSemantics(label: 'Clear', isButton: true));
+
+      semantics.dispose();
+    });
   });
 }

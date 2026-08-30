@@ -473,22 +473,20 @@ class _FOtpFieldState extends State<FOtpField> {
           child: widget.builder(context, style, variants, textfield),
         );
 
-        field = MergeSemantics(
-          child: Material(
-            color: Colors.transparent,
-            child: Theme(
-              data: Theme.of(context).copyWith(
-                visualDensity: .standard,
-                textSelectionTheme: const TextSelectionThemeData(
-                  cursorColor: Colors.transparent,
-                  selectionColor: Colors.transparent,
-                  selectionHandleColor: Colors.transparent,
-                ),
+        field = Material(
+          color: Colors.transparent,
+          child: Theme(
+            data: Theme.of(context).copyWith(
+              visualDensity: .standard,
+              textSelectionTheme: const TextSelectionThemeData(
+                cursorColor: Colors.transparent,
+                selectionColor: Colors.transparent,
+                selectionHandleColor: Colors.transparent,
               ),
-              child: CupertinoTheme(
-                data: CupertinoTheme.of(context).copyWith(selectionHandleColor: Colors.transparent),
-                child: field,
-              ),
+            ),
+            child: CupertinoTheme(
+              data: CupertinoTheme.of(context).copyWith(selectionHandleColor: Colors.transparent),
+              child: field,
             ),
           ),
         );
