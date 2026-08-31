@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -306,5 +307,39 @@ void main() {
 
       expect(tester.getSemantics(find.text('Title')), isSemantics(hasExpandedState: true, isExpanded: true));
     });
+
+    for (final (name, validator, result) in [
+      ('valid', (Set<int>? _) => null, SemanticsValidationResult.valid),
+      ('invalid', (Set<int>? _) => 'error', SemanticsValidationResult.invalid),
+    ]) {
+      testWidgets('$name validation state is exposed', (tester) async {
+        final semantics = tester.ensureSemantics();
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelectMenuTile<int>(
+              title: const Text('Title'),
+              validator: validator,
+              autovalidateMode: AutovalidateMode.always,
+              menu: const [.tile(title: Text('1'), value: 1)],
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        SemanticsNode? node = tester.getSemantics(find.text('Title'));
+        var found = SemanticsValidationResult.none;
+        while (node != null) {
+          if (node.getSemanticsData().validationResult != SemanticsValidationResult.none) {
+            found = node.getSemanticsData().validationResult;
+            break;
+          }
+          node = node.parent;
+        }
+        expect(found, result);
+
+        semantics.dispose();
+      });
+    }
   });
 }

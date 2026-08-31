@@ -595,6 +595,28 @@ void main() {
       });
     });
   });
+
+  group('accessibility', () {
+    testWidgets('slider node carries label, description and value', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(label: const Text('Volume'), description: const Text('Drag to adjust')),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Volume'))),
+        isSemantics(label: 'Volume\nDrag to adjust', value: '0%', isSlider: true, isEnabled: true),
+      );
+
+      semantics.dispose();
+    });
+  });
 }
 
 extension on Rect {

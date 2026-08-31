@@ -26,7 +26,6 @@ class const Track({super.key}) extends StatelessWidget {
       height: height,
       width: width,
       child: Semantics(
-        container: true,
         slider: true,
         enabled: true,
         value: semanticFormatterCallback(controller.value),

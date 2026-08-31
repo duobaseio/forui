@@ -587,6 +587,35 @@ void main() {
   });
 
   group('accessibility', () {
+    testWidgets('field merges label and description into its node', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            description: const Text('Pick some'),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(
+          label: 'Fruits\nSelect items',
+          hint: 'Pick some',
+          isButton: true,
+          isFocusable: true,
+          hasExpandedState: true,
+          hasTapAction: true,
+        ),
+      );
+
+      semantics.dispose();
+    });
+
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
       final semantics = tester.ensureSemantics();
 

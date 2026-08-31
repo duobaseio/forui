@@ -6,7 +6,25 @@
 * Fix label, description and error not being announced with the form field by screen readers.
 
 
+### `FSelect` & `FMultiSelect`
+* Fix `FMultiSelect` label and description not being announced with the field by screen readers.
+
+
+### `FSelectMenuTile`
+* Fix validation state not being exposed to screen readers when validation passes.
+
+
+### `FSlider`
+* Fix label and description not being announced with the slider by screen readers.
+
+
+### `FTile` & `FTileGroup`
+* Fix `FTileGroup` label and description not naming the group for screen readers.
+
+
 ### `FTappable`
+* Add `FTappable.semanticsContainer`.
+
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
 
 

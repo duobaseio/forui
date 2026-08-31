@@ -130,7 +130,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   final bool? intrinsicWidth;
 
-  /// The group's semantic label.
+  /// The group's semantic label. Defaults to the visible [label] and [description].
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   final String? semanticsLabel;
@@ -330,6 +330,21 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
       child = FTappableGroup(slidePressHapticFeedback: style.slidePressHapticFeedback, child: child);
     }
 
+    child = ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: maxHeight),
+      child: DecoratedBox(
+        decoration: style.decoration,
+        child: ClipPath(
+          clipper: InnerPathClipper(decoration: style.decoration, direction: Directionality.maybeOf(context) ?? .ltr),
+          child: child,
+        ),
+      ),
+    );
+
+    if (semanticsLabel case final semanticsLabel?) {
+      child = Semantics(container: true, label: semanticsLabel, child: child);
+    }
+
     return FLabel(
       style: style,
       layout: .vertical,
@@ -337,23 +352,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
       label: label,
       description: description,
       error: error,
-      child: Semantics(
-        container: true,
-        label: semanticsLabel,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: maxHeight),
-          child: DecoratedBox(
-            decoration: style.decoration,
-            child: ClipPath(
-              clipper: InnerPathClipper(
-                decoration: style.decoration,
-                direction: Directionality.maybeOf(context) ?? .ltr,
-              ),
-              child: child,
-            ),
-          ),
-        ),
-      ),
+      child: child,
     );
   }
 

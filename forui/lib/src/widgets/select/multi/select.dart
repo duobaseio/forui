@@ -871,6 +871,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                     listenable: _popoverController,
                     builder: (context, _) => FTappable(
                       style: fieldStyle.tappableStyle,
+                      semanticsContainer: false,
                       semanticsExpanded: _popoverController.status.isForwardOrCompleted,
                       focusNode: _focus,
                       onPress: widget.enabled ? _toggle : null,

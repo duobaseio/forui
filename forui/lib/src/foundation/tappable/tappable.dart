@@ -67,6 +67,11 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.semanticsTooltip}
   final String? semanticsTooltip;
 
+  /// Whether this tappable forms its own semantics node. Defaults to true.
+  ///
+  /// Set to false to merge this tappable's semantics into its parent.
+  final bool semanticsContainer;
+
   /// Whether this tappable is announced as a button. Defaults to true.
   final bool semanticsButton;
 
@@ -338,6 +343,7 @@ class FTappable extends StatefulWidget {
     String? semanticsLabel,
     String? semanticsHint,
     String? semanticsTooltip,
+    bool semanticsContainer,
     bool semanticsButton,
     bool? semanticsChecked,
     bool? semanticsExpanded,
@@ -393,6 +399,7 @@ class FTappable extends StatefulWidget {
     this.semanticsLabel,
     this.semanticsHint,
     this.semanticsTooltip,
+    this.semanticsContainer = true,
     this.semanticsButton = true,
     this.semanticsChecked,
     this.semanticsExpanded,
@@ -453,6 +460,7 @@ class FTappable extends StatefulWidget {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(StringProperty('semanticsHint', semanticsHint))
       ..add(StringProperty('semanticsTooltip', semanticsTooltip))
+      ..add(FlagProperty('semanticsContainer', value: semanticsContainer, ifFalse: 'not a container'))
       ..add(FlagProperty('semanticsButton', value: semanticsButton, ifFalse: 'not a button'))
       ..add(DiagnosticsProperty('semanticsChecked', semanticsChecked))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
@@ -687,7 +695,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       label: widget.semanticsLabel,
       hint: widget.semanticsHint,
       tooltip: widget.semanticsTooltip,
-      container: true,
+      container: widget.semanticsContainer,
       button: widget.semanticsButton,
       checked: widget.semanticsChecked,
       expanded: widget.semanticsExpanded,
@@ -895,12 +903,13 @@ class const AnimatedTappable({
   super.style,
   super.focusedOutlineStyle,
   super.semanticsLabel,
+  super.semanticsHint,
+  super.semanticsTooltip,
+  super.semanticsContainer,
   super.semanticsButton,
   super.semanticsChecked,
   super.semanticsExpanded,
   super.semanticsInMutuallyExclusiveGroup,
-  super.semanticsHint,
-  super.semanticsTooltip,
   super.excludeSemantics,
   super.autofocus,
   super.focusNode,
