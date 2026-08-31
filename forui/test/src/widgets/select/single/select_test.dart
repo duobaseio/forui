@@ -599,6 +599,35 @@ void main() {
   });
 
   group('accessibility', () {
+    for (final (name, clearable, expected) in [
+      ('clears when clearable', true, null),
+      ('does nothing otherwise', false, 'A'),
+    ]) {
+      testWidgets('backspace $name', (tester) async {
+        final focus = autoDispose(FocusNode());
+        String? value = 'A';
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>(
+              key: key,
+              focusNode: focus,
+              clearable: clearable,
+              control: .managed(initial: 'A', onChange: (v) => value = v),
+              items: letters,
+            ),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pump();
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+        await tester.pumpAndSettle();
+        expect(value, expected);
+      });
+    }
+
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
       final semantics = tester.ensureSemantics();
 

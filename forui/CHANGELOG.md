@@ -1,5 +1,10 @@
 ## 0.27.0
 
+### `FAvatar`
+* Fix `semanticsLabel` not being announced while the image is loading or has failed to load.
+* Fix the fallback being clipped at large text scales.
+
+
 ### `FLabel`
 * Change error to be a live region on platforms without accessibility announcement support.
 
@@ -7,6 +12,7 @@
 
 
 ### `FSelect` & `FMultiSelect`
+* Add Backspace to clear a clearable `FSelect` while its field is focused.
 * Add Backspace to remove the last tag while a `FMultiSelect` field is focused.
 
 * Fix `FMultiSelect` label and description not being announced with the field by screen readers.
