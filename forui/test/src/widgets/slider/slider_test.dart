@@ -616,6 +616,23 @@ void main() {
 
       semantics.dispose();
     });
+
+    testWidgets('disabled slider', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(width: 320, child: FSlider(label: const Text('Volume'), enabled: false)),
+        ),
+      );
+
+      final node = tester.getSemantics(find.bySemanticsLabel(RegExp('Volume')));
+      expect(node, isSemantics(label: 'Volume', value: '0%', isSlider: true, isEnabled: false, hasEnabledState: true));
+      // The thumb should not be a separately focusable node when disabled.
+      expect(node.childrenCount, 0);
+
+      semantics.dispose();
+    });
   });
 }
 

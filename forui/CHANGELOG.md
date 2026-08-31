@@ -25,6 +25,7 @@
 * Fix `FMultiSelect` tags not announcing that activating them removes the item.
 * Fix items being announced as buttons instead of radio buttons in `FSelect` and checkboxes in `FMultiSelect`.
 * Fix `FMultiSelect` hint being merged into the field's semantic label instead of its hint.
+* Fix search result count changes not being announced to screen readers.
 
 
 ### `FSelectMenuTile`
@@ -33,6 +34,8 @@
 
 ### `FSlider`
 * Fix label and description not being announced with the slider by screen readers.
+* Fix disabled slider still being announced as enabled by screen readers.
+* Fix disabled slider's thumb still being focusable by screen readers.
 
 
 ### `FTile` & `FTileGroup`

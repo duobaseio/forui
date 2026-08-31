@@ -72,10 +72,10 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     }
 
     Widget thumb = Semantics(
-      enabled: enabled,
-      value: semanticValueFormatterCallback(offset),
-      increasedValue: increasedValue,
-      decreasedValue: decreasedValue,
+      enabled: enabled ? true : null,
+      value: enabled ? semanticValueFormatterCallback(offset) : null,
+      increasedValue: enabled ? increasedValue : null,
+      decreasedValue: enabled ? decreasedValue : null,
       child: FocusableActionDetector(
         shortcuts: switch ((layout, widget.min)) {
           (.ltr, true) || (.rtl, false) => const {
