@@ -637,6 +637,66 @@ void main() {
       semantics.dispose();
     });
 
+    testWidgets('backspace removes the visually last tag', (tester) async {
+      final focus = autoDispose(FocusNode());
+      Set<String>? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            focusNode: focus,
+            control: .managed(initial: const {'A', 'B'}, onChange: (v) => changed = v),
+            sort: (a, b) => b.compareTo(a),
+            items: letters,
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pump();
+
+      // Sorted descending, the visually last tag is 'A'.
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, {'B'});
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, <String>{});
+
+      // No-op on an empty selection.
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, <String>{});
+    });
+
+    testWidgets('backspace does nothing while a tag is focused', (tester) async {
+      final focus = autoDispose(FocusNode());
+      Set<String>? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            focusNode: focus,
+            control: .managed(initial: const {'A', 'B'}, onChange: (v) => changed = v),
+            items: letters,
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+      expect(focus.hasPrimaryFocus, false);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, null);
+    });
+
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
       final semantics = tester.ensureSemantics();
 

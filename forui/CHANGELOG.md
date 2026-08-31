@@ -7,6 +7,8 @@
 
 
 ### `FSelect` & `FMultiSelect`
+* Add Backspace to remove the last tag while a `FMultiSelect` field is focused.
+
 * Fix `FMultiSelect` label and description not being announced with the field by screen readers.
 * Fix `FMultiSelect` tags not announcing that activating them removes the item.
 
