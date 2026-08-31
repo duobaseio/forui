@@ -134,6 +134,11 @@ class FLocalizationsTr extends FLocalizations {
   String get selectNoResults => 'Eşleşen sonuç yok.';
 
   @override
+  String selectResults(int count) {
+    return '$count sonuç mevcut';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Yukarı kaydır';
 
   @override

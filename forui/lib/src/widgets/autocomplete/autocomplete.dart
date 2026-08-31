@@ -1371,22 +1371,28 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     final token = ++_monotonic;
     final data = _data;
 
-    _apply(token, _content(data));
+    _apply(token, data);
     switch (data) {
       case final Iterable<T> values:
         _announce(token, values.length);
       case final Future<Iterable<T>> future:
         future.then((values) {
-          _apply(token, _content(values));
+          _apply(token, values);
           _announce(token, values.length);
-        }, onError: (_, _) => _apply(token, widget.contentErrorBuilder != null));
+        }, onError: (_, _) => _apply(token, null));
     }
   }
 
-  void _apply(int token, bool show) {
+  void _apply(int token, FutureOr<Iterable<T>>? data) {
     if (!mounted || token != _monotonic) {
       return;
     }
+
+    final show = switch (data) {
+      final Iterable<T> values => values.isNotEmpty || widget.contentEmptyBuilder != null,
+      Future<Iterable<T>>() => widget.contentLoadingBuilder != null,
+      null => widget.contentErrorBuilder != null,
+    };
 
     // Don't re-show after unfocus: a pending async filter completing must not reopen the popover.
     if (show && !_fieldFocus.hasFocus) {
@@ -1400,11 +1406,6 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
       _popoverController.hide();
     }
   }
-
-  bool _content(FutureOr<Iterable<T>> data) => switch (data) {
-    final Iterable<T> values => values.isNotEmpty || widget.contentEmptyBuilder != null,
-    Future<Iterable<T>>() => widget.contentLoadingBuilder != null,
-  };
 
   void _announce(int token, int count) {
     if (!mounted || token != _monotonic || !_fieldFocus.hasFocus) {
@@ -1675,20 +1676,20 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
 }
 
 @internal
-final class AutocompleteFieldScope extends InheritedWidget {
+final class const AutocompleteFieldScope({
+  /// The autocomplete field style.
+  required final FAutocompleteFieldStyle style,
+
+  /// The current widget variants.
+  required final Set<FTextFieldVariant> variants,
+  required super.child,
+  super.key,
+}) extends InheritedWidget {
   @useResult
   static AutocompleteFieldScope of(BuildContext context) {
     assert(debugCheckHasAncestor<AutocompleteFieldScope>('FAutocomplete', context));
     return context.dependOnInheritedWidgetOfExactType<AutocompleteFieldScope>()!;
   }
-
-  /// The autocomplete field style.
-  final FAutocompleteFieldStyle style;
-
-  /// The current widget variants.
-  final Set<FTextFieldVariant> variants;
-
-  const new({required this.style, required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(AutocompleteFieldScope old) => style != old.style || variants != old.variants;

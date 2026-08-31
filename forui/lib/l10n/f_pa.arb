@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "ਘੰਟਾ",
   "timePickerMinuteSemanticsLabel": "ਮਿੰਟ",
   "autocompleteResults": "{count} ਨਤੀਜੇ ਉਪਲਬਧ",
+  "selectResults": "{count} ਨਤੀਜੇ ਉਪਲਬਧ",
   "autocompleteSuggestion": "ਸੁਝਾਅ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ਹੋਰ",
   "paginationPageSemanticsLabel": "ਪੰਨਾ {page}",

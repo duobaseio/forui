@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Oras",
   "timePickerMinuteSemanticsLabel": "Minuto",
   "autocompleteResults": "{count} resulta ang available",
+  "selectResults": "{count} resulta ang available",
   "autocompleteSuggestion": "Mungkahi: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Higit pa",
   "paginationPageSemanticsLabel": "Page {page}",

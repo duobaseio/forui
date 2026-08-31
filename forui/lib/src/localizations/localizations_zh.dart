@@ -134,6 +134,11 @@ class FLocalizationsZh extends FLocalizations {
   String get selectNoResults => '没有匹配结果。';
 
   @override
+  String selectResults(int count) {
+    return '$count 个结果可用';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '向上滚动';
 
   @override
@@ -305,6 +310,11 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get selectNoResults => '沒有匹配結果。';
 
   @override
+  String selectResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '向上捲動';
 
   @override
@@ -474,6 +484,11 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get selectNoResults => '沒有匹配結果。';
+
+  @override
+  String selectResults(int count) {
+    return '$count 個結果可用';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => '向上捲動';

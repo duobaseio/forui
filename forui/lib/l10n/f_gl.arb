@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "Hora",
   "timePickerMinuteSemanticsLabel": "Minuto",
   "autocompleteResults": "{count} resultados dispoñibles",
+  "selectResults": "{count} resultados dispoñibles",
   "autocompleteSuggestion": "Suxestión: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Máis",
   "paginationPageSemanticsLabel": "Páxina {page}",

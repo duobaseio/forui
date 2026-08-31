@@ -134,6 +134,11 @@ class FLocalizationsSw extends FLocalizations {
   String get selectNoResults => 'Hakuna matokeo yanayolingana.';
 
   @override
+  String selectResults(int count) {
+    return 'Matokeo $count yanapatikana';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Sogeza juu';
 
   @override

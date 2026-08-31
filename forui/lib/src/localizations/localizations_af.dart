@@ -134,6 +134,11 @@ class FLocalizationsAf extends FLocalizations {
   String get selectNoResults => 'Geen passende resultate nie.';
 
   @override
+  String selectResults(int count) {
+    return '$count beskikbare resultate';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rol op';
 
   @override

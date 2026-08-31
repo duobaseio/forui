@@ -134,6 +134,11 @@ class FLocalizationsZu extends FLocalizations {
   String get selectNoResults => 'Ayikho imiphumela efanayo.';
 
   @override
+  String selectResults(int count) {
+    return 'Imiphumela engu-$count iyatholakala';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Skrola phezulu';
 
   @override

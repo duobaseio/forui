@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "Саат",
   "timePickerMinuteSemanticsLabel": "Мүнөт",
   "autocompleteResults": "{count} жыйынтык бар",
+  "selectResults": "{count} жыйынтык бар",
   "autocompleteSuggestion": "Сунуш: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Дагы",
   "paginationPageSemanticsLabel": "{page}-бет",

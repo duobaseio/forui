@@ -134,6 +134,11 @@ class FLocalizationsFi extends FLocalizations {
   String get selectNoResults => 'Ei vastaavia tuloksia.';
 
   @override
+  String selectResults(int count) {
+    return '$count tulosta saatavilla';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Vieritä ylös';
 
   @override

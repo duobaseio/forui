@@ -134,6 +134,11 @@ class FLocalizationsJa extends FLocalizations {
   String get selectNoResults => '一致する結果がありません。';
 
   @override
+  String selectResults(int count) {
+    return '$count 件の結果があります';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '上にスクロール';
 
   @override

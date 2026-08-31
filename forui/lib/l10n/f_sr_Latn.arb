@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Sat",
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} dostupnih rezultata",
+  "selectResults": "{count} dostupnih rezultata",
   "autocompleteSuggestion": "Predlog: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Više",
   "paginationPageSemanticsLabel": "{page}. stranica",

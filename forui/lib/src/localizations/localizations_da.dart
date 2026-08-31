@@ -134,6 +134,11 @@ class FLocalizationsDa extends FLocalizations {
   String get selectNoResults => 'Ingen matchende resultater.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultater tilgængelige';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rul op';
 
   @override

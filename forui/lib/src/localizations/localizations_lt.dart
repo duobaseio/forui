@@ -134,6 +134,11 @@ class FLocalizationsLt extends FLocalizations {
   String get selectNoResults => 'Jokių atitinkančių rezultatų.';
 
   @override
+  String selectResults(int count) {
+    return 'Yra $count rezultatų';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Slinkti aukštyn';
 
   @override

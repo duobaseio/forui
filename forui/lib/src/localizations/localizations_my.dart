@@ -134,6 +134,11 @@ class FLocalizationsMy extends FLocalizations {
   String get selectNoResults => 'တူညီသည့်ရလဒ်များမရှိပါ။';
 
   @override
+  String selectResults(int count) {
+    return 'ရလဒ် $count ခု ရနိုင်ပါသည်';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'အပေါ်သို့ပွတ်ဆွဲရန်';
 
   @override

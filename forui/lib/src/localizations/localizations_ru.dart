@@ -134,6 +134,11 @@ class FLocalizationsRu extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return 'Доступно результатов: $count';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Прокрутить вверх';
 
   @override

@@ -134,6 +134,11 @@ class FLocalizationsSi extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return 'ප්‍රතිඵල $countක් තිබේ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ඉහළට අනුචලනය කරන්න';
 
   @override

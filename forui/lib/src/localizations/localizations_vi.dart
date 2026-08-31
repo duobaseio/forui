@@ -134,6 +134,11 @@ class FLocalizationsVi extends FLocalizations {
   String get selectNoResults => 'Không có kết quả phù hợp.';
 
   @override
+  String selectResults(int count) {
+    return 'Có $count kết quả';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Cuộn lên';
 
   @override

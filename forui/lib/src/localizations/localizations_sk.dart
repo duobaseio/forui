@@ -134,6 +134,11 @@ class FLocalizationsSk extends FLocalizations {
   String get selectNoResults => 'Žiadne zodpovedajúce výsledky.';
 
   @override
+  String selectResults(int count) {
+    return '$count dostupných výsledkov';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Posunúť nahor';
 
   @override

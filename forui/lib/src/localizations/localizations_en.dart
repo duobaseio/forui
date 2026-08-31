@@ -140,6 +140,17 @@ class FLocalizationsEn extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -315,6 +326,17 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get selectNoResults => 'No matching results.';
+
+  @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
@@ -494,6 +516,17 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -669,6 +702,17 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get selectNoResults => 'No matching results.';
+
+  @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
@@ -848,6 +892,17 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1023,6 +1078,17 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get selectNoResults => 'No matching results.';
+
+  @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
@@ -1202,6 +1268,17 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1379,6 +1456,17 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1554,6 +1642,17 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get selectNoResults => 'No matching results.';
+
+  @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';

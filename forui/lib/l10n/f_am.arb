@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "ሰዓት",
   "timePickerMinuteSemanticsLabel": "ደቂቃ",
   "autocompleteResults": "{count} ውጤቶች ይገኛሉ",
+  "selectResults": "{count} ውጤቶች ይገኛሉ",
   "autocompleteSuggestion": "ጥቆማ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ተጨማሪ",
   "paginationPageSemanticsLabel": "ገፅ {page}",

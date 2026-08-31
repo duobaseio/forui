@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "Час",
   "timePickerMinuteSemanticsLabel": "Минута",
   "autocompleteResults": "{count} достапни резултати",
+  "selectResults": "{count} достапни резултати",
   "autocompleteSuggestion": "Предлог: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Повеќе",
   "paginationPageSemanticsLabel": "Страница {page}",

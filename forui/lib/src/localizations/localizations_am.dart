@@ -134,6 +134,11 @@ class FLocalizationsAm extends FLocalizations {
   String get selectNoResults => 'ምንም ተዛማጅ ውጤቶች የሉም።';
 
   @override
+  String selectResults(int count) {
+    return '$count ውጤቶች ይገኛሉ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ወደ ላይ ሸብልል';
 
   @override

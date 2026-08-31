@@ -134,6 +134,11 @@ class FLocalizationsEt extends FLocalizations {
   String get selectNoResults => 'Sobivaid tulemusi pole.';
 
   @override
+  String selectResults(int count) {
+    return '$count tulemust saadaval';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Keri üles';
 
   @override

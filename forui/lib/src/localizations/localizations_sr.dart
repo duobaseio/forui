@@ -134,6 +134,11 @@ class FLocalizationsSr extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count доступних резултата';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Померите нагоре';
 
   @override
@@ -303,6 +308,11 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get selectNoResults => 'Nema podudarajućih rezultata.';
+
+  @override
+  String selectResults(int count) {
+    return '$count dostupnih rezultata';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Pomerite nagore';

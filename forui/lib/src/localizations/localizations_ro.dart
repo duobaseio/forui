@@ -134,6 +134,11 @@ class FLocalizationsRo extends FLocalizations {
   String get selectNoResults => 'Niciun rezultat care să se potrivească.';
 
   @override
+  String selectResults(int count) {
+    return '$count rezultate disponibile';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Derulează în sus';
 
   @override

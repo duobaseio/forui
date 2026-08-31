@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Uur",
   "timePickerMinuteSemanticsLabel": "Minuut",
   "autocompleteResults": "{count} beskikbare resultate",
+  "selectResults": "{count} beskikbare resultate",
   "autocompleteSuggestion": "Voorstel: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meer",
   "paginationPageSemanticsLabel": "Bladsy {page}",

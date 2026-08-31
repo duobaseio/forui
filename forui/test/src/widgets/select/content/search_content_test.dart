@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -204,5 +207,99 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('custom clear'), findsNothing);
+  });
+
+  group('accessibility', () {
+    List<String> captureAnnouncements(WidgetTester tester) {
+      final announcements = <String>[];
+      tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(SystemChannels.accessibility, (
+        message,
+      ) async {
+        final map = message! as Map<Object?, Object?>;
+        if (map['type'] == 'announce') {
+          announcements.add((map['data']! as Map<Object?, Object?>)['message']! as String);
+        }
+        return null;
+      });
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+          SystemChannels.accessibility,
+          null,
+        ),
+      );
+      return announcements;
+    }
+
+    Widget select({FutureOr<Iterable<String>> Function(String)? filter}) => TestScaffold.app(
+      child: FSelect<String>.search(
+        key: key,
+        control: .managed(controller: controller),
+        filter:
+            filter ??
+            (query) =>
+                query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+        items: {for (final fruit in fruits) fruit: fruit},
+      ),
+    );
+
+    testWidgets('announces the result count when the query changes', (tester) async {
+      final announcements = captureAnnouncements(tester);
+      await tester.pumpWidget(select());
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'B');
+      await tester.pumpAndSettle();
+
+      expect(announcements, contains('2 results available'));
+    });
+
+    testWidgets('announces no matches when the query has no results', (tester) async {
+      final announcements = captureAnnouncements(tester);
+      await tester.pumpWidget(select());
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'zzz');
+      await tester.pumpAndSettle();
+
+      expect(announcements, contains('No matches found.'));
+    });
+
+    testWidgets('announces the result count when an asynchronous filter resolves', (tester) async {
+      final announcements = captureAnnouncements(tester);
+      await tester.pumpWidget(
+        select(
+          filter: (query) async =>
+              query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase())),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'Pineapple');
+      await tester.pumpAndSettle();
+
+      expect(announcements, contains('1 result available'));
+    });
+
+    testWidgets('does not re-announce an unchanged result count', (tester) async {
+      final announcements = captureAnnouncements(tester);
+      await tester.pumpWidget(select());
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'B');
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byType(FTextField).last, 'b');
+      await tester.pumpAndSettle();
+
+      expect(announcements.where((a) => a == '2 results available'), hasLength(1));
+    });
   });
 }

@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "ชั่วโมง",
   "timePickerMinuteSemanticsLabel": "นาที",
   "autocompleteResults": "มีผลลัพธ์ {count} รายการ",
+  "selectResults": "มีผลลัพธ์ {count} รายการ",
   "autocompleteSuggestion": "คำแนะนำ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "เพิ่มเติม",
   "paginationPageSemanticsLabel": "หน้า {page}",

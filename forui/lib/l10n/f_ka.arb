@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "საათი",
   "timePickerMinuteSemanticsLabel": "წუთი",
   "autocompleteResults": "{count} შედეგი ხელმისაწვდომია",
+  "selectResults": "{count} შედეგი ხელმისაწვდომია",
   "autocompleteSuggestion": "შემოთავაზება: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "მეტი",
   "paginationPageSemanticsLabel": "გვერდი {page}",

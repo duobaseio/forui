@@ -134,6 +134,11 @@ class FLocalizationsGsw extends FLocalizations {
   String get selectNoResults => 'Kei passendi Ergebnis.';
 
   @override
+  String selectResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Nach obe scrolle';
 
   @override

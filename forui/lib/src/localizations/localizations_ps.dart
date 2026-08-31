@@ -134,6 +134,11 @@ class FLocalizationsPs extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count پایلې شتون لري';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'پورته سکرول کړئ';
 
   @override

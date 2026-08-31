@@ -134,6 +134,11 @@ class FLocalizationsSl extends FLocalizations {
   String get selectNoResults => 'Ni ujemajočih se rezultatov.';
 
   @override
+  String selectResults(int count) {
+    return '$count razpoložljivih rezultatov';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Pomik navzgor';
 
   @override

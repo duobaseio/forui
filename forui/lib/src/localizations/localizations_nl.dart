@@ -134,6 +134,11 @@ class FLocalizationsNl extends FLocalizations {
   String get selectNoResults => 'Geen overeenkomende resultaten.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultaten beschikbaar';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Omhoog scrollen';
 
   @override

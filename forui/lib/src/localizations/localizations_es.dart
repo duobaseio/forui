@@ -134,6 +134,11 @@ class FLocalizationsEs extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -296,6 +301,11 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -453,6 +463,11 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -614,6 +629,11 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -771,6 +791,11 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -932,6 +957,11 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -1089,6 +1119,11 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1250,6 +1285,11 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -1407,6 +1447,11 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1568,6 +1613,11 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -1725,6 +1775,11 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1886,6 +1941,11 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -2043,6 +2103,11 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2204,6 +2269,11 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -2361,6 +2431,11 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2522,6 +2597,11 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -2679,6 +2759,11 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2840,6 +2925,11 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -2997,6 +3087,11 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -3158,6 +3253,11 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get selectSearchHint => 'Buscar';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -3315,6 +3415,11 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';

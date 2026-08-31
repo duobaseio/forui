@@ -134,6 +134,11 @@ class FLocalizationsBn extends FLocalizations {
   String get selectNoResults => 'কোন মিলে যাওয়া ফলাফল নেই।';
 
   @override
+  String selectResults(int count) {
+    return '$countটি ফলাফল উপলব্ধ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'উপরে স্ক্রোল করুন';
 
   @override

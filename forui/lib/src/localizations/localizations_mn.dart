@@ -134,6 +134,11 @@ class FLocalizationsMn extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count үр дүн байна';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Дээш гүйлгэх';
 
   @override

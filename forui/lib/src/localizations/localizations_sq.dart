@@ -134,6 +134,11 @@ class FLocalizationsSq extends FLocalizations {
   String get selectNoResults => 'Nuk ka rezultate përputhëse.';
 
   @override
+  String selectResults(int count) {
+    return '$count rezultate në dispozicion';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Lëviz lart';
 
   @override

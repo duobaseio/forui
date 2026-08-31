@@ -134,6 +134,11 @@ class FLocalizationsHy extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count արդյունք հասանելի է';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Ոլորել վերև';
 
   @override

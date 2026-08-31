@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "ঘণ্টা",
   "timePickerMinuteSemanticsLabel": "মিনিট",
   "autocompleteResults": "{count}টি ফলাফল উপলব্ধ",
+  "selectResults": "{count}টি ফলাফল উপলব্ধ",
   "autocompleteSuggestion": "পরামর্শ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "আরও",
   "paginationPageSemanticsLabel": "পৃষ্ঠা {page}",

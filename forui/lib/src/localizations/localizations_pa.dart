@@ -134,6 +134,11 @@ class FLocalizationsPa extends FLocalizations {
   String get selectNoResults => 'ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।';
 
   @override
+  String selectResults(int count) {
+    return '$count ਨਤੀਜੇ ਉਪਲਬਧ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ਉੱਪਰ ਸਕ੍ਰੋਲ ਕਰੋ';
 
   @override

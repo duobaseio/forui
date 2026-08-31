@@ -134,6 +134,11 @@ class FLocalizationsUz extends FLocalizations {
   String get selectNoResults => 'Mos keladigan natijalar yo\'q.';
 
   @override
+  String selectResults(int count) {
+    return '$count ta natija mavjud';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Tepaga aylantirish';
 
   @override

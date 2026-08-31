@@ -134,6 +134,11 @@ class FLocalizationsMs extends FLocalizations {
   String get selectNoResults => 'Tiada hasil yang sepadan.';
 
   @override
+  String selectResults(int count) {
+    return '$count hasil tersedia';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Tatal ke atas';
 
   @override

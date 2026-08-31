@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "Ժամ",
   "timePickerMinuteSemanticsLabel": "Րոպե",
   "autocompleteResults": "{count} արդյունք հասանելի է",
+  "selectResults": "{count} արդյունք հասանելի է",
   "autocompleteSuggestion": "Առաջարկ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Ավելին",
   "paginationPageSemanticsLabel": "Էջ {page}",

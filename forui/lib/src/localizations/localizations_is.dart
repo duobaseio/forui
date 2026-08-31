@@ -134,6 +134,11 @@ class FLocalizationsIs extends FLocalizations {
   String get selectNoResults => 'Engar samsvarandi niðurstöður.';
 
   @override
+  String selectResults(int count) {
+    return '$count niðurstöður í boði';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Fletta upp';
 
   @override

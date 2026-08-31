@@ -134,6 +134,11 @@ class FLocalizationsUr extends FLocalizations {
   String get selectNoResults => 'کوئی مماثل نتائج نہیں۔';
 
   @override
+  String selectResults(int count) {
+    return '$count نتائج دستیاب ہیں';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'اوپر سکرول کریں';
 
   @override

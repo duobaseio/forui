@@ -134,6 +134,11 @@ class FLocalizationsKm extends FLocalizations {
   String get selectNoResults => 'គ្មានលទ្ធផលដែលត្រូវគ្នាទេ។';
 
   @override
+  String selectResults(int count) {
+    return 'លទ្ធផល $count អាចប្រើបាន';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'រមូរឡើងលើ';
 
   @override

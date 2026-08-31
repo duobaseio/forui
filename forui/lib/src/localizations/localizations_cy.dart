@@ -134,6 +134,11 @@ class FLocalizationsCy extends FLocalizations {
   String get selectNoResults => 'Dim canlyniadau cyfatebol.';
 
   @override
+  String selectResults(int count) {
+    return '$count canlyniad ar gael';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Sgrolio i fyny';
 
   @override

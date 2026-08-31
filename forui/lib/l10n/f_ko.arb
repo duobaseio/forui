@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "시",
   "timePickerMinuteSemanticsLabel": "분",
   "autocompleteResults": "{count}개의 결과가 있습니다",
+  "selectResults": "{count}개의 결과가 있습니다",
   "autocompleteSuggestion": "제안: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "더보기",
   "paginationPageSemanticsLabel": "{page}페이지",

@@ -134,6 +134,11 @@ class FLocalizationsFa extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count نتیجه موجود است';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'پیمایش به بالا';
 
   @override

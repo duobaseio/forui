@@ -134,6 +134,11 @@ class FLocalizationsTl extends FLocalizations {
   String get selectNoResults => 'Walang mga tumutugmang resulta.';
 
   @override
+  String selectResults(int count) {
+    return '$count resulta ang available';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Mag-scroll pataas';
 
   @override

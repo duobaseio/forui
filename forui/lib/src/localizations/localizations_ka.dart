@@ -134,6 +134,11 @@ class FLocalizationsKa extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count შედეგი ხელმისაწვდომია';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ზემოთ გადაადგილება';
 
   @override

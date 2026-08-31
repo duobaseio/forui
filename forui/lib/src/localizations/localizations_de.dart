@@ -134,6 +134,11 @@ class FLocalizationsDe extends FLocalizations {
   String get selectNoResults => 'Keine übereinstimmenden Ergebnisse.';
 
   @override
+  String selectResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Nach oben scrollen';
 
   @override
@@ -295,6 +300,11 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get selectNoResults => 'Keine übereinstimmenden Ergebnisse.';
+
+  @override
+  String selectResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Nach oben scrollen';

@@ -175,6 +175,15 @@
   "@selectNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "selectResults": "{count, plural, =1{1 result available} other{{count} results available}}",
+  "@selectResults": {
+    "description": "Announced to screen readers when search results appear or their count changes, e.g. '3 results available'.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "selectScrollUpSemanticsLabel": "Scroll up",
   "@selectScrollUpSemanticsLabel": {
     "description": "The semantic label for the scroll handle in a select field."

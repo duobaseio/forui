@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Valandos",
   "timePickerMinuteSemanticsLabel": "Minutės",
   "autocompleteResults": "Yra {count} rezultatų",
+  "selectResults": "Yra {count} rezultatų",
   "autocompleteSuggestion": "Pasiūlymas: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Daugiau",
   "paginationPageSemanticsLabel": "{page} puslapis",

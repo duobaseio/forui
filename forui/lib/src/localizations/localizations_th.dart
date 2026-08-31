@@ -134,6 +134,11 @@ class FLocalizationsTh extends FLocalizations {
   String get selectNoResults => 'ไม่มีผลลัพธ์ที่ตรงกัน';
 
   @override
+  String selectResults(int count) {
+    return 'มีผลลัพธ์ $count รายการ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'เลื่อนขึ้น';
 
   @override

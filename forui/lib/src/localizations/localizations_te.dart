@@ -134,6 +134,11 @@ class FLocalizationsTe extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count ఫలితాలు అందుబాటులో ఉన్నాయి';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'పైకి స్క్రోల్ చేయండి';
 
   @override

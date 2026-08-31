@@ -134,6 +134,11 @@ class FLocalizationsPl extends FLocalizations {
   String get selectNoResults => 'Brak pasujących wyników.';
 
   @override
+  String selectResults(int count) {
+    return 'Dostępne wyniki: $count';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Przewiń w górę';
 
   @override

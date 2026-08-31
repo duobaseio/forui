@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Óra",
   "timePickerMinuteSemanticsLabel": "Perc",
   "autocompleteResults": "{count} találat érhető el",
+  "selectResults": "{count} találat érhető el",
   "autocompleteSuggestion": "Javaslat: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Továbbiak",
   "paginationPageSemanticsLabel": "{page}. oldal",

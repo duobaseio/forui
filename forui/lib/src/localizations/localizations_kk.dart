@@ -134,6 +134,11 @@ class FLocalizationsKk extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count нәтиже қолжетімді';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Жоғары айналдыру';
 
   @override

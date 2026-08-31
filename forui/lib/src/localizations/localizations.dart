@@ -510,6 +510,12 @@ abstract class FLocalizations {
   /// **'No matches found.'**
   String get selectNoResults;
 
+  /// Announced to screen readers when search results appear or their count changes, e.g. '3 results available'.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 result available} other{{count} results available}}'**
+  String selectResults(int count);
+
   /// The semantic label for the scroll handle in a select field.
   ///
   /// In en, this message translates to:

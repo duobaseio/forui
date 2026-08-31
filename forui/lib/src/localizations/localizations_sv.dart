@@ -134,6 +134,11 @@ class FLocalizationsSv extends FLocalizations {
   String get selectNoResults => 'Inga matchande resultat.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultat tillgängliga';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rulla uppåt';
 
   @override

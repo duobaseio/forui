@@ -134,6 +134,11 @@ class FLocalizationsPt extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponíveis';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rolar para cima';
 
   @override
@@ -294,6 +299,11 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get selectSearchHint => 'Pesquisar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponíveis';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Deslocar para cima';

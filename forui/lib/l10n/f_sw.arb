@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Saa",
   "timePickerMinuteSemanticsLabel": "Dakika",
   "autocompleteResults": "Matokeo {count} yanapatikana",
+  "selectResults": "Matokeo {count} yanapatikana",
   "autocompleteSuggestion": "Pendekezo: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Zaidi",
   "paginationPageSemanticsLabel": "Ukurasa {page}",

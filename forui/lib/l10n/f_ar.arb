@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "ساعة",
   "timePickerMinuteSemanticsLabel": "دقيقة",
   "autocompleteResults": "{count} نتائج متوفرة",
+  "selectResults": "{count} نتائج متوفرة",
   "autocompleteSuggestion": "اقتراح: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "المزيد",
   "paginationPageSemanticsLabel": "الصفحة {page}",

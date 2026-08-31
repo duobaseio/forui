@@ -134,6 +134,11 @@ class FLocalizationsTa extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count முடிவுகள் கிடைக்கின்றன';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'மேலே உருட்டு';
 
   @override

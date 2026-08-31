@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Klukkustund",
   "timePickerMinuteSemanticsLabel": "Mínúta",
   "autocompleteResults": "{count} niðurstöður í boði",
+  "selectResults": "{count} niðurstöður í boði",
   "autocompleteSuggestion": "Tillaga: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meira",
   "paginationPageSemanticsLabel": "Síða {page}",

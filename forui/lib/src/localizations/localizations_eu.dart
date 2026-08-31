@@ -134,6 +134,11 @@ class FLocalizationsEu extends FLocalizations {
   String get selectNoResults => 'Ez dago bat datorren emaitzarik.';
 
   @override
+  String selectResults(int count) {
+    return '$count emaitza erabilgarri';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Egin gora';
 
   @override

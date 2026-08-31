@@ -47,6 +47,7 @@
   "timePickerHourSemanticsLabel": "පැය",
   "timePickerMinuteSemanticsLabel": "මිනිත්තු",
   "autocompleteResults": "ප්‍රතිඵල {count}ක් තිබේ",
+  "selectResults": "ප්‍රතිඵල {count}ක් තිබේ",
   "autocompleteSuggestion": "යෝජනාව: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "තව",
   "paginationPageSemanticsLabel": "පිටුව {page}",

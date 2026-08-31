@@ -48,6 +48,7 @@
   "timePickerHourSemanticsLabel": "Ora",
   "timePickerMinuteSemanticsLabel": "Minuta",
   "autocompleteResults": "{count} rezultate në dispozicion",
+  "selectResults": "{count} rezultate në dispozicion",
   "autocompleteSuggestion": "Sugjerim: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Më shumë",
   "paginationPageSemanticsLabel": "Faqja {page}",

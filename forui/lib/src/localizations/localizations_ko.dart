@@ -134,6 +134,11 @@ class FLocalizationsKo extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count개의 결과가 있습니다';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '위로 스크롤';
 
   @override

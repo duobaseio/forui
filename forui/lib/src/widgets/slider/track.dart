@@ -15,7 +15,7 @@ import 'package:forui/src/widgets/slider/thumb.dart';
 class const Track({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :semanticFormatterCallback) = .of(context);
+    final InheritedData(:style, :enabled, :layout, :semanticFormatterCallback) = .of(context);
     final controller = InheritedController.of(context).controller;
     final position = layout.position;
 
@@ -27,7 +27,7 @@ class const Track({super.key}) extends StatelessWidget {
       width: width,
       child: Semantics(
         slider: true,
-        enabled: true,
+        enabled: enabled,
         value: semanticFormatterCallback(controller.value),
         child: Stack(
           alignment: .center,

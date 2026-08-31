@@ -134,6 +134,11 @@ class FLocalizationsLv extends FLocalizations {
   String get selectNoResults => 'Nav atbilstošu rezultātu.';
 
   @override
+  String selectResults(int count) {
+    return 'Pieejami $count rezultāti';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Ritināt uz augšu';
 
   @override

@@ -134,6 +134,11 @@ class FLocalizationsHu extends FLocalizations {
   String get selectNoResults => 'Nincs megfelelő találat.';
 
   @override
+  String selectResults(int count) {
+    return '$count találat érhető el';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Görgetés felfelé';
 
   @override

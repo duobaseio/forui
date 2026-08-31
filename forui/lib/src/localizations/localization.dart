@@ -167,6 +167,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) => count == 1 ? '1 result available' : '$count results available';
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
