@@ -122,6 +122,9 @@ class FLocalizationsLv extends FLocalizations {
   String get multiSelectHint => 'Atlasiet vienumus';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Noņemt';
+
+  @override
   String get selectHint => 'Atlasiet vienumu';
 
   @override

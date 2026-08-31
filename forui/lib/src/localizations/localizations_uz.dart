@@ -122,6 +122,9 @@ class FLocalizationsUz extends FLocalizations {
   String get multiSelectHint => 'Elementlarni tanlang';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Olib tashlash';
+
+  @override
   String get selectHint => 'Element tanlang';
 
   @override

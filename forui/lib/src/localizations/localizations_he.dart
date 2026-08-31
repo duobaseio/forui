@@ -122,6 +122,9 @@ class FLocalizationsHe extends FLocalizations {
   String get multiSelectHint => 'בחר פריטים';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'הסרה';
+
+  @override
   String get selectHint => 'בחר פריט';
 
   @override

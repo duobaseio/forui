@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} dostupných výsledkov",
   "autocompleteSuggestion": "Návrh: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Viac",
-  "paginationPageSemanticsLabel": "Strana {page}"
+  "paginationPageSemanticsLabel": "Strana {page}",
+  "multiSelectTagSemanticsLabel": "Odstrániť"
 }

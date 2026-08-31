@@ -122,6 +122,9 @@ class FLocalizationsPa extends FLocalizations {
   String get multiSelectHint => 'ਆਈਟਮਾਂ ਚੁਣੋ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ਹਟਾਓ';
+
+  @override
   String get selectHint => 'ਇੱਕ ਆਈਟਮ ਚੁਣੋ';
 
   @override

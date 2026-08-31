@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} ଫଳାଫଳ ଉପଲବ୍ଧ",
   "autocompleteSuggestion": "ପରାମର୍ଶ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ଅଧିକ",
-  "paginationPageSemanticsLabel": "ପୃଷ୍ଠା {page}"
+  "paginationPageSemanticsLabel": "ପୃଷ୍ଠା {page}",
+  "multiSelectTagSemanticsLabel": "ବାହାର କରନ୍ତୁ"
 }

@@ -122,6 +122,9 @@ class FLocalizationsKm extends FLocalizations {
   String get multiSelectHint => 'ជ្រើសរើសធាតុ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'យកចេញ';
+
+  @override
   String get selectHint => 'ជ្រើសរើសធាតុមួយ';
 
   @override

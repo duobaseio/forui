@@ -122,6 +122,9 @@ class FLocalizationsFil extends FLocalizations {
   String get multiSelectHint => 'Pumili ng mga item';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Alisin';
+
+  @override
   String get selectHint => 'Pumili ng item';
 
   @override

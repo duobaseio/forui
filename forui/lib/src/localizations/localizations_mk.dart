@@ -122,6 +122,9 @@ class FLocalizationsMk extends FLocalizations {
   String get multiSelectHint => 'Изберете елементи';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Отстрани';
+
+  @override
   String get selectHint => 'Изберете ставка';
 
   @override

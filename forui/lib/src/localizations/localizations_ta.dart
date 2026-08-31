@@ -122,6 +122,9 @@ class FLocalizationsTa extends FLocalizations {
   String get multiSelectHint => 'உருப்படிகளைத் தேர்ந்தெடுக்கவும்';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'அகற்று';
+
+  @override
   String get selectHint => 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்';
 
   @override

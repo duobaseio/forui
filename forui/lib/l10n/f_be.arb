@@ -49,5 +49,6 @@
   "autocompleteResults": "Даступна вынікаў: {count}",
   "autocompleteSuggestion": "Прапанова: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Больш",
-  "paginationPageSemanticsLabel": "Старонка {page}"
+  "paginationPageSemanticsLabel": "Старонка {page}",
+  "multiSelectTagSemanticsLabel": "Выдаліць"
 }

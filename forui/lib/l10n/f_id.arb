@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} hasil tersedia",
   "autocompleteSuggestion": "Saran: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Lainnya",
-  "paginationPageSemanticsLabel": "Halaman {page}"
+  "paginationPageSemanticsLabel": "Halaman {page}",
+  "multiSelectTagSemanticsLabel": "Hapus"
 }

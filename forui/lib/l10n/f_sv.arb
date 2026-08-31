@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} resultat tillgängliga",
   "autocompleteSuggestion": "Förslag: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mer",
-  "paginationPageSemanticsLabel": "Sida {page}"
+  "paginationPageSemanticsLabel": "Sida {page}",
+  "multiSelectTagSemanticsLabel": "Ta bort"
 }

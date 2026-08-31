@@ -159,6 +159,10 @@
   "@multiSelectHint": {
     "description": "The hint text for the multi-select field."
   },
+  "multiSelectTagSemanticsLabel": "Remove",
+  "@multiSelectTagSemanticsLabel": {
+    "description": "The semantics label for a removable tag in a multi-select field, merged with the tag's own label."
+  },
   "selectHint": "Select an item",
   "@selectHint": {
     "description": "The hint text for the select field."

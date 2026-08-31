@@ -50,5 +50,6 @@
   "autocompleteResults": "{count}টি ফলাফল উপলব্ধ",
   "autocompleteSuggestion": "পরামর্শ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "আরও",
-  "paginationPageSemanticsLabel": "পৃষ্ঠা {page}"
+  "paginationPageSemanticsLabel": "পৃষ্ঠা {page}",
+  "multiSelectTagSemanticsLabel": "সরান"
 }

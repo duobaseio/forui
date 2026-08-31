@@ -122,6 +122,9 @@ class FLocalizationsLo extends FLocalizations {
   String get multiSelectHint => 'ເລືອກລາຍການ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ເອົາອອກ';
+
+  @override
   String get selectHint => 'ເລືອກລາຍການ';
 
   @override

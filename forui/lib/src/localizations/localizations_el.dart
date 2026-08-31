@@ -122,6 +122,9 @@ class FLocalizationsEl extends FLocalizations {
   String get multiSelectHint => 'Επιλέξτε στοιχεία';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Κατάργηση';
+
+  @override
   String get selectHint => 'Επιλέξτε ένα στοιχείο';
 
   @override

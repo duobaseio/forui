@@ -486,6 +486,12 @@ abstract class FLocalizations {
   /// **'Select items'**
   String get multiSelectHint;
 
+  /// The semantics label for a removable tag in a multi-select field, merged with the tag's own label.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get multiSelectTagSemanticsLabel;
+
   /// The hint text for the select field.
   ///
   /// In en, this message translates to:

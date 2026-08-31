@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} نتائج متوفرة",
   "autocompleteSuggestion": "اقتراح: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "المزيد",
-  "paginationPageSemanticsLabel": "الصفحة {page}"
+  "paginationPageSemanticsLabel": "الصفحة {page}",
+  "multiSelectTagSemanticsLabel": "إزالة"
 }

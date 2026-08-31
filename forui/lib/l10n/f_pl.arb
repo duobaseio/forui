@@ -50,5 +50,6 @@
   "autocompleteResults": "Dostępne wyniki: {count}",
   "autocompleteSuggestion": "Sugestia: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Więcej",
-  "paginationPageSemanticsLabel": "Strona {page}"
+  "paginationPageSemanticsLabel": "Strona {page}",
+  "multiSelectTagSemanticsLabel": "Usuń"
 }

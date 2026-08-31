@@ -122,6 +122,9 @@ class FLocalizationsBn extends FLocalizations {
   String get multiSelectHint => 'আইটেম নির্বাচন করুন';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'সরান';
+
+  @override
   String get selectHint => 'একটি আইটেম নির্বাচন করুন';
 
   @override

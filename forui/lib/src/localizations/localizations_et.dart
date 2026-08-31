@@ -122,6 +122,9 @@ class FLocalizationsEt extends FLocalizations {
   String get multiSelectHint => 'Valige üksused';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Eemalda';
+
+  @override
   String get selectHint => 'Valige üksus';
 
   @override

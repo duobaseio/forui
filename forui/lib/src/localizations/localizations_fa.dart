@@ -122,6 +122,9 @@ class FLocalizationsFa extends FLocalizations {
   String get multiSelectHint => 'انتخاب آیتم‌ها';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'حذف';
+
+  @override
   String get selectHint => 'یک مورد را انتخاب کنید';
 
   @override

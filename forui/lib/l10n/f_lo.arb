@@ -49,5 +49,6 @@
   "autocompleteResults": "ມີ {count} ຜົນລັບ",
   "autocompleteSuggestion": "ຄຳແນະນຳ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ເພີ່ມເຕີມ",
-  "paginationPageSemanticsLabel": "ໜ້າ {page}"
+  "paginationPageSemanticsLabel": "ໜ້າ {page}",
+  "multiSelectTagSemanticsLabel": "ເອົາອອກ"
 }

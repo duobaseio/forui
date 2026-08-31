@@ -122,6 +122,9 @@ class FLocalizationsVi extends FLocalizations {
   String get multiSelectHint => 'Chọn các mục';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Xóa';
+
+  @override
   String get selectHint => 'Chọn một mục';
 
   @override

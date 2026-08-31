@@ -122,6 +122,9 @@ class FLocalizationsHu extends FLocalizations {
   String get multiSelectHint => 'Elemek kiválasztása';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Eltávolítás';
+
+  @override
   String get selectHint => 'Válasszon egy elemet';
 
   @override

@@ -122,6 +122,9 @@ class FLocalizationsZh extends FLocalizations {
   String get multiSelectHint => '选择项目';
 
   @override
+  String get multiSelectTagSemanticsLabel => '移除';
+
+  @override
   String get selectHint => '选择项目';
 
   @override
@@ -290,6 +293,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get multiSelectHint => '選擇項目';
 
   @override
+  String get multiSelectTagSemanticsLabel => '移除';
+
+  @override
   String get selectHint => '選擇項目';
 
   @override
@@ -456,6 +462,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get multiSelectHint => '選擇項目';
+
+  @override
+  String get multiSelectTagSemanticsLabel => '移除';
 
   @override
   String get selectHint => '選擇項目';

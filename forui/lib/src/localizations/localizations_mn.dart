@@ -122,6 +122,9 @@ class FLocalizationsMn extends FLocalizations {
   String get multiSelectHint => 'Зүйлсийг сонгох';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Хасах';
+
+  @override
   String get selectHint => 'Зүйл сонгох';
 
   @override

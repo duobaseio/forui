@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} 个结果可用",
   "autocompleteSuggestion": "建议：{suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "更多",
-  "paginationPageSemanticsLabel": "第 {page} 页"
+  "paginationPageSemanticsLabel": "第 {page} 页",
+  "multiSelectTagSemanticsLabel": "移除"
 }

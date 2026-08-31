@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} முடிவுகள் கிடைக்கின்றன",
   "autocompleteSuggestion": "பரிந்துரை: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "மேலும்",
-  "paginationPageSemanticsLabel": "பக்கம் {page}"
+  "paginationPageSemanticsLabel": "பக்கம் {page}",
+  "multiSelectTagSemanticsLabel": "அகற்று"
 }

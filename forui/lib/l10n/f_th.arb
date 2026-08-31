@@ -50,5 +50,6 @@
   "autocompleteResults": "มีผลลัพธ์ {count} รายการ",
   "autocompleteSuggestion": "คำแนะนำ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "เพิ่มเติม",
-  "paginationPageSemanticsLabel": "หน้า {page}"
+  "paginationPageSemanticsLabel": "หน้า {page}",
+  "multiSelectTagSemanticsLabel": "นำออก"
 }

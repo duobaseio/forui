@@ -616,6 +616,27 @@ void main() {
       semantics.dispose();
     });
 
+    testWidgets('tag announces removal', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            control: const .managed(initial: {'A'}),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Remove'))),
+        isSemantics(label: 'Remove\nA', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
       final semantics = tester.ensureSemantics();
 

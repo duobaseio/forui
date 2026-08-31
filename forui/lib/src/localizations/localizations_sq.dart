@@ -122,6 +122,9 @@ class FLocalizationsSq extends FLocalizations {
   String get multiSelectHint => 'Zgjidh elementet';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Hiq';
+
+  @override
   String get selectHint => 'Zgjidhni një artikull';
 
   @override

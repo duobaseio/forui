@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} ఫలితాలు అందుబాటులో ఉన్నాయి",
   "autocompleteSuggestion": "సూచన: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "మరిన్ని",
-  "paginationPageSemanticsLabel": "పేజీ {page}"
+  "paginationPageSemanticsLabel": "పేజీ {page}",
+  "multiSelectTagSemanticsLabel": "తీసివేయి"
 }

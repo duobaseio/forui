@@ -122,6 +122,9 @@ class FLocalizationsKy extends FLocalizations {
   String get multiSelectHint => 'Элементтерди тандоо';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Алып салуу';
+
+  @override
   String get selectHint => 'Элементти тандаңыз';
 
   @override

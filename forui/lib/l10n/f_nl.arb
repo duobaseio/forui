@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} resultaten beschikbaar",
   "autocompleteSuggestion": "Suggestie: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meer",
-  "paginationPageSemanticsLabel": "Pagina {page}"
+  "paginationPageSemanticsLabel": "Pagina {page}",
+  "multiSelectTagSemanticsLabel": "Verwijderen"
 }

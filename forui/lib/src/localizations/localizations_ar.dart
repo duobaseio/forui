@@ -122,6 +122,9 @@ class FLocalizationsAr extends FLocalizations {
   String get multiSelectHint => 'حدد العناصر';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'إزالة';
+
+  @override
   String get selectHint => 'حدد عنصرا';
 
   @override

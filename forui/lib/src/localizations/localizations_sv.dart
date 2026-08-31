@@ -122,6 +122,9 @@ class FLocalizationsSv extends FLocalizations {
   String get multiSelectHint => 'Välj objekt';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Ta bort';
+
+  @override
   String get selectHint => 'Välj ett objekt';
 
   @override

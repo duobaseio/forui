@@ -122,6 +122,9 @@ class FLocalizationsEs extends FLocalizations {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -284,6 +287,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -438,6 +444,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -596,6 +605,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -750,6 +762,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -908,6 +923,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -1062,6 +1080,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -1220,6 +1241,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -1374,6 +1398,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -1532,6 +1559,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -1686,6 +1716,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -1844,6 +1877,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -1998,6 +2034,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -2156,6 +2195,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -2310,6 +2352,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -2468,6 +2513,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -2622,6 +2670,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -2780,6 +2831,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -2934,6 +2988,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';
@@ -3092,6 +3149,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -3246,6 +3306,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get multiSelectHint => 'Seleccionar elementos';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
 
   @override
   String get selectHint => 'Seleccione un elemento';

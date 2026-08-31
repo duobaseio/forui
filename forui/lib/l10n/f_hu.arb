@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} találat érhető el",
   "autocompleteSuggestion": "Javaslat: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Továbbiak",
-  "paginationPageSemanticsLabel": "{page}. oldal"
+  "paginationPageSemanticsLabel": "{page}. oldal",
+  "multiSelectTagSemanticsLabel": "Eltávolítás"
 }

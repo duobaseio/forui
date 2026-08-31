@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} ਨਤੀਜੇ ਉਪਲਬਧ",
   "autocompleteSuggestion": "ਸੁਝਾਅ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ਹੋਰ",
-  "paginationPageSemanticsLabel": "ਪੰਨਾ {page}"
+  "paginationPageSemanticsLabel": "ਪੰਨਾ {page}",
+  "multiSelectTagSemanticsLabel": "ਹਟਾਓ"
 }

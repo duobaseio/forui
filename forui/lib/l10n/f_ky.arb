@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} жыйынтык бар",
   "autocompleteSuggestion": "Сунуш: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Дагы",
-  "paginationPageSemanticsLabel": "{page}-бет"
+  "paginationPageSemanticsLabel": "{page}-бет",
+  "multiSelectTagSemanticsLabel": "Алып салуу"
 }

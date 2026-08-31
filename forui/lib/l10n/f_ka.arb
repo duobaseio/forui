@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} შედეგი ხელმისაწვდომია",
   "autocompleteSuggestion": "შემოთავაზება: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "მეტი",
-  "paginationPageSemanticsLabel": "გვერდი {page}"
+  "paginationPageSemanticsLabel": "გვერდი {page}",
+  "multiSelectTagSemanticsLabel": "ამოშლა"
 }

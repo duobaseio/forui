@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} διαθέσιμα αποτελέσματα",
   "autocompleteSuggestion": "Πρόταση: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Περισσότερα",
-  "paginationPageSemanticsLabel": "Σελίδα {page}"
+  "paginationPageSemanticsLabel": "Σελίδα {page}",
+  "multiSelectTagSemanticsLabel": "Κατάργηση"
 }

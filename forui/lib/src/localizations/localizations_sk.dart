@@ -122,6 +122,9 @@ class FLocalizationsSk extends FLocalizations {
   String get multiSelectHint => 'Vybrať položky';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Odstrániť';
+
+  @override
   String get selectHint => 'Vyberte položku';
 
   @override

@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} پایلې شتون لري",
   "autocompleteSuggestion": "وړاندیز: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "نور",
-  "paginationPageSemanticsLabel": "مخ {page}"
+  "paginationPageSemanticsLabel": "مخ {page}",
+  "multiSelectTagSemanticsLabel": "لرې کول"
 }

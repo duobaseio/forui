@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} نتائج دستیاب ہیں",
   "autocompleteSuggestion": "تجویز: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "مزید",
-  "paginationPageSemanticsLabel": "صفحہ {page}"
+  "paginationPageSemanticsLabel": "صفحہ {page}",
+  "multiSelectTagSemanticsLabel": "ہٹائیں"
 }

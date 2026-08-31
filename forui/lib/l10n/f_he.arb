@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} תוצאות זמינות",
   "autocompleteSuggestion": "הצעה: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "עוד",
-  "paginationPageSemanticsLabel": "דף {page}"
+  "paginationPageSemanticsLabel": "דף {page}",
+  "multiSelectTagSemanticsLabel": "הסרה"
 }

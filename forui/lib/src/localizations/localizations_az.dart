@@ -122,6 +122,9 @@ class FLocalizationsAz extends FLocalizations {
   String get multiSelectHint => 'Elementləri seçin';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Silin';
+
+  @override
   String get selectHint => 'Element seçin';
 
   @override

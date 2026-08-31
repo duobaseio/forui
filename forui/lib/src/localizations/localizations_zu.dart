@@ -122,6 +122,9 @@ class FLocalizationsZu extends FLocalizations {
   String get multiSelectHint => 'Khetha izinto';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Susa';
+
+  @override
   String get selectHint => 'Khetha into';
 
   @override

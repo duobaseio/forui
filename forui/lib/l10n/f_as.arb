@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} ফলাফল উপলব্ধ",
   "autocompleteSuggestion": "পৰামৰ্শ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "অধিক",
-  "paginationPageSemanticsLabel": "পৃষ্ঠা {page}"
+  "paginationPageSemanticsLabel": "পৃষ্ঠা {page}",
+  "multiSelectTagSemanticsLabel": "আঁতৰাওক"
 }

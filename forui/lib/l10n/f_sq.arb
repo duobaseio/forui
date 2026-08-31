@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} rezultate në dispozicion",
   "autocompleteSuggestion": "Sugjerim: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Më shumë",
-  "paginationPageSemanticsLabel": "Faqja {page}"
+  "paginationPageSemanticsLabel": "Faqja {page}",
+  "multiSelectTagSemanticsLabel": "Hiq"
 }

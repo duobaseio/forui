@@ -122,6 +122,9 @@ class FLocalizationsGsw extends FLocalizations {
   String get multiSelectHint => 'Elemente uswähle';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Entfernen';
+
+  @override
   String get selectHint => 'Wähle e Element';
 
   @override

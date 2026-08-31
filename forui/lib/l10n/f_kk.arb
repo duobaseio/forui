@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} нәтиже қолжетімді",
   "autocompleteSuggestion": "Ұсыныс: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Тағы",
-  "paginationPageSemanticsLabel": "{page}-бет"
+  "paginationPageSemanticsLabel": "{page}-бет",
+  "multiSelectTagSemanticsLabel": "Алып тастау"
 }

@@ -122,6 +122,9 @@ class FLocalizationsIs extends FLocalizations {
   String get multiSelectHint => 'Veldu hluti';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Fjarlægja';
+
+  @override
   String get selectHint => 'Veldu atriði';
 
   @override

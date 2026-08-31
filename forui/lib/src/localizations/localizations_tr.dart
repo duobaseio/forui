@@ -122,6 +122,9 @@ class FLocalizationsTr extends FLocalizations {
   String get multiSelectHint => 'Öğeleri seç';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Kaldır';
+
+  @override
   String get selectHint => 'Bir öğe seçin';
 
   @override

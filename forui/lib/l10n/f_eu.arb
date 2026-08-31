@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} emaitza erabilgarri",
   "autocompleteSuggestion": "Iradokizuna: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Gehiago",
-  "paginationPageSemanticsLabel": "{page}. orria"
+  "paginationPageSemanticsLabel": "{page}. orria",
+  "multiSelectTagSemanticsLabel": "Kendu"
 }

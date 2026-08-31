@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} tulosta saatavilla",
   "autocompleteSuggestion": "Ehdotus: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Lisää",
-  "paginationPageSemanticsLabel": "Sivu {page}"
+  "paginationPageSemanticsLabel": "Sivu {page}",
+  "multiSelectTagSemanticsLabel": "Poista"
 }

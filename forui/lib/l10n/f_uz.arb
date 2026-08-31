@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} ta natija mavjud",
   "autocompleteSuggestion": "Taklif: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Yana",
-  "paginationPageSemanticsLabel": "{page}-sahifa"
+  "paginationPageSemanticsLabel": "{page}-sahifa",
+  "multiSelectTagSemanticsLabel": "Olib tashlash"
 }

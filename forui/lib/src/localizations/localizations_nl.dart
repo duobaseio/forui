@@ -122,6 +122,9 @@ class FLocalizationsNl extends FLocalizations {
   String get multiSelectHint => 'Selecteer items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Verwijderen';
+
+  @override
   String get selectHint => 'Selecteer een item';
 
   @override

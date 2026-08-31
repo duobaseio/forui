@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} dostupnih rezultata",
   "autocompleteSuggestion": "Predlog: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Više",
-  "paginationPageSemanticsLabel": "{page}. stranica"
+  "paginationPageSemanticsLabel": "{page}. stranica",
+  "multiSelectTagSemanticsLabel": "Ukloni"
 }

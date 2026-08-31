@@ -122,6 +122,9 @@ class FLocalizationsFi extends FLocalizations {
   String get multiSelectHint => 'Valitse kohteet';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Poista';
+
+  @override
   String get selectHint => 'Valitse kohde';
 
   @override

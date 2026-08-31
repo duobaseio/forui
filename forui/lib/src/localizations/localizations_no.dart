@@ -122,6 +122,9 @@ class FLocalizationsNo extends FLocalizations {
   String get multiSelectHint => 'Velg elementer';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Fjern';
+
+  @override
   String get selectHint => 'Velg et element';
 
   @override

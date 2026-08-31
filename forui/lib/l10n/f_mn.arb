@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} үр дүн байна",
   "autocompleteSuggestion": "Санал: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Илүү",
-  "paginationPageSemanticsLabel": "{page}-р хуудас"
+  "paginationPageSemanticsLabel": "{page}-р хуудас",
+  "multiSelectTagSemanticsLabel": "Хасах"
 }

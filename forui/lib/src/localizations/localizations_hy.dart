@@ -122,6 +122,9 @@ class FLocalizationsHy extends FLocalizations {
   String get multiSelectHint => 'Ընտրել տարրեր';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Հեռացնել';
+
+  @override
   String get selectHint => 'Ընտրեք տարր';
 
   @override

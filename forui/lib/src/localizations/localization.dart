@@ -155,6 +155,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override

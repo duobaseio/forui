@@ -122,6 +122,9 @@ class FLocalizationsAm extends FLocalizations {
   String get multiSelectHint => 'ንጥሎች ይምረጡ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'አስወግድ';
+
+  @override
   String get selectHint => 'አንድ ንጥል ይምረጡ';
 
   @override

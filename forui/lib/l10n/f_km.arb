@@ -50,5 +50,6 @@
   "autocompleteResults": "លទ្ធផល {count} អាចប្រើបាន",
   "autocompleteSuggestion": "សំណើ៖ {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ច្រើនទៀត",
-  "paginationPageSemanticsLabel": "ទំព័រ {page}"
+  "paginationPageSemanticsLabel": "ទំព័រ {page}",
+  "multiSelectTagSemanticsLabel": "យកចេញ"
 }

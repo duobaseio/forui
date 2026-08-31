@@ -49,5 +49,6 @@
   "autocompleteResults": "Доступно результатов: {count}",
   "autocompleteSuggestion": "Предложение: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Ещё",
-  "paginationPageSemanticsLabel": "Страница {page}"
+  "paginationPageSemanticsLabel": "Страница {page}",
+  "multiSelectTagSemanticsLabel": "Удалить"
 }

@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} налични резултата",
   "autocompleteSuggestion": "Предложение: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Още",
-  "paginationPageSemanticsLabel": "Страница {page}"
+  "paginationPageSemanticsLabel": "Страница {page}",
+  "multiSelectTagSemanticsLabel": "Премахване"
 }

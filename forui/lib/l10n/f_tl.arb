@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} resulta ang available",
   "autocompleteSuggestion": "Mungkahi: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Higit pa",
-  "paginationPageSemanticsLabel": "Page {page}"
+  "paginationPageSemanticsLabel": "Page {page}",
+  "multiSelectTagSemanticsLabel": "Alisin"
 }

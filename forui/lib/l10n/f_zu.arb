@@ -50,5 +50,6 @@
   "autocompleteResults": "Imiphumela engu-{count} iyatholakala",
   "autocompleteSuggestion": "Isiphakamiso: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Okuningi",
-  "paginationPageSemanticsLabel": "Ikhasi {page}"
+  "paginationPageSemanticsLabel": "Ikhasi {page}",
+  "multiSelectTagSemanticsLabel": "Susa"
 }

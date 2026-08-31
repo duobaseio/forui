@@ -122,6 +122,9 @@ class FLocalizationsCy extends FLocalizations {
   String get multiSelectHint => 'Dewis eitemau';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Tynnu';
+
+  @override
   String get selectHint => 'Dewiswch eitem';
 
   @override

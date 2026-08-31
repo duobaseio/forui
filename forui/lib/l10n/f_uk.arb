@@ -49,5 +49,6 @@
   "autocompleteResults": "Доступно результатів: {count}",
   "autocompleteSuggestion": "Пропозиція: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Більше",
-  "paginationPageSemanticsLabel": "Сторінка {page}"
+  "paginationPageSemanticsLabel": "Сторінка {page}",
+  "multiSelectTagSemanticsLabel": "Видалити"
 }

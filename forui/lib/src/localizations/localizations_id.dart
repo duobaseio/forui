@@ -122,6 +122,9 @@ class FLocalizationsId extends FLocalizations {
   String get multiSelectHint => 'Pilih item';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Hapus';
+
+  @override
   String get selectHint => 'Pilih item';
 
   @override

@@ -122,6 +122,9 @@ class FLocalizationsJa extends FLocalizations {
   String get multiSelectHint => 'アイテムを選択';
 
   @override
+  String get multiSelectTagSemanticsLabel => '削除';
+
+  @override
   String get selectHint => 'アイテムを選択';
 
   @override

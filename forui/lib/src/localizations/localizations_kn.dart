@@ -122,6 +122,9 @@ class FLocalizationsKn extends FLocalizations {
   String get multiSelectHint => 'ಐಟಮ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ತೆಗೆದುಹಾಕಿ';
+
+  @override
   String get selectHint => 'ಐಟಂ ಆಯ್ಕೆಮಾಡಿ';
 
   @override

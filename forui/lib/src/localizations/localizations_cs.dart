@@ -122,6 +122,9 @@ class FLocalizationsCs extends FLocalizations {
   String get multiSelectHint => 'Vyberte položky';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Odebrat';
+
+  @override
   String get selectHint => 'Vyberte položku';
 
   @override

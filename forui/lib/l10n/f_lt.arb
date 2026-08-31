@@ -50,5 +50,6 @@
   "autocompleteResults": "Yra {count} rezultatų",
   "autocompleteSuggestion": "Pasiūlymas: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Daugiau",
-  "paginationPageSemanticsLabel": "{page} puslapis"
+  "paginationPageSemanticsLabel": "{page} puslapis",
+  "multiSelectTagSemanticsLabel": "Pašalinti"
 }

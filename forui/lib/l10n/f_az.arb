@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} nəticə mövcuddur",
   "autocompleteSuggestion": "Təklif: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Daha çox",
-  "paginationPageSemanticsLabel": "Səhifə {page}"
+  "paginationPageSemanticsLabel": "Səhifə {page}",
+  "multiSelectTagSemanticsLabel": "Silin"
 }

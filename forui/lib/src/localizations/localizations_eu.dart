@@ -122,6 +122,9 @@ class FLocalizationsEu extends FLocalizations {
   String get multiSelectHint => 'Hautatu elementuak';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Kendu';
+
+  @override
   String get selectHint => 'Hautatu elementu bat';
 
   @override

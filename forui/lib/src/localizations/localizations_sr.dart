@@ -122,6 +122,9 @@ class FLocalizationsSr extends FLocalizations {
   String get multiSelectHint => 'Изаберите ставке';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Уклони';
+
+  @override
   String get selectHint => 'Изаберите ставку';
 
   @override
@@ -288,6 +291,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get multiSelectHint => 'Izaberite stavke';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Ukloni';
 
   @override
   String get selectHint => 'Izaberite stavku';

@@ -122,6 +122,9 @@ class FLocalizationsPt extends FLocalizations {
   String get multiSelectHint => 'Selecionar itens';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remover';
+
+  @override
   String get selectHint => 'Selecione um item';
 
   @override
@@ -282,6 +285,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get multiSelectHint => 'Selecionar itens';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Remover';
 
   @override
   String get selectHint => 'Selecione um item';

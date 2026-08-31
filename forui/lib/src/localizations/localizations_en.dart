@@ -128,6 +128,9 @@ class FLocalizationsEn extends FLocalizations {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -300,6 +303,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get multiSelectHint => 'Select items';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
 
   @override
   String get selectHint => 'Select an item';
@@ -476,6 +482,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -648,6 +657,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get multiSelectHint => 'Select items';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
 
   @override
   String get selectHint => 'Select an item';
@@ -824,6 +836,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -996,6 +1011,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get multiSelectHint => 'Select items';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
 
   @override
   String get selectHint => 'Select an item';
@@ -1172,6 +1190,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -1346,6 +1367,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -1518,6 +1542,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get multiSelectHint => 'Select items';
+
+  @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
 
   @override
   String get selectHint => 'Select an item';

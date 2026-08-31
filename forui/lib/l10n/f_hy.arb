@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} արդյունք հասանելի է",
   "autocompleteSuggestion": "Առաջարկ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Ավելին",
-  "paginationPageSemanticsLabel": "Էջ {page}"
+  "paginationPageSemanticsLabel": "Էջ {page}",
+  "multiSelectTagSemanticsLabel": "Հեռացնել"
 }

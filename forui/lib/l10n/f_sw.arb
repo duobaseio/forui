@@ -50,5 +50,6 @@
   "autocompleteResults": "Matokeo {count} yanapatikana",
   "autocompleteSuggestion": "Pendekezo: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Zaidi",
-  "paginationPageSemanticsLabel": "Ukurasa {page}"
+  "paginationPageSemanticsLabel": "Ukurasa {page}",
+  "multiSelectTagSemanticsLabel": "Ondoa"
 }

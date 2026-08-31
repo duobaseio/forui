@@ -122,6 +122,9 @@ class FLocalizationsPs extends FLocalizations {
   String get multiSelectHint => 'توکي غوره کړئ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'لرې کول';
+
+  @override
   String get selectHint => 'یو توکی وټاکئ';
 
   @override

@@ -103,8 +103,10 @@ class FMultiSelectTag extends StatelessWidget {
     final style = this.style(
       MultiSelectFieldScope.maybeOf(context)?.style.tagStyle ?? context.theme.multiSelectStyle.fieldStyles.md.tagStyle,
     );
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return FTappable(
       style: style.tappableStyle,
+      semanticsLabel: localizations.multiSelectTagSemanticsLabel,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,

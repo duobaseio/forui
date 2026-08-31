@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} доступних резултата",
   "autocompleteSuggestion": "Предлог: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Више",
-  "paginationPageSemanticsLabel": "{page}. страница"
+  "paginationPageSemanticsLabel": "{page}. страница",
+  "multiSelectTagSemanticsLabel": "Уклони"
 }

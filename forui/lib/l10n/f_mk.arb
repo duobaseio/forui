@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} достапни резултати",
   "autocompleteSuggestion": "Предлог: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Повеќе",
-  "paginationPageSemanticsLabel": "Страница {page}"
+  "paginationPageSemanticsLabel": "Страница {page}",
+  "multiSelectTagSemanticsLabel": "Отстрани"
 }

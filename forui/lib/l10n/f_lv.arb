@@ -50,5 +50,6 @@
   "autocompleteResults": "Pieejami {count} rezultāti",
   "autocompleteSuggestion": "Ieteikums: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Vairāk",
-  "paginationPageSemanticsLabel": "{page}. lapa"
+  "paginationPageSemanticsLabel": "{page}. lapa",
+  "multiSelectTagSemanticsLabel": "Noņemt"
 }

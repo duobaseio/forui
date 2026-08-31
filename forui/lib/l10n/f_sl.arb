@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} razpoložljivih rezultatov",
   "autocompleteSuggestion": "Predlog: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Več",
-  "paginationPageSemanticsLabel": "Stran {page}"
+  "paginationPageSemanticsLabel": "Stran {page}",
+  "multiSelectTagSemanticsLabel": "Odstrani"
 }

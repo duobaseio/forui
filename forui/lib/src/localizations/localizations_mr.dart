@@ -122,6 +122,9 @@ class FLocalizationsMr extends FLocalizations {
   String get multiSelectHint => 'आयटम निवडा';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'काढून टाका';
+
+  @override
   String get selectHint => 'आयटम निवडा';
 
   @override

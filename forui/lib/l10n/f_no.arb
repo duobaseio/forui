@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} resultater tilgjengelig",
   "autocompleteSuggestion": "Forslag: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mer",
-  "paginationPageSemanticsLabel": "Side {page}"
+  "paginationPageSemanticsLabel": "Side {page}",
+  "multiSelectTagSemanticsLabel": "Fjern"
 }

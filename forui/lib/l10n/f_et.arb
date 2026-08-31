@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} tulemust saadaval",
   "autocompleteSuggestion": "Soovitus: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Rohkem",
-  "paginationPageSemanticsLabel": "{page}. leht"
+  "paginationPageSemanticsLabel": "{page}. leht",
+  "multiSelectTagSemanticsLabel": "Eemalda"
 }

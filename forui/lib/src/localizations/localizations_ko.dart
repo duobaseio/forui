@@ -122,6 +122,9 @@ class FLocalizationsKo extends FLocalizations {
   String get multiSelectHint => '항목 선택';
 
   @override
+  String get multiSelectTagSemanticsLabel => '제거';
+
+  @override
   String get selectHint => '항목 선택';
 
   @override

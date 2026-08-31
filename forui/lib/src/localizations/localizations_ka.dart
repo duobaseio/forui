@@ -122,6 +122,9 @@ class FLocalizationsKa extends FLocalizations {
   String get multiSelectHint => 'ელემენტების არჩევა';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ამოშლა';
+
+  @override
   String get selectHint => 'აირჩიეთ ელემენტი';
 
   @override

@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} beskikbare resultate",
   "autocompleteSuggestion": "Voorstel: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meer",
-  "paginationPageSemanticsLabel": "Bladsy {page}"
+  "paginationPageSemanticsLabel": "Bladsy {page}",
+  "multiSelectTagSemanticsLabel": "Verwyder"
 }

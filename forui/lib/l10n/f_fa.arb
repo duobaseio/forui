@@ -49,5 +49,6 @@
   "autocompleteResults": "{count} نتیجه موجود است",
   "autocompleteSuggestion": "پیشنهاد: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "بیشتر",
-  "paginationPageSemanticsLabel": "صفحه {page}"
+  "paginationPageSemanticsLabel": "صفحه {page}",
+  "multiSelectTagSemanticsLabel": "حذف"
 }

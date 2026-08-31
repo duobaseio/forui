@@ -50,5 +50,6 @@
   "autocompleteResults": "{count} ውጤቶች ይገኛሉ",
   "autocompleteSuggestion": "ጥቆማ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ተጨማሪ",
-  "paginationPageSemanticsLabel": "ገፅ {page}"
+  "paginationPageSemanticsLabel": "ገፅ {page}",
+  "multiSelectTagSemanticsLabel": "አስወግድ"
 }

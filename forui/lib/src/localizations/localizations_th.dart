@@ -122,6 +122,9 @@ class FLocalizationsTh extends FLocalizations {
   String get multiSelectHint => 'เลือกรายการ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'นำออก';
+
+  @override
   String get selectHint => 'เลือกรายการ';
 
   @override

@@ -122,6 +122,9 @@ class FLocalizationsSw extends FLocalizations {
   String get multiSelectHint => 'Chagua vipengee';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Ondoa';
+
+  @override
   String get selectHint => 'Chagua kipengee';
 
   @override
