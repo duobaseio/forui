@@ -5,6 +5,12 @@
 * Fix the fallback being clipped at large text scales.
 
 
+### `FItem` & `FItemGroup`
+* Add `FItem.semanticsButton`.
+* Add `FItem.semanticsChecked`.
+* Add `FItem.semanticsInMutuallyExclusiveGroup`.
+
+
 ### `FLabel`
 * Change error to be a live region on platforms without accessibility announcement support.
 
@@ -17,6 +23,8 @@
 
 * Fix `FMultiSelect` label and description not being announced with the field by screen readers.
 * Fix `FMultiSelect` tags not announcing that activating them removes the item.
+* Fix items being announced as buttons instead of radio buttons in `FSelect` and checkboxes in `FMultiSelect`.
+* Fix `FMultiSelect` hint being merged into the field's semantic label instead of its hint.
 
 
 ### `FSelectMenuTile`

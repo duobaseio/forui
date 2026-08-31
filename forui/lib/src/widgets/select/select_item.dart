@@ -413,13 +413,14 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedSelectController(:popover, :contains, :onPress) = .of<T>(context);
+    final InheritedSelectController(:popover, :radio, :contains, :onPress) = .of<T>(context);
     final content = ContentData.of<T>(context);
 
     return _item(
       context,
       widget.enabled ?? content.enabled,
       contains(widget.value),
+      radio,
       content.autofocus(widget.value) || content.autofocusFirst,
       (previous, current) {
         final added = current.difference(previous);
@@ -449,6 +450,7 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
     BuildContext context,
     bool enabled,
     bool selected,
+    bool? radio,
     bool focused,
     FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
@@ -489,6 +491,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     BuildContext context,
     bool enabled,
     bool selected,
+    bool? radio,
     bool focused,
     FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
@@ -496,6 +499,9 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     style: widget.style,
     enabled: enabled,
     selected: selected,
+    semanticsButton: false,
+    semanticsChecked: selected,
+    semanticsInMutuallyExclusiveGroup: radio,
     autofocus: focused,
     focusNode: _focus,
     onVariantChange: onVariantChange,
@@ -523,6 +529,7 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     BuildContext context,
     bool enabled,
     bool selected,
+    bool? radio,
     bool focused,
     FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
@@ -530,6 +537,9 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     style: widget.style,
     enabled: enabled,
     selected: selected,
+    semanticsButton: false,
+    semanticsChecked: selected,
+    semanticsInMutuallyExclusiveGroup: radio,
     autofocus: focused,
     focusNode: _focus,
     onVariantChange: onVariantChange,

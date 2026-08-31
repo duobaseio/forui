@@ -885,6 +885,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
           popoverBuilder: (_, popoverController) => TextFieldTapRegion(
             child: InheritedSelectController<T>(
               popover: popoverController,
+              radio: true,
               contains: (value) => _controller.value == value,
               onPress: (value) async {
                 if (widget.autoHide) {

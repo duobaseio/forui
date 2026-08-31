@@ -604,13 +604,97 @@ void main() {
       expect(
         tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
         isSemantics(
-          label: 'Fruits\nSelect items',
-          hint: 'Pick some',
+          label: 'Fruits',
+          hint: 'Select items\nPick some',
           isButton: true,
           isFocusable: true,
           hasExpandedState: true,
           hasTapAction: true,
         ),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('default hint announces as a semantic hint instead of the label', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(key: key, label: const Text('Fruits'), items: letters),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: 'Select items', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('text hint announces as a semantic hint instead of the label', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            hint: const Text('Pick fruits'),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: 'Pick fruits', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('non-text hint announces as a semantic hint instead of the label', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            hint: const Align(alignment: AlignmentDirectional.centerStart, child: Text('Custom')),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: 'Custom', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('hidden hint is not announced when items are selected', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            keepHint: false,
+            control: const .managed(initial: {'A'}),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: '', isButton: true, hasTapAction: true),
       );
 
       semantics.dispose();
@@ -695,6 +779,30 @@ void main() {
       await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
       await tester.pumpAndSettle();
       expect(changed, null);
+    });
+
+    testWidgets('items announce as checkboxes', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(key: key, control: const .managed(initial: {'A'}), items: letters),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.descendant(of: find.byType(FItem), matching: find.text('A'))),
+        isSemantics(hasCheckedState: true, isChecked: true, isInMutuallyExclusiveGroup: false, isButton: false),
+      );
+      expect(
+        tester.getSemantics(find.descendant(of: find.byType(FItem), matching: find.text('B'))),
+        isSemantics(hasCheckedState: true, isChecked: false, isInMutuallyExclusiveGroup: false, isButton: false),
+      );
+
+      semantics.dispose();
     });
 
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
