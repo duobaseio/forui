@@ -148,6 +148,25 @@ class FLocalizationsLt extends FLocalizations {
   String get sheetSemanticsLabel => 'lapas';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dukart palieskite, kad perjungtumėte šliaužiklius';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Pasirinkti minimumo šliaužiklį';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Pasirinkti maksimumo šliaužiklį';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimumas, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimumas, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'El. paštas';
 
   @override

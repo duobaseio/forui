@@ -148,6 +148,25 @@ class FLocalizationsPs extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'د لاستو بدلولو لپاره دوه ځله ټک ووهئ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'د لږترلږه لاستی وټاکئ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'د زیات نه زیات لاستی وټاکئ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'لږ تر لږه، $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'زیات نه زیات، $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'برېښنالیک';
 
   @override

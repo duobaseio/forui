@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Öneri: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Daha fazla",
   "paginationPageSemanticsLabel": "Sayfa {page}",
-  "multiSelectTagSemanticsLabel": "Kaldır"
+  "multiSelectTagSemanticsLabel": "Kaldır",
+  "sliderSwitchThumbsSemanticsHint": "Tutamaçlar arasında geçiş yapmak için iki kez dokunun",
+  "sliderSelectMinThumbSemanticsLabel": "Minimum tutamacı seç",
+  "sliderSelectMaxThumbSemanticsLabel": "Maksimum tutamacı seç",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

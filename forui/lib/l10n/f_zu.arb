@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Isiphakamiso: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Okuningi",
   "paginationPageSemanticsLabel": "Ikhasi {page}",
-  "multiSelectTagSemanticsLabel": "Susa"
+  "multiSelectTagSemanticsLabel": "Susa",
+  "sliderSwitchThumbsSemanticsHint": "Thepha kabili ukuze ushintshe izibambo",
+  "sliderSelectMinThumbSemanticsLabel": "Khetha isibambo esincane",
+  "sliderSelectMaxThumbSemanticsLabel": "Khetha isibambo esikhulu",
+  "sliderMinSemanticsValue": "Okuncane, {value}",
+  "sliderMaxSemanticsValue": "Okukhulu, {value}"
 }

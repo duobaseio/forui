@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "تجویز: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "مزید",
   "paginationPageSemanticsLabel": "صفحہ {page}",
-  "multiSelectTagSemanticsLabel": "ہٹائیں"
+  "multiSelectTagSemanticsLabel": "ہٹائیں",
+  "sliderSwitchThumbsSemanticsHint": "ہینڈل تبدیل کرنے کے لیے دو بار تھپتھپائیں",
+  "sliderSelectMinThumbSemanticsLabel": "کم از کم ہینڈل منتخب کریں",
+  "sliderSelectMaxThumbSemanticsLabel": "زیادہ سے زیادہ ہینڈل منتخب کریں",
+  "sliderMinSemanticsValue": "کم از کم، {value}",
+  "sliderMaxSemanticsValue": "زیادہ سے زیادہ، {value}"
 }

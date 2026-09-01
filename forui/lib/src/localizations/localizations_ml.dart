@@ -148,6 +148,25 @@ class FLocalizationsMl extends FLocalizations {
   String get sheetSemanticsLabel => 'ഷീറ്റ്';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ഹാൻഡിലുകൾ മാറ്റാൻ രണ്ടുതവണ ടാപ്പുചെയ്യുക';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'മിനിമം ഹാൻഡിൽ തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'മാക്സിമം ഹാൻഡിൽ തിരഞ്ഞെടുക്കുക';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'മിനിമം, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'മാക്സിമം, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ഇമെയിൽ';
 
   @override

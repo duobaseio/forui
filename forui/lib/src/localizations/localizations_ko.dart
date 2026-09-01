@@ -148,6 +148,25 @@ class FLocalizationsKo extends FLocalizations {
   String get sheetSemanticsLabel => '시트';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => '핸들을 전환하려면 두 번 탭하세요';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '최소 핸들 선택';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '최대 핸들 선택';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '최소, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '최대, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => '이메일';
 
   @override

@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "பரிந்துரை: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "மேலும்",
   "paginationPageSemanticsLabel": "பக்கம் {page}",
-  "multiSelectTagSemanticsLabel": "அகற்று"
+  "multiSelectTagSemanticsLabel": "அகற்று",
+  "sliderSwitchThumbsSemanticsHint": "ஹேண்டில்களை மாற்ற இருமுறை தட்டவும்",
+  "sliderSelectMinThumbSemanticsLabel": "குறைந்தபட்ச ஹேண்டிலைத் தேர்ந்தெடுக்கவும்",
+  "sliderSelectMaxThumbSemanticsLabel": "அதிகபட்ச ஹேண்டிலைத் தேர்ந்தெடுக்கவும்",
+  "sliderMinSemanticsValue": "குறைந்தபட்சம், {value}",
+  "sliderMaxSemanticsValue": "அதிகபட்சம், {value}"
 }

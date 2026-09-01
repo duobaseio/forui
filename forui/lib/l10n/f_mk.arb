@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Предлог: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Повеќе",
   "paginationPageSemanticsLabel": "Страница {page}",
-  "multiSelectTagSemanticsLabel": "Отстрани"
+  "multiSelectTagSemanticsLabel": "Отстрани",
+  "sliderSwitchThumbsSemanticsHint": "Допрете двапати за да ги промените лизгачите",
+  "sliderSelectMinThumbSemanticsLabel": "Изберете го минималниот лизгач",
+  "sliderSelectMaxThumbSemanticsLabel": "Изберете го максималниот лизгач",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

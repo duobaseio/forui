@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "សំណើ៖ {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ច្រើនទៀត",
   "paginationPageSemanticsLabel": "ទំព័រ {page}",
-  "multiSelectTagSemanticsLabel": "យកចេញ"
+  "multiSelectTagSemanticsLabel": "យកចេញ",
+  "sliderSwitchThumbsSemanticsHint": "ចុចពីរដងដើម្បីប្តូរគ្រាប់រំកិល",
+  "sliderSelectMinThumbSemanticsLabel": "ជ្រើសរើសគ្រាប់រំកិលអប្បបរមា",
+  "sliderSelectMaxThumbSemanticsLabel": "ជ្រើសរើសគ្រាប់រំកិលអតិបរមា",
+  "sliderMinSemanticsValue": "អប្បបរមា, {value}",
+  "sliderMaxSemanticsValue": "អតិបរមា, {value}"
 }

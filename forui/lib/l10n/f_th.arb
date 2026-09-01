@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "คำแนะนำ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "เพิ่มเติม",
   "paginationPageSemanticsLabel": "หน้า {page}",
-  "multiSelectTagSemanticsLabel": "นำออก"
+  "multiSelectTagSemanticsLabel": "นำออก",
+  "sliderSwitchThumbsSemanticsHint": "แตะสองครั้งเพื่อสลับตัวเลื่อน",
+  "sliderSelectMinThumbSemanticsLabel": "เลือกตัวเลื่อนค่าต่ำสุด",
+  "sliderSelectMaxThumbSemanticsLabel": "เลือกตัวเลื่อนค่าสูงสุด",
+  "sliderMinSemanticsValue": "ต่ำสุด, {value}",
+  "sliderMaxSemanticsValue": "สูงสุด, {value}"
 }

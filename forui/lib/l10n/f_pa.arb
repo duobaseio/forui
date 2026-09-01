@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "ਸੁਝਾਅ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ਹੋਰ",
   "paginationPageSemanticsLabel": "ਪੰਨਾ {page}",
-  "multiSelectTagSemanticsLabel": "ਹਟਾਓ"
+  "multiSelectTagSemanticsLabel": "ਹਟਾਓ",
+  "sliderSwitchThumbsSemanticsHint": "ਹੈਂਡਲ ਬਦਲਣ ਲਈ ਦੋ ਵਾਰ ਟੈਪ ਕਰੋ",
+  "sliderSelectMinThumbSemanticsLabel": "ਘੱਟੋ-ਘੱਟ ਹੈਂਡਲ ਚੁਣੋ",
+  "sliderSelectMaxThumbSemanticsLabel": "ਵੱਧ ਤੋਂ ਵੱਧ ਹੈਂਡਲ ਚੁਣੋ",
+  "sliderMinSemanticsValue": "ਘੱਟੋ-ਘੱਟ, {value}",
+  "sliderMaxSemanticsValue": "ਵੱਧ ਤੋਂ ਵੱਧ, {value}"
 }

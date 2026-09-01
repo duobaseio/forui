@@ -148,6 +148,25 @@ class FLocalizationsTe extends FLocalizations {
   String get sheetSemanticsLabel => 'షీట్';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'హ్యాండిల్‌లను మార్చడానికి రెండుసార్లు నొక్కండి';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'కనిష్ఠ హ్యాండిల్‌ను ఎంచుకోండి';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'గరిష్ఠ హ్యాండిల్‌ను ఎంచుకోండి';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'కనిష్ఠం, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'గరిష్ఠం, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ఇమెయిల్';
 
   @override

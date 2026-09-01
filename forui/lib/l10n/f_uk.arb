@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Пропозиція: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Більше",
   "paginationPageSemanticsLabel": "Сторінка {page}",
-  "multiSelectTagSemanticsLabel": "Видалити"
+  "multiSelectTagSemanticsLabel": "Видалити",
+  "sliderSwitchThumbsSemanticsHint": "Двічі торкніться, щоб переключити повзунки",
+  "sliderSelectMinThumbSemanticsLabel": "Вибрати мінімальний повзунок",
+  "sliderSelectMaxThumbSemanticsLabel": "Вибрати максимальний повзунок",
+  "sliderMinSemanticsValue": "Мінімум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

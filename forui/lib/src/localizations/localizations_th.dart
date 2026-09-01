@@ -148,6 +148,25 @@ class FLocalizationsTh extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'แตะสองครั้งเพื่อสลับตัวเลื่อน';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'เลือกตัวเลื่อนค่าต่ำสุด';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'เลือกตัวเลื่อนค่าสูงสุด';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'ต่ำสุด, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'สูงสุด, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'อีเมล';
 
   @override

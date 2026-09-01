@@ -67,6 +67,7 @@ class _TrackState extends State<Track> {
     }
 
     final range = controller.active.min && controller.active.max;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return SizedBox(
       height: height,
       width: width,
@@ -80,10 +81,16 @@ class _TrackState extends State<Track> {
         onDecrease: enabled ? decrease : null,
         // onTap + customSemanticsAction is a workaround Flutter engine's focused outlines "lagging" behind a moving
         // focusable semantics node & causing focus to switch from a focused thumb to a background track.
-        hint: range && enabled ? 'Double tap to switch thumbs' : null,
+        hint: range && enabled ? localizations.sliderSwitchThumbsSemanticsHint : null,
         onTap: range && enabled ? _toggle : null,
         customSemanticsActions: range && enabled
-            ? {CustomSemanticsAction(label: _max ? 'Select minimum thumb' : 'Select maximum thumb'): _toggle}
+            ? {
+                CustomSemanticsAction(
+                  label: _max
+                      ? localizations.sliderSelectMinThumbSemanticsLabel
+                      : localizations.sliderSelectMaxThumbSemanticsLabel,
+                ): _toggle,
+              }
             : null,
         child: Stack(
           alignment: .center,
@@ -110,7 +117,11 @@ class _TrackState extends State<Track> {
     SemanticsService.sendAnnouncement(View.of(context), _describe(), Directionality.of(context));
   }
 
-  String _describe() => '${_max ? 'Maximum' : 'Minimum'}, ${_semanticFormatterCallback(_controller!.value)}';
+  String _describe() {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final value = _semanticFormatterCallback(_controller!.value);
+    return _max ? localizations.sliderMaxSemanticsValue(value) : localizations.sliderMinSemanticsValue(value);
+  }
 }
 
 class const _GestureDetector() extends StatefulWidget {

@@ -148,6 +148,25 @@ class FLocalizationsNe extends FLocalizations {
   String get sheetSemanticsLabel => 'पाना';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ह्यान्डल बदल्न दुई पटक ट्याप गर्नुहोस्';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'न्यूनतम ह्यान्डल चयन गर्नुहोस्';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'अधिकतम ह्यान्डल चयन गर्नुहोस्';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'न्यूनतम, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'अधिकतम, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'इमेल';
 
   @override

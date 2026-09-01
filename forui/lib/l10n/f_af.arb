@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Voorstel: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meer",
   "paginationPageSemanticsLabel": "Bladsy {page}",
-  "multiSelectTagSemanticsLabel": "Verwyder"
+  "multiSelectTagSemanticsLabel": "Verwyder",
+  "sliderSwitchThumbsSemanticsHint": "Dubbeltik om van skuifknop te wissel",
+  "sliderSelectMinThumbSemanticsLabel": "Kies minimum skuifknop",
+  "sliderSelectMaxThumbSemanticsLabel": "Kies maksimum skuifknop",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

@@ -148,6 +148,25 @@ class FLocalizationsNb extends FLocalizations {
   String get sheetSemanticsLabel => 'Felt';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Trykk to ganger for å bytte håndtak';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Velg minimumshåndtak';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Velg maksimumshåndtak';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-post';
 
   @override

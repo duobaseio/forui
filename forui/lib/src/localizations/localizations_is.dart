@@ -148,6 +148,25 @@ class FLocalizationsIs extends FLocalizations {
   String get sheetSemanticsLabel => 'Blað';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Ýttu tvisvar til að skipta um sleða';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Velja lágmarkssleða';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Velja hámarkssleða';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Lágmark, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Hámark, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Netfang';
 
   @override

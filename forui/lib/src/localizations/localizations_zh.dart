@@ -148,6 +148,25 @@ class FLocalizationsZh extends FLocalizations {
   String get sheetSemanticsLabel => '动作条';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => '双击可切换滑块';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '选择最小滑块';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '选择最大滑块';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小值，$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大值，$value';
+  }
+
+  @override
   String get textFieldEmailLabel => '电子邮件';
 
   @override
@@ -324,6 +343,25 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get sheetSemanticsLabel => '面板';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => '輕按兩下即可切換滑桿';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '選取最小滑桿';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '選取最大滑桿';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小值，$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大值，$value';
+  }
+
+  @override
   String get textFieldEmailLabel => '電郵';
 
   @override
@@ -498,6 +536,25 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get sheetSemanticsLabel => '功能表';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => '輕觸兩下即可切換滑桿';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '選取最小滑桿';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '選取最大滑桿';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小值，$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大值，$value';
+  }
 
   @override
   String get textFieldEmailLabel => '電子郵件';

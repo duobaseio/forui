@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "پیشنهاد: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "بیشتر",
   "paginationPageSemanticsLabel": "صفحه {page}",
-  "multiSelectTagSemanticsLabel": "حذف"
+  "multiSelectTagSemanticsLabel": "حذف",
+  "sliderSwitchThumbsSemanticsHint": "برای تعویض دستگیره‌ها دو بار ضربه بزنید",
+  "sliderSelectMinThumbSemanticsLabel": "انتخاب دستگیره حداقل",
+  "sliderSelectMaxThumbSemanticsLabel": "انتخاب دستگیره حداکثر",
+  "sliderMinSemanticsValue": "حداقل، {value}",
+  "sliderMaxSemanticsValue": "حداکثر، {value}"
 }

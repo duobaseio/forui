@@ -148,6 +148,25 @@ class FLocalizationsFa extends FLocalizations {
   String get sheetSemanticsLabel => 'برگ';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'برای تعویض دستگیره‌ها دو بار ضربه بزنید';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'انتخاب دستگیره حداقل';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'انتخاب دستگیره حداکثر';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'حداقل، $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'حداکثر، $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ایمیل';
 
   @override

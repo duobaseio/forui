@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Предложение: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Ещё",
   "paginationPageSemanticsLabel": "Страница {page}",
-  "multiSelectTagSemanticsLabel": "Удалить"
+  "multiSelectTagSemanticsLabel": "Удалить",
+  "sliderSwitchThumbsSemanticsHint": "Дважды нажмите, чтобы переключить ползунки",
+  "sliderSelectMinThumbSemanticsLabel": "Выбрать минимальный ползунок",
+  "sliderSelectMaxThumbSemanticsLabel": "Выбрать максимальный ползунок",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

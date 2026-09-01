@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Soovitus: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Rohkem",
   "paginationPageSemanticsLabel": "{page}. leht",
-  "multiSelectTagSemanticsLabel": "Eemalda"
+  "multiSelectTagSemanticsLabel": "Eemalda",
+  "sliderSwitchThumbsSemanticsHint": "Sanga vahetamiseks topeltpuudutage",
+  "sliderSelectMinThumbSemanticsLabel": "Vali miinimumi sang",
+  "sliderSelectMaxThumbSemanticsLabel": "Vali maksimumi sang",
+  "sliderMinSemanticsValue": "Miinimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

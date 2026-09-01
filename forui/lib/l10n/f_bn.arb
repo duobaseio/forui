@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "পরামর্শ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "আরও",
   "paginationPageSemanticsLabel": "পৃষ্ঠা {page}",
-  "multiSelectTagSemanticsLabel": "সরান"
+  "multiSelectTagSemanticsLabel": "সরান",
+  "sliderSwitchThumbsSemanticsHint": "হ্যান্ডেল পরিবর্তন করতে দুবার আলতো চাপুন",
+  "sliderSelectMinThumbSemanticsLabel": "সর্বনিম্ন হ্যান্ডেল নির্বাচন করুন",
+  "sliderSelectMaxThumbSemanticsLabel": "সর্বোচ্চ হ্যান্ডেল নির্বাচন করুন",
+  "sliderMinSemanticsValue": "সর্বনিম্ন, {value}",
+  "sliderMaxSemanticsValue": "সর্বোচ্চ, {value}"
 }

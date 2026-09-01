@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Forslag: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mer",
   "paginationPageSemanticsLabel": "Side {page}",
-  "multiSelectTagSemanticsLabel": "Fjern"
+  "multiSelectTagSemanticsLabel": "Fjern",
+  "sliderSwitchThumbsSemanticsHint": "Trykk to ganger for å bytte håndtak",
+  "sliderSelectMinThumbSemanticsLabel": "Velg minimumshåndtak",
+  "sliderSelectMaxThumbSemanticsLabel": "Velg maksimumshåndtak",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

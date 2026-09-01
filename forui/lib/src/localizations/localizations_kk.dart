@@ -148,6 +148,25 @@ class FLocalizationsKk extends FLocalizations {
   String get sheetSemanticsLabel => 'парақша';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Тұтқаларды ауыстыру үшін екі рет түртіңіз';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Ең төменгі тұтқаны таңдау';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Ең жоғарғы тұтқаны таңдау';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Минимум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Электрондық пошта';
 
   @override

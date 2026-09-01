@@ -148,6 +148,25 @@ class FLocalizationsEu extends FLocalizations {
   String get sheetSemanticsLabel => 'orria';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Sakatu birritan heldulekuz aldatzeko';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Hautatu gutxieneko heldulekua';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Hautatu gehienezko heldulekua';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Gutxienekoa, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Gehienezkoa, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Posta elektronikoa';
 
   @override

@@ -148,6 +148,25 @@ class FLocalizationsKn extends FLocalizations {
   String get sheetSemanticsLabel => 'ಶೀಟ್';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ಹ್ಯಾಂಡಲ್ ಬದಲಾಯಿಸಲು ಎರಡು ಬಾರಿ ಟ್ಯಾಪ್ ಮಾಡಿ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'ಕನಿಷ್ಠ ಹ್ಯಾಂಡಲ್ ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'ಗರಿಷ್ಠ ಹ್ಯಾಂಡಲ್ ಆಯ್ಕೆಮಾಡಿ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'ಕನಿಷ್ಠ, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'ಗರಿಷ್ಠ, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ಇಮೇಲ್';
 
   @override

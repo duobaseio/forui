@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "കൂടുതൽ",
   "paginationPageSemanticsLabel": "പേജ് {page}",
-  "multiSelectTagSemanticsLabel": "നീക്കംചെയ്യുക"
+  "multiSelectTagSemanticsLabel": "നീക്കംചെയ്യുക",
+  "sliderSwitchThumbsSemanticsHint": "ഹാൻഡിലുകൾ മാറ്റാൻ രണ്ടുതവണ ടാപ്പുചെയ്യുക",
+  "sliderSelectMinThumbSemanticsLabel": "മിനിമം ഹാൻഡിൽ തിരഞ്ഞെടുക്കുക",
+  "sliderSelectMaxThumbSemanticsLabel": "മാക്സിമം ഹാൻഡിൽ തിരഞ്ഞെടുക്കുക",
+  "sliderMinSemanticsValue": "മിനിമം, {value}",
+  "sliderMaxSemanticsValue": "മാക്സിമം, {value}"
 }

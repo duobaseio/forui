@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Pendekezo: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Zaidi",
   "paginationPageSemanticsLabel": "Ukurasa {page}",
-  "multiSelectTagSemanticsLabel": "Ondoa"
+  "multiSelectTagSemanticsLabel": "Ondoa",
+  "sliderSwitchThumbsSemanticsHint": "Gusa mara mbili ili kubadilisha vishikizo",
+  "sliderSelectMinThumbSemanticsLabel": "Chagua kishikizo cha chini zaidi",
+  "sliderSelectMaxThumbSemanticsLabel": "Chagua kishikizo cha juu zaidi",
+  "sliderMinSemanticsValue": "Kima cha chini, {value}",
+  "sliderMaxSemanticsValue": "Kima cha juu, {value}"
 }

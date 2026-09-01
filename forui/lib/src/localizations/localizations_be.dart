@@ -148,6 +148,25 @@ class FLocalizationsBe extends FLocalizations {
   String get sheetSemanticsLabel => 'аркуш';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Двойчы націсніце, каб пераключыць паўзункі';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Выбраць мінімальны паўзунок';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Выбраць максімальны паўзунок';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Мінімум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максімум, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Электронная пошта';
 
   @override

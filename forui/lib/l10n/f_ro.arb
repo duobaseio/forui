@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Sugestie: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mai multe",
   "paginationPageSemanticsLabel": "Pagina {page}",
-  "multiSelectTagSemanticsLabel": "Eliminați"
+  "multiSelectTagSemanticsLabel": "Eliminați",
+  "sliderSwitchThumbsSemanticsHint": "Atingeți de două ori pentru a comuta între glisoare",
+  "sliderSelectMinThumbSemanticsLabel": "Selectați glisorul minim",
+  "sliderSelectMaxThumbSemanticsLabel": "Selectați glisorul maxim",
+  "sliderMinSemanticsValue": "Minim, {value}",
+  "sliderMaxSemanticsValue": "Maxim, {value}"
 }

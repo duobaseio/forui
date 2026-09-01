@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Prijedlog: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Više",
   "paginationPageSemanticsLabel": "{page}. stranica",
-  "multiSelectTagSemanticsLabel": "Ukloni"
+  "multiSelectTagSemanticsLabel": "Ukloni",
+  "sliderSwitchThumbsSemanticsHint": "Dvaput dodirnite da promijenite klizače",
+  "sliderSelectMinThumbSemanticsLabel": "Odaberite minimalni klizač",
+  "sliderSelectMaxThumbSemanticsLabel": "Odaberite maksimalni klizač",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

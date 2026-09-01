@@ -148,6 +148,25 @@ class FLocalizationsAr extends FLocalizations {
   String get sheetSemanticsLabel => 'بطاق ';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'انقر نقرًا مزدوجًا للتبديل بين المقبضين';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'تحديد مقبض الحد الأدنى';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'تحديد مقبض الحد الأقصى';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'الحد الأدنى، $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'الحد الأقصى، $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'البريد الإلكتروني';
 
   @override

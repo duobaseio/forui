@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Tillaga: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meira",
   "paginationPageSemanticsLabel": "Síða {page}",
-  "multiSelectTagSemanticsLabel": "Fjarlægja"
+  "multiSelectTagSemanticsLabel": "Fjarlægja",
+  "sliderSwitchThumbsSemanticsHint": "Ýttu tvisvar til að skipta um sleða",
+  "sliderSelectMinThumbSemanticsLabel": "Velja lágmarkssleða",
+  "sliderSelectMaxThumbSemanticsLabel": "Velja hámarkssleða",
+  "sliderMinSemanticsValue": "Lágmark, {value}",
+  "sliderMaxSemanticsValue": "Hámark, {value}"
 }

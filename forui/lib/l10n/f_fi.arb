@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Ehdotus: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Lisää",
   "paginationPageSemanticsLabel": "Sivu {page}",
-  "multiSelectTagSemanticsLabel": "Poista"
+  "multiSelectTagSemanticsLabel": "Poista",
+  "sliderSwitchThumbsSemanticsHint": "Vaihda kahvaa kaksoisnapauttamalla",
+  "sliderSelectMinThumbSemanticsLabel": "Valitse minimikahva",
+  "sliderSelectMaxThumbSemanticsLabel": "Valitse maksimikahva",
+  "sliderMinSemanticsValue": "Minimi, {value}",
+  "sliderMaxSemanticsValue": "Maksimi, {value}"
 }

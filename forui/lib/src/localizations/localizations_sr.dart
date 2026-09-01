@@ -148,6 +148,25 @@ class FLocalizationsSr extends FLocalizations {
   String get sheetSemanticsLabel => 'табела';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Додирните двапут да бисте променили клизаче';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Изаберите минимални клизач';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Изаберите максимални клизач';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Минимум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Имејл';
 
   @override
@@ -322,6 +341,25 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get sheetSemanticsLabel => 'tabela';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dodirnite dvaput da biste promenili klizače';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Izaberite minimalni klizač';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Izaberite maksimalni klizač';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Imejl';

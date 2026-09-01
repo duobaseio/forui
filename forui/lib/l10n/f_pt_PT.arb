@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Sugestão: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mais",
   "paginationPageSemanticsLabel": "Página {page}",
-  "multiSelectTagSemanticsLabel": "Remover"
+  "multiSelectTagSemanticsLabel": "Remover",
+  "sliderSwitchThumbsSemanticsHint": "Toque duas vezes para alternar entre os manípulos",
+  "sliderSelectMinThumbSemanticsLabel": "Selecionar o manípulo mínimo",
+  "sliderSelectMaxThumbSemanticsLabel": "Selecionar o manípulo máximo",
+  "sliderMinSemanticsValue": "Mínimo, {value}",
+  "sliderMaxSemanticsValue": "Máximo, {value}"
 }

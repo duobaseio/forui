@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "შემოთავაზება: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "მეტი",
   "paginationPageSemanticsLabel": "გვერდი {page}",
-  "multiSelectTagSemanticsLabel": "ამოშლა"
+  "multiSelectTagSemanticsLabel": "ამოშლა",
+  "sliderSwitchThumbsSemanticsHint": "ორჯერ შეეხეთ სახელურების გადასართავად",
+  "sliderSelectMinThumbSemanticsLabel": "მინიმალური სახელურის არჩევა",
+  "sliderSelectMaxThumbSemanticsLabel": "მაქსიმალური სახელურის არჩევა",
+  "sliderMinSemanticsValue": "მინიმუმი, {value}",
+  "sliderMaxSemanticsValue": "მაქსიმუმი, {value}"
 }

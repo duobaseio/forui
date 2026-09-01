@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "ಸಲಹೆ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ಇನ್ನಷ್ಟು",
   "paginationPageSemanticsLabel": "ಪುಟ {page}",
-  "multiSelectTagSemanticsLabel": "ತೆಗೆದುಹಾಕಿ"
+  "multiSelectTagSemanticsLabel": "ತೆಗೆದುಹಾಕಿ",
+  "sliderSwitchThumbsSemanticsHint": "ಹ್ಯಾಂಡಲ್ ಬದಲಾಯಿಸಲು ಎರಡು ಬಾರಿ ಟ್ಯಾಪ್ ಮಾಡಿ",
+  "sliderSelectMinThumbSemanticsLabel": "ಕನಿಷ್ಠ ಹ್ಯಾಂಡಲ್ ಆಯ್ಕೆಮಾಡಿ",
+  "sliderSelectMaxThumbSemanticsLabel": "ಗರಿಷ್ಠ ಹ್ಯಾಂಡಲ್ ಆಯ್ಕೆಮಾಡಿ",
+  "sliderMinSemanticsValue": "ಕನಿಷ್ಠ, {value}",
+  "sliderMaxSemanticsValue": "ಗರಿಷ್ಠ, {value}"
 }

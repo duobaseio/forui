@@ -148,6 +148,25 @@ class FLocalizationsSi extends FLocalizations {
   String get sheetSemanticsLabel => 'පත්‍රය';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'හැඬල් මාරු කිරීමට දෙවරක් තට්ටු කරන්න';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'අවම හැඬලය තෝරන්න';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'උපරිම හැඬලය තෝරන්න';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'අවම, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'උපරිම, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'විද්‍යුත් තැපෑල';
 
   @override

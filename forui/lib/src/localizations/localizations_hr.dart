@@ -148,6 +148,25 @@ class FLocalizationsHr extends FLocalizations {
   String get sheetSemanticsLabel => 'tablica';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dvaput dodirnite za promjenu klizača';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Odaberite minimalni klizač';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Odaberite maksimalni klizač';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-pošta';
 
   @override

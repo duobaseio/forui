@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Cadangan: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Lagi",
   "paginationPageSemanticsLabel": "Halaman {page}",
-  "multiSelectTagSemanticsLabel": "Alih keluar"
+  "multiSelectTagSemanticsLabel": "Alih keluar",
+  "sliderSwitchThumbsSemanticsHint": "Ketik dua kali untuk menukar pemegang",
+  "sliderSelectMinThumbSemanticsLabel": "Pilih pemegang minimum",
+  "sliderSelectMaxThumbSemanticsLabel": "Pilih pemegang maksimum",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

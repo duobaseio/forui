@@ -148,6 +148,25 @@ class FLocalizationsMr extends FLocalizations {
   String get sheetSemanticsLabel => 'शीट';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'हँडल बदलण्यासाठी दोनदा टॅप करा';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'किमान हँडल निवडा';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'कमाल हँडल निवडा';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'किमान, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'कमाल, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ईमेल';
 
   @override

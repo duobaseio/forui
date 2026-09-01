@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "సూచన: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "మరిన్ని",
   "paginationPageSemanticsLabel": "పేజీ {page}",
-  "multiSelectTagSemanticsLabel": "తీసివేయి"
+  "multiSelectTagSemanticsLabel": "తీసివేయి",
+  "sliderSwitchThumbsSemanticsHint": "హ్యాండిల్‌లను మార్చడానికి రెండుసార్లు నొక్కండి",
+  "sliderSelectMinThumbSemanticsLabel": "కనిష్ఠ హ్యాండిల్‌ను ఎంచుకోండి",
+  "sliderSelectMaxThumbSemanticsLabel": "గరిష్ఠ హ్యాండిల్‌ను ఎంచుకోండి",
+  "sliderMinSemanticsValue": "కనిష్ఠం, {value}",
+  "sliderMaxSemanticsValue": "గరిష్ఠం, {value}"
 }

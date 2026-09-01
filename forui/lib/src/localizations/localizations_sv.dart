@@ -148,6 +148,25 @@ class FLocalizationsSv extends FLocalizations {
   String get sheetSemanticsLabel => 'Ark';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Tryck två gånger för att byta reglage';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Välj minimireglage';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Välj maximireglage';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-post';
 
   @override

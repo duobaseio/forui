@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Ұсыныс: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Тағы",
   "paginationPageSemanticsLabel": "{page}-бет",
-  "multiSelectTagSemanticsLabel": "Алып тастау"
+  "multiSelectTagSemanticsLabel": "Алып тастау",
+  "sliderSwitchThumbsSemanticsHint": "Тұтқаларды ауыстыру үшін екі рет түртіңіз",
+  "sliderSelectMinThumbSemanticsLabel": "Ең төменгі тұтқаны таңдау",
+  "sliderSelectMaxThumbSemanticsLabel": "Ең жоғарғы тұтқаны таңдау",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

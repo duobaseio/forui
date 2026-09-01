@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Saran: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Lainnya",
   "paginationPageSemanticsLabel": "Halaman {page}",
-  "multiSelectTagSemanticsLabel": "Hapus"
+  "multiSelectTagSemanticsLabel": "Hapus",
+  "sliderSwitchThumbsSemanticsHint": "Ketuk dua kali untuk beralih gagang",
+  "sliderSelectMinThumbSemanticsLabel": "Pilih gagang minimum",
+  "sliderSelectMaxThumbSemanticsLabel": "Pilih gagang maksimum",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

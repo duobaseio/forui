@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Návrh: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Viac",
   "paginationPageSemanticsLabel": "Strana {page}",
-  "multiSelectTagSemanticsLabel": "Odstrániť"
+  "multiSelectTagSemanticsLabel": "Odstrániť",
+  "sliderSwitchThumbsSemanticsHint": "Dvojitým klepnutím prepnete posúvače",
+  "sliderSelectMinThumbSemanticsLabel": "Vybrať minimálny posúvač",
+  "sliderSelectMaxThumbSemanticsLabel": "Vybrať maximálny posúvač",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

@@ -160,6 +160,25 @@ class FLocalizationsEn extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override
@@ -346,6 +365,25 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -536,6 +574,25 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override
@@ -722,6 +779,25 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -912,6 +988,25 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override
@@ -1098,6 +1193,25 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -1288,6 +1402,25 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override
@@ -1476,6 +1609,25 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override
@@ -1662,6 +1814,25 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

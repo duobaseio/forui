@@ -148,6 +148,25 @@ class FLocalizationsTr extends FLocalizations {
   String get sheetSemanticsLabel => 'sayfa';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Tutamaçlar arasında geçiş yapmak için iki kez dokunun';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimum tutamacı seç';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maksimum tutamacı seç';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-posta';
 
   @override

@@ -148,6 +148,25 @@ class FLocalizationsEt extends FLocalizations {
   String get sheetSemanticsLabel => 'leht';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Sanga vahetamiseks topeltpuudutage';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Vali miinimumi sang';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Vali maksimumi sang';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Miinimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-post';
 
   @override

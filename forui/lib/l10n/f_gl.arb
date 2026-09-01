@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Suxestión: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Máis",
   "paginationPageSemanticsLabel": "Páxina {page}",
-  "multiSelectTagSemanticsLabel": "Quitar"
+  "multiSelectTagSemanticsLabel": "Quitar",
+  "sliderSwitchThumbsSemanticsHint": "Toca dúas veces para cambiar de control",
+  "sliderSelectMinThumbSemanticsLabel": "Seleccionar o control mínimo",
+  "sliderSelectMaxThumbSemanticsLabel": "Seleccionar o control máximo",
+  "sliderMinSemanticsValue": "Mínimo, {value}",
+  "sliderMaxSemanticsValue": "Máximo, {value}"
 }

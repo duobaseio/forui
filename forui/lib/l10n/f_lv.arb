@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Ieteikums: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Vairāk",
   "paginationPageSemanticsLabel": "{page}. lapa",
-  "multiSelectTagSemanticsLabel": "Noņemt"
+  "multiSelectTagSemanticsLabel": "Noņemt",
+  "sliderSwitchThumbsSemanticsHint": "Divreiz pieskarieties, lai pārslēgtu slīdņus",
+  "sliderSelectMinThumbSemanticsLabel": "Atlasīt minimuma slīdni",
+  "sliderSelectMaxThumbSemanticsLabel": "Atlasīt maksimuma slīdni",
+  "sliderMinSemanticsValue": "Minimums, {value}",
+  "sliderMaxSemanticsValue": "Maksimums, {value}"
 }

@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Javaslat: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Továbbiak",
   "paginationPageSemanticsLabel": "{page}. oldal",
-  "multiSelectTagSemanticsLabel": "Eltávolítás"
+  "multiSelectTagSemanticsLabel": "Eltávolítás",
+  "sliderSwitchThumbsSemanticsHint": "Koppintson duplán a csúszkák közötti váltáshoz",
+  "sliderSelectMinThumbSemanticsLabel": "Minimum csúszka kiválasztása",
+  "sliderSelectMaxThumbSemanticsLabel": "Maximum csúszka kiválasztása",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

@@ -148,6 +148,25 @@ class FLocalizationsHu extends FLocalizations {
   String get sheetSemanticsLabel => 'lap';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Koppintson duplán a csúszkák közötti váltáshoz';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimum csúszka kiválasztása';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maximum csúszka kiválasztása';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mail';
 
   @override

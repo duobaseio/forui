@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Сунуш: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Дагы",
   "paginationPageSemanticsLabel": "{page}-бет",
-  "multiSelectTagSemanticsLabel": "Алып салуу"
+  "multiSelectTagSemanticsLabel": "Алып салуу",
+  "sliderSwitchThumbsSemanticsHint": "Кармагычтарды которуштуруу үчүн эки жолу таптаңыз",
+  "sliderSelectMinThumbSemanticsLabel": "Минималдуу кармагычты тандоо",
+  "sliderSelectMaxThumbSemanticsLabel": "Максималдуу кармагычты тандоо",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

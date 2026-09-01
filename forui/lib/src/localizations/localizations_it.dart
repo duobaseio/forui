@@ -148,6 +148,25 @@ class FLocalizationsIt extends FLocalizations {
   String get sheetSemanticsLabel => 'Riquadro';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Tocca due volte per cambiare cursore';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleziona il cursore del minimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleziona il cursore del massimo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Massimo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override

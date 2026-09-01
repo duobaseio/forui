@@ -148,6 +148,25 @@ class FLocalizationsHy extends FLocalizations {
   String get sheetSemanticsLabel => 'էկրան';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Կրկնակի հպեք՝ սահիչները փոխարկելու համար';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Ընտրել նվազագույն սահիչը';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Ընտրել առավելագույն սահիչը';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Նվազագույն, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Առավելագույն, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Էլ․ փոստ';
 
   @override

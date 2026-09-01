@@ -148,6 +148,25 @@ class FLocalizationsJa extends FLocalizations {
   String get sheetSemanticsLabel => 'シート';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ダブルタップでつまみを切り替えます';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '最小値のつまみを選択';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '最大値のつまみを選択';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小、$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大、$value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'メール';
 
   @override

@@ -148,6 +148,25 @@ class FLocalizationsPt extends FLocalizations {
   String get sheetSemanticsLabel => 'inferior';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Toque duas vezes para alternar entre as alças';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Selecionar a alça mínima';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Selecionar a alça máxima';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mail';
 
   @override
@@ -313,6 +332,25 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get sheetSemanticsLabel => 'Secção';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Toque duas vezes para alternar entre os manípulos';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Selecionar o manípulo mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Selecionar o manípulo máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-mail';

@@ -148,6 +148,25 @@ class FLocalizationsGl extends FLocalizations {
   String get sheetSemanticsLabel => 'Panel';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Toca dúas veces para cambiar de control';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar o control mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar o control máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override

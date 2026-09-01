@@ -148,6 +148,25 @@ class FLocalizationsKa extends FLocalizations {
   String get sheetSemanticsLabel => 'ფურცელი';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ორჯერ შეეხეთ სახელურების გადასართავად';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'მინიმალური სახელურის არჩევა';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'მაქსიმალური სახელურის არჩევა';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'მინიმუმი, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'მაქსიმუმი, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ელფოსტა';
 
   @override

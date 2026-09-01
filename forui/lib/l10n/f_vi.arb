@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Đề xuất: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Thêm",
   "paginationPageSemanticsLabel": "Trang {page}",
-  "multiSelectTagSemanticsLabel": "Xóa"
+  "multiSelectTagSemanticsLabel": "Xóa",
+  "sliderSwitchThumbsSemanticsHint": "Nhấn đúp để chuyển núm trượt",
+  "sliderSelectMinThumbSemanticsLabel": "Chọn núm trượt tối thiểu",
+  "sliderSelectMaxThumbSemanticsLabel": "Chọn núm trượt tối đa",
+  "sliderMinSemanticsValue": "Tối thiểu, {value}",
+  "sliderMaxSemanticsValue": "Tối đa, {value}"
 }

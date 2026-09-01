@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "အကြံပြုချက်: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "နောက်ထပ်",
   "paginationPageSemanticsLabel": "စာမျက်နှာ {page}",
-  "multiSelectTagSemanticsLabel": "ဖယ်ရှားရန်"
+  "multiSelectTagSemanticsLabel": "ဖယ်ရှားရန်",
+  "sliderSwitchThumbsSemanticsHint": "လက်ကိုင်များပြောင်းရန် နှစ်ချက်တို့ပါ",
+  "sliderSelectMinThumbSemanticsLabel": "အနည်းဆုံး လက်ကိုင်ကို ရွေးပါ",
+  "sliderSelectMaxThumbSemanticsLabel": "အများဆုံး လက်ကိုင်ကို ရွေးပါ",
+  "sliderMinSemanticsValue": "အနည်းဆုံး၊ {value}",
+  "sliderMaxSemanticsValue": "အများဆုံး၊ {value}"
 }

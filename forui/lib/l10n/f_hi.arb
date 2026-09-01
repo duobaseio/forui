@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "सुझाव: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "अधिक",
   "paginationPageSemanticsLabel": "पेज {page}",
-  "multiSelectTagSemanticsLabel": "हटाएं"
+  "multiSelectTagSemanticsLabel": "हटाएं",
+  "sliderSwitchThumbsSemanticsHint": "हैंडल बदलने के लिए दो बार टैप करें",
+  "sliderSelectMinThumbSemanticsLabel": "न्यूनतम हैंडल चुनें",
+  "sliderSelectMaxThumbSemanticsLabel": "अधिकतम हैंडल चुनें",
+  "sliderMinSemanticsValue": "न्यूनतम, {value}",
+  "sliderMaxSemanticsValue": "अधिकतम, {value}"
 }

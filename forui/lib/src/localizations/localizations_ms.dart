@@ -148,6 +148,25 @@ class FLocalizationsMs extends FLocalizations {
   String get sheetSemanticsLabel => 'Helaian';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Ketik dua kali untuk menukar pemegang';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Pilih pemegang minimum';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Pilih pemegang maksimum';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mel';
 
   @override

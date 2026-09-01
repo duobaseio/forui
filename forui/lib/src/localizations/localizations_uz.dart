@@ -148,6 +148,25 @@ class FLocalizationsUz extends FLocalizations {
   String get sheetSemanticsLabel => 'ekran';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dastaklarni almashtirish uchun ikki marta bosing';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimal dastakni tanlash';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maksimal dastakni tanlash';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimal, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimal, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Elektron pochta';
 
   @override

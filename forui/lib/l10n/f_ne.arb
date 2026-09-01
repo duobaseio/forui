@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "सुझाव: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "थप",
   "paginationPageSemanticsLabel": "पृष्ठ {page}",
-  "multiSelectTagSemanticsLabel": "हटाउनुहोस्"
+  "multiSelectTagSemanticsLabel": "हटाउनुहोस्",
+  "sliderSwitchThumbsSemanticsHint": "ह्यान्डल बदल्न दुई पटक ट्याप गर्नुहोस्",
+  "sliderSelectMinThumbSemanticsLabel": "न्यूनतम ह्यान्डल चयन गर्नुहोस्",
+  "sliderSelectMaxThumbSemanticsLabel": "अधिकतम ह्यान्डल चयन गर्नुहोस्",
+  "sliderMinSemanticsValue": "न्यूनतम, {value}",
+  "sliderMaxSemanticsValue": "अधिकतम, {value}"
 }

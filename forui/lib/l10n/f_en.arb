@@ -196,6 +196,36 @@
   "@sheetSemanticsLabel": {
     "description": "The semantic label for a sheet."
   },
+  "sliderSwitchThumbsSemanticsHint": "Double tap to switch thumbs",
+  "@sliderSwitchThumbsSemanticsHint": {
+    "description": "The semantic hint for a range slider's track, announcing that double tapping switches the selected thumb."
+  },
+  "sliderSelectMinThumbSemanticsLabel": "Select minimum thumb",
+  "@sliderSelectMinThumbSemanticsLabel": {
+    "description": "The label for the custom semantics action that selects a range slider's minimum thumb."
+  },
+  "sliderSelectMaxThumbSemanticsLabel": "Select maximum thumb",
+  "@sliderSelectMaxThumbSemanticsLabel": {
+    "description": "The label for the custom semantics action that selects a range slider's maximum thumb."
+  },
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "@sliderMinSemanticsValue": {
+    "description": "The semantic value of a range slider when the minimum thumb is selected, e.g. 'Minimum, 20%'.",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "sliderMaxSemanticsValue": "Maximum, {value}",
+  "@sliderMaxSemanticsValue": {
+    "description": "The semantic value of a range slider when the maximum thumb is selected, e.g. 'Maximum, 80%'.",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
   "textFieldEmailLabel": "Email",
   "@textFieldEmailLabel": {
     "description": "The email text field's label."

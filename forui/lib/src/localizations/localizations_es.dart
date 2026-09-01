@@ -148,6 +148,25 @@ class FLocalizationsEs extends FLocalizations {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Pulsa dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -315,6 +334,25 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -477,6 +515,25 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -643,6 +700,25 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -805,6 +881,25 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -971,6 +1066,25 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -1133,6 +1247,25 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1299,6 +1432,25 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -1461,6 +1613,25 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1627,6 +1798,25 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -1789,6 +1979,25 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1955,6 +2164,25 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -2117,6 +2345,25 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2283,6 +2530,25 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -2445,6 +2711,25 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2611,6 +2896,25 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -2773,6 +3077,25 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'inferior';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2939,6 +3262,25 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -3101,6 +3443,25 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -3267,6 +3628,25 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get sheetSemanticsLabel => 'Hoja';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correo electrónico';
 
   @override
@@ -3429,6 +3809,25 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';

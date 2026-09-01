@@ -148,6 +148,25 @@ class FLocalizationsMn extends FLocalizations {
   String get sheetSemanticsLabel => 'хүснэгт';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Бариулыг сэлгэхийн тулд хоёр удаа товшино уу';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Хамгийн бага бариулыг сонгох';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Хамгийн их бариулыг сонгох';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Хамгийн бага, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Хамгийн их, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Имэйл';
 
   @override

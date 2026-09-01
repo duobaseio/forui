@@ -148,6 +148,25 @@ class FLocalizationsNl extends FLocalizations {
   String get sheetSemanticsLabel => 'Blad';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dubbeltik om van schuifknop te wisselen';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimale schuifknop selecteren';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maximale schuifknop selecteren';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mail';
 
   @override

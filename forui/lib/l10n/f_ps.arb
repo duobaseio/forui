@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "وړاندیز: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "نور",
   "paginationPageSemanticsLabel": "مخ {page}",
-  "multiSelectTagSemanticsLabel": "لرې کول"
+  "multiSelectTagSemanticsLabel": "لرې کول",
+  "sliderSwitchThumbsSemanticsHint": "د لاستو بدلولو لپاره دوه ځله ټک ووهئ",
+  "sliderSelectMinThumbSemanticsLabel": "د لږترلږه لاستی وټاکئ",
+  "sliderSelectMaxThumbSemanticsLabel": "د زیات نه زیات لاستی وټاکئ",
+  "sliderMinSemanticsValue": "لږ تر لږه، {value}",
+  "sliderMaxSemanticsValue": "زیات نه زیات، {value}"
 }

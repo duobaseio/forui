@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Πρόταση: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Περισσότερα",
   "paginationPageSemanticsLabel": "Σελίδα {page}",
-  "multiSelectTagSemanticsLabel": "Κατάργηση"
+  "multiSelectTagSemanticsLabel": "Κατάργηση",
+  "sliderSwitchThumbsSemanticsHint": "Πατήστε δύο φορές για εναλλαγή λαβών",
+  "sliderSelectMinThumbSemanticsLabel": "Επιλογή λαβής ελάχιστου",
+  "sliderSelectMaxThumbSemanticsLabel": "Επιλογή λαβής μέγιστου",
+  "sliderMinSemanticsValue": "Ελάχιστο, {value}",
+  "sliderMaxSemanticsValue": "Μέγιστο, {value}"
 }

@@ -148,6 +148,25 @@ class FLocalizationsHe extends FLocalizations {
   String get sheetSemanticsLabel => 'גיליו ';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'הקש הקשה כפולה כדי להחליף בין הידיות';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'בחירת ידית המינימום';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'בחירת ידית המקסימום';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'מינימום, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'מקסימום, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'דוא״ל';
 
   @override

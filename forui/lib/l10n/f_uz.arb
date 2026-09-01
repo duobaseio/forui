@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Taklif: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Yana",
   "paginationPageSemanticsLabel": "{page}-sahifa",
-  "multiSelectTagSemanticsLabel": "Olib tashlash"
+  "multiSelectTagSemanticsLabel": "Olib tashlash",
+  "sliderSwitchThumbsSemanticsHint": "Dastaklarni almashtirish uchun ikki marta bosing",
+  "sliderSelectMinThumbSemanticsLabel": "Minimal dastakni tanlash",
+  "sliderSelectMaxThumbSemanticsLabel": "Maksimal dastakni tanlash",
+  "sliderMinSemanticsValue": "Minimal, {value}",
+  "sliderMaxSemanticsValue": "Maksimal, {value}"
 }

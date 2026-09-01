@@ -148,6 +148,25 @@ class FLocalizationsCy extends FLocalizations {
   String get sheetSemanticsLabel => 'Taflen';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Tapiwch ddwywaith i newid rhwng y dolenni';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Dewiswch y ddolen isafswm';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Dewiswch y ddolen uchafswm';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Isafswm, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Uchafswm, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-bost';
 
   @override

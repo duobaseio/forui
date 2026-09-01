@@ -148,6 +148,25 @@ class FLocalizationsRo extends FLocalizations {
   String get sheetSemanticsLabel => 'Foaie';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Atingeți de două ori pentru a comuta între glisoare';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Selectați glisorul minim';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Selectați glisorul maxim';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minim, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maxim, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mail';
 
   @override

@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Mungkahi: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Higit pa",
   "paginationPageSemanticsLabel": "Page {page}",
-  "multiSelectTagSemanticsLabel": "Alisin"
+  "multiSelectTagSemanticsLabel": "Alisin",
+  "sliderSwitchThumbsSemanticsHint": "I-double tap para magpalit ng handle",
+  "sliderSelectMinThumbSemanticsLabel": "Piliin ang minimum na handle",
+  "sliderSelectMaxThumbSemanticsLabel": "Piliin ang maximum na handle",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

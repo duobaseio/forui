@@ -148,6 +148,25 @@ class FLocalizationsSq extends FLocalizations {
   String get sheetSemanticsLabel => 'Fleta';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Trokit dy herë për të ndërruar dorezat';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Zgjidh dorezën e minimumit';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Zgjidh dorezën e maksimumit';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimumi, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimumi, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override

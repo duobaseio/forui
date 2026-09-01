@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "建议：{suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "更多",
   "paginationPageSemanticsLabel": "第 {page} 页",
-  "multiSelectTagSemanticsLabel": "移除"
+  "multiSelectTagSemanticsLabel": "移除",
+  "sliderSwitchThumbsSemanticsHint": "双击可切换滑块",
+  "sliderSelectMinThumbSemanticsLabel": "选择最小滑块",
+  "sliderSelectMaxThumbSemanticsLabel": "选择最大滑块",
+  "sliderMinSemanticsValue": "最小值，{value}",
+  "sliderMaxSemanticsValue": "最大值，{value}"
 }

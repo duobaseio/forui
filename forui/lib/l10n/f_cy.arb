@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Awgrym: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Rhagor",
   "paginationPageSemanticsLabel": "Tudalen {page}",
-  "multiSelectTagSemanticsLabel": "Tynnu"
+  "multiSelectTagSemanticsLabel": "Tynnu",
+  "sliderSwitchThumbsSemanticsHint": "Tapiwch ddwywaith i newid rhwng y dolenni",
+  "sliderSelectMinThumbSemanticsLabel": "Dewiswch y ddolen isafswm",
+  "sliderSelectMaxThumbSemanticsLabel": "Dewiswch y ddolen uchafswm",
+  "sliderMinSemanticsValue": "Isafswm, {value}",
+  "sliderMaxSemanticsValue": "Uchafswm, {value}"
 }

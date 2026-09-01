@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "ପରାମର୍ଶ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ଅଧିକ",
   "paginationPageSemanticsLabel": "ପୃଷ୍ଠା {page}",
-  "multiSelectTagSemanticsLabel": "ବାହାର କରନ୍ତୁ"
+  "multiSelectTagSemanticsLabel": "ବାହାର କରନ୍ତୁ",
+  "sliderSwitchThumbsSemanticsHint": "ହ୍ୟାଣ୍ଡେଲ ବଦଳାଇବାକୁ ଦୁଇଥର ଟ୍ୟାପ୍ କରନ୍ତୁ",
+  "sliderSelectMinThumbSemanticsLabel": "ସର୍ବନିମ୍ନ ହ୍ୟାଣ୍ଡେଲ ଚୟନ କରନ୍ତୁ",
+  "sliderSelectMaxThumbSemanticsLabel": "ସର୍ବାଧିକ ହ୍ୟାଣ୍ଡେଲ ଚୟନ କରନ୍ତୁ",
+  "sliderMinSemanticsValue": "ସର୍ବନିମ୍ନ, {value}",
+  "sliderMaxSemanticsValue": "ସର୍ବାଧିକ, {value}"
 }

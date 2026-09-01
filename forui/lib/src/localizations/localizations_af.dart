@@ -148,6 +148,25 @@ class FLocalizationsAf extends FLocalizations {
   String get sheetSemanticsLabel => 'blad';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dubbeltik om van skuifknop te wissel';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Kies minimum skuifknop';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Kies maksimum skuifknop';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-pos';
 
   @override

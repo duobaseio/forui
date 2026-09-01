@@ -179,6 +179,21 @@ class FDefaultLocalizations extends FLocalizations {
   String get sheetSemanticsLabel => 'Sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) => 'Minimum, $value';
+
+  @override
+  String sliderMaxSemanticsValue(String value) => 'Maximum, $value';
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override

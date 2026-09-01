@@ -148,6 +148,25 @@ class FLocalizationsMy extends FLocalizations {
   String get sheetSemanticsLabel => 'ပိုဆောင်း စာမျက်နှာ';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'လက်ကိုင်များပြောင်းရန် နှစ်ချက်တို့ပါ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'အနည်းဆုံး လက်ကိုင်ကို ရွေးပါ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'အများဆုံး လက်ကိုင်ကို ရွေးပါ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'အနည်းဆုံး၊ $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'အများဆုံး၊ $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'အီးမေးလ်';
 
   @override

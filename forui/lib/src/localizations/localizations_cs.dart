@@ -148,6 +148,25 @@ class FLocalizationsCs extends FLocalizations {
   String get sheetSemanticsLabel => 'tabulka';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dvojitým klepnutím přepnete jezdce';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Vybrat minimální jezdec';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Vybrat maximální jezdec';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mail';
 
   @override

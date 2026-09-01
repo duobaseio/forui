@@ -148,6 +148,25 @@ class FLocalizationsBn extends FLocalizations {
   String get sheetSemanticsLabel => 'শীট';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'হ্যান্ডেল পরিবর্তন করতে দুবার আলতো চাপুন';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'সর্বনিম্ন হ্যান্ডেল নির্বাচন করুন';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'সর্বোচ্চ হ্যান্ডেল নির্বাচন করুন';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'সর্বনিম্ন, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'সর্বোচ্চ, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ইমেল';
 
   @override

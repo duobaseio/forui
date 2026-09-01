@@ -148,6 +148,25 @@ class FLocalizationsFil extends FLocalizations {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'I-double tap para magpalit ng handle';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Piliin ang minimum na handle';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Piliin ang maximum na handle';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Email';
 
   @override

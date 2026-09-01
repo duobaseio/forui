@@ -148,6 +148,25 @@ class FLocalizationsSw extends FLocalizations {
   String get sheetSemanticsLabel => 'Safu';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Gusa mara mbili ili kubadilisha vishikizo';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Chagua kishikizo cha chini zaidi';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Chagua kishikizo cha juu zaidi';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Kima cha chini, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Kima cha juu, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Barua pepe';
 
   @override

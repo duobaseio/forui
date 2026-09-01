@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Iradokizuna: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Gehiago",
   "paginationPageSemanticsLabel": "{page}. orria",
-  "multiSelectTagSemanticsLabel": "Kendu"
+  "multiSelectTagSemanticsLabel": "Kendu",
+  "sliderSwitchThumbsSemanticsHint": "Sakatu birritan heldulekuz aldatzeko",
+  "sliderSelectMinThumbSemanticsLabel": "Hautatu gutxieneko heldulekua",
+  "sliderSelectMaxThumbSemanticsLabel": "Hautatu gehienezko heldulekua",
+  "sliderMinSemanticsValue": "Gutxienekoa, {value}",
+  "sliderMaxSemanticsValue": "Gehienezkoa, {value}"
 }

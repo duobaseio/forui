@@ -148,6 +148,25 @@ class FLocalizationsFr extends FLocalizations {
   String get sheetSemanticsLabel => 'sheet';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Appuyez deux fois pour changer de curseur';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Sélectionner le curseur minimum';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Sélectionner le curseur maximum';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-mail';
 
   @override
@@ -322,6 +341,25 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get sheetSemanticsLabel => 'Zone de contenu';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Touchez deux fois pour changer de curseur';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Sélectionner le curseur minimum';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Sélectionner le curseur maximum';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Courriel';

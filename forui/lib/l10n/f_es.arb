@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Sugerencia: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Más",
   "paginationPageSemanticsLabel": "Página {page}",
-  "multiSelectTagSemanticsLabel": "Quitar"
+  "multiSelectTagSemanticsLabel": "Quitar",
+  "sliderSwitchThumbsSemanticsHint": "Pulsa dos veces para cambiar de tirador",
+  "sliderSelectMinThumbSemanticsLabel": "Seleccionar el tirador mínimo",
+  "sliderSelectMaxThumbSemanticsLabel": "Seleccionar el tirador máximo",
+  "sliderMinSemanticsValue": "Mínimo, {value}",
+  "sliderMaxSemanticsValue": "Máximo, {value}"
 }

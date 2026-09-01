@@ -52,5 +52,10 @@
   "autocompleteSuggestion": "Sugjerim: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Më shumë",
   "paginationPageSemanticsLabel": "Faqja {page}",
-  "multiSelectTagSemanticsLabel": "Hiq"
+  "multiSelectTagSemanticsLabel": "Hiq",
+  "sliderSwitchThumbsSemanticsHint": "Trokit dy herë për të ndërruar dorezat",
+  "sliderSelectMinThumbSemanticsLabel": "Zgjidh dorezën e minimumit",
+  "sliderSelectMaxThumbSemanticsLabel": "Zgjidh dorezën e maksimumit",
+  "sliderMinSemanticsValue": "Minimumi, {value}",
+  "sliderMaxSemanticsValue": "Maksimumi, {value}"
 }

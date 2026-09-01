@@ -534,6 +534,36 @@ abstract class FLocalizations {
   /// **'Sheet'**
   String get sheetSemanticsLabel;
 
+  /// The semantic hint for a range slider's track, announcing that double tapping switches the selected thumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Double tap to switch thumbs'**
+  String get sliderSwitchThumbsSemanticsHint;
+
+  /// The label for the custom semantics action that selects a range slider's minimum thumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Select minimum thumb'**
+  String get sliderSelectMinThumbSemanticsLabel;
+
+  /// The label for the custom semantics action that selects a range slider's maximum thumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Select maximum thumb'**
+  String get sliderSelectMaxThumbSemanticsLabel;
+
+  /// The semantic value of a range slider when the minimum thumb is selected, e.g. 'Minimum, 20%'.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum, {value}'**
+  String sliderMinSemanticsValue(String value);
+
+  /// The semantic value of a range slider when the maximum thumb is selected, e.g. 'Maximum, 80%'.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum, {value}'**
+  String sliderMaxSemanticsValue(String value);
+
   /// The email text field's label.
   ///
   /// In en, this message translates to:

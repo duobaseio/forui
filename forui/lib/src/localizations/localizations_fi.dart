@@ -148,6 +148,25 @@ class FLocalizationsFi extends FLocalizations {
   String get sheetSemanticsLabel => 'arkki';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Vaihda kahvaa kaksoisnapauttamalla';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Valitse minimikahva';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Valitse maksimikahva';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimi, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimi, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Sähköposti';
 
   @override

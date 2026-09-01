@@ -148,6 +148,25 @@ class FLocalizationsRu extends FLocalizations {
   String get sheetSemanticsLabel => 'экран';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Дважды нажмите, чтобы переключить ползунки';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Выбрать минимальный ползунок';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Выбрать максимальный ползунок';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Минимум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Электронная почта';
 
   @override

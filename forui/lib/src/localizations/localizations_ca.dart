@@ -148,6 +148,25 @@ class FLocalizationsCa extends FLocalizations {
   String get sheetSemanticsLabel => 'Full';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Fes doble toc per canviar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Selecciona el tirador mínim';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Selecciona el tirador màxim';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínim, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Màxim, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Correu electrònic';
 
   @override

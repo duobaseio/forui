@@ -148,6 +148,25 @@ class FLocalizationsKm extends FLocalizations {
   String get sheetSemanticsLabel => 'សន្លឹក';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ចុចពីរដងដើម្បីប្តូរគ្រាប់រំកិល';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'ជ្រើសរើសគ្រាប់រំកិលអប្បបរមា';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'ជ្រើសរើសគ្រាប់រំកិលអតិបរមា';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'អប្បបរមា, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'អតិបរមា, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'អ៊ីមែល';
 
   @override

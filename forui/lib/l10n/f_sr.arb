@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Предлог: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Више",
   "paginationPageSemanticsLabel": "{page}. страница",
-  "multiSelectTagSemanticsLabel": "Уклони"
+  "multiSelectTagSemanticsLabel": "Уклони",
+  "sliderSwitchThumbsSemanticsHint": "Додирните двапут да бисте променили клизаче",
+  "sliderSelectMinThumbSemanticsLabel": "Изаберите минимални клизач",
+  "sliderSelectMaxThumbSemanticsLabel": "Изаберите максимални клизач",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

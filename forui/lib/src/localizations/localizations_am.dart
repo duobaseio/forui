@@ -148,6 +148,25 @@ class FLocalizationsAm extends FLocalizations {
   String get sheetSemanticsLabel => 'ሉህ';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'መያዣዎችን ለመቀያየር ሁለቴ መታ ያድርጉ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'ዝቅተኛውን መያዣ ይምረጡ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'ከፍተኛውን መያዣ ይምረጡ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'ዝቅተኛ, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'ከፍተኛ, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'ኢሜይል';
 
   @override

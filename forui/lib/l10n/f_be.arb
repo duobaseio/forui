@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "Прапанова: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Больш",
   "paginationPageSemanticsLabel": "Старонка {page}",
-  "multiSelectTagSemanticsLabel": "Выдаліць"
+  "multiSelectTagSemanticsLabel": "Выдаліць",
+  "sliderSwitchThumbsSemanticsHint": "Двойчы націсніце, каб пераключыць паўзункі",
+  "sliderSelectMinThumbSemanticsLabel": "Выбраць мінімальны паўзунок",
+  "sliderSelectMaxThumbSemanticsLabel": "Выбраць максімальны паўзунок",
+  "sliderMinSemanticsValue": "Мінімум, {value}",
+  "sliderMaxSemanticsValue": "Максімум, {value}"
 }

@@ -51,5 +51,10 @@
   "autocompleteSuggestion": "הצעה: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "עוד",
   "paginationPageSemanticsLabel": "דף {page}",
-  "multiSelectTagSemanticsLabel": "הסרה"
+  "multiSelectTagSemanticsLabel": "הסרה",
+  "sliderSwitchThumbsSemanticsHint": "הקש הקשה כפולה כדי להחליף בין הידיות",
+  "sliderSelectMinThumbSemanticsLabel": "בחירת ידית המינימום",
+  "sliderSelectMaxThumbSemanticsLabel": "בחירת ידית המקסימום",
+  "sliderMinSemanticsValue": "מינימום, {value}",
+  "sliderMaxSemanticsValue": "מקסימום, {value}"
 }

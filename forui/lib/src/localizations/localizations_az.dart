@@ -148,6 +148,25 @@ class FLocalizationsAz extends FLocalizations {
   String get sheetSemanticsLabel => 'Vərəq';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Sürüşdürmə düymələri arasında keçid etmək üçün iki dəfə toxunun';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimum düyməni seçin';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maksimum düyməni seçin';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'E-poçt';
 
   @override

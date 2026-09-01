@@ -148,6 +148,25 @@ class FLocalizationsKy extends FLocalizations {
   String get sheetSemanticsLabel => 'экран';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'Кармагычтарды которуштуруу үчүн эки жолу таптаңыз';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Минималдуу кармагычты тандоо';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Максималдуу кармагычты тандоо';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Минимум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'Электрондук почта';
 
   @override

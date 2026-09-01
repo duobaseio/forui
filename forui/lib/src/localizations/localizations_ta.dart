@@ -148,6 +148,25 @@ class FLocalizationsTa extends FLocalizations {
   String get sheetSemanticsLabel => 'திரை';
 
   @override
+  String get sliderSwitchThumbsSemanticsHint => 'ஹேண்டில்களை மாற்ற இருமுறை தட்டவும்';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'குறைந்தபட்ச ஹேண்டிலைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'அதிகபட்ச ஹேண்டிலைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'குறைந்தபட்சம், $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'அதிகபட்சம், $value';
+  }
+
+  @override
   String get textFieldEmailLabel => 'மின்னஞ்சல்';
 
   @override
