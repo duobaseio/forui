@@ -397,7 +397,7 @@ void main() {
     });
   }
 
-  group('arrow key manipulation', () {
+  group('keyboard manipulation', () {
     testWidgets('calls onEnd when expanded', (tester) async {
       final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
       var onEndCalled = 0;
@@ -452,6 +452,103 @@ void main() {
 
       expect(controller.value.max, lessThan(0.5));
       expect(onEndCalled, 1);
+    });
+
+    for (final (name, key, expected) in [
+      ('Home jumps to track minimum', LogicalKeyboardKey.home, 0.0),
+      ('End jumps to track maximum', LogicalKeyboardKey.end, 1.0),
+    ]) {
+      testWidgets('$name - continuous', (tester) async {
+        final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
+        var onEndCalled = 0;
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Focus(
+              focusNode: focus,
+              child: FSlider(
+                control: .managedContinuous(controller: controller),
+                onEnd: (_) => onEndCalled++,
+              ),
+            ),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(.tab);
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(key);
+        await tester.pumpAndSettle();
+
+        expect(controller.value.max, moreOrLessEquals(expected));
+        expect(onEndCalled, 1);
+      });
+    }
+
+    for (final (name, key, expected) in [
+      ('Home jumps to first tick', LogicalKeyboardKey.home, 0.0),
+      ('End jumps to last tick', LogicalKeyboardKey.end, 1.0),
+    ]) {
+      testWidgets('$name - discrete', (tester) async {
+        final controller = autoDispose(FDiscreteSliderController(value: FSliderValue(max: 0.5)));
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Focus(
+              focusNode: focus,
+              child: FSlider(
+                control: .managedDiscrete(controller: controller),
+                marks: const [
+                  .mark(value: 0),
+                  .mark(value: 0.25),
+                  .mark(value: 0.5),
+                  .mark(value: 0.75),
+                  .mark(value: 1),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(.tab);
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(key);
+        await tester.pumpAndSettle();
+
+        expect(controller.value.max, moreOrLessEquals(expected));
+      });
+    }
+
+    testWidgets('home/end keys on range slider min thumb', (tester) async {
+      final controller = autoDispose(FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75)));
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(control: .managedContinuousRange(controller: controller)),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.home);
+      await tester.pumpAndSettle();
+      expect(controller.value.min, moreOrLessEquals(0));
+
+      await tester.sendKeyEvent(.end);
+      await tester.pumpAndSettle();
+      expect(controller.value.min, moreOrLessEquals(0.75));
+      expect(controller.value.max, moreOrLessEquals(0.75));
     });
   });
 

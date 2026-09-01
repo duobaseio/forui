@@ -14,6 +14,10 @@ import 'package:forui/src/widgets/slider/inherited_variants.dart';
 
 part 'thumb.design.dart';
 
+class const _HomeIntent() extends Intent;
+
+class const _EndIntent() extends Intent;
+
 class const _ShrinkIntent() extends Intent;
 
 class const _ExpandIntent() extends Intent;
@@ -61,25 +65,43 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     );
 
     Widget thumb = FocusableActionDetector(
-      shortcuts: switch ((layout, widget.min)) {
-        (.ltr, true) || (.rtl, false) => const {
-          SingleActivator(.arrowLeft): _ExpandIntent(),
-          SingleActivator(.arrowRight): _ShrinkIntent(),
-        },
-        (.ltr, false) || (.rtl, true) => const {
-          SingleActivator(.arrowLeft): _ShrinkIntent(),
-          SingleActivator(.arrowRight): _ExpandIntent(),
-        },
-        (.ttb, true) || (.btt, false) => const {
-          SingleActivator(.arrowUp): _ExpandIntent(),
-          SingleActivator(.arrowDown): _ShrinkIntent(),
-        },
-        (.ttb, false) || (.btt, true) => const {
-          SingleActivator(.arrowUp): _ShrinkIntent(),
-          SingleActivator(.arrowDown): _ExpandIntent(),
+      shortcuts: {
+        const SingleActivator(.home): const _HomeIntent(),
+        const SingleActivator(.end): const _EndIntent(),
+        ...switch ((layout, widget.min)) {
+          (.ltr, true) || (.rtl, false) => const {
+            SingleActivator(.arrowLeft): _ExpandIntent(),
+            SingleActivator(.arrowRight): _ShrinkIntent(),
+          },
+          (.ltr, false) || (.rtl, true) => const {
+            SingleActivator(.arrowLeft): _ShrinkIntent(),
+            SingleActivator(.arrowRight): _ExpandIntent(),
+          },
+          (.ttb, true) || (.btt, false) => const {
+            SingleActivator(.arrowUp): _ExpandIntent(),
+            SingleActivator(.arrowDown): _ShrinkIntent(),
+          },
+          (.ttb, false) || (.btt, true) => const {
+            SingleActivator(.arrowUp): _ShrinkIntent(),
+            SingleActivator(.arrowDown): _ExpandIntent(),
+          },
         },
       },
       actions: {
+        _HomeIntent: CallbackAction(
+          onInvoke: (_) {
+            controller.value = controller.value.move(min: widget.min, to: 0);
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+        _EndIntent: CallbackAction(
+          onInvoke: (_) {
+            controller.value = controller.value.move(min: widget.min, to: controller.value.pixelConstraints.extent);
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
         _ExpandIntent: CallbackAction(
           onInvoke: (_) {
             if (controller.step(min: widget.min, expand: true)) {
