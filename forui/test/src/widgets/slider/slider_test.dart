@@ -1,5 +1,6 @@
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart' hide Thumb;
 
@@ -1022,7 +1023,7 @@ void main() {
 
       expect(find.text('50%'), findsNothing);
       expect(find.text('${(controller.value.max * 100).toStringAsFixed(0)}%'), findsOne);
-      
+
       await tester.pump(const Duration(milliseconds: 1));
     });
 

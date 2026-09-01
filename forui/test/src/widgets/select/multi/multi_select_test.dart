@@ -786,7 +786,11 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FMultiSelect<String>(key: key, control: const .managed(initial: {'A'}), items: letters),
+          child: FMultiSelect<String>(
+            key: key,
+            control: const .managed(initial: {'A'}),
+            items: letters,
+          ),
         ),
       );
 

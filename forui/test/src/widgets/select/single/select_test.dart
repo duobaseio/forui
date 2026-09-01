@@ -633,7 +633,11 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelect<String>(key: key, control: const .managed(initial: 'A'), items: letters),
+          child: FSelect<String>(
+            key: key,
+            control: const .managed(initial: 'A'),
+            items: letters,
+          ),
         ),
       );
 
