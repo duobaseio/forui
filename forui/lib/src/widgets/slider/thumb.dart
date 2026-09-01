@@ -54,98 +54,65 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       ),
       :layout,
       :tooltipBuilder,
-      :semanticValueFormatterCallback,
       :enabled,
       :onEnd,
     ) = .of(
       context,
     );
 
-    String? increasedValue;
-    VoidCallback? increase;
-    if (controller.value.step(min: widget.min, expand: !widget.min) case final value when controller.value != value) {
-      increasedValue = semanticValueFormatterCallback(widget.min ? value.min : value.max);
-      increase = () {
-        if (controller.step(min: widget.min, expand: !widget.min)) {
-          unawaited(tickHapticFeedback());
-        }
-        onEnd?.call(controller.value);
-      };
-    }
-
-    String? decreasedValue;
-    VoidCallback? decrease;
-    if (controller.value.step(min: widget.min, expand: widget.min) case final value when controller.value != value) {
-      decreasedValue = semanticValueFormatterCallback(widget.min ? value.min : value.max);
-      decrease = () {
-        if (controller.step(min: widget.min, expand: widget.min)) {
-          unawaited(tickHapticFeedback());
-        }
-        onEnd?.call(controller.value);
-      };
-    }
-
-    Widget thumb = Semantics(
-      enabled: enabled ? true : null,
-      value: enabled ? semanticValueFormatterCallback(offset) : null,
-      increasedValue: enabled ? increasedValue : null,
-      decreasedValue: enabled ? decreasedValue : null,
-      onIncrease: enabled ? increase : null,
-      onDecrease: enabled ? decrease : null,
-      child: FocusableActionDetector(
-        shortcuts: switch ((layout, widget.min)) {
-          (.ltr, true) || (.rtl, false) => const {
-            SingleActivator(.arrowLeft): _ExpandIntent(),
-            SingleActivator(.arrowRight): _ShrinkIntent(),
-          },
-          (.ltr, false) || (.rtl, true) => const {
-            SingleActivator(.arrowLeft): _ShrinkIntent(),
-            SingleActivator(.arrowRight): _ExpandIntent(),
-          },
-          (.ttb, true) || (.btt, false) => const {
-            SingleActivator(.arrowUp): _ExpandIntent(),
-            SingleActivator(.arrowDown): _ShrinkIntent(),
-          },
-          (.ttb, false) || (.btt, true) => const {
-            SingleActivator(.arrowUp): _ShrinkIntent(),
-            SingleActivator(.arrowDown): _ExpandIntent(),
-          },
+    Widget thumb = FocusableActionDetector(
+      shortcuts: switch ((layout, widget.min)) {
+        (.ltr, true) || (.rtl, false) => const {
+          SingleActivator(.arrowLeft): _ExpandIntent(),
+          SingleActivator(.arrowRight): _ShrinkIntent(),
         },
-        actions: {
-          _ExpandIntent: CallbackAction(
-            onInvoke: (_) {
-              if (controller.step(min: widget.min, expand: true)) {
-                unawaited(tickHapticFeedback());
-              }
-              onEnd?.call(controller.value);
-              return null;
-            },
-          ),
-          _ShrinkIntent: CallbackAction(
-            onInvoke: (_) {
-              if (controller.step(min: widget.min, expand: false)) {
-                unawaited(tickHapticFeedback());
-              }
-              onEnd?.call(controller.value);
-              return null;
-            },
-          ),
+        (.ltr, false) || (.rtl, true) => const {
+          SingleActivator(.arrowLeft): _ShrinkIntent(),
+          SingleActivator(.arrowRight): _ExpandIntent(),
         },
-        enabled: enabled,
-        mouseCursor: enabled ? _cursor : .defer,
-        includeFocusSemantics: false,
-        onFocusChange: (focused) => setState(() => _focused = focused),
-        child: FFocusedOutline(
-          style: thumbStyle.focusedOutlineStyle,
-          focused: _focused,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              shape: .circle,
-              color: thumbStyle.color.resolve(variants),
-              border: .all(color: thumbStyle.borderColor.resolve(variants), width: thumbStyle.borderWidth),
-            ),
-            child: SizedBox.square(dimension: thumbSize),
+        (.ttb, true) || (.btt, false) => const {
+          SingleActivator(.arrowUp): _ExpandIntent(),
+          SingleActivator(.arrowDown): _ShrinkIntent(),
+        },
+        (.ttb, false) || (.btt, true) => const {
+          SingleActivator(.arrowUp): _ShrinkIntent(),
+          SingleActivator(.arrowDown): _ExpandIntent(),
+        },
+      },
+      actions: {
+        _ExpandIntent: CallbackAction(
+          onInvoke: (_) {
+            if (controller.step(min: widget.min, expand: true)) {
+              unawaited(tickHapticFeedback());
+            }
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+        _ShrinkIntent: CallbackAction(
+          onInvoke: (_) {
+            if (controller.step(min: widget.min, expand: false)) {
+              unawaited(tickHapticFeedback());
+            }
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+      },
+      enabled: enabled,
+      mouseCursor: enabled ? _cursor : .defer,
+      includeFocusSemantics: false,
+      onFocusChange: (focused) => setState(() => _focused = focused),
+      child: FFocusedOutline(
+        style: thumbStyle.focusedOutlineStyle,
+        focused: _focused,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            shape: .circle,
+            color: thumbStyle.color.resolve(variants),
+            border: .all(color: thumbStyle.borderColor.resolve(variants), width: thumbStyle.borderWidth),
           ),
+          child: SizedBox.square(dimension: thumbSize),
         ),
       ),
     );
@@ -206,6 +173,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
 
     if (layout.vertical) {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
@@ -215,6 +183,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       );
     } else {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
