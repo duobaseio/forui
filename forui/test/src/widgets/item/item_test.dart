@@ -243,5 +243,42 @@ void main() {
 
       semantics.dispose();
     });
+
+    testWidgets('item in FItemGroup keeps its long-press action', (tester) async {
+      final semantics = tester.ensureSemantics();
+      var longPresses = 0;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FItemGroup(
+            children: [FItem(title: const Text('Option one'), onLongPress: () => longPresses++)],
+          ),
+        ),
+      );
+
+      expect(find.semantics.byAction(SemanticsAction.longPress), findsOneWidget);
+
+      tester.semantics.longPress(find.semantics.byAction(SemanticsAction.longPress));
+      await tester.pump();
+      expect(longPresses, 1);
+
+      semantics.dispose();
+    });
+
+    for (final (name, item) in [
+      ('onLongPress', FItem(title: const Text('Lorem'), onLongPress: () {})),
+      ('onDoubleTap', FItem(title: const Text('Lorem'), onDoubleTap: () {})),
+      ('onSecondaryLongPress', FItem(title: const Text('Lorem'), onSecondaryLongPress: () {})),
+    ]) {
+      testWidgets('$name-only item advertises no tap action', (tester) async {
+        final semantics = tester.ensureSemantics();
+
+        await tester.pumpWidget(TestScaffold.app(child: item));
+
+        expect(find.semantics.byAction(SemanticsAction.tap), findsNothing);
+
+        semantics.dispose();
+      });
+    }
   });
 }

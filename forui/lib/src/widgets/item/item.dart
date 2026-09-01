@@ -375,12 +375,15 @@ class FItem extends StatelessWidget with FItemMixin {
             onHoverChange: onHoverChange,
             onVariantChange: onVariantChange,
             selected: selected,
-            onPress: enabled
-                ? () {
-                    callbacks?.onPress?.call();
-                    onPress?.call();
-                  }
-                : null,
+            onPress: switch ((enabled, callbacks?.onPress, onPress)) {
+              (true, final onPress?, null) => onPress,
+              (true, null, final onPress?) => onPress,
+              (true, final callback?, final onPress?) => () {
+                callback();
+                onPress();
+              },
+              (_, _, _) => null,
+            },
             onLongPress: enabled && (callbacks?.onLongPress != null || onLongPress != null)
                 ? () {
                     callbacks?.onLongPress?.call();

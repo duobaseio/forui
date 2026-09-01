@@ -702,9 +702,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
       inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
       selected: widget.semanticsChecked == null ? widget.selected : null,
       excludeSemantics: widget.excludeSemantics,
-      // When grouped (_entries != null), onTap is nullified so the group owns pointer gestures. We forward onPress
-      // so screen readers can activate the control. Leave onTap null otherwise to avoid double-numbering.
+      // When grouped (_entries != null), onTap/onLongPress are nullified so the group owns pointer gestures. We
+      // forward onPress/onLongPress so screen readers can activate the control. Leave them null otherwise to avoid
+      // double-numbering.
       onTap: (widget.excludeSemantics || _entries != null) ? widget._onPress : null,
+      onLongPress: (widget.excludeSemantics || _entries != null) ? widget.onLongPress : null,
       // Below Semantics so Shortcuts merge into single container. Workaround a repositioning bug on scroll.
       child: Shortcuts(
         shortcuts: widget.shortcuts,

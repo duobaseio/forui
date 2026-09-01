@@ -10,6 +10,9 @@
 * Add `FItem.semanticsChecked`.
 * Add `FItem.semanticsInMutuallyExclusiveGroup`.
 
+* Fix `FItem` advertising a no-op tap action to screen readers.
+* Fix `FItem` long-press action not exposed to screen readers when inside a group.
+
 
 ### `FLabel`
 * Change error to be a live region on platforms without accessibility announcement support.
