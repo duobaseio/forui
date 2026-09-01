@@ -18,7 +18,7 @@ class RenderLabelSemantics(var TextDirection _textDirection) extends RenderProxy
 
   static const errorTag = SemanticsTag('FLabel.error');
 
-  static ChildSemanticsConfigurationsResult _delegate(List<SemanticsConfiguration> configs) {
+  static ChildSemanticsConfigurationsResult delegate(List<SemanticsConfiguration> configs) {
     final builder = ChildSemanticsConfigurationsResultBuilder();
     for (final config in configs) {
       if (config.tagsChildrenWith(descriptionTag) || config.tagsChildrenWith(errorTag)) {
@@ -55,7 +55,7 @@ class RenderLabelSemantics(var TextDirection _textDirection) extends RenderProxy
     super.describeSemanticsConfiguration(config);
     config
       ..textDirection = _textDirection
-      ..childConfigurationsDelegate = _delegate;
+      ..childConfigurationsDelegate = delegate;
   }
 
   @override

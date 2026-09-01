@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart' hide Thumb;
 
@@ -630,6 +631,91 @@ void main() {
       expect(node, isSemantics(label: 'Volume', value: '0%', isSlider: true, isEnabled: false, hasEnabledState: true));
       // The thumb should not be a separately focusable node when disabled.
       expect(node.childrenCount, 0);
+
+      semantics.dispose();
+    });
+
+    testWidgets('thumb announces stepped increased/decreased values', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(control: .managedContinuous(initial: FSliderValue(max: 0.5))),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.byType(Thumb)),
+        isSemantics(
+          value: '50%',
+          increasedValue: '55%',
+          decreasedValue: '45%',
+          hasIncreaseAction: true,
+          hasDecreaseAction: true,
+        ),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('increase & decrease actions adjust value and call onEnd', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final ends = <FSliderValue>[];
+      FSliderValue? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              control: .managedContinuous(initial: FSliderValue(max: 0.5), onChange: (value) => changed = value),
+              onEnd: ends.add,
+            ),
+          ),
+        ),
+      );
+
+      final thumb = find.semantics.byAction(SemanticsAction.increase);
+
+      tester.semantics.increase(thumb);
+      await tester.pumpAndSettle();
+      expect(changed?.max, closeTo(0.55, 0.01));
+      expect(ends, hasLength(1));
+
+      tester.semantics.decrease(thumb);
+      await tester.pumpAndSettle();
+      expect(changed?.max, closeTo(0.5, 0.01));
+      expect(ends, hasLength(2));
+
+      semantics.dispose();
+    });
+
+    testWidgets("increase action on a range slider's min thumb moves the min edge up", (tester) async {
+      final semantics = tester.ensureSemantics();
+      FSliderValue? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              control: .managedContinuousRange(
+                initial: FSliderValue(min: 0.25, max: 0.75),
+                onChange: (value) => changed = value,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      tester.semantics.increase(find.semantics.byAction(SemanticsAction.increase).first);
+      await tester.pumpAndSettle();
+
+      expect(changed?.min, closeTo(0.3, 0.01));
+      expect(changed?.max, closeTo(0.75, 0.01));
 
       semantics.dispose();
     });

@@ -7,6 +7,7 @@ import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
+import 'package:forui/src/widgets/label/semantics.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 @internal
@@ -163,6 +164,14 @@ abstract class _RenderSlider extends RenderBox
 
   new(this._style, this._layout, this._textDirection, this._marks, this._mainAxisExtent) {
     _positionMark = _position;
+  }
+
+  @override
+  void describeSemanticsConfiguration(SemanticsConfiguration config) {
+    super.describeSemanticsConfiguration(config);
+    config
+      ..textDirection = _textDirection
+      ..childConfigurationsDelegate = RenderLabelSemantics.delegate;
   }
 
   @override

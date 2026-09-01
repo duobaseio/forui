@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/label/semantics.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 import 'package:forui/src/widgets/slider/inherited_variants.dart';
 import 'package:forui/src/widgets/slider/slider_render_object.dart';
@@ -52,14 +53,20 @@ class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<
              if (description != null)
                DefaultTextStyle.merge(
                  style: style.descriptionTextStyle.resolve(formVariants),
-                 child: Padding(padding: style.descriptionPadding, child: description),
+                 child: Semantics(
+                   tagForChildren: RenderLabelSemantics.descriptionTag,
+                   child: Padding(padding: style.descriptionPadding, child: description),
+                 ),
                )
              else
                const SizedBox(),
              if (state.errorText != null)
                DefaultTextStyle.merge(
                  style: style.errorTextStyle.resolve(formVariants),
-                 child: Padding(padding: style.errorPadding, child: errorBuilder(state.context, state.errorText!)),
+                 child: Semantics(
+                   tagForChildren: RenderLabelSemantics.errorTag,
+                   child: Padding(padding: style.errorPadding, child: errorBuilder(state.context, state.errorText!)),
+                 ),
                )
              else
                const SizedBox(),

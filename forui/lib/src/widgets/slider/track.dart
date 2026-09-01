@@ -96,6 +96,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     if (layout.vertical) {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: _tap(controller, style, minTooltipController, maxTooltipController, style.thumbSize, layout),
         onTapUp: (_) {
           minTooltipController?.hide();
@@ -109,6 +110,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       );
     } else {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: _tap(controller, style, minTooltipController, maxTooltipController, style.thumbSize, layout),
         onTapUp: (_) {
           minTooltipController?.hide();

@@ -62,13 +62,27 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     );
 
     String? increasedValue;
+    VoidCallback? increase;
     if (controller.value.step(min: widget.min, expand: !widget.min) case final value when controller.value != value) {
-      increasedValue = semanticValueFormatterCallback(offset);
+      increasedValue = semanticValueFormatterCallback(widget.min ? value.min : value.max);
+      increase = () {
+        if (controller.step(min: widget.min, expand: !widget.min)) {
+          unawaited(tickHapticFeedback());
+        }
+        onEnd?.call(controller.value);
+      };
     }
 
     String? decreasedValue;
+    VoidCallback? decrease;
     if (controller.value.step(min: widget.min, expand: widget.min) case final value when controller.value != value) {
-      decreasedValue = semanticValueFormatterCallback(offset);
+      decreasedValue = semanticValueFormatterCallback(widget.min ? value.min : value.max);
+      decrease = () {
+        if (controller.step(min: widget.min, expand: widget.min)) {
+          unawaited(tickHapticFeedback());
+        }
+        onEnd?.call(controller.value);
+      };
     }
 
     Widget thumb = Semantics(
@@ -76,6 +90,8 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       value: enabled ? semanticValueFormatterCallback(offset) : null,
       increasedValue: enabled ? increasedValue : null,
       decreasedValue: enabled ? decreasedValue : null,
+      onIncrease: enabled ? increase : null,
+      onDecrease: enabled ? decrease : null,
       child: FocusableActionDetector(
         shortcuts: switch ((layout, widget.min)) {
           (.ltr, true) || (.rtl, false) => const {

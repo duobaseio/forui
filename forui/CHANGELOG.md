@@ -34,6 +34,8 @@
 
 ### `FSlider`
 * Fix label and description not being announced with the slider by screen readers.
+* Fix thumbs not being adjustable by screen readers.
+* Fix announced increased/decreased values equaling the current value.
 * Fix disabled slider still being announced as enabled by screen readers.
 * Fix disabled slider's thumb still being focusable by screen readers.
 
