@@ -424,6 +424,8 @@ void main() {
 
       expect(controller.value.max, greaterThan(0.5));
       expect(onEndCalled, 1);
+
+      await tester.pump(const Duration(milliseconds: 1));
     });
 
     testWidgets('calls onEnd when shrunk', (tester) async {
@@ -452,6 +454,8 @@ void main() {
 
       expect(controller.value.max, lessThan(0.5));
       expect(onEndCalled, 1);
+
+      await tester.pump(const Duration(milliseconds: 1));
     });
 
     for (final (name, key, expected) in [
@@ -484,6 +488,8 @@ void main() {
 
         expect(controller.value.max, moreOrLessEquals(expected));
         expect(onEndCalled, 1);
+
+        await tester.pump(const Duration(milliseconds: 1));
       });
     }
 
@@ -521,6 +527,8 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(controller.value.max, moreOrLessEquals(expected));
+
+        await tester.pump(const Duration(milliseconds: 1));
       });
     }
 
@@ -549,6 +557,8 @@ void main() {
       await tester.pumpAndSettle();
       expect(controller.value.min, moreOrLessEquals(0.75));
       expect(controller.value.max, moreOrLessEquals(0.75));
+
+      await tester.pump(const Duration(milliseconds: 1));
     });
   });
 
@@ -985,6 +995,59 @@ void main() {
       expect(node.getSemanticsData().hint, '');
 
       semantics.dispose();
+    });
+
+    testWidgets('shows value tooltip on thumb focus', (tester) async {
+      final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(control: .managedContinuous(controller: controller)),
+          ),
+        ),
+      );
+
+      // Focus the slider and tab into the thumb.
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsOne);
+
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsNothing);
+      expect(find.text('${(controller.value.max * 100).toStringAsFixed(0)}%'), findsOne);
+      
+      await tester.pump(const Duration(milliseconds: 1));
+    });
+
+    testWidgets('hides value tooltip when thumb loses focus', (tester) async {
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(control: .managedContinuous(initial: FSliderValue(max: 0.5))),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsOne);
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsNothing);
     });
   });
 }

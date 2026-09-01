@@ -124,7 +124,14 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       enabled: enabled,
       mouseCursor: enabled ? _cursor : .defer,
       includeFocusSemantics: false,
-      onFocusChange: (focused) => setState(() => _focused = focused),
+      onFocusChange: (focused) {
+        setState(() => _focused = focused);
+        if (focused) {
+          tooltip?.show();
+        } else {
+          tooltip?.hide();
+        }
+      },
       child: FFocusedOutline(
         style: thumbStyle.focusedOutlineStyle,
         focused: _focused,
@@ -147,7 +154,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       thumb = MouseRegion(
         onEnter: (_) => tooltip.show(),
         onExit: (_) {
-          if (!_gesture) {
+          if (!_gesture && !_focused) {
             tooltip.hide();
           }
         },
@@ -173,7 +180,9 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     void up(TapUpDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
-      tooltip?.hide();
+      if (!_focused) {
+        tooltip?.hide();
+      }
       InheritedData.of(context).onEnd?.call(controller.value);
     }
 
@@ -189,7 +198,9 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
       _gesture = false;
-      tooltip?.hide();
+      if (!_focused) {
+        tooltip?.hide();
+      }
       InheritedData.of(context).onEnd?.call(controller.value);
     }
 

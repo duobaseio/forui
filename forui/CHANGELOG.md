@@ -35,6 +35,7 @@
 ### `FSlider`
 * Add Home/End to jump a thumb to the track's minimum/maximum.
 
+* Fix value tooltip not shown on keyboard focus.
 * Fix label and description not being announced with the slider by screen readers.
 * Fix thumbs not being adjustable by screen readers.
 * Fix announced increased/decreased values equaling the current value.
