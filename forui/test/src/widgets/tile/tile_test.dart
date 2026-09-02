@@ -114,4 +114,50 @@ void main() {
       });
     }
   });
+
+  group('accessibility', () {
+    testWidgets('group node is named by the visible label and description', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTileGroup(
+            label: const Text('Settings'),
+            description: const Text('Device options'),
+            children: [FTile(title: const Text('Bluetooth'), onPress: () {})],
+          ),
+        ),
+      );
+
+      final group = tester.getSemantics(find.bySemanticsLabel('Settings'));
+      expect(group, isSemantics(label: 'Settings', hint: 'Device options'));
+
+      var ancestor = tester.getSemantics(find.bySemanticsLabel('Bluetooth')).parent;
+      while (ancestor != null && ancestor != group) {
+        ancestor = ancestor.parent;
+      }
+      expect(ancestor, group);
+
+      semantics.dispose();
+    });
+
+    testWidgets('semanticsLabel names a separate group node', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTileGroup(
+            label: const Text('Settings'),
+            semanticsLabel: 'Settings group',
+            children: [FTile(title: const Text('Bluetooth'), onPress: () {})],
+          ),
+        ),
+      );
+
+      final group = tester.getSemantics(find.bySemanticsLabel('Settings group'));
+      expect(group.parent, tester.getSemantics(find.bySemanticsLabel('Settings')));
+
+      semantics.dispose();
+    });
+  });
 }

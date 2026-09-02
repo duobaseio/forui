@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "ሰዓት",
   "timePickerMinuteSemanticsLabel": "ደቂቃ",
   "autocompleteResults": "{count} ውጤቶች ይገኛሉ",
+  "selectResults": "{count} ውጤቶች ይገኛሉ",
   "autocompleteSuggestion": "ጥቆማ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ተጨማሪ",
-  "paginationPageSemanticsLabel": "ገፅ {page}"
+  "paginationPageSemanticsLabel": "ገፅ {page}",
+  "multiSelectTagSemanticsLabel": "አስወግድ",
+  "sliderSwitchThumbsSemanticsHint": "መያዣዎችን ለመቀያየር ሁለቴ መታ ያድርጉ",
+  "sliderSelectMinThumbSemanticsLabel": "ዝቅተኛውን መያዣ ይምረጡ",
+  "sliderSelectMaxThumbSemanticsLabel": "ከፍተኛውን መያዣ ይምረጡ",
+  "sliderMinSemanticsValue": "ዝቅተኛ, {value}",
+  "sliderMaxSemanticsValue": "ከፍተኛ, {value}"
 }

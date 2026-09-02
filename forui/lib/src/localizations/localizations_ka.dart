@@ -122,6 +122,9 @@ class FLocalizationsKa extends FLocalizations {
   String get multiSelectHint => 'ელემენტების არჩევა';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ამოშლა';
+
+  @override
   String get selectHint => 'აირჩიეთ ელემენტი';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsKa extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count შედეგი ხელმისაწვდომია';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ზემოთ გადაადგილება';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'ფურცელი';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'ორჯერ შეეხეთ სახელურების გადასართავად';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'მინიმალური სახელურის არჩევა';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'მაქსიმალური სახელურის არჩევა';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'მინიმუმი, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'მაქსიმუმი, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'ელფოსტა';

@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Giờ",
   "timePickerMinuteSemanticsLabel": "Phút",
   "autocompleteResults": "Có {count} kết quả",
+  "selectResults": "Có {count} kết quả",
   "autocompleteSuggestion": "Đề xuất: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Thêm",
-  "paginationPageSemanticsLabel": "Trang {page}"
+  "paginationPageSemanticsLabel": "Trang {page}",
+  "multiSelectTagSemanticsLabel": "Xóa",
+  "sliderSwitchThumbsSemanticsHint": "Nhấn đúp để chuyển núm trượt",
+  "sliderSelectMinThumbSemanticsLabel": "Chọn núm trượt tối thiểu",
+  "sliderSelectMaxThumbSemanticsLabel": "Chọn núm trượt tối đa",
+  "sliderMinSemanticsValue": "Tối thiểu, {value}",
+  "sliderMaxSemanticsValue": "Tối đa, {value}"
 }

@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Hora",
   "timePickerMinuteSemanticsLabel": "Minuto",
   "autocompleteResults": "{count} resultados disponíveis",
+  "selectResults": "{count} resultados disponíveis",
   "autocompleteSuggestion": "Sugestão: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mais",
-  "paginationPageSemanticsLabel": "Página {page}"
+  "paginationPageSemanticsLabel": "Página {page}",
+  "multiSelectTagSemanticsLabel": "Remover",
+  "sliderSwitchThumbsSemanticsHint": "Toque duas vezes para alternar entre as alças",
+  "sliderSelectMinThumbSemanticsLabel": "Selecionar a alça mínima",
+  "sliderSelectMaxThumbSemanticsLabel": "Selecionar a alça máxima",
+  "sliderMinSemanticsValue": "Mínimo, {value}",
+  "sliderMaxSemanticsValue": "Máximo, {value}"
 }

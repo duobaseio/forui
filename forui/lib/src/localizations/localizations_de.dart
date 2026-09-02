@@ -122,6 +122,9 @@ class FLocalizationsDe extends FLocalizations {
   String get multiSelectHint => 'Elemente auswählen';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Entfernen';
+
+  @override
   String get selectHint => 'Wählen Sie ein Element';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsDe extends FLocalizations {
   String get selectNoResults => 'Keine übereinstimmenden Ergebnisse.';
 
   @override
+  String selectResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Nach oben scrollen';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsDe extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Ansicht';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Doppeltippen, um den Regler zu wechseln';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimum-Regler auswählen';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maximum-Regler auswählen';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-Mail';
@@ -282,6 +309,9 @@ class FLocalizationsDeCh extends FLocalizationsDe {
   String get multiSelectHint => 'Elemente auswählen';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Entfernen';
+
+  @override
   String get selectHint => 'Wählen Sie ein Element';
 
   @override
@@ -291,10 +321,34 @@ class FLocalizationsDeCh extends FLocalizationsDe {
   String get selectNoResults => 'Keine übereinstimmenden Ergebnisse.';
 
   @override
+  String selectResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Nach oben scrollen';
 
   @override
   String get selectScrollDownSemanticsLabel => 'Nach unten scrollen';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Doppeltippen, um den Regler zu wechseln';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimum-Regler auswählen';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maximum-Regler auswählen';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-Mail';

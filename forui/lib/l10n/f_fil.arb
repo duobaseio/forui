@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Oras",
   "timePickerMinuteSemanticsLabel": "Minuto",
   "autocompleteResults": "{count} resulta ang available",
+  "selectResults": "{count} resulta ang available",
   "autocompleteSuggestion": "Mungkahi: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Higit pa",
-  "paginationPageSemanticsLabel": "Page {page}"
+  "paginationPageSemanticsLabel": "Page {page}",
+  "multiSelectTagSemanticsLabel": "Alisin",
+  "sliderSwitchThumbsSemanticsHint": "I-double tap para magpalit ng handle",
+  "sliderSelectMinThumbSemanticsLabel": "Piliin ang minimum na handle",
+  "sliderSelectMaxThumbSemanticsLabel": "Piliin ang maximum na handle",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

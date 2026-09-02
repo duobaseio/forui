@@ -587,6 +587,228 @@ void main() {
   });
 
   group('accessibility', () {
+    testWidgets('field merges label and description into its node', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            description: const Text('Pick some'),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(
+          label: 'Fruits',
+          hint: 'Select items\nPick some',
+          isButton: true,
+          isFocusable: true,
+          hasExpandedState: true,
+          hasTapAction: true,
+        ),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('default hint announces as a semantic hint instead of the label', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(key: key, label: const Text('Fruits'), items: letters),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: 'Select items', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('text hint announces as a semantic hint instead of the label', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            hint: const Text('Pick fruits'),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: 'Pick fruits', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('non-text hint announces as a semantic hint instead of the label', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            hint: const Align(alignment: AlignmentDirectional.centerStart, child: Text('Custom')),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: 'Custom', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('hidden hint is not announced when items are selected', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            label: const Text('Fruits'),
+            keepHint: false,
+            control: const .managed(initial: {'A'}),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Fruits'))),
+        isSemantics(label: 'Fruits', hint: '', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('tag announces removal', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            control: const .managed(initial: {'A'}),
+            items: letters,
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Remove'))),
+        isSemantics(label: 'Remove\nA', isButton: true, hasTapAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('backspace removes the visually last tag', (tester) async {
+      final focus = autoDispose(FocusNode());
+      Set<String>? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            focusNode: focus,
+            control: .managed(initial: const {'A', 'B'}, onChange: (v) => changed = v),
+            sort: (a, b) => b.compareTo(a),
+            items: letters,
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pump();
+
+      // Sorted descending, the visually last tag is 'A'.
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, {'B'});
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, <String>{});
+
+      // No-op on an empty selection.
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, <String>{});
+    });
+
+    testWidgets('backspace does nothing while a tag is focused', (tester) async {
+      final focus = autoDispose(FocusNode());
+      Set<String>? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            focusNode: focus,
+            control: .managed(initial: const {'A', 'B'}, onChange: (v) => changed = v),
+            items: letters,
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pump();
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pump();
+      expect(focus.hasPrimaryFocus, false);
+
+      await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+      await tester.pumpAndSettle();
+      expect(changed, null);
+    });
+
+    testWidgets('items announce as checkboxes', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            control: const .managed(initial: {'A'}),
+            items: letters,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.descendant(of: find.byType(FItem), matching: find.text('A'))),
+        isSemantics(hasCheckedState: true, isChecked: true, isInMutuallyExclusiveGroup: false, isButton: false),
+      );
+      expect(
+        tester.getSemantics(find.descendant(of: find.byType(FItem), matching: find.text('B'))),
+        isSemantics(hasCheckedState: true, isChecked: false, isInMutuallyExclusiveGroup: false, isButton: false),
+      );
+
+      semantics.dispose();
+    });
+
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
       final semantics = tester.ensureSemantics();
 

@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Ora",
   "timePickerMinuteSemanticsLabel": "Minuta",
   "autocompleteResults": "{count} rezultate në dispozicion",
+  "selectResults": "{count} rezultate në dispozicion",
   "autocompleteSuggestion": "Sugjerim: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Më shumë",
-  "paginationPageSemanticsLabel": "Faqja {page}"
+  "paginationPageSemanticsLabel": "Faqja {page}",
+  "multiSelectTagSemanticsLabel": "Hiq",
+  "sliderSwitchThumbsSemanticsHint": "Trokit dy herë për të ndërruar dorezat",
+  "sliderSelectMinThumbSemanticsLabel": "Zgjidh dorezën e minimumit",
+  "sliderSelectMaxThumbSemanticsLabel": "Zgjidh dorezën e maksimumit",
+  "sliderMinSemanticsValue": "Minimumi, {value}",
+  "sliderMaxSemanticsValue": "Maksimumi, {value}"
 }

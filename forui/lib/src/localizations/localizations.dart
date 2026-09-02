@@ -486,6 +486,12 @@ abstract class FLocalizations {
   /// **'Select items'**
   String get multiSelectHint;
 
+  /// The semantics label for a removable tag in a multi-select field, merged with the tag's own label.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get multiSelectTagSemanticsLabel;
+
   /// The hint text for the select field.
   ///
   /// In en, this message translates to:
@@ -504,6 +510,12 @@ abstract class FLocalizations {
   /// **'No matches found.'**
   String get selectNoResults;
 
+  /// Announced to screen readers when search results appear or their count changes, e.g. '3 results available'.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 result available} other{{count} results available}}'**
+  String selectResults(int count);
+
   /// The semantic label for the scroll handle in a select field.
   ///
   /// In en, this message translates to:
@@ -521,6 +533,36 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'Sheet'**
   String get sheetSemanticsLabel;
+
+  /// The semantic hint for a range slider's track, announcing that double tapping switches the selected thumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Double tap to switch thumbs'**
+  String get sliderSwitchThumbsSemanticsHint;
+
+  /// The label for the custom semantics action that selects a range slider's minimum thumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Select minimum thumb'**
+  String get sliderSelectMinThumbSemanticsLabel;
+
+  /// The label for the custom semantics action that selects a range slider's maximum thumb.
+  ///
+  /// In en, this message translates to:
+  /// **'Select maximum thumb'**
+  String get sliderSelectMaxThumbSemanticsLabel;
+
+  /// The semantic value of a range slider when the minimum thumb is selected, e.g. 'Minimum, 20%'.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimum, {value}'**
+  String sliderMinSemanticsValue(String value);
+
+  /// The semantic value of a range slider when the maximum thumb is selected, e.g. 'Maximum, 80%'.
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum, {value}'**
+  String sliderMaxSemanticsValue(String value);
 
   /// The email text field's label.
   ///

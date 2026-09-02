@@ -1,3 +1,6 @@
+import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart' hide Thumb;
 
@@ -395,7 +398,7 @@ void main() {
     });
   }
 
-  group('arrow key manipulation', () {
+  group('keyboard manipulation', () {
     testWidgets('calls onEnd when expanded', (tester) async {
       final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
       var onEndCalled = 0;
@@ -422,6 +425,8 @@ void main() {
 
       expect(controller.value.max, greaterThan(0.5));
       expect(onEndCalled, 1);
+
+      await tester.pump(const Duration(milliseconds: 1));
     });
 
     testWidgets('calls onEnd when shrunk', (tester) async {
@@ -450,6 +455,111 @@ void main() {
 
       expect(controller.value.max, lessThan(0.5));
       expect(onEndCalled, 1);
+
+      await tester.pump(const Duration(milliseconds: 1));
+    });
+
+    for (final (name, key, expected) in [
+      ('Home jumps to track minimum', LogicalKeyboardKey.home, 0.0),
+      ('End jumps to track maximum', LogicalKeyboardKey.end, 1.0),
+    ]) {
+      testWidgets('$name - continuous', (tester) async {
+        final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
+        var onEndCalled = 0;
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Focus(
+              focusNode: focus,
+              child: FSlider(
+                control: .managedContinuous(controller: controller),
+                onEnd: (_) => onEndCalled++,
+              ),
+            ),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(.tab);
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(key);
+        await tester.pumpAndSettle();
+
+        expect(controller.value.max, moreOrLessEquals(expected));
+        expect(onEndCalled, 1);
+
+        await tester.pump(const Duration(milliseconds: 1));
+      });
+    }
+
+    for (final (name, key, expected) in [
+      ('Home jumps to first tick', LogicalKeyboardKey.home, 0.0),
+      ('End jumps to last tick', LogicalKeyboardKey.end, 1.0),
+    ]) {
+      testWidgets('$name - discrete', (tester) async {
+        final controller = autoDispose(FDiscreteSliderController(value: FSliderValue(max: 0.5)));
+        final focus = autoDispose(FocusNode());
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: Focus(
+              focusNode: focus,
+              child: FSlider(
+                control: .managedDiscrete(controller: controller),
+                marks: const [
+                  .mark(value: 0),
+                  .mark(value: 0.25),
+                  .mark(value: 0.5),
+                  .mark(value: 0.75),
+                  .mark(value: 1),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pumpAndSettle();
+        await tester.sendKeyEvent(.tab);
+        await tester.pumpAndSettle();
+
+        await tester.sendKeyEvent(key);
+        await tester.pumpAndSettle();
+
+        expect(controller.value.max, moreOrLessEquals(expected));
+
+        await tester.pump(const Duration(milliseconds: 1));
+      });
+    }
+
+    testWidgets('home/end keys on range slider min thumb', (tester) async {
+      final controller = autoDispose(FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75)));
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(control: .managedContinuousRange(controller: controller)),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.home);
+      await tester.pumpAndSettle();
+      expect(controller.value.min, moreOrLessEquals(0));
+
+      await tester.sendKeyEvent(.end);
+      await tester.pumpAndSettle();
+      expect(controller.value.min, moreOrLessEquals(0.75));
+      expect(controller.value.max, moreOrLessEquals(0.75));
+
+      await tester.pump(const Duration(milliseconds: 1));
     });
   });
 
@@ -593,6 +703,352 @@ void main() {
 
         expect(counts.collision(), 0);
       });
+    });
+  });
+
+  group('accessibility', () {
+    List<String> captureAnnouncements(WidgetTester tester) {
+      final announcements = <String>[];
+      tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(SystemChannels.accessibility, (
+        message,
+      ) async {
+        final map = message! as Map<Object?, Object?>;
+        if (map['type'] == 'announce') {
+          announcements.add((map['data']! as Map<Object?, Object?>)['message']! as String);
+        }
+        return null;
+      });
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+          SystemChannels.accessibility,
+          null,
+        ),
+      );
+      return announcements;
+    }
+
+    testWidgets('single slider is one node with label, description, value and adjust actions', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(label: const Text('Volume'), description: const Text('Drag to adjust')),
+          ),
+        ),
+      );
+
+      final node = tester.getSemantics(find.bySemanticsLabel(RegExp('Volume')));
+      expect(
+        node,
+        isSemantics(
+          label: 'Volume',
+          hint: 'Drag to adjust',
+          value: '0%',
+          increasedValue: '5%',
+          isSlider: true,
+          isEnabled: true,
+          hasIncreaseAction: true,
+          hasDecreaseAction: false,
+          hasTapAction: false,
+        ),
+      );
+      // The thumb and gesture detectors must not form separate nodes; a moving or unlabelled child node breaks
+      // VoiceOver focus.
+      expect(node.childrenCount, 0);
+
+      semantics.dispose();
+    });
+
+    testWidgets('single slider announces stepped increased/decreased values', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(control: .managedContinuous(initial: FSliderValue(max: 0.5))),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.byType(Track)),
+        isSemantics(
+          value: '50%',
+          increasedValue: '55%',
+          decreasedValue: '45%',
+          hasIncreaseAction: true,
+          hasDecreaseAction: true,
+        ),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('single slider at the maximum only exposes decrease', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(control: .managedContinuous(initial: FSliderValue(max: 1))),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.byType(Track)),
+        isSemantics(value: '100%', decreasedValue: '95%', hasIncreaseAction: false, hasDecreaseAction: true),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('increase & decrease actions adjust value and call onEnd', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final ends = <FSliderValue>[];
+      FSliderValue? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              control: .managedContinuous(initial: FSliderValue(max: 0.5), onChange: (value) => changed = value),
+              onEnd: ends.add,
+            ),
+          ),
+        ),
+      );
+
+      final slider = find.semantics.byAction(SemanticsAction.increase);
+
+      tester.semantics.increase(slider);
+      await tester.pumpAndSettle();
+      expect(changed?.max, closeTo(0.55, 0.01));
+      expect(ends, hasLength(1));
+
+      tester.semantics.decrease(slider);
+      await tester.pumpAndSettle();
+      expect(changed?.max, closeTo(0.5, 0.01));
+      expect(ends, hasLength(2));
+
+      semantics.dispose();
+    });
+
+    testWidgets('disabled slider', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(width: 320, child: FSlider(label: const Text('Volume'), enabled: false)),
+        ),
+      );
+
+      final node = tester.getSemantics(find.bySemanticsLabel(RegExp('Volume')));
+      expect(
+        node,
+        isSemantics(
+          label: 'Volume',
+          value: '0%',
+          isSlider: true,
+          isEnabled: false,
+          hasEnabledState: true,
+          hasIncreaseAction: false,
+          hasDecreaseAction: false,
+          hasTapAction: false,
+        ),
+      );
+      expect(node.childrenCount, 0);
+
+      semantics.dispose();
+    });
+
+    testWidgets('range slider is a single node targeting the min thumb first', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              label: const Text('Volume'),
+              control: .managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)),
+            ),
+          ),
+        ),
+      );
+
+      final node = tester.getSemantics(find.bySemanticsLabel(RegExp('Volume')));
+      expect(
+        node,
+        isSemantics(
+          label: 'Volume',
+          value: 'Minimum, 25% - 75%',
+          hint: 'Double tap to switch thumbs',
+          isSlider: true,
+          hasIncreaseAction: true,
+          hasDecreaseAction: true,
+          hasTapAction: true,
+          customActions: [const CustomSemanticsAction(label: 'Select maximum thumb')],
+        ),
+      );
+      expect(node.childrenCount, 0);
+
+      semantics.dispose();
+    });
+
+    testWidgets('double tap toggles the targeted thumb and announces it', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final announcements = captureAnnouncements(tester);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              label: const Text('Volume'),
+              control: .managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)),
+            ),
+          ),
+        ),
+      );
+
+      tester.semantics.tap(find.semantics.byAction(SemanticsAction.tap));
+      await tester.pumpAndSettle();
+
+      expect(announcements, ['Maximum, 25% - 75%']);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Volume'))),
+        isSemantics(
+          value: 'Maximum, 25% - 75%',
+          customActions: [const CustomSemanticsAction(label: 'Select minimum thumb')],
+        ),
+      );
+
+      semantics.dispose();
+    });
+
+    testWidgets('adjusting a range slider moves the targeted thumb', (tester) async {
+      final semantics = tester.ensureSemantics();
+      FSliderValue? changed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              control: .managedContinuousRange(
+                initial: FSliderValue(min: 0.25, max: 0.75),
+                onChange: (value) => changed = value,
+              ),
+            ),
+          ),
+        ),
+      );
+
+      tester.semantics.increase(find.semantics.byAction(SemanticsAction.increase));
+      await tester.pumpAndSettle();
+      expect(changed?.min, closeTo(0.3, 0.01));
+      expect(changed?.max, closeTo(0.75, 0.01));
+
+      tester.semantics.tap(find.semantics.byAction(SemanticsAction.tap));
+      await tester.pumpAndSettle();
+
+      tester.semantics.increase(find.semantics.byAction(SemanticsAction.increase));
+      await tester.pumpAndSettle();
+      expect(changed?.min, closeTo(0.3, 0.01));
+      expect(changed?.max, closeTo(0.8, 0.01));
+
+      semantics.dispose();
+    });
+
+    testWidgets('disabled range slider exposes no adjust or toggle actions', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(
+            width: 320,
+            child: FSlider(
+              label: const Text('Volume'),
+              enabled: false,
+              control: .managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)),
+            ),
+          ),
+        ),
+      );
+
+      final node = tester.getSemantics(find.bySemanticsLabel(RegExp('Volume')));
+      expect(
+        node,
+        isSemantics(
+          isEnabled: false,
+          hasEnabledState: true,
+          hasIncreaseAction: false,
+          hasDecreaseAction: false,
+          hasTapAction: false,
+        ),
+      );
+      expect(node.getSemanticsData().hint, '');
+
+      semantics.dispose();
+    });
+
+    testWidgets('shows value tooltip on thumb focus', (tester) async {
+      final controller = autoDispose(FContinuousSliderController(value: FSliderValue(max: 0.5)));
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(control: .managedContinuous(controller: controller)),
+          ),
+        ),
+      );
+
+      // Focus the slider and tab into the thumb.
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsOne);
+
+      await tester.sendKeyEvent(.arrowRight);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsNothing);
+      expect(find.text('${(controller.value.max * 100).toStringAsFixed(0)}%'), findsOne);
+
+      await tester.pump(const Duration(milliseconds: 1));
+    });
+
+    testWidgets('hides value tooltip when thumb loses focus', (tester) async {
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Focus(
+            focusNode: focus,
+            child: FSlider(control: .managedContinuous(initial: FSliderValue(max: 0.5))),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsOne);
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(find.text('50%'), findsNothing);
     });
   });
 }

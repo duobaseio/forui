@@ -122,6 +122,9 @@ class FLocalizationsZu extends FLocalizations {
   String get multiSelectHint => 'Khetha izinto';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Susa';
+
+  @override
   String get selectHint => 'Khetha into';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsZu extends FLocalizations {
   String get selectNoResults => 'Ayikho imiphumela efanayo.';
 
   @override
+  String selectResults(int count) {
+    return 'Imiphumela engu-$count iyatholakala';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Skrola phezulu';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsZu extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Ishidi';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Thepha kabili ukuze ushintshe izibambo';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Khetha isibambo esincane';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Khetha isibambo esikhulu';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Okuncane, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Okukhulu, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'I-imeyili';

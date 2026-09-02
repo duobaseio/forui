@@ -122,6 +122,9 @@ class FLocalizationsKy extends FLocalizations {
   String get multiSelectHint => 'Элементтерди тандоо';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Алып салуу';
+
+  @override
   String get selectHint => 'Элементти тандаңыз';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsKy extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count жыйынтык бар';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Өйдө сыдыруу';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsKy extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'экран';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Кармагычтарды которуштуруу үчүн эки жолу таптаңыз';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Минималдуу кармагычты тандоо';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Максималдуу кармагычты тандоо';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Минимум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Электрондук почта';

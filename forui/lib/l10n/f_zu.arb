@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Ihora",
   "timePickerMinuteSemanticsLabel": "Iminithi",
   "autocompleteResults": "Imiphumela engu-{count} iyatholakala",
+  "selectResults": "Imiphumela engu-{count} iyatholakala",
   "autocompleteSuggestion": "Isiphakamiso: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Okuningi",
-  "paginationPageSemanticsLabel": "Ikhasi {page}"
+  "paginationPageSemanticsLabel": "Ikhasi {page}",
+  "multiSelectTagSemanticsLabel": "Susa",
+  "sliderSwitchThumbsSemanticsHint": "Thepha kabili ukuze ushintshe izibambo",
+  "sliderSelectMinThumbSemanticsLabel": "Khetha isibambo esincane",
+  "sliderSelectMaxThumbSemanticsLabel": "Khetha isibambo esikhulu",
+  "sliderMinSemanticsValue": "Okuncane, {value}",
+  "sliderMaxSemanticsValue": "Okukhulu, {value}"
 }

@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Часы",
   "timePickerMinuteSemanticsLabel": "Минуты",
   "autocompleteResults": "Доступно результатов: {count}",
+  "selectResults": "Доступно результатов: {count}",
   "autocompleteSuggestion": "Предложение: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Ещё",
-  "paginationPageSemanticsLabel": "Страница {page}"
+  "paginationPageSemanticsLabel": "Страница {page}",
+  "multiSelectTagSemanticsLabel": "Удалить",
+  "sliderSwitchThumbsSemanticsHint": "Дважды нажмите, чтобы переключить ползунки",
+  "sliderSelectMinThumbSemanticsLabel": "Выбрать минимальный ползунок",
+  "sliderSelectMaxThumbSemanticsLabel": "Выбрать максимальный ползунок",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

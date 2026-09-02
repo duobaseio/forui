@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Години",
   "timePickerMinuteSemanticsLabel": "Хвилини",
   "autocompleteResults": "Доступно результатів: {count}",
+  "selectResults": "Доступно результатів: {count}",
   "autocompleteSuggestion": "Пропозиція: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Більше",
-  "paginationPageSemanticsLabel": "Сторінка {page}"
+  "paginationPageSemanticsLabel": "Сторінка {page}",
+  "multiSelectTagSemanticsLabel": "Видалити",
+  "sliderSwitchThumbsSemanticsHint": "Двічі торкніться, щоб переключити повзунки",
+  "sliderSelectMinThumbSemanticsLabel": "Вибрати мінімальний повзунок",
+  "sliderSelectMaxThumbSemanticsLabel": "Вибрати максимальний повзунок",
+  "sliderMinSemanticsValue": "Мінімум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

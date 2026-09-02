@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "કલાક",
   "timePickerMinuteSemanticsLabel": "મિનિટ",
   "autocompleteResults": "{count} પરિણામો ઉપલબ્ધ",
+  "selectResults": "{count} પરિણામો ઉપલબ્ધ",
   "autocompleteSuggestion": "સૂચન: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "વધુ",
-  "paginationPageSemanticsLabel": "પેજ {page}"
+  "paginationPageSemanticsLabel": "પેજ {page}",
+  "multiSelectTagSemanticsLabel": "દૂર કરો",
+  "sliderSwitchThumbsSemanticsHint": "હેન્ડલ બદલવા માટે બે વાર ટૅપ કરો",
+  "sliderSelectMinThumbSemanticsLabel": "ન્યૂનતમ હેન્ડલ પસંદ કરો",
+  "sliderSelectMaxThumbSemanticsLabel": "મહત્તમ હેન્ડલ પસંદ કરો",
+  "sliderMinSemanticsValue": "ન્યૂનતમ, {value}",
+  "sliderMaxSemanticsValue": "મહત્તમ, {value}"
 }

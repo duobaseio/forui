@@ -122,6 +122,9 @@ class FLocalizationsZh extends FLocalizations {
   String get multiSelectHint => '选择项目';
 
   @override
+  String get multiSelectTagSemanticsLabel => '移除';
+
+  @override
   String get selectHint => '选择项目';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsZh extends FLocalizations {
   String get selectNoResults => '没有匹配结果。';
 
   @override
+  String selectResults(int count) {
+    return '$count 个结果可用';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '向上滚动';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => '动作条';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => '双击可切换滑块';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '选择最小滑块';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '选择最大滑块';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小值，$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大值，$value';
+  }
 
   @override
   String get textFieldEmailLabel => '电子邮件';
@@ -290,6 +317,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get multiSelectHint => '選擇項目';
 
   @override
+  String get multiSelectTagSemanticsLabel => '移除';
+
+  @override
   String get selectHint => '選擇項目';
 
   @override
@@ -299,6 +329,11 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get selectNoResults => '沒有匹配結果。';
 
   @override
+  String selectResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '向上捲動';
 
   @override
@@ -306,6 +341,25 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get sheetSemanticsLabel => '面板';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => '輕按兩下即可切換滑桿';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '選取最小滑桿';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '選取最大滑桿';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小值，$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大值，$value';
+  }
 
   @override
   String get textFieldEmailLabel => '電郵';
@@ -458,6 +512,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get multiSelectHint => '選擇項目';
 
   @override
+  String get multiSelectTagSemanticsLabel => '移除';
+
+  @override
   String get selectHint => '選擇項目';
 
   @override
@@ -467,6 +524,11 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get selectNoResults => '沒有匹配結果。';
 
   @override
+  String selectResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '向上捲動';
 
   @override
@@ -474,6 +536,25 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get sheetSemanticsLabel => '功能表';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => '輕觸兩下即可切換滑桿';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '選取最小滑桿';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '選取最大滑桿';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小值，$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大值，$value';
+  }
 
   @override
   String get textFieldEmailLabel => '電子郵件';

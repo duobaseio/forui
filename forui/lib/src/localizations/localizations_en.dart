@@ -128,6 +128,9 @@ class FLocalizationsEn extends FLocalizations {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -137,6 +140,17 @@ class FLocalizationsEn extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -144,6 +158,25 @@ class FLocalizationsEn extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -302,6 +335,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -311,6 +347,17 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -318,6 +365,25 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -476,6 +542,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -485,6 +554,17 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -492,6 +572,25 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -650,6 +749,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -659,6 +761,17 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -666,6 +779,25 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -824,6 +956,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -833,6 +968,17 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -840,6 +986,25 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -998,6 +1163,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -1007,6 +1175,17 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1014,6 +1193,25 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -1172,6 +1370,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -1181,6 +1382,17 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1188,6 +1400,25 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -1346,6 +1577,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -1355,6 +1589,17 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1362,6 +1607,25 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';
@@ -1520,6 +1784,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -1529,6 +1796,17 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String get selectNoResults => 'No matching results.';
 
   @override
+  String selectResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -1536,6 +1814,25 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

@@ -122,6 +122,9 @@ class FLocalizationsUk extends FLocalizations {
   String get multiSelectHint => 'Виберіть елементи';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Видалити';
+
+  @override
   String get selectHint => 'Виберіть елемент';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsUk extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return 'Доступно результатів: $count';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Прокрутити вгору';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsUk extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'екран';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Двічі торкніться, щоб переключити повзунки';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Вибрати мінімальний повзунок';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Вибрати максимальний повзунок';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Мінімум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Електронна пошта';

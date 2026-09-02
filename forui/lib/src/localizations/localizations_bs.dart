@@ -122,6 +122,9 @@ class FLocalizationsBs extends FLocalizations {
   String get multiSelectHint => 'Odaberite stavke';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Ukloni';
+
+  @override
   String get selectHint => 'Odaberite stavku';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsBs extends FLocalizations {
   String get selectNoResults => 'Nema odgovarajućih rezultata.';
 
   @override
+  String selectResults(int count) {
+    return '$count dostupnih rezultata';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Pomjerite prema gore';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsBs extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'tabela';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dvaput dodirnite da promijenite klizače';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Odaberite minimalni klizač';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Odaberite maksimalni klizač';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-pošta';

@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "שעה",
   "timePickerMinuteSemanticsLabel": "דקה",
   "autocompleteResults": "{count} תוצאות זמינות",
+  "selectResults": "{count} תוצאות זמינות",
   "autocompleteSuggestion": "הצעה: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "עוד",
-  "paginationPageSemanticsLabel": "דף {page}"
+  "paginationPageSemanticsLabel": "דף {page}",
+  "multiSelectTagSemanticsLabel": "הסרה",
+  "sliderSwitchThumbsSemanticsHint": "הקש הקשה כפולה כדי להחליף בין הידיות",
+  "sliderSelectMinThumbSemanticsLabel": "בחירת ידית המינימום",
+  "sliderSelectMaxThumbSemanticsLabel": "בחירת ידית המקסימום",
+  "sliderMinSemanticsValue": "מינימום, {value}",
+  "sliderMaxSemanticsValue": "מקסימום, {value}"
 }

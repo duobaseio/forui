@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "ຊົ່ວໂມງ",
   "timePickerMinuteSemanticsLabel": "ນາທີ",
   "autocompleteResults": "ມີ {count} ຜົນລັບ",
+  "selectResults": "ມີ {count} ຜົນລັບ",
   "autocompleteSuggestion": "ຄຳແນະນຳ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "ເພີ່ມເຕີມ",
-  "paginationPageSemanticsLabel": "ໜ້າ {page}"
+  "paginationPageSemanticsLabel": "ໜ້າ {page}",
+  "multiSelectTagSemanticsLabel": "ເອົາອອກ",
+  "sliderSwitchThumbsSemanticsHint": "ແຕະສອງຄັ້ງເພື່ອສະຫຼັບປຸ່ມເລື່ອນ",
+  "sliderSelectMinThumbSemanticsLabel": "ເລືອກປຸ່ມເລື່ອນຕໍ່າສຸດ",
+  "sliderSelectMaxThumbSemanticsLabel": "ເລືອກປຸ່ມເລື່ອນສູງສຸດ",
+  "sliderMinSemanticsValue": "ຕໍ່າສຸດ, {value}",
+  "sliderMaxSemanticsValue": "ສູງສຸດ, {value}"
 }

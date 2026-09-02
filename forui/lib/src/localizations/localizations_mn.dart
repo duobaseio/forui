@@ -122,6 +122,9 @@ class FLocalizationsMn extends FLocalizations {
   String get multiSelectHint => 'Зүйлсийг сонгох';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Хасах';
+
+  @override
   String get selectHint => 'Зүйл сонгох';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsMn extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count үр дүн байна';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Дээш гүйлгэх';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsMn extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'хүснэгт';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Бариулыг сэлгэхийн тулд хоёр удаа товшино уу';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Хамгийн бага бариулыг сонгох';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Хамгийн их бариулыг сонгох';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Хамгийн бага, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Хамгийн их, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Имэйл';

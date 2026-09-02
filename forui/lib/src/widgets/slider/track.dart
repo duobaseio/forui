@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -12,24 +13,85 @@ import 'package:forui/src/widgets/slider/inherited_variants.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
 
 @internal
-class const Track({super.key}) extends StatelessWidget {
+class const Track({super.key}) extends StatefulWidget {
+  @override
+  State<Track> createState() => _TrackState();
+}
+
+class _TrackState extends State<Track> {
+  FSliderController? _controller;
+  late bool _max;
+  late String Function(FSliderValue) _semanticFormatterCallback;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _semanticFormatterCallback = InheritedData.of(context).semanticFormatterCallback;
+    final controller = InheritedController.of(context).controller;
+    if (_controller != controller) {
+      _controller = controller;
+      _max = controller.active.max && !controller.active.min;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final InheritedData(:style, :layout, :semanticFormatterCallback) = .of(context);
-    final controller = InheritedController.of(context).controller;
+    final InheritedData(:style, :enabled, :layout, :semanticValueFormatterCallback, :onEnd) = .of(context);
     final position = layout.position;
-
+    final controller = _controller!;
     final crossAxisExtent = max(style.thumbSize, style.crossAxisExtent);
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
+    String? increasedValue;
+    VoidCallback? increase;
+    if (controller.value.step(min: !_max, expand: _max) case final value when controller.value != value) {
+      increasedValue = semanticValueFormatterCallback(_max ? value.max : value.min);
+      increase = () {
+        if (controller.step(min: !_max, expand: _max)) {
+          unawaited(style.tickHapticFeedback());
+        }
+        onEnd?.call(controller.value);
+      };
+    }
+
+    String? decreasedValue;
+    VoidCallback? decrease;
+    if (controller.value.step(min: !_max, expand: !_max) case final value when controller.value != value) {
+      decreasedValue = semanticValueFormatterCallback(_max ? value.max : value.min);
+      decrease = () {
+        if (controller.step(min: !_max, expand: !_max)) {
+          unawaited(style.tickHapticFeedback());
+        }
+        onEnd?.call(controller.value);
+      };
+    }
+
+    final range = controller.active.min && controller.active.max;
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return SizedBox(
       height: height,
       width: width,
       child: Semantics(
-        container: true,
         slider: true,
-        enabled: true,
-        value: semanticFormatterCallback(controller.value),
+        enabled: enabled,
+        value: range ? _describe() : _semanticFormatterCallback(controller.value),
+        increasedValue: increasedValue,
+        decreasedValue: decreasedValue,
+        onIncrease: enabled ? increase : null,
+        onDecrease: enabled ? decrease : null,
+        // onTap + customSemanticsAction is a workaround Flutter engine's focused outlines "lagging" behind a moving
+        // focusable semantics node & causing focus to switch from a focused thumb to a background track.
+        hint: range && enabled ? localizations.sliderSwitchThumbsSemanticsHint : null,
+        onTap: range && enabled ? _toggle : null,
+        customSemanticsActions: range && enabled
+            ? {
+                CustomSemanticsAction(
+                  label: _max
+                      ? localizations.sliderSelectMinThumbSemanticsLabel
+                      : localizations.sliderSelectMaxThumbSemanticsLabel,
+                ): _toggle,
+              }
+            : null,
         child: Stack(
           alignment: .center,
           children: [
@@ -48,6 +110,17 @@ class const Track({super.key}) extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _toggle() {
+    setState(() => _max = !_max);
+    SemanticsService.sendAnnouncement(View.of(context), _describe(), Directionality.of(context));
+  }
+
+  String _describe() {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final value = _semanticFormatterCallback(_controller!.value);
+    return _max ? localizations.sliderMaxSemanticsValue(value) : localizations.sliderMinSemanticsValue(value);
   }
 }
 
@@ -97,6 +170,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     if (layout.vertical) {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: _tap(controller, style, minTooltipController, maxTooltipController, style.thumbSize, layout),
         onTapUp: (_) {
           minTooltipController?.hide();
@@ -110,6 +184,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       );
     } else {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: _tap(controller, style, minTooltipController, maxTooltipController, style.thumbSize, layout),
         onTapUp: (_) {
           minTooltipController?.hide();

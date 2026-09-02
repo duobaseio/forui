@@ -122,6 +122,9 @@ class FLocalizationsPs extends FLocalizations {
   String get multiSelectHint => 'توکي غوره کړئ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'لرې کول';
+
+  @override
   String get selectHint => 'یو توکی وټاکئ';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsPs extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count پایلې شتون لري';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'پورته سکرول کړئ';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsPs extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'د لاستو بدلولو لپاره دوه ځله ټک ووهئ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'د لږترلږه لاستی وټاکئ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'د زیات نه زیات لاستی وټاکئ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'لږ تر لږه، $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'زیات نه زیات، $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'برېښنالیک';

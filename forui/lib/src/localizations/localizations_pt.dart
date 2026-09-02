@@ -122,6 +122,9 @@ class FLocalizationsPt extends FLocalizations {
   String get multiSelectHint => 'Selecionar itens';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remover';
+
+  @override
   String get selectHint => 'Selecione um item';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsPt extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponíveis';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rolar para cima';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsPt extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'inferior';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Toque duas vezes para alternar entre as alças';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Selecionar a alça mínima';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Selecionar a alça máxima';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-mail';
@@ -284,10 +311,18 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String get multiSelectHint => 'Selecionar itens';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remover';
+
+  @override
   String get selectHint => 'Selecione um item';
 
   @override
   String get selectSearchHint => 'Pesquisar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponíveis';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Deslocar para cima';
@@ -297,6 +332,25 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get sheetSemanticsLabel => 'Secção';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Toque duas vezes para alternar entre os manípulos';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Selecionar o manípulo mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Selecionar o manípulo máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-mail';

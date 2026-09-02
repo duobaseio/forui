@@ -122,6 +122,9 @@ class FLocalizationsKo extends FLocalizations {
   String get multiSelectHint => '항목 선택';
 
   @override
+  String get multiSelectTagSemanticsLabel => '제거';
+
+  @override
   String get selectHint => '항목 선택';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsKo extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count개의 결과가 있습니다';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '위로 스크롤';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => '시트';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => '핸들을 전환하려면 두 번 탭하세요';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '최소 핸들 선택';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '최대 핸들 선택';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '최소, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '최대, $value';
+  }
 
   @override
   String get textFieldEmailLabel => '이메일';

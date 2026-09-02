@@ -122,6 +122,9 @@ class FLocalizationsEl extends FLocalizations {
   String get multiSelectHint => 'Επιλέξτε στοιχεία';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Κατάργηση';
+
+  @override
   String get selectHint => 'Επιλέξτε ένα στοιχείο';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsEl extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count διαθέσιμα αποτελέσματα';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Κύλιση προς τα πάνω';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Φύλλο';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Πατήστε δύο φορές για εναλλαγή λαβών';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Επιλογή λαβής ελάχιστου';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Επιλογή λαβής μέγιστου';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Ελάχιστο, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Μέγιστο, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

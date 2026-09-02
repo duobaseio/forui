@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "तास",
   "timePickerMinuteSemanticsLabel": "मिनिट",
   "autocompleteResults": "{count} परिणाम उपलब्ध",
+  "selectResults": "{count} परिणाम उपलब्ध",
   "autocompleteSuggestion": "सूचना: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "अधिक",
-  "paginationPageSemanticsLabel": "पेज {page}"
+  "paginationPageSemanticsLabel": "पेज {page}",
+  "multiSelectTagSemanticsLabel": "काढून टाका",
+  "sliderSwitchThumbsSemanticsHint": "हँडल बदलण्यासाठी दोनदा टॅप करा",
+  "sliderSelectMinThumbSemanticsLabel": "किमान हँडल निवडा",
+  "sliderSelectMaxThumbSemanticsLabel": "कमाल हँडल निवडा",
+  "sliderMinSemanticsValue": "किमान, {value}",
+  "sliderMaxSemanticsValue": "कमाल, {value}"
 }

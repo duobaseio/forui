@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Óra",
   "timePickerMinuteSemanticsLabel": "Perc",
   "autocompleteResults": "{count} találat érhető el",
+  "selectResults": "{count} találat érhető el",
   "autocompleteSuggestion": "Javaslat: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Továbbiak",
-  "paginationPageSemanticsLabel": "{page}. oldal"
+  "paginationPageSemanticsLabel": "{page}. oldal",
+  "multiSelectTagSemanticsLabel": "Eltávolítás",
+  "sliderSwitchThumbsSemanticsHint": "Koppintson duplán a csúszkák közötti váltáshoz",
+  "sliderSelectMinThumbSemanticsLabel": "Minimum csúszka kiválasztása",
+  "sliderSelectMaxThumbSemanticsLabel": "Maximum csúszka kiválasztása",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

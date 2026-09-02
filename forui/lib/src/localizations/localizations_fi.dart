@@ -122,6 +122,9 @@ class FLocalizationsFi extends FLocalizations {
   String get multiSelectHint => 'Valitse kohteet';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Poista';
+
+  @override
   String get selectHint => 'Valitse kohde';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsFi extends FLocalizations {
   String get selectNoResults => 'Ei vastaavia tuloksia.';
 
   @override
+  String selectResults(int count) {
+    return '$count tulosta saatavilla';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Vieritä ylös';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'arkki';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Vaihda kahvaa kaksoisnapauttamalla';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Valitse minimikahva';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Valitse maksimikahva';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimi, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimi, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Sähköposti';

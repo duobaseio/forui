@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Цаг",
   "timePickerMinuteSemanticsLabel": "Минут",
   "autocompleteResults": "{count} үр дүн байна",
+  "selectResults": "{count} үр дүн байна",
   "autocompleteSuggestion": "Санал: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Илүү",
-  "paginationPageSemanticsLabel": "{page}-р хуудас"
+  "paginationPageSemanticsLabel": "{page}-р хуудас",
+  "multiSelectTagSemanticsLabel": "Хасах",
+  "sliderSwitchThumbsSemanticsHint": "Бариулыг сэлгэхийн тулд хоёр удаа товшино уу",
+  "sliderSelectMinThumbSemanticsLabel": "Хамгийн бага бариулыг сонгох",
+  "sliderSelectMaxThumbSemanticsLabel": "Хамгийн их бариулыг сонгох",
+  "sliderMinSemanticsValue": "Хамгийн бага, {value}",
+  "sliderMaxSemanticsValue": "Хамгийн их, {value}"
 }

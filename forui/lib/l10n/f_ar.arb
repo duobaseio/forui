@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "ساعة",
   "timePickerMinuteSemanticsLabel": "دقيقة",
   "autocompleteResults": "{count} نتائج متوفرة",
+  "selectResults": "{count} نتائج متوفرة",
   "autocompleteSuggestion": "اقتراح: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "المزيد",
-  "paginationPageSemanticsLabel": "الصفحة {page}"
+  "paginationPageSemanticsLabel": "الصفحة {page}",
+  "multiSelectTagSemanticsLabel": "إزالة",
+  "sliderSwitchThumbsSemanticsHint": "انقر نقرًا مزدوجًا للتبديل بين المقبضين",
+  "sliderSelectMinThumbSemanticsLabel": "تحديد مقبض الحد الأدنى",
+  "sliderSelectMaxThumbSemanticsLabel": "تحديد مقبض الحد الأقصى",
+  "sliderMinSemanticsValue": "الحد الأدنى، {value}",
+  "sliderMaxSemanticsValue": "الحد الأقصى، {value}"
 }

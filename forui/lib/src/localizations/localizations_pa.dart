@@ -122,6 +122,9 @@ class FLocalizationsPa extends FLocalizations {
   String get multiSelectHint => 'ਆਈਟਮਾਂ ਚੁਣੋ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ਹਟਾਓ';
+
+  @override
   String get selectHint => 'ਇੱਕ ਆਈਟਮ ਚੁਣੋ';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsPa extends FLocalizations {
   String get selectNoResults => 'ਕੋਈ ਮੇਲ ਖਾਂਦੇ ਨਤੀਜੇ ਨਹੀਂ ਹਨ।';
 
   @override
+  String selectResults(int count) {
+    return '$count ਨਤੀਜੇ ਉਪਲਬਧ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ਉੱਪਰ ਸਕ੍ਰੋਲ ਕਰੋ';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsPa extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'ਸ਼ੀਟ';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'ਹੈਂਡਲ ਬਦਲਣ ਲਈ ਦੋ ਵਾਰ ਟੈਪ ਕਰੋ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'ਘੱਟੋ-ਘੱਟ ਹੈਂਡਲ ਚੁਣੋ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'ਵੱਧ ਤੋਂ ਵੱਧ ਹੈਂਡਲ ਚੁਣੋ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'ਘੱਟੋ-ਘੱਟ, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'ਵੱਧ ਤੋਂ ਵੱਧ, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'ਈਮੇਲ';

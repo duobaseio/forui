@@ -159,6 +159,10 @@
   "@multiSelectHint": {
     "description": "The hint text for the multi-select field."
   },
+  "multiSelectTagSemanticsLabel": "Remove",
+  "@multiSelectTagSemanticsLabel": {
+    "description": "The semantics label for a removable tag in a multi-select field, merged with the tag's own label."
+  },
   "selectHint": "Select an item",
   "@selectHint": {
     "description": "The hint text for the select field."
@@ -171,6 +175,15 @@
   "@selectNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "selectResults": "{count, plural, =1{1 result available} other{{count} results available}}",
+  "@selectResults": {
+    "description": "Announced to screen readers when search results appear or their count changes, e.g. '3 results available'.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "selectScrollUpSemanticsLabel": "Scroll up",
   "@selectScrollUpSemanticsLabel": {
     "description": "The semantic label for the scroll handle in a select field."
@@ -182,6 +195,36 @@
   "sheetSemanticsLabel": "Sheet",
   "@sheetSemanticsLabel": {
     "description": "The semantic label for a sheet."
+  },
+  "sliderSwitchThumbsSemanticsHint": "Double tap to switch thumbs",
+  "@sliderSwitchThumbsSemanticsHint": {
+    "description": "The semantic hint for a range slider's track, announcing that double tapping switches the selected thumb."
+  },
+  "sliderSelectMinThumbSemanticsLabel": "Select minimum thumb",
+  "@sliderSelectMinThumbSemanticsLabel": {
+    "description": "The label for the custom semantics action that selects a range slider's minimum thumb."
+  },
+  "sliderSelectMaxThumbSemanticsLabel": "Select maximum thumb",
+  "@sliderSelectMaxThumbSemanticsLabel": {
+    "description": "The label for the custom semantics action that selects a range slider's maximum thumb."
+  },
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "@sliderMinSemanticsValue": {
+    "description": "The semantic value of a range slider when the minimum thumb is selected, e.g. 'Minimum, 20%'.",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "sliderMaxSemanticsValue": "Maximum, {value}",
+  "@sliderMaxSemanticsValue": {
+    "description": "The semantic value of a range slider when the maximum thumb is selected, e.g. 'Maximum, 80%'.",
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
   },
   "textFieldEmailLabel": "Email",
   "@textFieldEmailLabel": {

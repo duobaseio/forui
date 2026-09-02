@@ -122,6 +122,9 @@ class FLocalizationsSq extends FLocalizations {
   String get multiSelectHint => 'Zgjidh elementet';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Hiq';
+
+  @override
   String get selectHint => 'Zgjidhni një artikull';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsSq extends FLocalizations {
   String get selectNoResults => 'Nuk ka rezultate përputhëse.';
 
   @override
+  String selectResults(int count) {
+    return '$count rezultate në dispozicion';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Lëviz lart';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Fleta';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Trokit dy herë për të ndërruar dorezat';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Zgjidh dorezën e minimumit';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Zgjidh dorezën e maksimumit';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimumi, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimumi, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

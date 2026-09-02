@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Ordua",
   "timePickerMinuteSemanticsLabel": "Minutua",
   "autocompleteResults": "{count} emaitza erabilgarri",
+  "selectResults": "{count} emaitza erabilgarri",
   "autocompleteSuggestion": "Iradokizuna: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Gehiago",
-  "paginationPageSemanticsLabel": "{page}. orria"
+  "paginationPageSemanticsLabel": "{page}. orria",
+  "multiSelectTagSemanticsLabel": "Kendu",
+  "sliderSwitchThumbsSemanticsHint": "Sakatu birritan heldulekuz aldatzeko",
+  "sliderSelectMinThumbSemanticsLabel": "Hautatu gutxieneko heldulekua",
+  "sliderSelectMaxThumbSemanticsLabel": "Hautatu gehienezko heldulekua",
+  "sliderMinSemanticsValue": "Gutxienekoa, {value}",
+  "sliderMaxSemanticsValue": "Gehienezkoa, {value}"
 }

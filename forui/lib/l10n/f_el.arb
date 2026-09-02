@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Ώρα",
   "timePickerMinuteSemanticsLabel": "Λεπτό",
   "autocompleteResults": "{count} διαθέσιμα αποτελέσματα",
+  "selectResults": "{count} διαθέσιμα αποτελέσματα",
   "autocompleteSuggestion": "Πρόταση: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Περισσότερα",
-  "paginationPageSemanticsLabel": "Σελίδα {page}"
+  "paginationPageSemanticsLabel": "Σελίδα {page}",
+  "multiSelectTagSemanticsLabel": "Κατάργηση",
+  "sliderSwitchThumbsSemanticsHint": "Πατήστε δύο φορές για εναλλαγή λαβών",
+  "sliderSelectMinThumbSemanticsLabel": "Επιλογή λαβής ελάχιστου",
+  "sliderSelectMaxThumbSemanticsLabel": "Επιλογή λαβής μέγιστου",
+  "sliderMinSemanticsValue": "Ελάχιστο, {value}",
+  "sliderMaxSemanticsValue": "Μέγιστο, {value}"
 }

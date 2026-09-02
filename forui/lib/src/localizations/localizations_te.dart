@@ -122,6 +122,9 @@ class FLocalizationsTe extends FLocalizations {
   String get multiSelectHint => 'అంశాలను ఎంచుకోండి';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'తీసివేయి';
+
+  @override
   String get selectHint => 'ఒక అంశాన్ని ఎంచుకోండి';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsTe extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count ఫలితాలు అందుబాటులో ఉన్నాయి';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'పైకి స్క్రోల్ చేయండి';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsTe extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'షీట్';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'హ్యాండిల్‌లను మార్చడానికి రెండుసార్లు నొక్కండి';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'కనిష్ఠ హ్యాండిల్‌ను ఎంచుకోండి';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'గరిష్ఠ హ్యాండిల్‌ను ఎంచుకోండి';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'కనిష్ఠం, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'గరిష్ఠం, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'ఇమెయిల్';

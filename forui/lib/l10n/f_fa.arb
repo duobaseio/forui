@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "ساعت",
   "timePickerMinuteSemanticsLabel": "دقیقه",
   "autocompleteResults": "{count} نتیجه موجود است",
+  "selectResults": "{count} نتیجه موجود است",
   "autocompleteSuggestion": "پیشنهاد: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "بیشتر",
-  "paginationPageSemanticsLabel": "صفحه {page}"
+  "paginationPageSemanticsLabel": "صفحه {page}",
+  "multiSelectTagSemanticsLabel": "حذف",
+  "sliderSwitchThumbsSemanticsHint": "برای تعویض دستگیره‌ها دو بار ضربه بزنید",
+  "sliderSelectMinThumbSemanticsLabel": "انتخاب دستگیره حداقل",
+  "sliderSelectMaxThumbSemanticsLabel": "انتخاب دستگیره حداکثر",
+  "sliderMinSemanticsValue": "حداقل، {value}",
+  "sliderMaxSemanticsValue": "حداکثر، {value}"
 }

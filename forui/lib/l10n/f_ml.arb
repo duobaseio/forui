@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "മണിക്കൂർ",
   "timePickerMinuteSemanticsLabel": "മിനിറ്റ്",
   "autocompleteResults": "{count} ഫലങ്ങൾ ലഭ്യമാണ്",
+  "selectResults": "{count} ഫലങ്ങൾ ലഭ്യമാണ്",
   "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "കൂടുതൽ",
-  "paginationPageSemanticsLabel": "പേജ് {page}"
+  "paginationPageSemanticsLabel": "പേജ് {page}",
+  "multiSelectTagSemanticsLabel": "നീക്കംചെയ്യുക",
+  "sliderSwitchThumbsSemanticsHint": "ഹാൻഡിലുകൾ മാറ്റാൻ രണ്ടുതവണ ടാപ്പുചെയ്യുക",
+  "sliderSelectMinThumbSemanticsLabel": "മിനിമം ഹാൻഡിൽ തിരഞ്ഞെടുക്കുക",
+  "sliderSelectMaxThumbSemanticsLabel": "മാക്സിമം ഹാൻഡിൽ തിരഞ്ഞെടുക്കുക",
+  "sliderMinSemanticsValue": "മിനിമം, {value}",
+  "sliderMaxSemanticsValue": "മാക്സിമം, {value}"
 }

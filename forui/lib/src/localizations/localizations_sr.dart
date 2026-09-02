@@ -122,6 +122,9 @@ class FLocalizationsSr extends FLocalizations {
   String get multiSelectHint => 'Изаберите ставке';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Уклони';
+
+  @override
   String get selectHint => 'Изаберите ставку';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsSr extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count доступних резултата';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Померите нагоре';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'табела';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Додирните двапут да бисте променили клизаче';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Изаберите минимални клизач';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Изаберите максимални клизач';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Минимум, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Максимум, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Имејл';
@@ -290,6 +317,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get multiSelectHint => 'Izaberite stavke';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Ukloni';
+
+  @override
   String get selectHint => 'Izaberite stavku';
 
   @override
@@ -299,6 +329,11 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get selectNoResults => 'Nema podudarajućih rezultata.';
 
   @override
+  String selectResults(int count) {
+    return '$count dostupnih rezultata';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Pomerite nagore';
 
   @override
@@ -306,6 +341,25 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get sheetSemanticsLabel => 'tabela';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dodirnite dvaput da biste promenili klizače';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Izaberite minimalni klizač';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Izaberite maksimalni klizač';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Imejl';

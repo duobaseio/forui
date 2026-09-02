@@ -122,6 +122,9 @@ class FLocalizationsJa extends FLocalizations {
   String get multiSelectHint => 'アイテムを選択';
 
   @override
+  String get multiSelectTagSemanticsLabel => '削除';
+
+  @override
   String get selectHint => 'アイテムを選択';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsJa extends FLocalizations {
   String get selectNoResults => '一致する結果がありません。';
 
   @override
+  String selectResults(int count) {
+    return '$count 件の結果があります';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => '上にスクロール';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsJa extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'シート';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'ダブルタップでつまみを切り替えます';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => '最小値のつまみを選択';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => '最大値のつまみを選択';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return '最小、$value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return '最大、$value';
+  }
 
   @override
   String get textFieldEmailLabel => 'メール';

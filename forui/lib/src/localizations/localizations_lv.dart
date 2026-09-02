@@ -122,6 +122,9 @@ class FLocalizationsLv extends FLocalizations {
   String get multiSelectHint => 'Atlasiet vienumus';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Noņemt';
+
+  @override
   String get selectHint => 'Atlasiet vienumu';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsLv extends FLocalizations {
   String get selectNoResults => 'Nav atbilstošu rezultātu.';
 
   @override
+  String selectResults(int count) {
+    return 'Pieejami $count rezultāti';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Ritināt uz augšu';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'lapa';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Divreiz pieskarieties, lai pārslēgtu slīdņus';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Atlasīt minimuma slīdni';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Atlasīt maksimuma slīdni';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimums, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimums, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-pasts';

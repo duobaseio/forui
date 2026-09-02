@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Saat",
   "timePickerMinuteSemanticsLabel": "Dəqiqə",
   "autocompleteResults": "{count} nəticə mövcuddur",
+  "selectResults": "{count} nəticə mövcuddur",
   "autocompleteSuggestion": "Təklif: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Daha çox",
-  "paginationPageSemanticsLabel": "Səhifə {page}"
+  "paginationPageSemanticsLabel": "Səhifə {page}",
+  "multiSelectTagSemanticsLabel": "Silin",
+  "sliderSwitchThumbsSemanticsHint": "Sürüşdürmə düymələri arasında keçid etmək üçün iki dəfə toxunun",
+  "sliderSelectMinThumbSemanticsLabel": "Minimum düyməni seçin",
+  "sliderSelectMaxThumbSemanticsLabel": "Maksimum düyməni seçin",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

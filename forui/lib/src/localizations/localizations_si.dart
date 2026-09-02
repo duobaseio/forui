@@ -122,6 +122,9 @@ class FLocalizationsSi extends FLocalizations {
   String get multiSelectHint => 'අයිතම තෝරන්න';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ඉවත් කරන්න';
+
+  @override
   String get selectHint => 'අයිතමයක් තෝරන්න';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsSi extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return 'ප්‍රතිඵල $countක් තිබේ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ඉහළට අනුචලනය කරන්න';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsSi extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'පත්‍රය';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'හැඬල් මාරු කිරීමට දෙවරක් තට්ටු කරන්න';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'අවම හැඬලය තෝරන්න';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'උපරිම හැඬලය තෝරන්න';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'අවම, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'උපරිම, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'විද්‍යුත් තැපෑල';

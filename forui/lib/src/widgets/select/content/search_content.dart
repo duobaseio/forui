@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
@@ -66,6 +67,8 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   late TextEditingController _controller;
   late String _previous;
   late FutureOr<Iterable<T>> _data;
+  int _monotonic = 0;
+  int? _count;
 
   @override
   void initState() {
@@ -73,7 +76,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     _controller = widget.properties.control.create(_update);
 
     _previous = _controller.text;
-    _data = widget.filter(_controller.text);
+    _data = _filter(_controller.text);
   }
 
   @override
@@ -83,7 +86,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     if (updated) {
       _controller = controller;
       _previous = _controller.text;
-      _data = widget.filter(_controller.text);
+      _data = _filter(_controller.text);
     }
   }
 
@@ -100,9 +103,37 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       setState(() {
         // DO NOT TRY TO CONVERT THIS TO AN ARROW EXPRESSION. Doing so changes the return type to a future, which
         // results in an assertion error being thrown.
-        _data = widget.filter(_controller.text);
+        _data = _filter(_controller.text);
       });
     }
+  }
+
+  FutureOr<Iterable<T>> _filter(String query) {
+    final token = ++_monotonic;
+    final data = widget.filter(query);
+    switch (data) {
+      case final Iterable<T> values:
+        _announce(token, values.length);
+      case final Future<Iterable<T>> future:
+        // Errors are surfaced by the FutureBuilder in build.
+        future.then((values) => _announce(token, values.length), onError: (_, _) {});
+    }
+
+    return data;
+  }
+
+  void _announce(int token, int count) {
+    if (!mounted || token != _monotonic || !_focus.hasFocus || count == _count) {
+      return;
+    }
+    _count = count;
+
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      count == 0 ? localizations.selectNoResults : localizations.selectResults(count),
+      Directionality.of(context),
+    );
   }
 
   @override

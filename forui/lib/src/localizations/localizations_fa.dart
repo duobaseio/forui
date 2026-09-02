@@ -122,6 +122,9 @@ class FLocalizationsFa extends FLocalizations {
   String get multiSelectHint => 'انتخاب آیتم‌ها';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'حذف';
+
+  @override
   String get selectHint => 'یک مورد را انتخاب کنید';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsFa extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count نتیجه موجود است';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'پیمایش به بالا';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsFa extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'برگ';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'برای تعویض دستگیره‌ها دو بار ضربه بزنید';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'انتخاب دستگیره حداقل';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'انتخاب دستگیره حداکثر';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'حداقل، $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'حداکثر، $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'ایمیل';

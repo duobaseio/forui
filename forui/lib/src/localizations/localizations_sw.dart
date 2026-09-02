@@ -122,6 +122,9 @@ class FLocalizationsSw extends FLocalizations {
   String get multiSelectHint => 'Chagua vipengee';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Ondoa';
+
+  @override
   String get selectHint => 'Chagua kipengee';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsSw extends FLocalizations {
   String get selectNoResults => 'Hakuna matokeo yanayolingana.';
 
   @override
+  String selectResults(int count) {
+    return 'Matokeo $count yanapatikana';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Sogeza juu';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsSw extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Safu';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Gusa mara mbili ili kubadilisha vishikizo';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Chagua kishikizo cha chini zaidi';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Chagua kishikizo cha juu zaidi';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Kima cha chini, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Kima cha juu, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Barua pepe';

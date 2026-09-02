@@ -122,6 +122,9 @@ class FLocalizationsEu extends FLocalizations {
   String get multiSelectHint => 'Hautatu elementuak';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Kendu';
+
+  @override
   String get selectHint => 'Hautatu elementu bat';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsEu extends FLocalizations {
   String get selectNoResults => 'Ez dago bat datorren emaitzarik.';
 
   @override
+  String selectResults(int count) {
+    return '$count emaitza erabilgarri';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Egin gora';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsEu extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'orria';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Sakatu birritan heldulekuz aldatzeko';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Hautatu gutxieneko heldulekua';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Hautatu gehienezko heldulekua';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Gutxienekoa, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Gehienezkoa, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Posta elektronikoa';

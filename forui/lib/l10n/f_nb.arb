@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Time",
   "timePickerMinuteSemanticsLabel": "Minutt",
   "autocompleteResults": "{count} resultater tilgjengelig",
+  "selectResults": "{count} resultater tilgjengelig",
   "autocompleteSuggestion": "Forslag: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mer",
-  "paginationPageSemanticsLabel": "Side {page}"
+  "paginationPageSemanticsLabel": "Side {page}",
+  "multiSelectTagSemanticsLabel": "Fjern",
+  "sliderSwitchThumbsSemanticsHint": "Trykk to ganger for å bytte håndtak",
+  "sliderSelectMinThumbSemanticsLabel": "Velg minimumshåndtak",
+  "sliderSelectMaxThumbSemanticsLabel": "Velg maksimumshåndtak",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

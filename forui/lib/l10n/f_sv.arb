@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Timme",
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} resultat tillgängliga",
+  "selectResults": "{count} resultat tillgängliga",
   "autocompleteSuggestion": "Förslag: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Mer",
-  "paginationPageSemanticsLabel": "Sida {page}"
+  "paginationPageSemanticsLabel": "Sida {page}",
+  "multiSelectTagSemanticsLabel": "Ta bort",
+  "sliderSwitchThumbsSemanticsHint": "Tryck två gånger för att byta reglage",
+  "sliderSelectMinThumbSemanticsLabel": "Välj minimireglage",
+  "sliderSelectMaxThumbSemanticsLabel": "Välj maximireglage",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

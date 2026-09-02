@@ -14,6 +14,10 @@ import 'package:forui/src/widgets/slider/inherited_variants.dart';
 
 part 'thumb.design.dart';
 
+class const _HomeIntent() extends Intent;
+
+class const _EndIntent() extends Intent;
+
 class const _ShrinkIntent() extends Intent;
 
 class const _ExpandIntent() extends Intent;
@@ -54,30 +58,17 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       ),
       :layout,
       :tooltipBuilder,
-      :semanticValueFormatterCallback,
       :enabled,
       :onEnd,
     ) = .of(
       context,
     );
 
-    String? increasedValue;
-    if (controller.value.step(min: widget.min, expand: !widget.min) case final value when controller.value != value) {
-      increasedValue = semanticValueFormatterCallback(offset);
-    }
-
-    String? decreasedValue;
-    if (controller.value.step(min: widget.min, expand: widget.min) case final value when controller.value != value) {
-      decreasedValue = semanticValueFormatterCallback(offset);
-    }
-
-    Widget thumb = Semantics(
-      enabled: enabled,
-      value: semanticValueFormatterCallback(offset),
-      increasedValue: increasedValue,
-      decreasedValue: decreasedValue,
-      child: FocusableActionDetector(
-        shortcuts: switch ((layout, widget.min)) {
+    Widget thumb = FocusableActionDetector(
+      shortcuts: {
+        const SingleActivator(.home): const _HomeIntent(),
+        const SingleActivator(.end): const _EndIntent(),
+        ...switch ((layout, widget.min)) {
           (.ltr, true) || (.rtl, false) => const {
             SingleActivator(.arrowLeft): _ExpandIntent(),
             SingleActivator(.arrowRight): _ShrinkIntent(),
@@ -95,41 +86,62 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
             SingleActivator(.arrowDown): _ExpandIntent(),
           },
         },
-        actions: {
-          _ExpandIntent: CallbackAction(
-            onInvoke: (_) {
-              if (controller.step(min: widget.min, expand: true)) {
-                unawaited(tickHapticFeedback());
-              }
-              onEnd?.call(controller.value);
-              return null;
-            },
+      },
+      actions: {
+        _HomeIntent: CallbackAction(
+          onInvoke: (_) {
+            controller.value = controller.value.move(min: widget.min, to: 0);
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+        _EndIntent: CallbackAction(
+          onInvoke: (_) {
+            controller.value = controller.value.move(min: widget.min, to: controller.value.pixelConstraints.extent);
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+        _ExpandIntent: CallbackAction(
+          onInvoke: (_) {
+            if (controller.step(min: widget.min, expand: true)) {
+              unawaited(tickHapticFeedback());
+            }
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+        _ShrinkIntent: CallbackAction(
+          onInvoke: (_) {
+            if (controller.step(min: widget.min, expand: false)) {
+              unawaited(tickHapticFeedback());
+            }
+            onEnd?.call(controller.value);
+            return null;
+          },
+        ),
+      },
+      enabled: enabled,
+      mouseCursor: enabled ? _cursor : .defer,
+      includeFocusSemantics: false,
+      onFocusChange: (focused) {
+        setState(() => _focused = focused);
+        if (focused) {
+          tooltip?.show();
+        } else {
+          tooltip?.hide();
+        }
+      },
+      child: FFocusedOutline(
+        style: thumbStyle.focusedOutlineStyle,
+        focused: _focused,
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            shape: .circle,
+            color: thumbStyle.color.resolve(variants),
+            border: .all(color: thumbStyle.borderColor.resolve(variants), width: thumbStyle.borderWidth),
           ),
-          _ShrinkIntent: CallbackAction(
-            onInvoke: (_) {
-              if (controller.step(min: widget.min, expand: false)) {
-                unawaited(tickHapticFeedback());
-              }
-              onEnd?.call(controller.value);
-              return null;
-            },
-          ),
-        },
-        enabled: enabled,
-        mouseCursor: enabled ? _cursor : .defer,
-        includeFocusSemantics: false,
-        onFocusChange: (focused) => setState(() => _focused = focused),
-        child: FFocusedOutline(
-          style: thumbStyle.focusedOutlineStyle,
-          focused: _focused,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              shape: .circle,
-              color: thumbStyle.color.resolve(variants),
-              border: .all(color: thumbStyle.borderColor.resolve(variants), width: thumbStyle.borderWidth),
-            ),
-            child: SizedBox.square(dimension: thumbSize),
-          ),
+          child: SizedBox.square(dimension: thumbSize),
         ),
       ),
     );
@@ -142,7 +154,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       thumb = MouseRegion(
         onEnter: (_) => tooltip.show(),
         onExit: (_) {
-          if (!_gesture) {
+          if (!_gesture && !_focused) {
             tooltip.hide();
           }
         },
@@ -168,7 +180,9 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     void up(TapUpDetails _) {
       setState(() => _cursor = SystemMouseCursors.grab);
       _gesture = false;
-      tooltip?.hide();
+      if (!_focused) {
+        tooltip?.hide();
+      }
       InheritedData.of(context).onEnd?.call(controller.value);
     }
 
@@ -184,12 +198,15 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       setState(() => _cursor = SystemMouseCursors.grab);
       _origin = null;
       _gesture = false;
-      tooltip?.hide();
+      if (!_focused) {
+        tooltip?.hide();
+      }
       InheritedData.of(context).onEnd?.call(controller.value);
     }
 
     if (layout.vertical) {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
@@ -199,6 +216,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
       );
     } else {
       return GestureDetector(
+        excludeFromSemantics: true,
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,

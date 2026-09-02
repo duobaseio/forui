@@ -99,8 +99,19 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@macro forui.foundation.doc_templates.semanticsTooltip}
   final String? semanticsTooltip;
 
+  /// Whether this item is announced as a button. Defaults to true.
+  final bool semanticsButton;
+
+  /// Whether this item is checked, for checkbox and radio-like controls. Null if it has no checked state.
+  ///
+  /// Suppresses the [selected] semantic flag when non-null.
+  final bool? semanticsChecked;
+
   /// Whether this item is expanded, for disclosure controls. Null if it has no expanded state.
   final bool? semanticsExpanded;
+
+  /// Whether this item belongs to a mutually exclusive group, such as a radio button. Null if not applicable.
+  final bool? semanticsInMutuallyExclusiveGroup;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -210,7 +221,10 @@ class FItem extends StatelessWidget with FItemMixin {
     this.selected = false,
     this.semanticsLabel,
     this.semanticsTooltip,
+    this.semanticsButton = true,
+    this.semanticsChecked,
     this.semanticsExpanded,
+    this.semanticsInMutuallyExclusiveGroup,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -265,7 +279,10 @@ class FItem extends StatelessWidget with FItemMixin {
     this.selected = false,
     this.semanticsLabel,
     this.semanticsTooltip,
+    this.semanticsButton = true,
+    this.semanticsChecked,
     this.semanticsExpanded,
+    this.semanticsInMutuallyExclusiveGroup,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -348,19 +365,25 @@ class FItem extends StatelessWidget with FItemMixin {
             focusedOutlineStyle: style.focusedOutlineStyle,
             semanticsLabel: semanticsLabel,
             semanticsTooltip: semanticsTooltip,
+            semanticsButton: semanticsButton,
+            semanticsChecked: semanticsChecked,
             semanticsExpanded: semanticsExpanded,
+            semanticsInMutuallyExclusiveGroup: semanticsInMutuallyExclusiveGroup,
             autofocus: autofocus,
             focusNode: focusNode,
             onFocusChange: onFocusChange,
             onHoverChange: onHoverChange,
             onVariantChange: onVariantChange,
             selected: selected,
-            onPress: enabled
-                ? () {
-                    callbacks?.onPress?.call();
-                    onPress?.call();
-                  }
-                : null,
+            onPress: switch ((enabled, callbacks?.onPress, onPress)) {
+              (true, final onPress?, null) => onPress,
+              (true, null, final onPress?) => onPress,
+              (true, final callback?, final onPress?) => () {
+                callback();
+                onPress();
+              },
+              (_, _, _) => null,
+            },
             onLongPress: enabled && (callbacks?.onLongPress != null || onLongPress != null)
                 ? () {
                     callbacks?.onLongPress?.call();
@@ -415,7 +438,10 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(StringProperty('semanticsTooltip', semanticsTooltip))
+      ..add(FlagProperty('semanticsButton', value: semanticsButton, ifFalse: 'not a button'))
+      ..add(DiagnosticsProperty('semanticsChecked', semanticsChecked))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
+      ..add(DiagnosticsProperty('semanticsInMutuallyExclusiveGroup', semanticsInMutuallyExclusiveGroup))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

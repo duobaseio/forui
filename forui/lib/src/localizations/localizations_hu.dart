@@ -122,6 +122,9 @@ class FLocalizationsHu extends FLocalizations {
   String get multiSelectHint => 'Elemek kiválasztása';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Eltávolítás';
+
+  @override
   String get selectHint => 'Válasszon egy elemet';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsHu extends FLocalizations {
   String get selectNoResults => 'Nincs megfelelő találat.';
 
   @override
+  String selectResults(int count) {
+    return '$count találat érhető el';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Görgetés felfelé';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'lap';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Koppintson duplán a csúszkák közötti váltáshoz';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimum csúszka kiválasztása';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maximum csúszka kiválasztása';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-mail';

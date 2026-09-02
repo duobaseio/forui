@@ -122,6 +122,9 @@ class FLocalizationsVi extends FLocalizations {
   String get multiSelectHint => 'Chọn các mục';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Xóa';
+
+  @override
   String get selectHint => 'Chọn một mục';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsVi extends FLocalizations {
   String get selectNoResults => 'Không có kết quả phù hợp.';
 
   @override
+  String selectResults(int count) {
+    return 'Có $count kết quả';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Cuộn lên';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Bảng';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Nhấn đúp để chuyển núm trượt';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Chọn núm trượt tối thiểu';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Chọn núm trượt tối đa';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Tối thiểu, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Tối đa, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

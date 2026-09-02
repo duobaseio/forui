@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "시",
   "timePickerMinuteSemanticsLabel": "분",
   "autocompleteResults": "{count}개의 결과가 있습니다",
+  "selectResults": "{count}개의 결과가 있습니다",
   "autocompleteSuggestion": "제안: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "더보기",
-  "paginationPageSemanticsLabel": "{page}페이지"
+  "paginationPageSemanticsLabel": "{page}페이지",
+  "multiSelectTagSemanticsLabel": "제거",
+  "sliderSwitchThumbsSemanticsHint": "핸들을 전환하려면 두 번 탭하세요",
+  "sliderSelectMinThumbSemanticsLabel": "최소 핸들 선택",
+  "sliderSelectMaxThumbSemanticsLabel": "최대 핸들 선택",
+  "sliderMinSemanticsValue": "최소, {value}",
+  "sliderMaxSemanticsValue": "최대, {value}"
 }

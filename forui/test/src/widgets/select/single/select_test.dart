@@ -599,6 +599,63 @@ void main() {
   });
 
   group('accessibility', () {
+    for (final (name, clearable, expected) in [
+      ('clears when clearable', true, null),
+      ('does nothing otherwise', false, 'A'),
+    ]) {
+      testWidgets('backspace $name', (tester) async {
+        final focus = autoDispose(FocusNode());
+        String? value = 'A';
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>(
+              key: key,
+              focusNode: focus,
+              clearable: clearable,
+              control: .managed(initial: 'A', onChange: (v) => value = v),
+              items: letters,
+            ),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pump();
+
+        await tester.sendKeyEvent(LogicalKeyboardKey.backspace);
+        await tester.pumpAndSettle();
+        expect(value, expected);
+      });
+    }
+
+    testWidgets('items announce as radio buttons in a mutually exclusive group', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            control: const .managed(initial: 'A'),
+            items: letters,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.descendant(of: find.byType(FItem), matching: find.text('A'))),
+        isSemantics(hasCheckedState: true, isChecked: true, isInMutuallyExclusiveGroup: true, isButton: false),
+      );
+      expect(
+        tester.getSemantics(find.descendant(of: find.byType(FItem), matching: find.text('B'))),
+        isSemantics(hasCheckedState: true, isChecked: false, isInMutuallyExclusiveGroup: true, isButton: false),
+      );
+
+      semantics.dispose();
+    });
+
     testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
       final semantics = tester.ensureSemantics();
 

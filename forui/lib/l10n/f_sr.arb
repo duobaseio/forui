@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Сат",
   "timePickerMinuteSemanticsLabel": "Минут",
   "autocompleteResults": "{count} доступних резултата",
+  "selectResults": "{count} доступних резултата",
   "autocompleteSuggestion": "Предлог: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Више",
-  "paginationPageSemanticsLabel": "{page}. страница"
+  "paginationPageSemanticsLabel": "{page}. страница",
+  "multiSelectTagSemanticsLabel": "Уклони",
+  "sliderSwitchThumbsSemanticsHint": "Додирните двапут да бисте променили клизаче",
+  "sliderSelectMinThumbSemanticsLabel": "Изаберите минимални клизач",
+  "sliderSelectMaxThumbSemanticsLabel": "Изаберите максимални клизач",
+  "sliderMinSemanticsValue": "Минимум, {value}",
+  "sliderMaxSemanticsValue": "Максимум, {value}"
 }

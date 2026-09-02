@@ -122,6 +122,9 @@ class FLocalizationsEt extends FLocalizations {
   String get multiSelectHint => 'Valige üksused';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Eemalda';
+
+  @override
   String get selectHint => 'Valige üksus';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsEt extends FLocalizations {
   String get selectNoResults => 'Sobivaid tulemusi pole.';
 
   @override
+  String selectResults(int count) {
+    return '$count tulemust saadaval';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Keri üles';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'leht';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Sanga vahetamiseks topeltpuudutage';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Vali miinimumi sang';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Vali maksimumi sang';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Miinimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-post';

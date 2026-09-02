@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "ساعت",
   "timePickerMinuteSemanticsLabel": "دقیقه",
   "autocompleteResults": "{count} پایلې شتون لري",
+  "selectResults": "{count} پایلې شتون لري",
   "autocompleteSuggestion": "وړاندیز: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "نور",
-  "paginationPageSemanticsLabel": "مخ {page}"
+  "paginationPageSemanticsLabel": "مخ {page}",
+  "multiSelectTagSemanticsLabel": "لرې کول",
+  "sliderSwitchThumbsSemanticsHint": "د لاستو بدلولو لپاره دوه ځله ټک ووهئ",
+  "sliderSelectMinThumbSemanticsLabel": "د لږترلږه لاستی وټاکئ",
+  "sliderSelectMaxThumbSemanticsLabel": "د زیات نه زیات لاستی وټاکئ",
+  "sliderMinSemanticsValue": "لږ تر لږه، {value}",
+  "sliderMaxSemanticsValue": "زیات نه زیات، {value}"
 }

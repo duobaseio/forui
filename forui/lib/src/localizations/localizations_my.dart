@@ -122,6 +122,9 @@ class FLocalizationsMy extends FLocalizations {
   String get multiSelectHint => 'အရာများကို ရွေးချယ်ပါ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ဖယ်ရှားရန်';
+
+  @override
   String get selectHint => 'ပစ္စည်းတစ်ခုရွေးပါ';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsMy extends FLocalizations {
   String get selectNoResults => 'တူညီသည့်ရလဒ်များမရှိပါ။';
 
   @override
+  String selectResults(int count) {
+    return 'ရလဒ် $count ခု ရနိုင်ပါသည်';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'အပေါ်သို့ပွတ်ဆွဲရန်';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsMy extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'ပိုဆောင်း စာမျက်နှာ';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'လက်ကိုင်များပြောင်းရန် နှစ်ချက်တို့ပါ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'အနည်းဆုံး လက်ကိုင်ကို ရွေးပါ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'အများဆုံး လက်ကိုင်ကို ရွေးပါ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'အနည်းဆုံး၊ $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'အများဆုံး၊ $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'အီးမေးလ်';

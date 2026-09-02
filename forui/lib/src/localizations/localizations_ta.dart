@@ -122,6 +122,9 @@ class FLocalizationsTa extends FLocalizations {
   String get multiSelectHint => 'உருப்படிகளைத் தேர்ந்தெடுக்கவும்';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'அகற்று';
+
+  @override
   String get selectHint => 'ஒரு பொருளைத் தேர்ந்தெடுக்கவும்';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsTa extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count முடிவுகள் கிடைக்கின்றன';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'மேலே உருட்டு';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsTa extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'திரை';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'ஹேண்டில்களை மாற்ற இருமுறை தட்டவும்';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'குறைந்தபட்ச ஹேண்டிலைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'அதிகபட்ச ஹேண்டிலைத் தேர்ந்தெடுக்கவும்';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'குறைந்தபட்சம், $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'அதிகபட்சம், $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'மின்னஞ்சல்';

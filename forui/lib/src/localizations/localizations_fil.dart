@@ -122,6 +122,9 @@ class FLocalizationsFil extends FLocalizations {
   String get multiSelectHint => 'Pumili ng mga item';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Alisin';
+
+  @override
   String get selectHint => 'Pumili ng item';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsFil extends FLocalizations {
   String get selectNoResults => 'Walang mga tumutugmang resulta.';
 
   @override
+  String selectResults(int count) {
+    return '$count resulta ang available';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Mag-scroll pataas';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsFil extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'I-double tap para magpalit ng handle';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Piliin ang minimum na handle';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Piliin ang maximum na handle';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

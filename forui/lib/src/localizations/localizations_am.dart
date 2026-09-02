@@ -122,6 +122,9 @@ class FLocalizationsAm extends FLocalizations {
   String get multiSelectHint => 'ንጥሎች ይምረጡ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'አስወግድ';
+
+  @override
   String get selectHint => 'አንድ ንጥል ይምረጡ';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsAm extends FLocalizations {
   String get selectNoResults => 'ምንም ተዛማጅ ውጤቶች የሉም።';
 
   @override
+  String selectResults(int count) {
+    return '$count ውጤቶች ይገኛሉ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ወደ ላይ ሸብልል';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsAm extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'ሉህ';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'መያዣዎችን ለመቀያየር ሁለቴ መታ ያድርጉ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'ዝቅተኛውን መያዣ ይምረጡ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'ከፍተኛውን መያዣ ይምረጡ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'ዝቅተኛ, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'ከፍተኛ, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'ኢሜይል';

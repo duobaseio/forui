@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "小時",
   "timePickerMinuteSemanticsLabel": "分鐘",
   "autocompleteResults": "{count} 個結果可用",
+  "selectResults": "{count} 個結果可用",
   "autocompleteSuggestion": "建議：{suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "更多",
-  "paginationPageSemanticsLabel": "第 {page} 頁"
+  "paginationPageSemanticsLabel": "第 {page} 頁",
+  "multiSelectTagSemanticsLabel": "移除",
+  "sliderSwitchThumbsSemanticsHint": "輕按兩下即可切換滑桿",
+  "sliderSelectMinThumbSemanticsLabel": "選取最小滑桿",
+  "sliderSelectMaxThumbSemanticsLabel": "選取最大滑桿",
+  "sliderMinSemanticsValue": "最小值，{value}",
+  "sliderMaxSemanticsValue": "最大值，{value}"
 }

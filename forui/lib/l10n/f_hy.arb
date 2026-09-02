@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Ժամ",
   "timePickerMinuteSemanticsLabel": "Րոպե",
   "autocompleteResults": "{count} արդյունք հասանելի է",
+  "selectResults": "{count} արդյունք հասանելի է",
   "autocompleteSuggestion": "Առաջարկ: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Ավելին",
-  "paginationPageSemanticsLabel": "Էջ {page}"
+  "paginationPageSemanticsLabel": "Էջ {page}",
+  "multiSelectTagSemanticsLabel": "Հեռացնել",
+  "sliderSwitchThumbsSemanticsHint": "Կրկնակի հպեք՝ սահիչները փոխարկելու համար",
+  "sliderSelectMinThumbSemanticsLabel": "Ընտրել նվազագույն սահիչը",
+  "sliderSelectMaxThumbSemanticsLabel": "Ընտրել առավելագույն սահիչը",
+  "sliderMinSemanticsValue": "Նվազագույն, {value}",
+  "sliderMaxSemanticsValue": "Առավելագույն, {value}"
 }

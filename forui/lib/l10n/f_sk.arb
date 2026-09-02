@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Hodina",
   "timePickerMinuteSemanticsLabel": "Minúta",
   "autocompleteResults": "{count} dostupných výsledkov",
+  "selectResults": "{count} dostupných výsledkov",
   "autocompleteSuggestion": "Návrh: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Viac",
-  "paginationPageSemanticsLabel": "Strana {page}"
+  "paginationPageSemanticsLabel": "Strana {page}",
+  "multiSelectTagSemanticsLabel": "Odstrániť",
+  "sliderSwitchThumbsSemanticsHint": "Dvojitým klepnutím prepnete posúvače",
+  "sliderSelectMinThumbSemanticsLabel": "Vybrať minimálny posúvač",
+  "sliderSelectMaxThumbSemanticsLabel": "Vybrať maximálny posúvač",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

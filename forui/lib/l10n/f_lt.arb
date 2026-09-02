@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Valandos",
   "timePickerMinuteSemanticsLabel": "Minutės",
   "autocompleteResults": "Yra {count} rezultatų",
+  "selectResults": "Yra {count} rezultatų",
   "autocompleteSuggestion": "Pasiūlymas: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Daugiau",
-  "paginationPageSemanticsLabel": "{page} puslapis"
+  "paginationPageSemanticsLabel": "{page} puslapis",
+  "multiSelectTagSemanticsLabel": "Pašalinti",
+  "sliderSwitchThumbsSemanticsHint": "Dukart palieskite, kad perjungtumėte šliaužiklius",
+  "sliderSelectMinThumbSemanticsLabel": "Pasirinkti minimumo šliaužiklį",
+  "sliderSelectMaxThumbSemanticsLabel": "Pasirinkti maksimumo šliaužiklį",
+  "sliderMinSemanticsValue": "Minimumas, {value}",
+  "sliderMaxSemanticsValue": "Maksimumas, {value}"
 }

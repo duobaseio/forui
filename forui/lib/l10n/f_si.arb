@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "පැය",
   "timePickerMinuteSemanticsLabel": "මිනිත්තු",
   "autocompleteResults": "ප්‍රතිඵල {count}ක් තිබේ",
+  "selectResults": "ප්‍රතිඵල {count}ක් තිබේ",
   "autocompleteSuggestion": "යෝජනාව: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "තව",
-  "paginationPageSemanticsLabel": "පිටුව {page}"
+  "paginationPageSemanticsLabel": "පිටුව {page}",
+  "multiSelectTagSemanticsLabel": "ඉවත් කරන්න",
+  "sliderSwitchThumbsSemanticsHint": "හැඬල් මාරු කිරීමට දෙවරක් තට්ටු කරන්න",
+  "sliderSelectMinThumbSemanticsLabel": "අවම හැඬලය තෝරන්න",
+  "sliderSelectMaxThumbSemanticsLabel": "උපරිම හැඬලය තෝරන්න",
+  "sliderMinSemanticsValue": "අවම, {value}",
+  "sliderMaxSemanticsValue": "උපරිම, {value}"
 }

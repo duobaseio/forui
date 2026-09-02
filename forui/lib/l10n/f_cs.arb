@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Hodina",
   "timePickerMinuteSemanticsLabel": "Minuta",
   "autocompleteResults": "{count} dostupných výsledků",
+  "selectResults": "{count} dostupných výsledků",
   "autocompleteSuggestion": "Návrh: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Více",
-  "paginationPageSemanticsLabel": "Stránka {page}"
+  "paginationPageSemanticsLabel": "Stránka {page}",
+  "multiSelectTagSemanticsLabel": "Odebrat",
+  "sliderSwitchThumbsSemanticsHint": "Dvojitým klepnutím přepnete jezdce",
+  "sliderSelectMinThumbSemanticsLabel": "Vybrat minimální jezdec",
+  "sliderSelectMaxThumbSemanticsLabel": "Vybrat maximální jezdec",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maximum, {value}"
 }

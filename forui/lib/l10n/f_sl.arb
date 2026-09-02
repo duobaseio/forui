@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Ura",
   "timePickerMinuteSemanticsLabel": "Minuta",
   "autocompleteResults": "{count} razpoložljivih rezultatov",
+  "selectResults": "{count} razpoložljivih rezultatov",
   "autocompleteSuggestion": "Predlog: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Več",
-  "paginationPageSemanticsLabel": "Stran {page}"
+  "paginationPageSemanticsLabel": "Stran {page}",
+  "multiSelectTagSemanticsLabel": "Odstrani",
+  "sliderSwitchThumbsSemanticsHint": "Dvakrat se dotaknite za preklop med drsnikoma",
+  "sliderSelectMinThumbSemanticsLabel": "Izberite minimalni drsnik",
+  "sliderSelectMaxThumbSemanticsLabel": "Izberite maksimalni drsnik",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

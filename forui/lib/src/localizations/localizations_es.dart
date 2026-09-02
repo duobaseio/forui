@@ -122,6 +122,9 @@ class FLocalizationsEs extends FLocalizations {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsEs extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsEs extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Pulsa dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -284,10 +311,18 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -297,6 +332,25 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -440,10 +494,18 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -453,6 +515,25 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -596,10 +677,18 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -609,6 +698,25 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -752,10 +860,18 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -765,6 +881,25 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -908,10 +1043,18 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -921,6 +1064,25 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1064,10 +1226,18 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1077,6 +1247,25 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1220,10 +1409,18 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1233,6 +1430,25 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1376,10 +1592,18 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1389,6 +1613,25 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1532,10 +1775,18 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1545,6 +1796,25 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1688,10 +1958,18 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1701,6 +1979,25 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -1844,10 +2141,18 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -1857,6 +2162,25 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2000,10 +2324,18 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2013,6 +2345,25 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2156,10 +2507,18 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2169,6 +2528,25 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2312,10 +2690,18 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2325,6 +2711,25 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2468,10 +2873,18 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2481,6 +2894,25 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2624,10 +3056,18 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2637,6 +3077,25 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'inferior';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2780,10 +3239,18 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2793,6 +3260,25 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -2936,10 +3422,18 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -2949,6 +3443,25 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -3092,10 +3605,18 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -3105,6 +3626,25 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';
@@ -3248,10 +3788,18 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String get multiSelectHint => 'Seleccionar elementos';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Quitar';
+
+  @override
   String get selectHint => 'Seleccione un elemento';
 
   @override
   String get selectSearchHint => 'Buscar';
+
+  @override
+  String selectResults(int count) {
+    return '$count resultados disponibles';
+  }
 
   @override
   String get selectScrollUpSemanticsLabel => 'Desplazarse hacia arriba';
@@ -3261,6 +3809,25 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get sheetSemanticsLabel => 'Hoja';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Presiona dos veces para cambiar de tirador';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Seleccionar el tirador mínimo';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Seleccionar el tirador máximo';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Mínimo, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Máximo, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Correo electrónico';

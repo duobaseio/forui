@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Stunda",
   "timePickerMinuteSemanticsLabel": "Minūte",
   "autocompleteResults": "Pieejami {count} rezultāti",
+  "selectResults": "Pieejami {count} rezultāti",
   "autocompleteSuggestion": "Ieteikums: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Vairāk",
-  "paginationPageSemanticsLabel": "{page}. lapa"
+  "paginationPageSemanticsLabel": "{page}. lapa",
+  "multiSelectTagSemanticsLabel": "Noņemt",
+  "sliderSwitchThumbsSemanticsHint": "Divreiz pieskarieties, lai pārslēgtu slīdņus",
+  "sliderSelectMinThumbSemanticsLabel": "Atlasīt minimuma slīdni",
+  "sliderSelectMaxThumbSemanticsLabel": "Atlasīt maksimuma slīdni",
+  "sliderMinSemanticsValue": "Minimums, {value}",
+  "sliderMaxSemanticsValue": "Maksimums, {value}"
 }

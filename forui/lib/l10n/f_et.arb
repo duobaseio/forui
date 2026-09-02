@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Tund",
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} tulemust saadaval",
+  "selectResults": "{count} tulemust saadaval",
   "autocompleteSuggestion": "Soovitus: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Rohkem",
-  "paginationPageSemanticsLabel": "{page}. leht"
+  "paginationPageSemanticsLabel": "{page}. leht",
+  "multiSelectTagSemanticsLabel": "Eemalda",
+  "sliderSwitchThumbsSemanticsHint": "Sanga vahetamiseks topeltpuudutage",
+  "sliderSelectMinThumbSemanticsLabel": "Vali miinimumi sang",
+  "sliderSelectMaxThumbSemanticsLabel": "Vali maksimumi sang",
+  "sliderMinSemanticsValue": "Miinimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

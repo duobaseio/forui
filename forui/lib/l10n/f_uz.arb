@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Soat",
   "timePickerMinuteSemanticsLabel": "Daqiqa",
   "autocompleteResults": "{count} ta natija mavjud",
+  "selectResults": "{count} ta natija mavjud",
   "autocompleteSuggestion": "Taklif: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Yana",
-  "paginationPageSemanticsLabel": "{page}-sahifa"
+  "paginationPageSemanticsLabel": "{page}-sahifa",
+  "multiSelectTagSemanticsLabel": "Olib tashlash",
+  "sliderSwitchThumbsSemanticsHint": "Dastaklarni almashtirish uchun ikki marta bosing",
+  "sliderSelectMinThumbSemanticsLabel": "Minimal dastakni tanlash",
+  "sliderSelectMaxThumbSemanticsLabel": "Maksimal dastakni tanlash",
+  "sliderMinSemanticsValue": "Minimal, {value}",
+  "sliderMaxSemanticsValue": "Maksimal, {value}"
 }

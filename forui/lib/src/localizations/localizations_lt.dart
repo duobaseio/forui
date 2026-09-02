@@ -122,6 +122,9 @@ class FLocalizationsLt extends FLocalizations {
   String get multiSelectHint => 'Pasirinkite elementus';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Pašalinti';
+
+  @override
   String get selectHint => 'Pasirinkite elementą';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsLt extends FLocalizations {
   String get selectNoResults => 'Jokių atitinkančių rezultatų.';
 
   @override
+  String selectResults(int count) {
+    return 'Yra $count rezultatų';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Slinkti aukštyn';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsLt extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'lapas';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dukart palieskite, kad perjungtumėte šliaužiklius';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Pasirinkti minimumo šliaužiklį';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Pasirinkti maksimumo šliaužiklį';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimumas, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimumas, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'El. paštas';

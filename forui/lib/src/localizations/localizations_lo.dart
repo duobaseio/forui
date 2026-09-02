@@ -122,6 +122,9 @@ class FLocalizationsLo extends FLocalizations {
   String get multiSelectHint => 'ເລືອກລາຍການ';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'ເອົາອອກ';
+
+  @override
   String get selectHint => 'ເລືອກລາຍການ';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsLo extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return 'ມີ $count ຜົນລັບ';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'ເລື່ອນຂຶ້ນ';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsLo extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'ແຜ່ນ';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'ແຕະສອງຄັ້ງເພື່ອສະຫຼັບປຸ່ມເລື່ອນ';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'ເລືອກປຸ່ມເລື່ອນຕໍ່າສຸດ';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'ເລືອກປຸ່ມເລື່ອນສູງສຸດ';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'ຕໍ່າສຸດ, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'ສູງສຸດ, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'ອີເມວ';

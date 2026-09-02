@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "საათი",
   "timePickerMinuteSemanticsLabel": "წუთი",
   "autocompleteResults": "{count} შედეგი ხელმისაწვდომია",
+  "selectResults": "{count} შედეგი ხელმისაწვდომია",
   "autocompleteSuggestion": "შემოთავაზება: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "მეტი",
-  "paginationPageSemanticsLabel": "გვერდი {page}"
+  "paginationPageSemanticsLabel": "გვერდი {page}",
+  "multiSelectTagSemanticsLabel": "ამოშლა",
+  "sliderSwitchThumbsSemanticsHint": "ორჯერ შეეხეთ სახელურების გადასართავად",
+  "sliderSelectMinThumbSemanticsLabel": "მინიმალური სახელურის არჩევა",
+  "sliderSelectMaxThumbSemanticsLabel": "მაქსიმალური სახელურის არჩევა",
+  "sliderMinSemanticsValue": "მინიმუმი, {value}",
+  "sliderMaxSemanticsValue": "მაქსიმუმი, {value}"
 }

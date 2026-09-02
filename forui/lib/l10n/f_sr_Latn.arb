@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Sat",
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} dostupnih rezultata",
+  "selectResults": "{count} dostupnih rezultata",
   "autocompleteSuggestion": "Predlog: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Više",
-  "paginationPageSemanticsLabel": "{page}. stranica"
+  "paginationPageSemanticsLabel": "{page}. stranica",
+  "multiSelectTagSemanticsLabel": "Ukloni",
+  "sliderSwitchThumbsSemanticsHint": "Dodirnite dvaput da biste promenili klizače",
+  "sliderSelectMinThumbSemanticsLabel": "Izaberite minimalni klizač",
+  "sliderSelectMaxThumbSemanticsLabel": "Izaberite maksimalni klizač",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

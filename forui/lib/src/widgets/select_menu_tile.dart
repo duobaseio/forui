@@ -711,7 +711,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           );
         }
 
-        return tile;
+        return Semantics(validationResult: state.hasError ? .invalid : .valid, child: tile);
       },
     );
   }

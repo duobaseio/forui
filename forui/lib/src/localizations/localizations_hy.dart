@@ -122,6 +122,9 @@ class FLocalizationsHy extends FLocalizations {
   String get multiSelectHint => 'Ընտրել տարրեր';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Հեռացնել';
+
+  @override
   String get selectHint => 'Ընտրեք տարր';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsHy extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) {
+    return '$count արդյունք հասանելի է';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Ոլորել վերև';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsHy extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'էկրան';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Կրկնակի հպեք՝ սահիչները փոխարկելու համար';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Ընտրել նվազագույն սահիչը';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Ընտրել առավելագույն սահիչը';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Նվազագույն, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Առավելագույն, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Էլ․ փոստ';

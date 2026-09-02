@@ -122,6 +122,9 @@ class FLocalizationsCs extends FLocalizations {
   String get multiSelectHint => 'Vyberte položky';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Odebrat';
+
+  @override
   String get selectHint => 'Vyberte položku';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsCs extends FLocalizations {
   String get selectNoResults => 'Žádné odpovídající výsledky.';
 
   @override
+  String selectResults(int count) {
+    return '$count dostupných výsledků';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Posunout nahoru';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsCs extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'tabulka';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dvojitým klepnutím přepnete jezdce';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Vybrat minimální jezdec';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Vybrat maximální jezdec';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-mail';

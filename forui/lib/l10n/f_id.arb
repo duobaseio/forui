@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Jam",
   "timePickerMinuteSemanticsLabel": "Menit",
   "autocompleteResults": "{count} hasil tersedia",
+  "selectResults": "{count} hasil tersedia",
   "autocompleteSuggestion": "Saran: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Lainnya",
-  "paginationPageSemanticsLabel": "Halaman {page}"
+  "paginationPageSemanticsLabel": "Halaman {page}",
+  "multiSelectTagSemanticsLabel": "Hapus",
+  "sliderSwitchThumbsSemanticsHint": "Ketuk dua kali untuk beralih gagang",
+  "sliderSelectMinThumbSemanticsLabel": "Pilih gagang minimum",
+  "sliderSelectMaxThumbSemanticsLabel": "Pilih gagang maksimum",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }

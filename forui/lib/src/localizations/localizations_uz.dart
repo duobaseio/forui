@@ -122,6 +122,9 @@ class FLocalizationsUz extends FLocalizations {
   String get multiSelectHint => 'Elementlarni tanlang';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Olib tashlash';
+
+  @override
   String get selectHint => 'Element tanlang';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsUz extends FLocalizations {
   String get selectNoResults => 'Mos keladigan natijalar yo\'q.';
 
   @override
+  String selectResults(int count) {
+    return '$count ta natija mavjud';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Tepaga aylantirish';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsUz extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'ekran';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dastaklarni almashtirish uchun ikki marta bosing';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Minimal dastakni tanlash';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Maksimal dastakni tanlash';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimal, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimal, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Elektron pochta';

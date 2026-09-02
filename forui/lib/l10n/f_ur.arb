@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "گھنٹہ",
   "timePickerMinuteSemanticsLabel": "منٹ",
   "autocompleteResults": "{count} نتائج دستیاب ہیں",
+  "selectResults": "{count} نتائج دستیاب ہیں",
   "autocompleteSuggestion": "تجویز: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "مزید",
-  "paginationPageSemanticsLabel": "صفحہ {page}"
+  "paginationPageSemanticsLabel": "صفحہ {page}",
+  "multiSelectTagSemanticsLabel": "ہٹائیں",
+  "sliderSwitchThumbsSemanticsHint": "ہینڈل تبدیل کرنے کے لیے دو بار تھپتھپائیں",
+  "sliderSelectMinThumbSemanticsLabel": "کم از کم ہینڈل منتخب کریں",
+  "sliderSelectMaxThumbSemanticsLabel": "زیادہ سے زیادہ ہینڈل منتخب کریں",
+  "sliderMinSemanticsValue": "کم از کم، {value}",
+  "sliderMaxSemanticsValue": "زیادہ سے زیادہ، {value}"
 }

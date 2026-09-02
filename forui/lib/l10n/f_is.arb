@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Klukkustund",
   "timePickerMinuteSemanticsLabel": "Mínúta",
   "autocompleteResults": "{count} niðurstöður í boði",
+  "selectResults": "{count} niðurstöður í boði",
   "autocompleteSuggestion": "Tillaga: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meira",
-  "paginationPageSemanticsLabel": "Síða {page}"
+  "paginationPageSemanticsLabel": "Síða {page}",
+  "multiSelectTagSemanticsLabel": "Fjarlægja",
+  "sliderSwitchThumbsSemanticsHint": "Ýttu tvisvar til að skipta um sleða",
+  "sliderSelectMinThumbSemanticsLabel": "Velja lágmarkssleða",
+  "sliderSelectMaxThumbSemanticsLabel": "Velja hámarkssleða",
+  "sliderMinSemanticsValue": "Lágmark, {value}",
+  "sliderMaxSemanticsValue": "Hámark, {value}"
 }

@@ -47,7 +47,14 @@
   "timePickerHourSemanticsLabel": "Гадзіна",
   "timePickerMinuteSemanticsLabel": "Хвіліна",
   "autocompleteResults": "Даступна вынікаў: {count}",
+  "selectResults": "Даступна вынікаў: {count}",
   "autocompleteSuggestion": "Прапанова: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Больш",
-  "paginationPageSemanticsLabel": "Старонка {page}"
+  "paginationPageSemanticsLabel": "Старонка {page}",
+  "multiSelectTagSemanticsLabel": "Выдаліць",
+  "sliderSwitchThumbsSemanticsHint": "Двойчы націсніце, каб пераключыць паўзункі",
+  "sliderSelectMinThumbSemanticsLabel": "Выбраць мінімальны паўзунок",
+  "sliderSelectMaxThumbSemanticsLabel": "Выбраць максімальны паўзунок",
+  "sliderMinSemanticsValue": "Мінімум, {value}",
+  "sliderMaxSemanticsValue": "Максімум, {value}"
 }

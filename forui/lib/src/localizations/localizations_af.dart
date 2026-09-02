@@ -122,6 +122,9 @@ class FLocalizationsAf extends FLocalizations {
   String get multiSelectHint => 'Kies items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Verwyder';
+
+  @override
   String get selectHint => 'Kies \'n item';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsAf extends FLocalizations {
   String get selectNoResults => 'Geen passende resultate nie.';
 
   @override
+  String selectResults(int count) {
+    return '$count beskikbare resultate';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rol op';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsAf extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'blad';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Dubbeltik om van skuifknop te wissel';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Kies minimum skuifknop';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Kies maksimum skuifknop';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-pos';

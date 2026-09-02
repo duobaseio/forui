@@ -155,6 +155,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get multiSelectHint => 'Select items';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Remove';
+
+  @override
   String get selectHint => 'Select an item';
 
   @override
@@ -164,6 +167,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get selectNoResults => 'No matches found.';
 
   @override
+  String selectResults(int count) => count == 1 ? '1 result available' : '$count results available';
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Scroll up';
 
   @override
@@ -171,6 +177,21 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Double tap to switch thumbs';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Select minimum thumb';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Select maximum thumb';
+
+  @override
+  String sliderMinSemanticsValue(String value) => 'Minimum, $value';
+
+  @override
+  String sliderMaxSemanticsValue(String value) => 'Maximum, $value';
 
   @override
   String get textFieldEmailLabel => 'Email';

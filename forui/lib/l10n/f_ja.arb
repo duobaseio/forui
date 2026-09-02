@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "時",
   "timePickerMinuteSemanticsLabel": "分",
   "autocompleteResults": "{count} 件の結果があります",
+  "selectResults": "{count} 件の結果があります",
   "autocompleteSuggestion": "候補: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "その他",
-  "paginationPageSemanticsLabel": "{page} ページ"
+  "paginationPageSemanticsLabel": "{page} ページ",
+  "multiSelectTagSemanticsLabel": "削除",
+  "sliderSwitchThumbsSemanticsHint": "ダブルタップでつまみを切り替えます",
+  "sliderSelectMinThumbSemanticsLabel": "最小値のつまみを選択",
+  "sliderSelectMaxThumbSemanticsLabel": "最大値のつまみを選択",
+  "sliderMinSemanticsValue": "最小、{value}",
+  "sliderMaxSemanticsValue": "最大、{value}"
 }

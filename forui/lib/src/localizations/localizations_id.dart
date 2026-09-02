@@ -122,6 +122,9 @@ class FLocalizationsId extends FLocalizations {
   String get multiSelectHint => 'Pilih item';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Hapus';
+
+  @override
   String get selectHint => 'Pilih item';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsId extends FLocalizations {
   String get selectNoResults => 'Tidak ada hasil yang cocok.';
 
   @override
+  String selectResults(int count) {
+    return '$count hasil tersedia';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Gulir ke atas';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsId extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Sheet';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Ketuk dua kali untuk beralih gagang';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Pilih gagang minimum';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Pilih gagang maksimum';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maksimum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Email';

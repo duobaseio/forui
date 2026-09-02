@@ -122,6 +122,9 @@ class FLocalizationsSv extends FLocalizations {
   String get multiSelectHint => 'Välj objekt';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Ta bort';
+
+  @override
   String get selectHint => 'Välj ett objekt';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsSv extends FLocalizations {
   String get selectNoResults => 'Inga matchande resultat.';
 
   @override
+  String selectResults(int count) {
+    return '$count resultat tillgängliga';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Rulla uppåt';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsSv extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Ark';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Tryck två gånger för att byta reglage';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Välj minimireglage';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Välj maximireglage';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Minimum, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Maximum, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'E-post';

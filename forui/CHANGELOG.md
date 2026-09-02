@@ -1,12 +1,58 @@
 ## 0.27.0
 
+### `FAvatar`
+* Fix `semanticsLabel` not being announced while the image is loading or has failed to load.
+* Fix the fallback being clipped at large text scales.
+
+
+### `FItem` & `FItemGroup`
+* Add `FItem.semanticsButton`.
+* Add `FItem.semanticsChecked`.
+* Add `FItem.semanticsInMutuallyExclusiveGroup`.
+
+* Fix `FItem` advertising a no-op tap action to screen readers.
+* Fix `FItem` long-press action not exposed to screen readers when inside a group.
+
+
 ### `FLabel`
 * Change error to be a live region on platforms without accessibility announcement support.
 
 * Fix label, description and error not being announced with the form field by screen readers.
 
 
+### `FSelect` & `FMultiSelect`
+* Add Backspace to clear a clearable `FSelect` while its field is focused.
+* Add Backspace to remove the last tag while a `FMultiSelect` field is focused.
+
+* Fix `FMultiSelect` label and description not being announced with the field by screen readers.
+* Fix `FMultiSelect` tags not announcing that activating them removes the item.
+* Fix items being announced as buttons instead of radio buttons in `FSelect` and checkboxes in `FMultiSelect`.
+* Fix `FMultiSelect` hint being merged into the field's semantic label instead of its hint.
+* Fix search result count changes not being announced to screen readers.
+
+
+### `FSelectMenuTile`
+* Fix validation state not being exposed to screen readers when validation passes.
+
+
+### `FSlider`
+* Add Home/End to jump a thumb to the track's minimum/maximum.
+
+* Fix value tooltip not shown on keyboard focus.
+* Fix label and description not being announced with the slider by screen readers.
+* Fix thumbs not being adjustable by screen readers.
+* Fix announced increased/decreased values equaling the current value.
+* Fix disabled slider still being announced as enabled by screen readers.
+* Fix disabled slider's thumb still being focusable by screen readers.
+
+
+### `FTile` & `FTileGroup`
+* Fix `FTileGroup` label and description not naming the group for screen readers.
+
+
 ### `FTappable`
+* Add `FTappable.semanticsContainer`.
+
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
 
 

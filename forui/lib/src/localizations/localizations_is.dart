@@ -122,6 +122,9 @@ class FLocalizationsIs extends FLocalizations {
   String get multiSelectHint => 'Veldu hluti';
 
   @override
+  String get multiSelectTagSemanticsLabel => 'Fjarlægja';
+
+  @override
   String get selectHint => 'Veldu atriði';
 
   @override
@@ -131,6 +134,11 @@ class FLocalizationsIs extends FLocalizations {
   String get selectNoResults => 'Engar samsvarandi niðurstöður.';
 
   @override
+  String selectResults(int count) {
+    return '$count niðurstöður í boði';
+  }
+
+  @override
   String get selectScrollUpSemanticsLabel => 'Fletta upp';
 
   @override
@@ -138,6 +146,25 @@ class FLocalizationsIs extends FLocalizations {
 
   @override
   String get sheetSemanticsLabel => 'Blað';
+
+  @override
+  String get sliderSwitchThumbsSemanticsHint => 'Ýttu tvisvar til að skipta um sleða';
+
+  @override
+  String get sliderSelectMinThumbSemanticsLabel => 'Velja lágmarkssleða';
+
+  @override
+  String get sliderSelectMaxThumbSemanticsLabel => 'Velja hámarkssleða';
+
+  @override
+  String sliderMinSemanticsValue(String value) {
+    return 'Lágmark, $value';
+  }
+
+  @override
+  String sliderMaxSemanticsValue(String value) {
+    return 'Hámark, $value';
+  }
 
   @override
   String get textFieldEmailLabel => 'Netfang';

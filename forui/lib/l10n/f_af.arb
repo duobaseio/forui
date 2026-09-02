@@ -48,7 +48,14 @@
   "timePickerHourSemanticsLabel": "Uur",
   "timePickerMinuteSemanticsLabel": "Minuut",
   "autocompleteResults": "{count} beskikbare resultate",
+  "selectResults": "{count} beskikbare resultate",
   "autocompleteSuggestion": "Voorstel: {suggestion}",
   "breadcrumbCollapsedSemanticsLabel": "Meer",
-  "paginationPageSemanticsLabel": "Bladsy {page}"
+  "paginationPageSemanticsLabel": "Bladsy {page}",
+  "multiSelectTagSemanticsLabel": "Verwyder",
+  "sliderSwitchThumbsSemanticsHint": "Dubbeltik om van skuifknop te wissel",
+  "sliderSelectMinThumbSemanticsLabel": "Kies minimum skuifknop",
+  "sliderSelectMaxThumbSemanticsLabel": "Kies maksimum skuifknop",
+  "sliderMinSemanticsValue": "Minimum, {value}",
+  "sliderMaxSemanticsValue": "Maksimum, {value}"
 }
