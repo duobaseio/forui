@@ -43,7 +43,7 @@
 * 🌍 I10n support.
 * 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
 * ✅ [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
-* 🧪 Part of [Flutter's customer test registry](https://github.com/flutter/tests & tested against every Flutter change.
+* 🧪 Part of [Flutter's customer test registry](https://github.com/flutter/tests) & tested against every Flutter change.
 * 🛠️ Actively maintained since [2024](https://github.com/duobaseio/forui/releases/tag/forui/0.1.0).
 
 ## Support Forui
