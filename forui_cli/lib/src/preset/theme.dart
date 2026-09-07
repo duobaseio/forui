@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 import 'package:forui_cli/forui_cli.dart';
 import 'package:forui_cli/src/commands/theme/theme.dart';
 import 'package:forui_cli/src/components/confirm.dart';
@@ -71,15 +73,16 @@ part of '$themeFileName';
 
 /// Generates the theme files for [preset] under [output], installing any required fonts and icon packages.
 Future<void> create(Configuration configuration, Preset preset, {required bool force, required String output}) async {
-  final separator = Platform.pathSeparator;
-  final themePath =
-      '${configuration.root.path}$separator${output.endsWith('.dart') ? output : '$output${separator}theme.dart'}';
-  final themeDir = File(themePath).parent.path;
-  final themeFileName = themePath.split(separator).last;
-  final colorsPath = '$themeDir${separator}colors.dart';
-  final typographyPath = '$themeDir${separator}typography.dart';
-  final stylePath = '$themeDir${separator}style.dart';
-  final iconsPath = '$themeDir${separator}icons.dart';
+  // Normalize so that a `/`-separated output resolves correctly on Windows.
+  final themePath = p.normalize(
+    p.join(configuration.root.path, output.endsWith('.dart') ? output : p.join(output, 'theme.dart')),
+  );
+  final themeDir = p.dirname(themePath);
+  final themeFileName = p.basename(themePath);
+  final colorsPath = p.join(themeDir, 'colors.dart');
+  final typographyPath = p.join(themeDir, 'typography.dart');
+  final stylePath = p.join(themeDir, 'style.dart');
+  final iconsPath = p.join(themeDir, 'icons.dart');
 
   // Check for existing files before doing any download or package work.
   if (!force) {
@@ -98,11 +101,7 @@ Future<void> create(Configuration configuration, Preset preset, {required bool f
         exit(1);
       }
 
-      final prefix = '${configuration.root.path}$separator';
-      final relative = [
-        for (final path in existing)
-          if (path.startsWith(prefix)) path.substring(prefix.length) else path,
-      ];
+      final relative = [for (final path in existing) p.relative(path, from: configuration.root.path)];
       terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
 
       if (!confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false)) {
