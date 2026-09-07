@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 import 'package:forui_cli/src/commands/style/style.dart';
 import 'package:forui_cli/src/components/autocomplete_multiselect.dart';
 import 'package:forui_cli/src/components/confirm.dart';
@@ -271,9 +273,9 @@ class StyleCreateCommand extends ForuiCommand {
 
     for (final style in styles) {
       final file = _snake(registry[style.toLowerCase()]!.type.substring(1));
-      final path =
-          '${configuration.root.path}${Platform.pathSeparator}'
-          '${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$file.dart'}';
+      final path = p.normalize(
+        p.join(configuration.root.path, output.endsWith('.dart') ? output : p.join(output, '$file.dart')),
+      );
 
       (paths[path] ??= []).add(style);
       if (File(path).existsSync()) {
@@ -283,10 +285,8 @@ class StyleCreateCommand extends ForuiCommand {
 
     if (!force && existing.isNotEmpty) {
       if (terminal.interactive) {
-        final prefix = '${configuration.root.path}${Platform.pathSeparator}';
         final relative = [
-          for (final path in existing.toList()..sort())
-            if (path.startsWith(prefix)) path.substring(prefix.length) else path,
+          for (final path in existing.toList()..sort()) p.relative(path, from: configuration.root.path),
         ];
         terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
       }

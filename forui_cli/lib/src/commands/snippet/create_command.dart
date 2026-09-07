@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 import 'package:forui_cli/src/commands/snippet/snippet.dart';
 import 'package:forui_cli/src/components/confirm.dart';
 import 'package:forui_cli/src/components/log.dart';
@@ -144,9 +146,9 @@ class SnippetCreateCommand extends ForuiCommand {
     final force = argResults!.flag('force');
 
     final (file, _, source) = snippets[snippet.toLowerCase()]!;
-    final path =
-        '${configuration.root.path}${Platform.pathSeparator}'
-        '${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$file.dart'}';
+    final path = p.normalize(
+      p.join(configuration.root.path, output.endsWith('.dart') ? output : p.join(output, '$file.dart')),
+    );
 
     if (!force && File(path).existsSync()) {
       if (!terminal.interactive) {
