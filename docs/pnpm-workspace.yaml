@@ -1,4 +1,8 @@
 minimumReleaseAge: 4320 # 3 days
+# Setting minimumReleaseAge implicitly turns on minimumReleaseAgeStrict, which makes Renovate's lockfile update
+# (run with --no-save) fail outright when a transitive dependency is younger than the cutoff. Keep it off so the
+# cutoff only steers resolution towards aged versions.
+minimumReleaseAgeStrict: false
 allowBuilds:
   esbuild: true
   sharp: true
