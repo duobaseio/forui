@@ -1,7 +1,7 @@
 name: forui_cli
 description: >-
   Command-line tool for Forui: create a theme and generate the styling boilerplate for your Forui app.
-version: 0.26.0
+version: 0.26.1
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/duobaseio/forui/tree/main/forui_cli
