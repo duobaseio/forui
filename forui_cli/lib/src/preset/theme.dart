@@ -73,7 +73,6 @@ part of '$themeFileName';
 
 /// Generates the theme files for [preset] under [output], installing any required fonts and icon packages.
 Future<void> create(Configuration configuration, Preset preset, {required bool force, required String output}) async {
-  // Normalize so that a `/`-separated output resolves correctly on Windows.
   final themePath = p.normalize(
     p.join(configuration.root.path, output.endsWith('.dart') ? output : p.join(output, 'theme.dart')),
   );
