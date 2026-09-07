@@ -1,4 +1,4 @@
-## 0.27.0
+## 0.26.1
 * Fix `forui theme create` generating incorrect `part of` directives on Windows.
 
 
