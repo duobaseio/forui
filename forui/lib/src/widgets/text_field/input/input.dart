@@ -246,8 +246,7 @@ class _InputState extends State<Input> {
         fontFeatures: [
           const .disable('calt'),
           for (final feature in contentTextStyle.fontFeatures ?? <FontFeature>[])
-            if (feature.feature != 'calt')
-              feature,
+            if (feature.feature != 'calt') feature,
         ],
       );
     }
