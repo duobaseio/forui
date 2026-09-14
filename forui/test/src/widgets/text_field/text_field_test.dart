@@ -228,7 +228,7 @@ void main() {
       );
 
       final style = tester.widget<EditableText>(find.byType(EditableText)).style;
-      expect(style.fontFeatures, [const FontFeature.tabularFigures(), const FontFeature.disable('calt')]);
+      expect(style.fontFeatures, [const FontFeature.disable('calt'), const FontFeature.tabularFigures()]);
     });
 
     testWidgets('does not modify font features when not obscured', (tester) async {
