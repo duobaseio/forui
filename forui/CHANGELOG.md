@@ -56,6 +56,10 @@
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
 
 
+### `FTextField`
+* Fix obscured text shifting vertically while the last typed character is briefly revealed.
+
+
 ## 0.26.0
 
 This update replaces the deprecated `flutter/cupertino.dart` & `flutter/material.dart` libraries with the `cupertino_ui` 

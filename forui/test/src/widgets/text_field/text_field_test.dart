@@ -205,6 +205,40 @@ void main() {
     expect(find.text('密码'), findsOneWidget);
   });
 
+  group('obscureText', () {
+    testWidgets('disables contextual alternates', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(child: const FTextField(obscureText: true)));
+
+      final style = tester.widget<EditableText>(find.byType(EditableText)).style;
+      expect(style.fontFeatures, contains(const FontFeature.disable('calt')));
+    });
+
+    testWidgets('preserves other font features', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(
+            obscureText: true,
+            style: .delta(
+              contentTextStyle: .delta([
+                .all(const .delta(fontFeatures: [FontFeature.tabularFigures(), FontFeature.enable('calt')])),
+              ]),
+            ),
+          ),
+        ),
+      );
+
+      final style = tester.widget<EditableText>(find.byType(EditableText)).style;
+      expect(style.fontFeatures, [const FontFeature.tabularFigures(), const FontFeature.disable('calt')]);
+    });
+
+    testWidgets('does not modify font features when not obscured', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(child: const FTextField()));
+
+      final style = tester.widget<EditableText>(find.byType(EditableText)).style;
+      expect(style.fontFeatures, isNot(contains(const FontFeature.disable('calt'))));
+    });
+  });
+
   testWidgets('expands', (tester) async {
     await tester.pumpWidget(TestScaffold.app(child: const FTextField(maxLines: null, expands: true)));
 
