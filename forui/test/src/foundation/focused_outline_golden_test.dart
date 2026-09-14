@@ -10,6 +10,11 @@ import '../test_scaffold.dart';
 
 void main() {
   group('FFocusedOutline', () {
+    setUp(() {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+    });
+
     testWidgets('blue screen', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(

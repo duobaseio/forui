@@ -5,6 +5,10 @@
 * Fix the fallback being clipped at large text scales.
 
 
+### `FFocusedOutline`
+* **Breaking** Fix outline being painted after a pointer click when the focus highlight is off.
+
+
 ### `FItem` & `FItemGroup`
 * Add `FItem.semanticsButton`.
 * Add `FItem.semanticsChecked`.
@@ -54,6 +58,10 @@
 * Add `FTappable.semanticsContainer`.
 
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
+
+
+### `FTextField`
+* Fix obscured text shifting vertically while the last typed character is briefly revealed.
 
 
 ## 0.26.0

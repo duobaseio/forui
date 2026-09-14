@@ -238,6 +238,19 @@ class _InputState extends State<Input> {
     final style = widget.style(context.theme.textFieldStyles.resolve({widget.size, context.platformVariant}));
     final variants = toTextFieldVariants(context.platformVariant, _statesController.value);
 
+    var contentTextStyle = style.contentTextStyle.resolve(variants);
+    if (widget.obscureText) {
+      // Inter raises '•' when next to uppercase letters and digits, causing them to jump.
+      // See https://github.com/flutter/flutter/issues/125568.
+      contentTextStyle = contentTextStyle.copyWith(
+        fontFeatures: [
+          const .disable('calt'),
+          for (final feature in contentTextStyle.fontFeatures ?? <FontFeature>[])
+            if (feature.feature != 'calt') feature,
+        ],
+      );
+    }
+
     final textfield = TextField(
       controller: widget.controller,
       decoration: _decoration(style),
@@ -251,7 +264,7 @@ class _InputState extends State<Input> {
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       textCapitalization: widget.textCapitalization,
-      style: style.contentTextStyle.resolve(variants),
+      style: contentTextStyle,
       textAlign: widget.textAlign,
       textAlignVertical: widget.textAlignVertical,
       textDirection: widget.textDirection,
@@ -317,7 +330,6 @@ class _InputState extends State<Input> {
       child: widget.builder(context, style, variants, textfield),
     );
 
-    // TODO: https://github.com/flutter/flutter/issues/191095
     field = Material(
       color: Colors.transparent,
       child: Theme(
