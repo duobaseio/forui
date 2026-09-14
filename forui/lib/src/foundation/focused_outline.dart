@@ -13,6 +13,8 @@ part 'focused_outline.design.dart';
 
 /// An outline around a focused widget that does not affect its layout.
 ///
+/// The outline is only painted when [FAccessibility.focusHighlight] is also true.
+///
 /// See:
 /// * https://forui.dev/docs/widgets/foundation/focused-outline for working examples.
 /// * [FFocusedOutlineStyle] for customizing an outline.
@@ -30,7 +32,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   /// ```
   final FFocusedOutlineStyleDelta style;
 
-  /// True if the [child] should be outlined.
+  /// True if the [child] is focused.
   final bool focused;
 
   /// Creates a [FFocusedOutline].
@@ -40,7 +42,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   RenderObject createRenderObject(BuildContext context) => _Outline(
     style(context.theme.style.focusedOutlineStyle),
     Directionality.maybeOf(context) ?? .ltr,
-    focused: focused,
+    focused: context.accessibility.focusHighlight && focused,
   );
 
   @override
@@ -49,7 +51,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
     outline
       ..style = style(context.theme.style.focusedOutlineStyle)
       ..textDirection = Directionality.maybeOf(context) ?? .ltr
-      ..focused = focused;
+      ..focused = context.accessibility.focusHighlight && focused;
   }
 
   @override
