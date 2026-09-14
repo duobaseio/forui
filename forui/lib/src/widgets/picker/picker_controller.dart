@@ -14,6 +14,8 @@ abstract class ValuePickerController<T>(super._value) extends ValueNotifier<T> {
   bool _mutating = false;
 
   /// Animates the controller to the given [value].
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateTo(
     T value, {
     Duration duration = const Duration(milliseconds: 300),
@@ -100,6 +102,8 @@ class FPickerController extends ValueNotifier<List<int>> {
   new({required List<int> indexes}) : super([...indexes]);
 
   /// Animates the wheels to the given [value].
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateTo(
     List<int> value, {
     Duration duration = const Duration(milliseconds: 300),

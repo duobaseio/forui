@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -38,6 +40,21 @@ extension Control on Never {
   /// `FDateSelectionControl.date()` vs `FDateSelectionControl.range()`.
   /// {@endtemplate}
   static const managed = '';
+
+  /// {@template forui.foundation.doc_templates.tickerFuture}
+  /// ## Testing
+  /// To avoid timeouts in widget tests, always wrap the returned `Future` in [unawaited].
+  ///
+  /// ```dart
+  /// testWidgets('shows', (tester) async {
+  ///   await tester.pumpWidget(...);
+  ///
+  ///   unawaited(controller.show());
+  ///   await tester.pumpAndSettle();
+  /// });
+  /// ```
+  /// {@endtemplate}
+  static const tickerFuture = '';
 }
 
 @internal

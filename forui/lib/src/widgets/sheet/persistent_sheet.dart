@@ -186,12 +186,18 @@ class FPersistentSheetController {
   }
 
   /// Shows the sheet if it is hidden.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   TickerFuture show() => _controller.forward();
 
   /// Shows the sheet if it is hidden and hides it if it is shown.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   TickerFuture toggle() => _controller.toggle();
 
   /// Hides the sheet if it is shown.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   TickerFuture hide() => _controller.reverse();
 
   /// The current status.
