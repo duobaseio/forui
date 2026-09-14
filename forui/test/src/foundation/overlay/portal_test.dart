@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -16,7 +18,7 @@ void main() {
           portalAnchor: .topRight,
           childAnchor: .bottomLeft,
           control: .managed(controller: controller),
-          portalBuilder: (context, _) => Padding(
+          portalBuilder: (context, _, _) => Padding(
             padding: const .all(5),
             child: ColoredBox(
               color: Colors.red,
@@ -63,7 +65,7 @@ void main() {
                 const SizedBox(height: 250), // places the child above the keyboard
                 FPortal(
                   control: .managed(controller: controller),
-                  portalBuilder: (context, _) => const ColoredBox(
+                  portalBuilder: (context, _, _) => const ColoredBox(
                     key: ValueKey('portal'),
                     color: Colors.red,
                     child: SizedBox(height: 150, width: 200),
@@ -110,7 +112,7 @@ void main() {
                     builder: (_) => FPortal(
                       control: .managed(controller: controller),
                       overlayLocation: location,
-                      portalBuilder: (_, _) => const SizedBox.square(dimension: 10, child: Text('portal')),
+                      portalBuilder: (_, _, _) => const SizedBox.square(dimension: 10, child: Text('portal')),
                       child: const SizedBox.square(dimension: 10),
                     ),
                   ),
@@ -139,5 +141,119 @@ void main() {
         entry.dispose();
       });
     }
+  });
+
+  group('geometry', () {
+    testWidgets('null until first painted', (tester) async {
+      final controller = OverlayPortalController();
+      final values = <FPortalGeometry?>[];
+      late ValueListenable<FPortalGeometry?> geometry;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPortal(
+            control: .managed(controller: controller),
+            portalBuilder: (context, _, g) {
+              geometry = g;
+              values.add(g.value);
+              return const SizedBox.square(dimension: 50);
+            },
+            child: const SizedBox.square(dimension: 100),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      expect(values.first, null);
+      expect(geometry.value, (child: const Rect.fromLTWH(-25, -100, 100, 100), portal: const Size(50, 50)));
+    });
+
+    for (final (portalAnchor, childAnchor, spacing, child) in [
+      (Alignment.topCenter, Alignment.bottomCenter, 0.0, const Rect.fromLTWH(-25, -100, 100, 100)),
+      (Alignment.topCenter, Alignment.bottomCenter, 10.0, const Rect.fromLTWH(-25, -110, 100, 100)),
+      (Alignment.centerLeft, Alignment.centerRight, 0.0, const Rect.fromLTWH(-100, -30, 100, 100)),
+      (Alignment.bottomRight, Alignment.topLeft, 0.0, const Rect.fromLTWH(50, 40, 100, 100)),
+    ]) {
+      testWidgets('child rect in portal coordinates, $portalAnchor to $childAnchor, spacing $spacing', (tester) async {
+        final controller = OverlayPortalController();
+        late ValueListenable<FPortalGeometry?> geometry;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPortal(
+              control: .managed(controller: controller),
+              portalAnchor: portalAnchor,
+              childAnchor: childAnchor,
+              spacing: FPortalSpacing(spacing),
+              portalBuilder: (context, _, g) {
+                geometry = g;
+                return const SizedBox(width: 50, height: 40);
+              },
+              child: const SizedBox.square(dimension: 100),
+            ),
+          ),
+        );
+
+        controller.show();
+        await tester.pumpAndSettle();
+
+        expect(geometry.value, (child: child, portal: const Size(50, 40)));
+      });
+    }
+
+    testWidgets('updates and notifies at the end of the frame when the portal slides', (tester) async {
+      final controller = OverlayPortalController();
+      final left = ValueNotifier(700.0);
+      addTearDown(left.dispose);
+      final phases = <SchedulerPhase>[];
+      late ValueListenable<FPortalGeometry?> geometry;
+
+      // 800x600 screen. A 200 wide portal centered on a 100 wide child at x = 700 overflows and slides left by 150.
+      await tester.pumpWidget(
+        TestScaffold.app(
+          padded: false,
+          child: ValueListenableBuilder(
+            valueListenable: left,
+            builder: (context, left, _) => Stack(
+              children: [
+                Positioned(
+                  left: left,
+                  top: 100,
+                  child: FPortal(
+                    control: .managed(controller: controller),
+                    portalBuilder: (context, _, g) {
+                      geometry = g;
+                      return const SizedBox(width: 200, height: 50);
+                    },
+                    child: const SizedBox.square(dimension: 100),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+      expect(geometry.value, (child: const Rect.fromLTWH(100, -100, 100, 100), portal: const Size(200, 50)));
+
+      geometry.addListener(() => phases.add(SchedulerBinding.instance.schedulerPhase));
+
+      left.value = 300;
+      await tester.pumpAndSettle();
+      // The portal repositions in a scheduled task that pumpAndSettle does not wait for.
+      await tester.pump(const Duration(milliseconds: 1));
+      await tester.pumpAndSettle();
+
+      expect(geometry.value, (child: const Rect.fromLTWH(50, -100, 100, 100), portal: const Size(200, 50)));
+      expect(phases, [SchedulerPhase.postFrameCallbacks]);
+
+      // Unchanged geometry does not notify.
+      await tester.pump();
+      expect(phases, [SchedulerPhase.postFrameCallbacks]);
+    });
   });
 }

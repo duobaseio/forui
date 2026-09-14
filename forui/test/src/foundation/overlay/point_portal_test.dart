@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -15,7 +16,7 @@ void main() {
         child: FPointPortal(
           point: const Offset(50, 80),
           control: .managed(controller: controller),
-          portalBuilder: (context, _) => Padding(
+          portalBuilder: (context, _, _) => Padding(
             padding: const .all(5),
             child: ColoredBox(
               color: Colors.red,
@@ -64,7 +65,7 @@ void main() {
                   control: .managed(controller: controller),
                   point: const Offset(100, 20), // bottom-center of the child
                   anchor: .topCenter,
-                  portalBuilder: (context, _) => const ColoredBox(
+                  portalBuilder: (context, _, _) => const ColoredBox(
                     key: ValueKey('portal'),
                     color: Colors.red,
                     child: SizedBox(height: 150, width: 200),
@@ -88,5 +89,38 @@ void main() {
 
     // The portal flips above the point instead of rendering behind the keyboard.
     expect(tester.getRect(find.byKey(const ValueKey('portal'))).bottom, lessThanOrEqualTo(300));
+  });
+
+  group('geometry', () {
+    for (final (anchor, child) in [
+      (Alignment.topLeft, Rect.zero),
+      (Alignment.center, const Rect.fromLTWH(30, 20, 0, 0)),
+      (Alignment.bottomRight, const Rect.fromLTWH(60, 40, 0, 0)),
+    ]) {
+      testWidgets('point as a zero-sized rect in portal coordinates, $anchor', (tester) async {
+        final controller = OverlayPortalController();
+        late ValueListenable<FPortalGeometry?> geometry;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPointPortal(
+              point: const Offset(50, 80),
+              anchor: anchor,
+              control: .managed(controller: controller),
+              portalBuilder: (context, _, g) {
+                geometry = g;
+                return const SizedBox(width: 60, height: 40);
+              },
+              child: const SizedBox.square(dimension: 200),
+            ),
+          ),
+        );
+
+        controller.show();
+        await tester.pumpAndSettle();
+
+        expect(geometry.value, (child: child, portal: const Size(60, 40)));
+      });
+    }
   });
 }

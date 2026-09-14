@@ -21,7 +21,7 @@ class _State extends StatefulExampleState<PointPortalPage> {
     control: .managed(controller: _controller),
     point: _point,
     padding: const .all(5),
-    portalBuilder: (context, _) => Container(
+    portalBuilder: (context, controller, geometry) => Container(
       decoration: BoxDecoration(
         color: context.theme.colors.background,
         border: .all(color: context.theme.colors.border),

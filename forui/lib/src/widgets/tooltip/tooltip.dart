@@ -279,7 +279,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         overlayLocation: widget.overlayLocation,
-        portalBuilder: (context, _) {
+        portalBuilder: (context, _, _) {
           final Size(:width, :height) = MediaQuery.sizeOf(context);
           Widget tooltip = ConstrainedBox(
             constraints: _style.constraints.enforce(BoxConstraints(maxWidth: width, maxHeight: height)),

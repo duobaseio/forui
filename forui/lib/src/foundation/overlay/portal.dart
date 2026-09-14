@@ -11,6 +11,7 @@ import 'package:forui/src/foundation/overlay/composited_child.dart';
 import 'package:forui/src/foundation/overlay/composited_portal.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
 import 'package:forui/src/foundation/overlay/overlay_controller.dart';
+import 'package:forui/src/foundation/overlay/portal_geometry.dart';
 
 /// A portal that "floats" on top of and relative to a [child] widget.
 ///
@@ -116,7 +117,12 @@ class FPortal extends StatefulWidget {
   final Widget Function(RenderBox? cutout)? barrier;
 
   /// The portal builder which returns the floating content.
-  final Widget Function(BuildContext context, OverlayPortalController controller) portalBuilder;
+  final Widget Function(
+    BuildContext context,
+    OverlayPortalController controller,
+    ValueListenable<FPortalGeometry?> geometry,
+  )
+  portalBuilder;
 
   /// {@macro forui.foundation.overlay.builder}
   final ValueWidgetBuilder<OverlayPortalController> builder;
@@ -176,6 +182,7 @@ class FPortal extends StatefulWidget {
 class _State extends State<FPortal> with WidgetsBindingObserver {
   final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
+  final _geometry = GeometryNotifier();
   final _traversal = OrderedTraversalPolicy();
   late OverlayPortalController _controller;
 
@@ -242,7 +249,8 @@ class _State extends State<FPortal> with WidgetsBindingObserver {
           spacing: widget.spacing(childAnchor, portalAnchor),
           overflow: widget.overflow,
           offset: widget.offset,
-          child: widget.portalBuilder(context, _controller),
+          geometry: _geometry,
+          child: widget.portalBuilder(context, _controller, _geometry),
         );
 
         if (widget.barrier case final barrier?) {
@@ -287,6 +295,7 @@ class _State extends State<FPortal> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _notifier.dispose();
+    _geometry.dispose();
     super.dispose();
   }
 }

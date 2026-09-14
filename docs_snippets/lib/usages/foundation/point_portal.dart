@@ -21,7 +21,7 @@ final pointPortal = FPointPortal(
   // {@endcategory}
   // {@category "Core"}
   point: const Offset(100, 100),
-  portalBuilder: (context, controller) => const Text('Portal content'),
+  portalBuilder: (context, controller, geometry) => const Text('Portal content'),
   builder: (context, controller, child) => child!,
   child: const Text('Child'),
   barrier: null,

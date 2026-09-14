@@ -11,6 +11,7 @@ import 'package:forui/src/foundation/overlay/composited_child.dart';
 import 'package:forui/src/foundation/overlay/composited_point_portal.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
 import 'package:forui/src/foundation/overlay/overlay_controller.dart';
+import 'package:forui/src/foundation/overlay/portal_geometry.dart';
 
 /// A portal that "floats" on top of a child widget, anchored at a specific [point] within the child's local coordinate
 /// space.
@@ -105,7 +106,12 @@ class FPointPortal extends StatefulWidget {
   final Widget Function(RenderBox? cutout)? barrier;
 
   /// The portal builder which returns the floating content.
-  final Widget Function(BuildContext context, OverlayPortalController controller) portalBuilder;
+  final Widget Function(
+    BuildContext context,
+    OverlayPortalController controller,
+    ValueListenable<FPortalGeometry?> geometry,
+  )
+  portalBuilder;
 
   /// {@macro forui.foundation.overlay.builder}
   final ValueWidgetBuilder<OverlayPortalController> builder;
@@ -163,6 +169,7 @@ class FPointPortal extends StatefulWidget {
 class _State extends State<FPointPortal> with WidgetsBindingObserver {
   final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
+  final _geometry = GeometryNotifier();
   late OverlayPortalController _controller;
 
   @override
@@ -193,6 +200,7 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _notifier.dispose();
+    _geometry.dispose();
     super.dispose();
   }
 
@@ -230,7 +238,8 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
           spacing: widget.spacing,
           overflow: widget.overflow,
           offset: widget.offset,
-          child: widget.portalBuilder(context, _controller),
+          geometry: _geometry,
+          child: widget.portalBuilder(context, _controller, _geometry),
         );
 
         if (widget.barrier case final barrier?) {

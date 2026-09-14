@@ -214,7 +214,7 @@ void main() {
                 ),
                 FPortal(
                   control: .managed(controller: controller),
-                  portalBuilder: (context, _) => SizedBox(
+                  portalBuilder: (context, _, _) => SizedBox(
                     key: const ValueKey('inner'),
                     height: 50,
                     width: 200,

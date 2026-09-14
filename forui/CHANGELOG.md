@@ -24,6 +24,12 @@
 * Fix label, description and error not being announced with the form field by screen readers.
 
 
+### `FPortal` & `FPointPortal`
+* Add `FPortalGeometry`.
+
+* **Breaking** Change `portalBuilder` to receive the portal's resolved geometry as a third parameter.
+
+
 ### `FSelect` & `FMultiSelect`
 * Add Backspace to clear a clearable `FSelect` while its field is focused.
 * Add Backspace to remove the last tag while a `FMultiSelect` field is focused.

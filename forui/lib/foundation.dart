@@ -19,5 +19,6 @@ export 'src/foundation/overlay/overlay_controller.dart' hide InternalFOverlayCon
 export 'src/foundation/overlay/point_portal.dart';
 export 'src/foundation/overlay/portal.dart';
 export 'src/foundation/overlay/portal_constraints.dart' hide FixedConstraints;
+export 'src/foundation/overlay/portal_geometry.dart' hide GeometryNotifier;
 export 'src/foundation/overlay/portal_overflow.dart';
 export 'src/foundation/overlay/portal_spacing.dart';
