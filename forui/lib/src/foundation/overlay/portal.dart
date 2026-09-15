@@ -11,7 +11,7 @@ import 'package:forui/src/foundation/overlay/composited_child.dart';
 import 'package:forui/src/foundation/overlay/composited_portal.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
 import 'package:forui/src/foundation/overlay/overlay_controller.dart';
-import 'package:forui/src/foundation/overlay/portal_geometry.dart';
+import 'package:forui/src/foundation/overlay/portal_arrow_decoration.dart';
 
 /// A portal that "floats" on top of and relative to a [child] widget.
 ///

@@ -34,9 +34,6 @@ class const CompositedPointPortal({
   ///
   /// It is applied after [overflow].
   required final Offset offset,
-
-  /// Receives the resolved geometry on each paint.
-  required final ValueNotifier<FPortalGeometry?> geometry,
   required super.notifier,
   required super.link,
   super.showWhenUnlinked,
@@ -56,7 +53,6 @@ class const CompositedPointPortal({
     spacing: spacing,
     overflow: overflow,
     offset: offset,
-    geometry: geometry,
   );
 
   @override
@@ -71,8 +67,7 @@ class const CompositedPointPortal({
     ..padding = padding
     ..spacing = spacing
     ..overflow = overflow
-    ..offset = offset
-    ..geometry = geometry;
+    ..offset = offset;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -84,8 +79,7 @@ class const CompositedPointPortal({
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DoubleProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(DiagnosticsProperty('geometry', geometry));
+      ..add(DiagnosticsProperty('offset', offset));
   }
 }
 
@@ -99,7 +93,6 @@ class RenderPointPortalLayer({
   required var double _spacing,
   required var FPortalOverflow _overflow,
   required var Offset _offset,
-  required var ValueNotifier<FPortalGeometry?> _geometry,
   required super.notifier,
   required super.link,
   required super.viewSize,
@@ -116,27 +109,24 @@ class RenderPointPortalLayer({
 
   @override
   Offset onPaint(PaintingContext _, Offset _) {
-    if ((link.childRenderBox?.localToGlobal(.zero), child) case (final childOffset?, final portal?)) {
-      final portalOrigin =
-          offset +
-          point +
-          overflow(
-            // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
-            // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
-            Size(viewSize.width - padding.horizontal, viewSize.height - padding.vertical),
-            (
-              offset: Offset(childOffset.dx + point.dx - padding.left, childOffset.dy + point.dy - padding.top),
-              size: .zero,
-              anchor: .center,
-            ),
-            (offset: Offset(-anchor.x * spacing, -anchor.y * spacing), size: portal.size, anchor: anchor),
-          );
-
-      geometry.value = (child: (point - portalOrigin) & .zero, portal: portal.size);
-      return portalOrigin;
+    final childOffset = link.childRenderBox?.localToGlobal(.zero);
+    if (childOffset == null || child == null) {
+      return .zero;
     }
 
-    return .zero;
+    return offset +
+        point +
+        overflow(
+          // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
+          // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
+          Size(viewSize.width - padding.horizontal, viewSize.height - padding.vertical),
+          (
+            offset: Offset(childOffset.dx + point.dx - padding.left, childOffset.dy + point.dy - padding.top),
+            size: .zero,
+            anchor: .center,
+          ),
+          (offset: Offset(-anchor.x * spacing, -anchor.y * spacing), size: child!.size, anchor: anchor),
+        );
   }
 
   /// The portal's constraints.
@@ -213,18 +203,6 @@ class RenderPointPortalLayer({
     markNeedsPaint();
   }
 
-  /// Receives the resolved geometry on each paint.
-  ValueNotifier<FPortalGeometry?> get geometry => _geometry;
-
-  set geometry(ValueNotifier<FPortalGeometry?> value) {
-    if (_geometry == value) {
-      return;
-    }
-
-    _geometry = value;
-    markNeedsPaint();
-  }
-
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -235,7 +213,6 @@ class RenderPointPortalLayer({
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DoubleProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset))
-      ..add(DiagnosticsProperty('geometry', geometry));
+      ..add(DiagnosticsProperty('offset', offset));
   }
 }
