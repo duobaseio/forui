@@ -12,6 +12,7 @@ import defaultSnippet from '@/snippets/examples/overlay/popover-menu/default.jso
 import blurredSnippet from '@/snippets/examples/overlay/popover-menu/blurred.json';
 import nestedSnippet from '@/snippets/examples/overlay/popover-menu/nested.json';
 import tilesSnippet from '@/snippets/examples/overlay/popover-menu/tiles.json';
+import arrowSnippet from '@/snippets/examples/overlay/popover-menu/arrow.json';
 import popoverMenuUsage from '@/snippets/usages/overlay/popover_menu/popoverMenu.json';
 import popoverMenuTilesUsage from '@/snippets/usages/overlay/popover_menu/popoverMenuTiles.json';
 
@@ -65,6 +66,20 @@ To generate a specific style for customization:
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tilesSnippet} />
+  </Tab>
+</Tabs>
+
+### Arrow
+
+An arrow can be drawn pointing at the child. `spacing` should be at least the arrow's height to keep it from overlapping
+the child.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/popover-menu' variant='arrow' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={arrowSnippet} />
   </Tab>
 </Tabs>
 

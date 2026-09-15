@@ -14,7 +14,10 @@ final item = FItem(
   onFocusChange: (focused) {},
   semanticsLabel: 'Item',
   semanticsTooltip: null,
+  semanticsButton: true,
+  semanticsChecked: null,
   semanticsExpanded: null,
+  semanticsInMutuallyExclusiveGroup: null,
   shortcuts: null,
   actions: null,
   // {@endcategory}
@@ -49,7 +52,10 @@ final raw = FItem.raw(
   onFocusChange: (focused) {},
   semanticsLabel: 'Item',
   semanticsTooltip: null,
+  semanticsButton: true,
+  semanticsChecked: null,
   semanticsExpanded: null,
+  semanticsInMutuallyExclusiveGroup: null,
   shortcuts: null,
   actions: null,
   // {@endcategory}

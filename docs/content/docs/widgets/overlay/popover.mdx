@@ -10,6 +10,7 @@ import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/overlay/popover/default.json';
 import horizontalSnippet from '@/snippets/examples/overlay/popover/horizontal.json';
+import arrowSnippet from '@/snippets/examples/overlay/popover/arrow.json';
 import slideSnippet from '@/snippets/examples/overlay/popover/slide.json';
 import flipSnippet from '@/snippets/examples/overlay/popover/flip.json';
 import allowOverflowSnippet from '@/snippets/examples/overlay/popover/allow-overflow.json';
@@ -73,6 +74,20 @@ You can change how the popover is aligned to the button.
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+### Arrow
+
+An arrow can be drawn pointing at the child. `spacing` should be at least the arrow's height to keep it from overlapping
+the child.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/popover' variant='arrow' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={arrowSnippet} />
   </Tab>
 </Tabs>
 
