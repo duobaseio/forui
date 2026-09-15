@@ -113,6 +113,9 @@ class FPopover extends StatefulWidget {
   /// The spacing between the popover and child anchors.
   ///
   /// Applied before `overflow`.
+  ///
+  /// It is recommended that [spacing] be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with the
+  /// child when [arrow] is set.
   /// {@endtemplate}
   ///
   /// Defaults to `FPortalSpacing(4)`.

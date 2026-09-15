@@ -84,6 +84,48 @@ void main() {
     });
   }
 
+  for (final (platform, target) in [('touch', FPlatformVariant.android), ('desktop', FPlatformVariant.macOS)]) {
+    for (final (name, tipAnchor, childAnchor) in [
+      ('top', Alignment.topCenter, Alignment.bottomCenter),
+      ('left', Alignment.centerLeft, Alignment.centerRight),
+      ('right', Alignment.centerRight, Alignment.centerLeft),
+    ]) {
+      testWidgets('arrow $platform $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            platform: target,
+            child: FTooltip(
+              control: const .managed(initial: true),
+              tipAnchor: tipAnchor,
+              childAnchor: childAnchor,
+              tipBuilder: (context, _) => const Text('Lorem'),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/arrow-$platform-$name.png'));
+      });
+    }
+  }
+
+  testWidgets('no arrow', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTooltip(
+          control: const .managed(initial: true),
+          arrow: null,
+          tipBuilder: (context, _) => const Text('Lorem'),
+          child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('tooltip/no-arrow.png'));
+  });
+
   group('accessibility', () {
     // The tip scales up and fades in under full motion, drops the scale to a plain fade under reduced motion, and
     // appears instantly (fully opaque, no scale) under disabled motion.

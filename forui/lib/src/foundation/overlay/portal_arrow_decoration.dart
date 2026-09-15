@@ -117,9 +117,13 @@ class const _Arrow(final OutlinedBorder shape, super.style, super.decoration, su
     final outline = shape.getOuterPath(rect.inflate(spread), textDirection: direction);
 
     if (geometry.value case (:final child, :final portal)) {
+      final FPortalArrowStyle(:cornerSpacing, :baseRadius, :width, :height) = style;
+
       final box = Offset.zero & portal;
       final radius = decoration.borderRadius?.resolve(direction) ?? .zero;
-      final inset = style.cornerSpacing + style.baseRadius + style.width / 2;
+      final half = width / 2;
+      // The base's fillet extends baseRadius * tan(corner angle / 2) past the base's corner along the edge.
+      final inset = cornerSpacing + half + baseRadius * height / (math.sqrt(half * half + height * height) + half);
 
       double? along(Axis axis, double length, double start, double end, double childStart, double childEnd) =>
           alignment(
@@ -283,7 +287,6 @@ class GeometryNotifier([var FPortalGeometry? _value]) extends ValueNotifier<FPor
     SchedulerBinding.instance.addPostFrameCallback((_) => notifyListeners(), debugLabel: 'FPortalGeometry.notify');
   }
 }
-
 
 /// An arrow's shape.
 ///
