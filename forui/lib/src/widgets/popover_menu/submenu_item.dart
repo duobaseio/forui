@@ -128,6 +128,9 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
   /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow submenuOverflow;
 
+  /// {@macro forui.widgets.FPopover.arrow}
+  final FPortalArrowAlignment? submenuArrow;
+
   /// The submenu's additional translation offset.
   ///
   /// Defaults to [Offset.zero].
@@ -208,6 +211,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
     this.submenuDragStartBehavior = .start,
     this.submenuSpacing = const .spacing(2),
     this.submenuOverflow = .flip,
+    this.submenuArrow,
     this.submenuOffset = .zero,
     this.submenuHideRegion = .excludeChild,
     this.submenuSemanticsLabel,
@@ -252,6 +256,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
       ..add(EnumProperty('submenuDragStartBehavior', submenuDragStartBehavior))
       ..add(DiagnosticsProperty('submenuSpacing', submenuSpacing))
       ..add(ObjectFlagProperty.has('submenuOverflow', submenuOverflow))
+      ..add(DiagnosticsProperty('submenuArrow', submenuArrow))
       ..add(DiagnosticsProperty('submenuOffset', submenuOffset))
       ..add(EnumProperty('submenuHideRegion', submenuHideRegion))
       ..add(StringProperty('submenuSemanticsLabel', submenuSemanticsLabel))
@@ -282,6 +287,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
       childAnchor: itemAnchor ?? (desktop ? .topEnd : .topCenter),
       spacing: submenuSpacing,
       overflow: submenuOverflow,
+      arrow: submenuArrow,
       offset: submenuOffset,
       hideRegion: submenuHideRegion,
       semanticsLabel: submenuSemanticsLabel,

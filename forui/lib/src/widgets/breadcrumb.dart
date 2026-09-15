@@ -139,6 +139,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
     FPortalOverflow overflow,
+    FPortalArrowAlignment? arrow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool cutout,
@@ -176,6 +177,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     AlignmentGeometry childAnchor,
     FPortalSpacing spacing,
     FPortalOverflow overflow,
+    FPortalArrowAlignment? arrow,
     Offset offset,
     FPopoverHideRegion hideRegion,
     bool cutout,
@@ -266,6 +268,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final AlignmentGeometry childAnchor;
   final FPortalSpacing spacing;
   final FPortalOverflow overflow;
+  final FPortalArrowAlignment? arrow;
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final VoidCallback? onTapHide;
@@ -295,6 +298,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.childAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.arrow,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.onTapHide,
@@ -327,6 +331,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.childAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.arrow,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.onTapHide,
@@ -363,6 +368,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
+      ..add(DiagnosticsProperty('arrow', arrow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
@@ -435,6 +441,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,
         overflow: widget.overflow,
+        arrow: widget.arrow,
         offset: widget.offset,
         hideRegion: widget.hideRegion,
         onTapHide: widget.onTapHide,
@@ -462,6 +469,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,
         overflow: widget.overflow,
+        arrow: widget.arrow,
         offset: widget.offset,
         hideRegion: widget.hideRegion,
         cutout: widget.cutout,

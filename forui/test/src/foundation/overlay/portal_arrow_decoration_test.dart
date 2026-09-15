@@ -42,10 +42,10 @@ void main() {
     }
 
     test('arrow clamped off the corner', () {
-      // Child center is 20; min center = radius 10 + width / 2 + baseRadius 3 + cornerSpacing 4 = 24.
-      geometry.value = (child: const Rect.fromLTWH(0, -50, 40, 50), portal: rect.size);
-      expect(clip().contains(const Offset(24, -3)), true);
-      expect(clip().contains(const Offset(16, -3)), false);
+      // Child center is 10; min center = radius 10 + width / 2 + baseRadius 3 + cornerSpacing 0 = 20.
+      geometry.value = (child: const Rect.fromLTWH(0, -50, 20, 50), portal: rect.size);
+      expect(clip().contains(const Offset(20, -3)), true);
+      expect(clip().contains(const Offset(12, -3)), false);
     });
 
     test('arrow hidden when clamped off the child', () {

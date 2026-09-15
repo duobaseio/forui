@@ -268,6 +268,7 @@ class FSelectContentStyle({
   super.barrierFilter,
   super.backgroundFilter,
   super.popoverPadding,
+  super.arrowStyle,
   super.motion,
 }) extends FPopoverStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   /// Creates a [FSelectContentStyle].

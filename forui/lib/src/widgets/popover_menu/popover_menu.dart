@@ -142,6 +142,9 @@ class FPopoverMenu extends StatefulWidget {
   /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow overflow;
 
+  /// {@macro forui.widgets.FPopover.arrow}
+  final FPortalArrowAlignment? arrow;
+
   /// {@macro forui.foundation.FPortal.useViewPadding}
   ///
   /// Defaults to true.
@@ -242,6 +245,7 @@ class FPopoverMenu extends StatefulWidget {
     this.childAnchor = .bottomCenter,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.arrow,
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.overlayLocation = .nearestOverlay,
@@ -310,6 +314,7 @@ class FPopoverMenu extends StatefulWidget {
     this.childAnchor = .bottomCenter,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.arrow,
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.overlayLocation = .nearestOverlay,
@@ -369,6 +374,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
+      ..add(DiagnosticsProperty('arrow', arrow))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(EnumProperty('overlayLocation', overlayLocation))
@@ -425,6 +431,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
       childAnchor: widget.childAnchor,
       spacing: widget.spacing,
       overflow: widget.overflow,
+      arrow: widget.arrow,
       offset: widget.offset,
       groupId: groupId,
       hideRegion: widget.hideRegion,
@@ -506,6 +513,7 @@ class const FPopoverMenuStyle({
   super.barrierFilter,
   super.backgroundFilter,
   super.popoverPadding,
+  super.arrowStyle,
   super.motion,
 }) extends FPopoverStyle with _$FPopoverMenuStyleFunctions {
   /// Creates a [FPopoverMenuStyle].

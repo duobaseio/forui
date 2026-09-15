@@ -14,6 +14,7 @@ final popover = FPopover(
   childAnchor: .bottomCenter,
   spacing: const .spacing(4),
   overflow: .flip,
+  arrow: .childCenter,
   useViewPadding: true,
   useViewInsets: true,
   offset: .zero,

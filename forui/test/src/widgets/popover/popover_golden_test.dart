@@ -246,6 +246,85 @@ void main() {
     });
   }
 
+  group('arrow', () {
+    for (final (name, popoverAnchor, childAnchor) in [
+      ('top', Alignment.topCenter, Alignment.bottomCenter),
+      ('bottom', Alignment.bottomCenter, Alignment.topCenter),
+      ('left', Alignment.centerLeft, Alignment.centerRight),
+      ('right', Alignment.centerRight, Alignment.centerLeft),
+    ]) {
+      testWidgets(name, (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPopover(
+              control: const .managed(initial: true),
+              popoverAnchor: popoverAnchor,
+              childAnchor: childAnchor,
+              spacing: const .spacing(11),
+              arrow: .childCenter,
+              popoverBuilder: (context, _) => const SizedBox(width: 120, height: 60),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/arrow-$name.png'));
+      });
+    }
+
+    testWidgets('background filter', (tester) async {
+      final theme = TestScaffold.themes.first.data;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme,
+          // The stripes extend past the child so the blur, clipped to the outline, is visible through the arrow.
+          child: Stack(
+            alignment: .topCenter,
+            children: [
+              SizedBox(
+                width: 500,
+                height: 140,
+                child: Row(
+                  children: [
+                    for (var i = 0; i < 50; i++)
+                      ColoredBox(
+                        color: i.isEven ? Colors.black : Colors.white,
+                        child: const SizedBox(width: 10, height: 140),
+                      ),
+                  ],
+                ),
+              ),
+              FPopover(
+                control: const .managed(initial: true),
+                popoverAnchor: .topCenter,
+                childAnchor: .bottomCenter,
+                spacing: const .spacing(11),
+                arrow: .childCenter,
+                style: .delta(
+                  backgroundFilter: (_, v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
+                  decoration: .value(
+                    BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.2),
+                      borderRadius: theme.style.borderRadius.md,
+                      border: .all(color: Colors.white.withValues(alpha: 0.5)),
+                    ),
+                  ),
+                ),
+                popoverBuilder: (_, _) => const SizedBox(width: 120, height: 60),
+                child: const SizedBox(width: 500, height: 40),
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/arrow-background-filter.png'));
+    });
+  });
+
   group('accessibility', () {
     // The popover scales up and fades in under full motion, drops the scale to a plain fade under reduced motion, and
     // appears instantly (fully opaque, no scale) under disabled motion.

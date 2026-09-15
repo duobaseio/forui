@@ -101,7 +101,13 @@ void main() {
     final controller = OverlayPortalController();
     await tester.pumpWidget(
       TestScaffold.app(
-        child: arrowed(controller: controller, portalAnchor: .topLeft, childAnchor: .bottomLeft, width: 200),
+        child: arrowed(
+          controller: controller,
+          portalAnchor: .topLeft,
+          childAnchor: .bottomLeft,
+          style: const FPortalArrowStyle(cornerSpacing: 4),
+          width: 200,
+        ),
       ),
     );
 

@@ -299,11 +299,11 @@ class GeometryNotifier([var FPortalGeometry? _value]) extends ValueNotifier<FPor
 /// │ cornerSpacing   width   ╰ baseRadius
 /// ```
 class const FPortalArrowStyle({
-  /// The minimum spacing between the arrow and the decoration's rounded corners. Defaults to 4.
+  /// The minimum spacing between the arrow and the decoration's rounded corners. Defaults to 0.
   ///
   /// ## Contract
   /// Must be >= 0.
-  @override final double cornerSpacing = 4,
+  @override final double cornerSpacing = 0,
 
   /// The radius of the rounded corners where the arrow's sides meet the decoration's edge. Defaults to 3.
   ///
