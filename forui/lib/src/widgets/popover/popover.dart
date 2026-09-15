@@ -114,8 +114,8 @@ class FPopover extends StatefulWidget {
   ///
   /// Applied before `overflow`.
   ///
-  /// It is recommended that [spacing] be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with the
-  /// child when [arrow] is set.
+  /// It is recommended that the spacing be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with
+  /// the anchor when an arrow is set.
   /// {@endtemplate}
   ///
   /// Defaults to `FPortalSpacing(4)`.
@@ -133,10 +133,10 @@ class FPopover extends StatefulWidget {
   final FPortalOverflow overflow;
 
   /// {@template forui.widgets.FPopover.arrow}
-  /// How this popover's arrow should be aligned to the [child]. Defaults to null.
+  /// How the arrow should be aligned to the anchor. Defaults to null.
   ///
-  /// It is recommended that [spacing] be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with the
-  /// child.
+  /// It is recommended that the spacing be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with
+  /// the anchor.
   /// {@endtemplate}
   final FPortalArrowAlignment? arrow;
 
