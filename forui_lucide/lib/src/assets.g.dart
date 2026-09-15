@@ -14,6 +14,7 @@ import 'package:flutter/widgets.dart';
 // least one surviving IconData constant, the entire font ships untouched.
 // See https://github.com/flutter/flutter/issues/190902.
 @pragma('vm:entry-point')
+@pragma('wasm:entry-point')
 const _sentinel = IconData(58757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_lucide');
 
 /// The Lucide icons maintained by the Forui team.

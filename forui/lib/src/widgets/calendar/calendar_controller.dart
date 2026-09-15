@@ -123,6 +123,8 @@ abstract class _GridCalendarController extends FCalendarController {
   /// Shows the day picker on the given [date]'s month, or the current month if [date] is null.
   ///
   /// If the day picker is already shown, its grid animates to the month; otherwise it is shown immediately.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateToDayPicker([
     DateTime? date,
     Duration duration = const Duration(milliseconds: 200),
@@ -157,6 +159,8 @@ abstract class _GridCalendarController extends FCalendarController {
   /// Shows the month picker for the given [date]'s year, or the current year if [date] is null.
   ///
   /// If the month picker is already shown, its grid animates to the year; otherwise it is shown immediately.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateToMonthPicker([
     DateTime? date,
     Duration duration = const Duration(milliseconds: 200),
@@ -191,6 +195,8 @@ abstract class _GridCalendarController extends FCalendarController {
   /// Shows the year picker for the given [date]'s year, or the current year if [date] is null.
   ///
   /// If the year picker is already shown, its grid animates to the decade; otherwise it is shown immediately.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateToYearPicker([
     DateTime? date,
     Duration duration = const Duration(milliseconds: 200),
@@ -299,6 +305,8 @@ class FWheelCalendarController extends FCalendarController {
   ///
   /// If the day grid is already shown, it animates to the month; otherwise the month-year wheel is dismissed and the
   /// day grid is shown on the month immediately.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateToDayPicker([
     DateTime? date,
     Duration duration = const Duration(milliseconds: 200),

@@ -12,7 +12,7 @@ class PortalPage extends Example {
   Widget example(BuildContext _) => FPortal(
     spacing: const .spacing(8),
     padding: const .all(5),
-    portalBuilder: (context, _) => Container(
+    portalBuilder: (context, controller, geometry) => Container(
       decoration: BoxDecoration(
         color: context.theme.colors.background,
         border: .all(color: context.theme.colors.border),

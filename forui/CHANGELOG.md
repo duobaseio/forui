@@ -5,6 +5,11 @@
 * Fix the fallback being clipped at large text scales.
 
 
+### `FBreadcrumb`
+* Add `FBreadcrumbItem.collapsed(arrow: ...)`
+* Add `FBreadcrumbItem.collapsedTiles(arrow: ...)`.
+
+
 ### `FFocusedOutline`
 * **Breaking** Fix outline being painted after a pointer click when the focus highlight is off.
 
@@ -24,6 +29,26 @@
 * Fix label, description and error not being announced with the form field by screen readers.
 
 
+### `FPortal`
+* Add `FPortalArrowDecoration`.
+* Add `FPortalArrowStyle`.
+* Add `FPortalArrowAlignment`.
+* Add `FPortalGeometry`.
+
+* **Breaking** Change `portalBuilder` to receive the portal's resolved geometry as a third parameter.
+
+
+### `FPopover`
+* Add `FPopover.arrow`.
+* Add `FPopoverStyle.arrowStyle`.
+
+
+### `FPopoverMenu`
+* Add `FPopoverMenu.arrow`.
+* Add `FSubmenuItem.submenuArrow`
+* Add `FSubmenuTile.submenuArrow`.
+
+
 ### `FSelect` & `FMultiSelect`
 * Add Backspace to clear a clearable `FSelect` while its field is focused.
 * Add Backspace to remove the last tag while a `FMultiSelect` field is focused.
@@ -36,6 +61,8 @@
 
 
 ### `FSelectMenuTile`
+* Add `FSelectMenuTile.menuArrow`.
+
 * Fix validation state not being exposed to screen readers when validation passes.
 
 
@@ -62,6 +89,17 @@
 
 ### `FTextField`
 * Fix obscured text shifting vertically while the last typed character is briefly revealed.
+
+
+### `FTooltip`
+* Add `FTooltip.arrow`.
+* Add `FTooltipStyle.arrowStyle`.
+
+* **Breaking** Change `FTooltip.spacing` default from 4 to 7.
+* **Breaking** Change `FTooltipStyle.inherit` to use a foreground background, and no border or shadow.
+* **Breaking** Change `FTooltipStyle.padding` default from `(14, 10)` to `(12, 6)`.
+
+* **Breaking** Remove `FTooltipStyle.shadow`.
 
 
 ## 0.26.0

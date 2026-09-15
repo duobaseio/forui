@@ -11,8 +11,9 @@ final tooltip = FTooltip(
   // {@category "Layout"}
   tipAnchor: .bottomCenter,
   childAnchor: .topCenter,
-  spacing: const .spacing(4),
+  spacing: const .spacing(7),
   overflow: .flip,
+  arrow: .childCenter,
   useViewPadding: true,
   useViewInsets: true,
   overlayLocation: .nearestOverlay,
@@ -22,7 +23,7 @@ final tooltip = FTooltip(
   longPress: true,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .value(.symmetric(horizontal: 14, vertical: 10))),
+  style: const .delta(padding: .value(.symmetric(horizontal: 12, vertical: 6))),
   tipBuilder: (context, controller) => const Text('Tooltip content'),
   builder: (context, controller, child) => child!,
   child: const Text('Hover me'),

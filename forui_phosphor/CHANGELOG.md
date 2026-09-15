@@ -1,3 +1,7 @@
+## 0.27.0
+* Fix icons not being tree-shaken when unused on wasm.
+
+
 ## 0.26.1
 * Add `FPhosphorDuotoneIcon`
 * Add `FPhosphorDuotoneIconData`

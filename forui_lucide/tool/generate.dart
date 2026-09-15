@@ -146,15 +146,17 @@ void verify(List<(String, String, String)> icons) {
 
 /// A sentinel constant that forces the icon tree shaker to subset the font even when an app references no icons from
 /// it. Without at least one `IconData` constant surviving compilation, the entire font is bundled untouched, see
-/// https://github.com/flutter/flutter/issues/190902. The pragma keeps the constant in the AOT kernel; on web, dart2js
-/// kernels retain top-level constants.
+/// https://github.com/flutter/flutter/issues/190902.
 Field sentinel(int codepoint) => (FieldBuilder()
       ..docs.addAll([
         '\n// Forces the icon tree shaker to subset this font even when an app references no icons from it. Without at',
         '// least one surviving IconData constant, the entire font ships untouched.',
         '// See https://github.com/flutter/flutter/issues/190902.',
       ])
-      ..annotations.add(refer('pragma').call([literalString('vm:entry-point')]))
+      ..annotations.addAll([
+        refer('pragma').call([literalString('vm:entry-point')]),
+        refer('pragma').call([literalString('wasm:entry-point')]),
+      ])
       ..modifier = FieldModifier.constant
       ..name = '_sentinel'
       ..assignment = refer('IconData')

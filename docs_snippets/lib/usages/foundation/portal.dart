@@ -22,7 +22,7 @@ final portal = FPortal(
   // {@endcategory}
   // {@category "Core"}
   traversalGrouped: true,
-  portalBuilder: (context, controller) => const Text('Portal content'),
+  portalBuilder: (context, controller, geometry) => const Text('Portal content'),
   builder: (context, controller, child) => child!,
   child: const Text('Child'),
   barrier: null,

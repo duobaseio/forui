@@ -10,6 +10,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_group.dart';
 
@@ -72,11 +73,12 @@ class FTooltip extends StatefulWidget {
   /// Defaults to [Alignment.topCenter].
   final AlignmentGeometry childAnchor;
 
-  /// The spacing between the [tipAnchor] and [childAnchor].
+  /// The spacing between the [tipAnchor] and [childAnchor]. Defaults to `FPortalSpacing(7)`.
   ///
   /// Applied before [overflow].
   ///
-  /// Defaults to `FPortalSpacing(4)`.
+  /// It is recommended that [spacing] be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with the
+  /// child when [arrow] is set.
   final FPortalSpacing spacing;
 
   /// The callback used to shift a tooltip's tip when it overflows out of the viewport.
@@ -87,6 +89,12 @@ class FTooltip extends StatefulWidget {
   ///
   /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow overflow;
+
+  /// How this tooltip's arrow should be aligned to the [child]. Defaults to [FPortalArrowAlignment.childCenter].
+  ///
+  /// It is recommended that [spacing] be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with the
+  /// child.
+  final FPortalArrowAlignment? arrow;
 
   /// True if the tooltip should be shown when hovered over. Defaults to [FTooltipGroup.hover], typically true.
   final bool? hover;
@@ -134,8 +142,9 @@ class FTooltip extends StatefulWidget {
     this.style = const .context(),
     this.tipAnchor = .bottomCenter,
     this.childAnchor = .topCenter,
-    this.spacing = const .spacing(4),
+    this.spacing = const .spacing(7),
     this.overflow = .flip,
+    this.arrow = .childCenter,
     this.hover,
     this.longPress,
     this.useViewPadding = true,
@@ -159,6 +168,7 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
+      ..add(DiagnosticsProperty('arrow', arrow))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
@@ -279,12 +289,22 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         overlayLocation: widget.overlayLocation,
-        portalBuilder: (context, _) {
+        portalBuilder: (context, _, geometry) {
           final Size(:width, :height) = MediaQuery.sizeOf(context);
+          final decoration = switch (widget.arrow) {
+            null => _style.decoration,
+            final arrow => FPortalArrowDecoration(
+              style: _style.arrowStyle,
+              decoration: _style.decoration,
+              alignment: arrow,
+              geometry: geometry,
+            ),
+          };
+
           Widget tooltip = ConstrainedBox(
             constraints: _style.constraints.enforce(BoxConstraints(maxWidth: width, maxHeight: height)),
             child: DecoratedBox(
-              decoration: _style.decoration,
+              decoration: decoration,
               child: Padding(
                 padding: _style.padding,
                 child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
@@ -311,7 +331,8 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
             tooltip = Stack(
               children: [
                 Positioned.fill(
-                  child: ClipRect(
+                  child: ClipPath(
+                    clipper: InnerPathClipper(decoration: decoration, direction: direction),
                     child: BackdropFilter(filter: background, child: Container()),
                   ),
                 ),
@@ -394,13 +415,17 @@ class const FTooltipStyle({
   /// This is typically combined with a translucent background in [decoration] to create a glassmorphic effect.
   @override final ImageFilter? backgroundFilter,
 
-  /// The padding surrounding the tooltip's text. Defaults to `EdgeInsets.symmetric(horizontal: 14, vertical: 10)`.
-  @override final EdgeInsets padding = const .symmetric(horizontal: 14, vertical: 10),
+  /// The padding surrounding the tooltip's text. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 6)`.
+  @override final EdgeInsets padding = const .symmetric(horizontal: 12, vertical: 6),
 
   /// The tooltip's constraints. The height & width is capped at the viewport so large tips wrap.
   ///
   /// Defaults to `const BoxConstraints()`.
   @override final BoxConstraints constraints = const BoxConstraints(),
+
+  /// The arrow's style. Defaults to `FPortalArrowStyle(baseRadius: 0, width: 8, height: 5, tipRadius: 1.5)`.
+  @override
+  final FPortalArrowStyle arrowStyle = const FPortalArrowStyle(baseRadius: 0, width: 8, height: 5, tipRadius: 1.5),
 
   /// The tooltip's motion configuration. Defaults to [FTooltipMotion].
   @override final FTooltipMotion motion = const FTooltipMotion(),
@@ -420,12 +445,6 @@ class const FTooltipStyle({
   /// Creates a [FTooltipStyle].
   this;
 
-  /// The tooltip's default shadow in [FTooltipStyle.inherit].
-  static const shadow = [
-    BoxShadow(color: Color(0x1a000000), offset: Offset(0, 4), blurRadius: 6, spreadRadius: -1),
-    BoxShadow(color: Color(0x1a000000), offset: Offset(0, 2), blurRadius: 4, spreadRadius: -2),
-  ];
-
   /// Creates a [FTooltipStyle] that inherits its properties.
   new inherit({
     required FColors colors,
@@ -438,16 +457,12 @@ class const FTooltipStyle({
     Duration longPressExitDuration = const Duration(milliseconds: 1500),
   }) : this(
          decoration: ShapeDecoration(
-           shape: RoundedSuperellipseBorder(
-             side: BorderSide(color: colors.border, width: style.borderWidth),
-             borderRadius: style.borderRadius.md,
-           ),
-           color: colors.card,
-           shadows: FTooltipStyle.shadow,
+           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.sm),
+           color: colors.foreground,
          ),
-         padding: const .symmetric(horizontal: 14, vertical: 10),
+         padding: const .symmetric(horizontal: 12, vertical: 6),
          constraints: const BoxConstraints(),
-         textStyle: typography.body.xs,
+         textStyle: typography.body.xs.copyWith(color: colors.background),
          hapticFeedback: hapticFeedback.mediumImpact,
          motion: motion,
          hoverEnterDuration: hoverEnterDuration,

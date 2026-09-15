@@ -160,6 +160,7 @@ class FAutocompleteContentStyle({
   super.barrierFilter,
   super.backgroundFilter,
   super.popoverPadding,
+  super.arrowStyle,
   super.motion,
 }) extends FPopoverStyle with Diagnosticable, _$FAutocompleteContentStyleFunctions {
   /// Creates an [FAutocompleteContentStyle].

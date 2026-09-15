@@ -108,6 +108,9 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@macro forui.widgets.FPopover.overflow}
   final FPortalOverflow menuOverflow;
 
+  /// {@macro forui.widgets.FPopover.arrow}
+  final FPortalArrowAlignment? menuArrow;
+
   /// {@macro forui.widgets.FPopover.offset}
   final Offset menuOffset;
 
@@ -253,6 +256,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.tileAnchor = .bottomRight,
     this.menuSpacing = const .spacing(4),
     this.menuOverflow = .flip,
+    this.menuArrow,
     this.menuUseViewPadding = true,
     this.menuUseViewInsets = true,
     this.menuOverlayLocation = .nearestOverlay,
@@ -315,6 +319,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     AlignmentGeometry tileAnchor = .bottomRight,
     FPortalSpacing menuSpacing = const .spacing(4),
     FPortalOverflow menuOverflow = .flip,
+    FPortalArrowAlignment? menuArrow,
     bool menuUseViewPadding = true,
     bool menuUseViewInsets = true,
     OverlayChildLocation menuOverlayLocation = .nearestOverlay,
@@ -367,6 +372,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     tileAnchor: tileAnchor,
     menuSpacing: menuSpacing,
     menuOverflow: menuOverflow,
+    menuArrow: menuArrow,
     menuUseViewPadding: menuUseViewPadding,
     menuUseViewInsets: menuUseViewInsets,
     menuOverlayLocation: menuOverlayLocation,
@@ -439,6 +445,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.tileAnchor = .bottomRight,
     this.menuSpacing = const .spacing(4),
     this.menuOverflow = .flip,
+    this.menuArrow,
     this.menuUseViewPadding = true,
     this.menuUseViewInsets = true,
     this.menuOverlayLocation = .nearestOverlay,
@@ -497,6 +504,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
       ..add(DiagnosticsProperty('menuSpacing', menuSpacing))
       ..add(ObjectFlagProperty.has('menuOverflow', menuOverflow))
+      ..add(DiagnosticsProperty('menuArrow', menuArrow))
       ..add(FlagProperty('menuUseViewPadding', value: menuUseViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('menuUseViewInsets', value: menuUseViewInsets, ifTrue: 'using view insets'))
       ..add(EnumProperty('menuOverlayLocation', menuOverlayLocation))
@@ -617,6 +625,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           childAnchor: widget.tileAnchor,
           spacing: widget.menuSpacing,
           overflow: widget.menuOverflow,
+          arrow: widget.menuArrow,
           useViewPadding: widget.menuUseViewPadding,
           useViewInsets: widget.menuUseViewInsets,
           overlayLocation: widget.menuOverlayLocation,

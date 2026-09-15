@@ -131,6 +131,40 @@ class HorizontalPopoverPage extends Example {
 }
 
 @RoutePage()
+class ArrowPopoverPage extends Example {
+  ArrowPopoverPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext context) => Wrap(
+    spacing: 8,
+    runSpacing: 8,
+    alignment: .center,
+    children: [
+      for (final (label, popoverAnchor, childAnchor) in const <(String, Alignment, Alignment)>[
+        ('Left', .centerRight, .centerLeft),
+        ('Top', .bottomCenter, .topCenter),
+        ('Bottom', .topCenter, .bottomCenter),
+        ('Right', .centerLeft, .centerRight),
+      ])
+        FPopover(
+          popoverAnchor: popoverAnchor,
+          childAnchor: childAnchor,
+          // {@highlight}
+          arrow: .childCenter,
+          spacing: const .spacing(11),
+          // {@endhighlight}
+          popoverBuilder: (context, _) => Padding(
+            padding: const .all(12),
+            child: SizedBox(width: 200, child: Text('Popover content', style: context.theme.typography.body.sm)),
+          ),
+          builder: (_, controller, _) =>
+              FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: controller.toggle, child: Text(label)),
+        ),
+    ],
+  );
+}
+
+@RoutePage()
 class NoHideRegionPopoverPage extends Example {
   NoHideRegionPopoverPage({@queryParam super.theme}) : super(maxHeight: 200, top: 30);
 

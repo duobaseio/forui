@@ -71,6 +71,8 @@ class FLineCalendarScrollController extends ScrollController {
   }
 
   /// Animates to [date].
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateToDate(
     DateTime date, {
     Duration duration = const Duration(milliseconds: 300),

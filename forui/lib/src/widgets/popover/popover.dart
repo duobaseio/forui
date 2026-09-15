@@ -113,6 +113,9 @@ class FPopover extends StatefulWidget {
   /// The spacing between the popover and child anchors.
   ///
   /// Applied before `overflow`.
+  ///
+  /// It is recommended that the spacing be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with
+  /// the anchor when an arrow is set.
   /// {@endtemplate}
   ///
   /// Defaults to `FPortalSpacing(4)`.
@@ -128,6 +131,14 @@ class FPopover extends StatefulWidget {
   ///
   /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow overflow;
+
+  /// {@template forui.widgets.FPopover.arrow}
+  /// How the arrow should be aligned to the anchor. Defaults to null.
+  ///
+  /// It is recommended that the spacing be at least [FPortalArrowStyle.height] to prevent the arrow overlapping with
+  /// the anchor.
+  /// {@endtemplate}
+  final FPortalArrowAlignment? arrow;
 
   /// {@macro forui.foundation.FPortal.useViewPadding}
   ///
@@ -282,6 +293,7 @@ class FPopover extends StatefulWidget {
     this.constraints = const FPortalConstraints(),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.arrow,
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.overlayLocation = .nearestOverlay,
@@ -330,6 +342,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
+      ..add(DiagnosticsProperty('arrow', arrow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideRegion', hideRegion))
@@ -479,7 +492,17 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                     onDismiss: widget.hideRegion == .none ? null : _hide,
                   ),
                 ),
-          portalBuilder: (context, _) {
+          portalBuilder: (context, _, geometry) {
+            final decoration = switch (widget.arrow) {
+              null => style.decoration,
+              final arrow => FPortalArrowDecoration(
+                style: style.arrowStyle,
+                decoration: style.decoration,
+                alignment: arrow,
+                geometry: geometry,
+              ),
+            };
+
             Widget popover = Semantics(
               label: widget.semanticsLabel,
               container: true,
@@ -491,7 +514,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                   groupId: _groupId,
                   onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
                   child: DecoratedBox(
-                    decoration: style.decoration,
+                    decoration: decoration,
                     child: widget.popoverClipBehavior == .none
                         ? widget.popoverBuilder(context, _controller)
                         : ClipPath(
@@ -524,7 +547,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                 children: [
                   Positioned.fill(
                     child: ClipPath(
-                      clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                      clipper: InnerPathClipper(decoration: decoration, direction: direction),
                       child: AnimatedBuilder(
                         animation: _controller.fade,
                         builder: (context, _) =>
@@ -628,6 +651,9 @@ class const FPopoverStyle({
   ///
   /// Defaults to `EdgeInsets.all(5)`.
   @override final EdgeInsetsGeometry popoverPadding = const .all(5),
+
+  /// The arrow's style. Defaults to [FPortalArrowStyle].
+  @override final FPortalArrowStyle arrowStyle = const FPortalArrowStyle(),
 
   /// The popover's motion configuration. Defaults to [FPopoverMotion].
   @override final FPopoverMotion motion = const FPopoverMotion(),

@@ -45,6 +45,8 @@ class FPopoverController extends FChangeNotifier {
   /// Convenience method for showing/hiding the popover.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> toggle({bool animated = true}) =>
       _animation.status.isForwardOrCompleted ? hide(animated: animated) : show(animated: animated);
 
@@ -53,6 +55,8 @@ class FPopoverController extends FChangeNotifier {
   /// If already shown, calling this method brings the popover to the top.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> show({bool animated = true}) async {
     if (_animation.isForwardOrCompleted) {
       return;
@@ -73,6 +77,8 @@ class FPopoverController extends FChangeNotifier {
   /// widgets in the popover may lose their states as a result.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> hide({bool animated = true}) async {
     if (!_animation.isForwardOrCompleted) {
       return;

@@ -36,6 +36,9 @@ class const CompositedPortal({
   ///
   /// It is applied after [overflow].
   required final Offset offset,
+
+  /// Receives the portal's geometry on each paint after all transformations.
+  required final ValueNotifier<FPortalGeometry?> geometry,
   required super.notifier,
   required super.link,
   super.showWhenUnlinked,
@@ -55,6 +58,7 @@ class const CompositedPortal({
     spacing: spacing,
     overflow: overflow,
     offset: offset,
+    geometry: geometry,
   );
 
   @override
@@ -69,7 +73,8 @@ class const CompositedPortal({
     ..padding = padding
     ..spacing = spacing
     ..overflow = overflow
-    ..offset = offset;
+    ..offset = offset
+    ..geometry = geometry;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -81,7 +86,8 @@ class const CompositedPortal({
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset));
+      ..add(DiagnosticsProperty('offset', offset))
+      ..add(DiagnosticsProperty('geometry', geometry));
   }
 }
 
@@ -95,6 +101,7 @@ class RenderPortalLayer({
   required var Offset _spacing,
   required var FPortalOverflow _overflow,
   required var Offset _offset,
+  required var ValueNotifier<FPortalGeometry?> _geometry,
   required super.notifier,
   required super.link,
   required super.viewSize,
@@ -136,9 +143,14 @@ class RenderPortalLayer({
       '(current value is $childAnchor).',
     );
 
-    return offset +
-        switch ((link.childRenderBox?.localToGlobal(.zero), link.childSize, child)) {
-          (final childOffset?, final childSize?, final portal?) => overflow(
+    if ((link.childRenderBox?.localToGlobal(.zero), link.childSize, child) case (
+      final childOffset?,
+      final childSize?,
+      final portal?,
+    )) {
+      final portalOrigin =
+          offset +
+          overflow(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
             Size(viewSize.width - padding.horizontal, viewSize.height - padding.vertical),
@@ -148,9 +160,13 @@ class RenderPortalLayer({
               anchor: childAnchor,
             ),
             (offset: spacing, size: portal.size, anchor: portalAnchor),
-          ),
-          _ => Offset.zero,
-        };
+          );
+
+      geometry.value = (child: (-portalOrigin) & childSize, portal: portal.size);
+      return portalOrigin;
+    }
+
+    return .zero;
   }
 
   /// The portal's constraints.
@@ -234,6 +250,18 @@ class RenderPortalLayer({
     markNeedsPaint();
   }
 
+  /// Receives the resolved geometry on each paint.
+  ValueNotifier<FPortalGeometry?> get geometry => _geometry;
+
+  set geometry(ValueNotifier<FPortalGeometry?> value) {
+    if (_geometry == value) {
+      return;
+    }
+
+    _geometry = value;
+    markNeedsPaint();
+  }
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -244,6 +272,7 @@ class RenderPortalLayer({
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
-      ..add(DiagnosticsProperty('offset', offset));
+      ..add(DiagnosticsProperty('offset', offset))
+      ..add(DiagnosticsProperty('geometry', geometry));
   }
 }

@@ -39,6 +39,8 @@ class FAccordionController extends FChangeNotifier {
   /// Toggles the item at the given [index], expanding it if it is collapsed and vice versa.
   ///
   /// This method should not be called while the widget tree is being rebuilt.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<bool> toggle(int index) async => switch (_controllers[index]?.status) {
     null => false,
     final status when status.isForwardOrCompleted => await collapse(index),
@@ -49,6 +51,8 @@ class FAccordionController extends FChangeNotifier {
   /// expanded item if the maximum number of expanded items is reached.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<bool> expand(int index) async {
     final controller = _controllers[index];
     if (_expanded.contains(index) || controller == null) {
@@ -78,6 +82,8 @@ class FAccordionController extends FChangeNotifier {
   /// Collapses the item at the given [index], returning true if successfully collapsed.
   ///
   /// This method should typically not be called while the widget tree is being rebuilt.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<bool> collapse(int index) async {
     if (controllers[index] == null || _expanded.length <= _min || !_expanded.contains(index)) {
       return false;

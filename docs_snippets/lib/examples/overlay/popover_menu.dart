@@ -44,6 +44,45 @@ class PopoverMenuPage extends Example {
 }
 
 @RoutePage()
+class ArrowPopoverMenuPage extends Example {
+  ArrowPopoverMenuPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => Wrap(
+    spacing: 8,
+    runSpacing: 8,
+    alignment: .center,
+    children: [
+      for (final (label, menuAnchor, childAnchor) in const <(String, Alignment, Alignment)>[
+        ('Left', .centerRight, .centerLeft),
+        ('Top', .bottomCenter, .topCenter),
+        ('Bottom', .topCenter, .bottomCenter),
+        ('Right', .centerLeft, .centerRight),
+      ])
+        FPopoverMenu(
+          // {@highlight}
+          arrow: .childCenter,
+          spacing: const .spacing(11),
+          // {@endhighlight}
+          menuAnchor: menuAnchor,
+          childAnchor: childAnchor,
+          menu: [
+            .group(
+              children: [
+                .item(prefix: const Icon(FLucideIcons.user), title: const Text('Personalization'), onPress: () {}),
+                .item(prefix: const Icon(FLucideIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+                .item(prefix: const Icon(FLucideIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              ],
+            ),
+          ],
+          builder: (_, controller, _) =>
+              FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: controller.toggle, child: Text(label)),
+        ),
+    ],
+  );
+}
+
+@RoutePage()
 class BlurredPopoverMenuPage extends Example {
   BlurredPopoverMenuPage({@queryParam super.theme});
 

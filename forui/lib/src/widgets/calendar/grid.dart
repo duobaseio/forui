@@ -194,6 +194,8 @@ abstract class GridController extends FChangeNotifier {
   /// Moves focus one date horizontally or one row vertically in [direction], honoring [textDirection]. Skips
   /// unselectable dates and pages across as needed. Does nothing if no selectable date exists in that direction within
   /// [start] and [end].
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> move(
     TraversalDirection direction,
     TextDirection textDirection, {
@@ -221,6 +223,8 @@ abstract class GridController extends FChangeNotifier {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [date] is not within `[start, end]`.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> focus(
     DateTime? date, {
     Duration duration = const Duration(milliseconds: 200),
@@ -240,6 +244,8 @@ abstract class GridController extends FChangeNotifier {
   }
 
   /// Animates the current page to the next page. Does nothing if it is the last page.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> next({Duration duration = const Duration(milliseconds: 200), Curve curve = Curves.ease}) async {
     if (_from(_current) case final page when page < _from(end)) {
       await _animateTo(page + 1, duration, curve);
@@ -247,6 +253,8 @@ abstract class GridController extends FChangeNotifier {
   }
 
   /// Animates the current page to the previous page. Does nothing if it is the first page.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> previous({Duration duration = const Duration(milliseconds: 200), Curve curve = Curves.ease}) async {
     if (_from(_current) case final page when 0 < page) {
       await _animateTo(page - 1, duration, curve);
@@ -257,6 +265,8 @@ abstract class GridController extends FChangeNotifier {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [date] is not within `[start, end]`.
+  ///
+  /// {@macro forui.foundation.doc_templates.tickerFuture}
   Future<void> animateTo(
     DateTime date, {
     Duration duration = const Duration(milliseconds: 200),
