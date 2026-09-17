@@ -4,7 +4,7 @@ import 'package:material_ui/material_ui.dart' hide Autocomplete, Badge, Dialog, 
 import 'package:forui/forui.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
 
-import 'widgets/sheet.dart';
+import 'widgets/toast.dart';
 
 void main() {
   if (kDebugMode) {
@@ -30,7 +30,7 @@ class Application extends StatelessWidget {
         data: theme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
-      home: const FScaffold(child: Sheet()),
+      home: const FScaffold(child: Toast()),
     );
   }
 }
