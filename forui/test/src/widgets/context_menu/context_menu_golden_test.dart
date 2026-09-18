@@ -136,6 +136,64 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('context-menu/tiles-shown-${theme.name}.png'));
     });
 
+    testWidgets('${theme.name} focused item', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FContextMenu(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .item(title: const Text('Cut'), onPress: () {}),
+                  .item(title: const Text('Copy'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 200)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Copy'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('context-menu/focused-item-${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} focused tile', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FContextMenu.tiles(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .tile(title: const Text('Cut'), onPress: () {}),
+                  .tile(title: const Text('Copy'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 200)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Copy'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('context-menu/focused-tile-${theme.name}.png'));
+    });
+
     testWidgets('${theme.name} scrollable', (tester) async {
       final scrollController = ScrollController();
       addTearDown(scrollController.dispose);

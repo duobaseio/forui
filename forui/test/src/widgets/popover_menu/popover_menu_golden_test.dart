@@ -160,6 +160,154 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/tiles-shown-${theme.name}.png'));
     });
 
+    testWidgets('${theme.name} focused item', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FPopoverMenu(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .item(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                  .item(title: const Text('Group 1 - Tile 2'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Group 1 - Tile 2'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/focused-item-${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} focused tile', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FPopoverMenu.tiles(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .tile(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                  .tile(title: const Text('Group 1 - Tile 2'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Group 1 - Tile 2'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/focused-tile-${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} focused submenu item', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FPopoverMenu(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .item(title: const Text('Edit'), onPress: () {}),
+                  .submenu(
+                    title: const Text('Share'),
+                    submenu: [
+                      .group(
+                        children: [
+                          .item(title: const Text('Email'), onPress: () {}),
+                          .item(title: const Text('Message'), onPress: () {}),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Share'));
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Message'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('popover-menu/focused-submenu-item-${theme.name}.png'),
+      );
+    });
+
+    testWidgets('${theme.name} focused submenu tile', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FPopoverMenu.tiles(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .tile(title: const Text('Edit'), onPress: () {}),
+                  .submenu(
+                    title: const Text('Share'),
+                    menu: [
+                      .group(
+                        children: [
+                          .tile(title: const Text('Email'), onPress: () {}),
+                          .tile(title: const Text('Message'), onPress: () {}),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Share'));
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Message'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('popover-menu/focused-submenu-tile-${theme.name}.png'),
+      );
+    });
+
     testWidgets('${theme.name} scrollable', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

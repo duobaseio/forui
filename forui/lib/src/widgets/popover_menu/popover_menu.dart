@@ -551,7 +551,11 @@ class const FPopoverMenuStyle({
                  .all(
                    .delta(
                      backgroundColor: FVariants.all(colors.card),
-                     contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
+                     contentDecoration: .delta([
+                       .base(.shapeDelta(color: colors.card)),
+                       .exact({.focused}, .shapeDelta(color: colors.secondary)),
+                     ]),
+                     focusedOutlineStyle: null,
                    ),
                  ),
                  .base(
@@ -578,6 +582,12 @@ class const FPopoverMenuStyle({
          tileGroupStyle: .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback)
              .copyWith(
                tileStyles: .delta([
+                 .all(
+                   .delta(
+                     contentDecoration: .delta([.exact({.focused}, .shapeDelta(color: colors.secondary))]),
+                     focusedOutlineStyle: () => null,
+                   ),
+                 ),
                  .base(
                    .delta(
                      contentStyle: .delta(

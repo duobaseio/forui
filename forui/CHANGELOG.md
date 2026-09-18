@@ -48,6 +48,8 @@
 * Add `FSubmenuItem.submenuArrow`
 * Add `FSubmenuTile.submenuArrow`.
 
+* Change focused items and tiles to use the hovered appearance.
+
 
 ### `FSelect` & `FMultiSelect`
 * Add Backspace to clear a clearable `FSelect` while its field is focused.
