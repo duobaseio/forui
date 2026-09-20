@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 
@@ -48,6 +49,9 @@ class FInheritedItemCallbacks extends InheritedWidget {
   static FInheritedItemCallbacks? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<FInheritedItemCallbacks>();
 
+  /// The semantics role applied to each item. Defaults to null.
+  final SemanticsRole? semanticsRole;
+
   /// Whether hovering an item focuses it. Defaults to false.
   final bool hoverFocus;
 
@@ -66,16 +70,18 @@ class FInheritedItemCallbacks extends InheritedWidget {
   /// Creates a [FInheritedItemCallbacks].
   const new({
     required super.child,
-    super.key,
+    this.semanticsRole,
     this.hoverFocus = false,
     this.onHoverEnter,
     this.onHoverExit,
     this.onPress,
     this.onLongPress,
+    super.key,
   });
 
   @override
   bool updateShouldNotify(FInheritedItemCallbacks old) =>
+      semanticsRole != old.semanticsRole ||
       hoverFocus != old.hoverFocus ||
       onHoverEnter != old.onHoverEnter ||
       onHoverExit != old.onHoverExit ||
@@ -86,6 +92,7 @@ class FInheritedItemCallbacks extends InheritedWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(EnumProperty('semanticsRole', semanticsRole))
       ..add(FlagProperty('hoverFocus', value: hoverFocus, ifTrue: 'hoverFocus'))
       ..add(ObjectFlagProperty.has('onHoverEnter', onHoverEnter))
       ..add(ObjectFlagProperty.has('onHoverExit', onHoverExit))

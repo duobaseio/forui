@@ -86,6 +86,9 @@ class FTappable extends StatefulWidget {
   /// Whether this tappable belongs to a mutually exclusive group, such as a radio button. Null if not applicable.
   final bool? semanticsInMutuallyExclusiveGroup;
 
+  /// The semantics role of this tappable. Null if it has none.
+  final SemanticsRole? semanticsRole;
+
   /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
 
@@ -102,6 +105,7 @@ class FTappable extends StatefulWidget {
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
+
   /// {@template forui.foundation.FTappable.onHoverChange}
   /// Handler called when the hover changes.
   ///
@@ -352,6 +356,7 @@ class FTappable extends StatefulWidget {
     bool? semanticsChecked,
     bool? semanticsExpanded,
     bool? semanticsInMutuallyExclusiveGroup,
+    SemanticsRole? semanticsRole,
     bool excludeSemantics,
     bool autofocus,
     bool hoverFocus,
@@ -409,6 +414,7 @@ class FTappable extends StatefulWidget {
     this.semanticsChecked,
     this.semanticsExpanded,
     this.semanticsInMutuallyExclusiveGroup,
+    this.semanticsRole,
     this.excludeSemantics = false,
     this.autofocus = false,
     this.hoverFocus = false,
@@ -471,6 +477,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('semanticsChecked', semanticsChecked))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
       ..add(DiagnosticsProperty('semanticsInMutuallyExclusiveGroup', semanticsInMutuallyExclusiveGroup))
+      ..add(EnumProperty('semanticsRole', semanticsRole))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(FlagProperty('hoverFocus', value: hoverFocus, ifTrue: 'hoverFocus'))
@@ -707,6 +714,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       checked: widget.semanticsChecked,
       expanded: widget.semanticsExpanded,
       inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
+      role: widget.semanticsRole,
       selected: widget.semanticsChecked == null ? widget.selected : null,
       excludeSemantics: widget.excludeSemantics,
       // When grouped (_entries != null), onTap/onLongPress are nullified so the group owns pointer gestures. We
@@ -925,6 +933,7 @@ class const AnimatedTappable({
   super.semanticsChecked,
   super.semanticsExpanded,
   super.semanticsInMutuallyExclusiveGroup,
+  super.semanticsRole,
   super.excludeSemantics,
   super.autofocus,
   super.hoverFocus,

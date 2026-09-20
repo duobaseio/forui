@@ -467,6 +467,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
           Widget popover = Semantics(
             label: widget.semanticsLabel,
             container: true,
+            role: .menu,
             child: FocusScope(
               autofocus: widget.autofocus ?? true,
               node: _focusNode,
@@ -486,6 +487,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
                       active: _active,
                       // The default behavior for non-submenu trigger items.
                       child: FInheritedItemCallbacks(
+                        semanticsRole: .menuItem,
                         hoverFocus: true,
                         onHoverEnter: () => _active.value = (null, false),
                         onPress: () => _active.value = (null, false),

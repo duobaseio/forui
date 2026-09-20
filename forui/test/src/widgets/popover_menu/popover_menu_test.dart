@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
@@ -290,6 +291,35 @@ void main() {
           await tester.pumpAndSettle();
           expect(focused(tester, 'SMS'), true);
         });
+      });
+
+      testWidgets('menu & item roles ($name)', (tester) async {
+        final semantics = tester.ensureSemantics();
+
+        await tester.pumpWidget(TestScaffold.app(child: menu));
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        expect(find.semantics.byPredicate((node) => node.role == SemanticsRole.menu), findsOneWidget);
+        expect(tester.getSemantics(find.text('First')), isSemantics(role: .menuItem, isButton: true));
+        expect(tester.getSemantics(find.text('Last')), isSemantics(role: .menuItem, isButton: true));
+        expect(
+          tester.getSemantics(find.text('Share')),
+          isSemantics(role: .menuItem, hasExpandedState: true, isExpanded: false),
+        );
+
+        final mouse = await tester.createPointerGesture();
+        await mouse.moveTo(tester.getCenter(find.text('Share')));
+        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
+
+        expect(find.semantics.byPredicate((node) => node.role == SemanticsRole.menu), findsNWidgets(2));
+        expect(tester.getSemantics(find.text('Share')), isSemantics(role: .menuItem, isExpanded: true));
+        expect(tester.getSemantics(find.text('Email')), isSemantics(role: .menuItem, isButton: true));
+        expect(tester.getSemantics(find.text('SMS')), isSemantics(role: .menuItem, isButton: true));
+
+        semantics.dispose();
       });
     }
 

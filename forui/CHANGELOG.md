@@ -12,6 +12,7 @@
 
 ### `FContextMenu`
 * Add arrow & Home/End keyboard navigation to `FContextMenu`.
+* Add menu & menu item semantics roles to `FContextMenu`.
 
 * Change `FContextMenu.autofocus` to default to true.
 * Change `FContextMenu` items to request focus when hovered.
@@ -26,6 +27,7 @@
 * Add `FItem.semanticsChecked`.
 * Add `FItem.semanticsInMutuallyExclusiveGroup`.
 * Add `FInheritedItemCallbacks.hoverFocus`.
+* Add `FInheritedItemCallbacks.semanticsRole`.
 
 * Fix `FItem` advertising a no-op tap action to screen readers.
 * Fix `FItem` long-press action not exposed to screen readers when inside a group.
@@ -58,6 +60,7 @@
 * Add `FSubmenuItem.submenuArrow`
 * Add `FSubmenuTile.submenuArrow`.
 * Add arrow & Home/End keyboard navigation to `FPopoverMenu`.
+* Add menu & menu item semantics roles to `FPopoverMenu`.
 
 * Change `FPopoverMenu` items to request focus when hovered.
 * Change focused items and tiles to use the hovered appearance.
@@ -96,8 +99,9 @@
 
 
 ### `FTappable`
-* Add `FTappable.semanticsContainer`.
 * Add `FTappable.hoverFocus`.
+* Add `FTappable.semanticsContainer`.
+* Add `FTappable.semanticsRole`.
 
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
 

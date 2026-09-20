@@ -369,6 +369,7 @@ class FItem extends StatelessWidget with FItemMixin {
             semanticsChecked: semanticsChecked,
             semanticsExpanded: semanticsExpanded,
             semanticsInMutuallyExclusiveGroup: semanticsInMutuallyExclusiveGroup,
+            semanticsRole: callbacks?.semanticsRole,
             autofocus: autofocus,
             hoverFocus: callbacks?.hoverFocus ?? false,
             focusNode: focusNode,

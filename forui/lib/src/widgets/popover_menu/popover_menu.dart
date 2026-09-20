@@ -515,31 +515,36 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         overlayLocation: widget.overlayLocation,
-        popoverBuilder: (context, controller) => PopoverMenuScope(
-          controller: controller,
-          style: style,
-          groupId: groupId,
-          active: _active,
-          // The default behavior for non-submenu trigger items.
-          child: FInheritedItemCallbacks(
-            hoverFocus: true,
-            onHoverEnter: () => _active.value = (null, false),
-            onPress: () => _active.value = (null, false),
-            onLongPress: () => _active.value = (null, false),
-            // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally leaking
-            // into the popover menu's items.
-            //
-            // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
-            child: FInheritedItemData(
-              child: ValueListenableBuilder(
-                valueListenable: _active,
-                builder: (_, value, child) => AnimatedOpacity(
-                  opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
-                  duration: style.menuMotion.fadeDuration,
-                  curve: style.menuMotion.fadeCurve,
-                  child: child,
+        popoverBuilder: (context, controller) => Semantics(
+          container: true,
+          role: .menu,
+          child: PopoverMenuScope(
+            controller: controller,
+            style: style,
+            groupId: groupId,
+            active: _active,
+            // The default behavior for non-submenu trigger items.
+            child: FInheritedItemCallbacks(
+              hoverFocus: true,
+              onHoverEnter: () => _active.value = (null, false),
+              onPress: () => _active.value = (null, false),
+              onLongPress: () => _active.value = (null, false),
+              semanticsRole: .menuItem,
+              // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally
+              // leaking into the popover menu's items.
+              //
+              // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
+              child: FInheritedItemData(
+                child: ValueListenableBuilder(
+                  valueListenable: _active,
+                  builder: (_, value, child) => AnimatedOpacity(
+                    opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
+                    duration: style.menuMotion.fadeDuration,
+                    curve: style.menuMotion.fadeCurve,
+                    child: child,
+                  ),
+                  child: widget._menuBuilder(context, controller, style),
                 ),
-                child: widget._menuBuilder(context, controller, style),
               ),
             ),
           ),

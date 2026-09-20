@@ -128,6 +128,7 @@ class _State extends State<SubmenuTrigger> {
         return .handled;
       },
       child: FInheritedItemCallbacks(
+        semanticsRole: FInheritedItemCallbacks.maybeOf(context)?.semanticsRole,
         hoverFocus: FInheritedItemCallbacks.maybeOf(context)?.hoverFocus ?? false,
         onHoverEnter: () async {
           _hovered = true;
