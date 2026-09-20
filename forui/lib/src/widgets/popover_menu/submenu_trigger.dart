@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -12,8 +11,13 @@ import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 class const SubmenuTrigger({
   required final FPopoverController controller,
   required final FocusNode? focusNode,
-  // ignore: avoid_positional_boolean_parameters
-  required final Widget Function(BuildContext context, bool shown) builder,
+  required final Widget Function(
+    BuildContext context,
+    bool shown, // ignore: avoid_positional_boolean_parameters
+    Map<ShortcutActivator, Intent> shortcuts,
+    Map<Type, Action<Intent>> actions,
+  )
+  builder,
   super.key,
 }) extends StatefulWidget {
   @override
@@ -107,56 +111,58 @@ class _State extends State<SubmenuTrigger> {
 
   @override
   Widget build(BuildContext context) => switch ((_active, _style)) {
-    (final active?, final style?) => Focus(
-      canRequestFocus: false,
-      skipTraversal: true,
-      includeSemantics: false,
-      onKeyEvent: (_, event) {
-        final LogicalKeyboardKey open = Directionality.maybeOf(context) == .rtl ? .arrowLeft : .arrowRight;
-        if (event is KeyUpEvent || event.logicalKey != open) {
-          return .ignored;
+    (final active?, final style?) => FInheritedItemCallbacks(
+      semanticsRole: FInheritedItemCallbacks.maybeOf(context)?.semanticsRole,
+      hoverFocus: FInheritedItemCallbacks.maybeOf(context)?.hoverFocus ?? false,
+      onHoverEnter: () async {
+        _hovered = true;
+
+        final (key, hovered) = active.value;
+        active.value = (key, true);
+
+        final token = _monotonic;
+        await Future.delayed(style.hoverEnterDuration);
+
+        if (token == _monotonic && mounted) {
+          active.value = (_key, true);
+          unawaited(widget.controller.show(animated: !hovered));
         }
-
-        active.value = (_key, false);
-        unawaited(widget.controller.show());
-        // We need this as submenu we want to focus is only available in the next frame.
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) {
-            widget.focusNode?.nextFocus();
-          }
-        });
-        return .handled;
       },
-      child: FInheritedItemCallbacks(
-        semanticsRole: FInheritedItemCallbacks.maybeOf(context)?.semanticsRole,
-        hoverFocus: FInheritedItemCallbacks.maybeOf(context)?.hoverFocus ?? false,
-        onHoverEnter: () async {
-          _hovered = true;
-
-          final (key, hovered) = active.value;
-          active.value = (key, true);
-
-          final token = _monotonic;
-          await Future.delayed(style.hoverEnterDuration);
-
-          if (token == _monotonic && mounted) {
-            active.value = (_key, true);
-            unawaited(widget.controller.show(animated: !hovered));
-          }
+      onHoverExit: () {
+        _hovered = false;
+        _monotonic++;
+      },
+      onPress: _toggle,
+      onLongPress: () {
+        unawaited(style.hapticFeedback());
+        _toggle();
+      },
+      child: widget.builder(
+        context,
+        _shown,
+        {
+          const SingleActivator(.enter): const ActivateIntent(),
+          SingleActivator(Directionality.maybeOf(context) == .rtl ? .arrowLeft : .arrowRight): const ActivateIntent(),
         },
-        onHoverExit: () {
-          _hovered = false;
-          _monotonic++;
+        {
+          // Keyboard activation additionally moves focus into the submenu.
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              active.value = (_key, false);
+              unawaited(widget.controller.show());
+              // We need this as submenu we want to focus is only available in the next frame.
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  widget.focusNode?.nextFocus();
+                }
+              });
+              return null;
+            },
+          ),
         },
-        onPress: _toggle,
-        onLongPress: () {
-          unawaited(style.hapticFeedback());
-          _toggle();
-        },
-        child: widget.builder(context, _shown),
       ),
     ),
-    (_, _) => widget.builder(context, _shown),
+    (_, _) => widget.builder(context, _shown, const {}, const {}),
   };
 
   void _toggle() {

@@ -332,7 +332,7 @@ class _FSubmenuTileState extends State<FSubmenuTile> {
       builder: (_, controller, _) => SubmenuTrigger(
         controller: controller,
         focusNode: _focusNode,
-        builder: (context, shown) => FTile(
+        builder: (context, shown, shortcuts, actions) => FTile(
           variant: widget.variant,
           style: widget.style,
           enabled: widget.enabled,
@@ -347,8 +347,8 @@ class _FSubmenuTileState extends State<FSubmenuTile> {
           onDoubleTap: widget.onDoubleTap,
           onSecondaryPress: widget.onSecondaryPress,
           onSecondaryLongPress: widget.onSecondaryLongPress,
-          shortcuts: widget.shortcuts,
-          actions: widget.actions,
+          shortcuts: {...shortcuts, ...?widget.shortcuts},
+          actions: {...actions, ...?widget.actions},
           prefix: widget.prefix,
           title: widget.title,
           subtitle: widget.subtitle,

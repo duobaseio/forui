@@ -364,6 +364,64 @@ void main() {
         }
       });
 
+      testWidgets('enter on a submenu trigger opens it and focuses its first item', (tester) async {
+        await tester.pumpWidget(_contextMenuWithSubmenu());
+        await open(tester);
+
+        await focus(tester, 'Share');
+
+        await tester.sendKeyEvent(.enter);
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Email'), true);
+      });
+
+      testWidgets('enter on a hovered submenu trigger focuses its first item', (tester) async {
+        await tester.pumpWidget(_contextMenuWithSubmenu());
+        await open(tester);
+
+        final mouse = await tester.createPointerGesture();
+        await mouse.moveTo(tester.getCenter(find.text('Share')));
+        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Share'), true);
+
+        await tester.sendKeyEvent(.enter);
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Email'), true);
+      });
+
+      testWidgets('keyboard navigation closes a submenu opened by hovering its trigger', (tester) async {
+        await tester.pumpWidget(_contextMenuWithSubmenu());
+        await open(tester);
+
+        final mouse = await tester.createPointerGesture();
+        await mouse.moveTo(tester.getCenter(find.text('Share')));
+        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Share'), true);
+
+        await tester.sendKeyEvent(.arrowDown);
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsNothing);
+        expect(focused(tester, 'Paste'), true);
+      });
+
+      testWidgets('tap on a submenu trigger opens it without moving focus', (tester) async {
+        await tester.pumpWidget(_contextMenuWithSubmenu());
+        await open(tester);
+
+        await tester.tap(find.text('Share'));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        for (final text in ['Cut', 'Share', 'Paste', 'Email', 'Messages']) {
+          expect(focused(tester, text), false, reason: text);
+        }
+      });
+
       testWidgets('open key on a submenu trigger opens it and focuses its first item', (tester) async {
         await tester.pumpWidget(_contextMenuWithSubmenu());
         await open(tester);

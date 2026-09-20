@@ -551,6 +551,72 @@ void main() {
         expect(focused(tester, 'Last'), true);
       });
 
+      testWidgets('enter on a submenu trigger opens it and focuses its first item', (tester) async {
+        await tester.pumpWidget(menu());
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        await focus(tester, 'Share');
+
+        await tester.sendKeyEvent(.enter);
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Email'), true);
+      });
+
+      testWidgets('enter on a hovered submenu trigger focuses its first item', (tester) async {
+        await tester.pumpWidget(menu());
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        final mouse = await tester.createPointerGesture();
+        await mouse.moveTo(tester.getCenter(find.text('Share')));
+        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Share'), true);
+
+        await tester.sendKeyEvent(.enter);
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Email'), true);
+      });
+
+      testWidgets('keyboard navigation closes a submenu opened by hovering its trigger', (tester) async {
+        await tester.pumpWidget(menu());
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        final mouse = await tester.createPointerGesture();
+        await mouse.moveTo(tester.getCenter(find.text('Share')));
+        await tester.pump(const Duration(milliseconds: 200));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        expect(focused(tester, 'Share'), true);
+
+        await tester.sendKeyEvent(.arrowDown);
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsNothing);
+        expect(focused(tester, 'Last'), true);
+      });
+
+      testWidgets('tap on a submenu trigger opens it without moving focus', (tester) async {
+        await tester.pumpWidget(menu());
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('Share'));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+        for (final text in ['First', 'Second', 'Share', 'Last', 'Email', 'SMS']) {
+          expect(focused(tester, text), false, reason: text);
+        }
+      });
+
       for (final (direction, open, close) in [
         (TextDirection.ltr, LogicalKeyboardKey.arrowRight, LogicalKeyboardKey.arrowLeft),
         (TextDirection.rtl, LogicalKeyboardKey.arrowLeft, LogicalKeyboardKey.arrowRight),

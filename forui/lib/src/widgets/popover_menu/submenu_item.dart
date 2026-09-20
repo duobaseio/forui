@@ -337,7 +337,7 @@ class _FSubmenuItemState extends State<FSubmenuItem> {
       builder: (_, controller, _) => SubmenuTrigger(
         controller: controller,
         focusNode: _focusNode,
-        builder: (context, shown) => FItem(
+        builder: (context, shown, shortcuts, actions) => FItem(
           variant: widget.variant,
           style: widget.style,
           enabled: widget.enabled,
@@ -353,8 +353,8 @@ class _FSubmenuItemState extends State<FSubmenuItem> {
           onDoubleTap: widget.onDoubleTap,
           onSecondaryPress: widget.onSecondaryPress,
           onSecondaryLongPress: widget.onSecondaryLongPress,
-          shortcuts: widget.shortcuts,
-          actions: widget.actions,
+          shortcuts: {...shortcuts, ...?widget.shortcuts},
+          actions: {...actions, ...?widget.actions},
           prefix: widget.prefix,
           title: widget.title,
           subtitle: widget.subtitle,

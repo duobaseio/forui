@@ -472,7 +472,8 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
               autofocus: widget.autofocus ?? true,
               node: _focusNode,
               onFocusChange: widget.onFocusChange,
-              onKeyEvent: (node, event) => event is KeyUpEvent ? .ignored : (node as FocusScopeNode).navigate(event),
+              onKeyEvent: (node, event) =>
+                  event is KeyUpEvent ? .ignored : (node as FocusScopeNode).navigate(event, _active),
               child: TapRegion(
                 groupId: _groupId,
                 onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),

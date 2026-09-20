@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 
 @internal
 extension MenuNavigation on FocusScopeNode {
-  KeyEventResult navigate(KeyEvent event) {
+  KeyEventResult navigate(KeyEvent event, ValueNotifier<(Key?, bool)> active) {
     final items = ReadingOrderTraversalPolicy()
         .sortDescendants(
           traversalDescendants.where((node) => node is! FocusScopeNode && node.enclosingScope == this),
@@ -29,7 +29,10 @@ extension MenuNavigation on FocusScopeNode {
       return .ignored;
     }
 
+    // Navigating away from a submenu trigger closes its submenu.
     FocusTraversalPolicy.defaultTraversalRequestFocusCallback(items[index]);
+    active.value = (null, false);
+
     return .handled;
   }
 }

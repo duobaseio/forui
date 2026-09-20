@@ -488,7 +488,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
           return .handled;
         }
 
-        return focus.navigate(event);
+        return focus.navigate(event, _active);
       },
       child: FPopover(
         control: widget.control,
