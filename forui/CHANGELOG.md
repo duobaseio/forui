@@ -10,6 +10,13 @@
 * Add `FBreadcrumbItem.collapsedTiles(arrow: ...)`.
 
 
+### `FContextMenu`
+* Add arrow & Home/End keyboard navigation to `FContextMenu`.
+
+* Change `FContextMenu.autofocus` to default to true.
+* Change `FContextMenu` items to request focus when hovered.
+
+
 ### `FFocusedOutline`
 * **Breaking** Fix outline being painted after a pointer click when the focus highlight is off.
 

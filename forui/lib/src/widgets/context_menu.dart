@@ -10,6 +10,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
+import 'package:forui/src/widgets/popover_menu/menu_navigation.dart';
 import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 
 /// A context menu displays a menu at the user's pointer.
@@ -100,6 +101,8 @@ class FContextMenu extends StatefulWidget {
   final VoidCallback? onTapHide;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
+  ///
+  /// Defaults to true.
   final bool? autofocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
@@ -320,7 +323,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.control.create(_handleOnChange, this);
+    _controller = widget.control.create(_handleOnChange, this)..addStatusListener(_handleStatus);
     _focusNode =
         widget.focusNode ??
         .new(debugLabel: 'FContextMenu', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
@@ -351,7 +354,11 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
           .new(debugLabel: 'FContextMenu', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
     }
 
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
+    final controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
+    if (controller != _controller) {
+      _controller.removeStatusListener(_handleStatus);
+      _controller = controller..addStatusListener(_handleStatus);
+    }
     _controller.updateMotion(_style.motion);
   }
 
@@ -360,9 +367,22 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
     if (widget.focusNode == null) {
       _focusNode?.dispose();
     }
+    _controller.removeStatusListener(_handleStatus);
     widget.control.dispose(_controller, _handleOnChange);
     _active.dispose();
     super.dispose();
+  }
+
+  // FocusScope.autofocus is ignored when the enclosing scope already has a focused child, explicitly request focus once
+  // menu is available.
+  void _handleStatus(AnimationStatus status) {
+    if (status.isForwardOrCompleted && (widget.autofocus ?? true)) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          _focusNode?.requestFocus();
+        }
+      });
+    }
   }
 
   void _handleOnChange() {
@@ -448,9 +468,10 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
             label: widget.semanticsLabel,
             container: true,
             child: FocusScope(
-              autofocus: widget.autofocus ?? (style.barrierFilter != null),
+              autofocus: widget.autofocus ?? true,
               node: _focusNode,
               onFocusChange: widget.onFocusChange,
+              onKeyEvent: (node, event) => event is KeyUpEvent ? .ignored : (node as FocusScopeNode).navigate(event),
               child: TapRegion(
                 groupId: _groupId,
                 onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
@@ -465,6 +486,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
                       active: _active,
                       // The default behavior for non-submenu trigger items.
                       child: FInheritedItemCallbacks(
+                        hoverFocus: true,
                         onHoverEnter: () => _active.value = (null, false),
                         onPress: () => _active.value = (null, false),
                         onLongPress: () => _active.value = (null, false),

@@ -12,7 +12,8 @@ import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 class const SubmenuTrigger({
   required final FPopoverController controller,
   required final FocusNode? focusNode,
-  required final Widget child,
+  // ignore: avoid_positional_boolean_parameters
+  required final Widget Function(BuildContext context, bool shown) builder,
   super.key,
 }) extends StatefulWidget {
   @override
@@ -23,7 +24,8 @@ class const SubmenuTrigger({
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
-      ..add(DiagnosticsProperty('focusNode', focusNode));
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -34,6 +36,24 @@ class _State extends State<SubmenuTrigger> {
   FPopoverMenuStyle? _style;
   int _monotonic = 0;
   bool _hovered = false;
+  late bool _shown;
+
+  @override
+  void initState() {
+    super.initState();
+    _shown = widget.controller.status.isForwardOrCompleted;
+    widget.controller.addStatusListener(_handleStatus);
+  }
+
+  @override
+  void didUpdateWidget(covariant SubmenuTrigger old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      old.controller.removeStatusListener(_handleStatus);
+      widget.controller.addStatusListener(_handleStatus);
+      _shown = widget.controller.status.isForwardOrCompleted;
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -56,7 +76,16 @@ class _State extends State<SubmenuTrigger> {
   void dispose() {
     _active?.removeListener(_handleSiblingShow);
     _parent?.removeStatusListener(_handleParentHide);
+    widget.controller.removeStatusListener(_handleStatus);
     super.dispose();
+  }
+
+  // Controller only notifies after animation completes but we need to be notified before animation starts to avoid
+  // the trigger from flashing.
+  void _handleStatus(AnimationStatus status) {
+    if (_shown != status.isForwardOrCompleted) {
+      setState(() => _shown = status.isForwardOrCompleted);
+    }
   }
 
   // Hide this submenu without animation when a sibling becomes active, so rapid switches between siblings don't
@@ -123,10 +152,10 @@ class _State extends State<SubmenuTrigger> {
           unawaited(style.hapticFeedback());
           _toggle();
         },
-        child: widget.child,
+        child: widget.builder(context, _shown),
       ),
     ),
-    (_, _) => widget.child,
+    (_, _) => widget.builder(context, _shown),
   };
 
   void _toggle() {

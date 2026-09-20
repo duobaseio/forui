@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -10,6 +9,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/popover_menu/menu_navigation.dart';
 
 part 'popover_menu.design.dart';
 
@@ -480,30 +480,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
           return .handled;
         }
 
-        final items = ReadingOrderTraversalPolicy()
-            .sortDescendants(
-              focus.traversalDescendants.where((node) => node is! FocusScopeNode && node.enclosingScope == focus),
-              focus,
-            )
-            .toList();
-        if (items.isEmpty) {
-          return .ignored;
-        }
-
-        final current = items.indexWhere((node) => node.hasFocus);
-        final index = switch (event.logicalKey) {
-          .home => 0,
-          .end => items.length - 1,
-          .arrowUp => (max(current, 0) - 1) % items.length,
-          .arrowDown => (current + 1) % items.length,
-          _ => null,
-        };
-        if (index == null) {
-          return .ignored;
-        }
-
-        FocusTraversalPolicy.defaultTraversalRequestFocusCallback(items[index]);
-        return .handled;
+        return focus.navigate(event);
       },
       child: FPopover(
         control: widget.control,
