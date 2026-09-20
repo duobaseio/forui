@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -8,15 +9,21 @@ import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 
 @internal
-class const SubmenuTrigger({required final FPopoverController controller, required final Widget child, super.key})
-    extends StatefulWidget {
+class const SubmenuTrigger({
+  required final FPopoverController controller,
+  required final FocusNode? focusNode,
+  required final Widget child,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<SubmenuTrigger> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', controller));
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('focusNode', focusNode));
   }
 }
 
@@ -71,31 +78,53 @@ class _State extends State<SubmenuTrigger> {
 
   @override
   Widget build(BuildContext context) => switch ((_active, _style)) {
-    (final active?, final style?) => FInheritedItemCallbacks(
-      onHoverEnter: () async {
-        _hovered = true;
-
-        final (key, hovered) = active.value;
-        active.value = (key, true);
-
-        final token = _monotonic;
-        await Future.delayed(style.hoverEnterDuration);
-
-        if (token == _monotonic && mounted) {
-          active.value = (_key, true);
-          unawaited(widget.controller.show(animated: !hovered));
+    (final active?, final style?) => Focus(
+      canRequestFocus: false,
+      skipTraversal: true,
+      includeSemantics: false,
+      onKeyEvent: (_, event) {
+        final LogicalKeyboardKey open = Directionality.maybeOf(context) == .rtl ? .arrowLeft : .arrowRight;
+        if (event is KeyUpEvent || event.logicalKey != open) {
+          return .ignored;
         }
+
+        active.value = (_key, false);
+        unawaited(widget.controller.show());
+        // We need this as submenu we want to focus is only available in the next frame.
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) {
+            widget.focusNode?.nextFocus();
+          }
+        });
+        return .handled;
       },
-      onHoverExit: () {
-        _hovered = false;
-        _monotonic++;
-      },
-      onPress: _toggle,
-      onLongPress: () {
-        unawaited(style.hapticFeedback());
-        _toggle();
-      },
-      child: widget.child,
+      child: FInheritedItemCallbacks(
+        hoverFocus: FInheritedItemCallbacks.maybeOf(context)?.hoverFocus ?? false,
+        onHoverEnter: () async {
+          _hovered = true;
+
+          final (key, hovered) = active.value;
+          active.value = (key, true);
+
+          final token = _monotonic;
+          await Future.delayed(style.hoverEnterDuration);
+
+          if (token == _monotonic && mounted) {
+            active.value = (_key, true);
+            unawaited(widget.controller.show(animated: !hovered));
+          }
+        },
+        onHoverExit: () {
+          _hovered = false;
+          _monotonic++;
+        },
+        onPress: _toggle,
+        onLongPress: () {
+          unawaited(style.hapticFeedback());
+          _toggle();
+        },
+        child: widget.child,
+      ),
     ),
     (_, _) => widget.child,
   };

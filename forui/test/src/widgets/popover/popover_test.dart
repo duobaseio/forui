@@ -648,15 +648,18 @@ void main() {
       expect(inside.hasFocus, false);
     });
 
-    testWidgets('escape on the trigger dismisses the popover', (tester) async {
+    testWidgets('escape dismisses the popover and returns focus to childFocusNode', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester, shown: true));
       final trigger = autoDispose(FocusNode());
+      final inside = autoDispose(FocusNode());
 
       await tester.pumpWidget(
         TestScaffold.app(
           child: FPopover(
-            control: const .managed(initial: true),
+            control: .managed(controller: controller),
             autofocus: false,
-            popoverBuilder: (_, _) => const Text('content'),
+            childFocusNode: trigger,
+            popoverBuilder: (_, _) => FButton(focusNode: inside, onPress: () {}, child: const Text('inside')),
             child: Focus(
               focusNode: trigger,
               child: Container(color: Colors.black, height: 10, width: 10),
@@ -669,13 +672,24 @@ void main() {
       trigger.requestFocus();
       await tester.pump();
 
-      expect(find.text('content'), findsOneWidget);
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle();
+
+      expect(find.text('inside'), findsNothing);
       expect(trigger.hasFocus, true);
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      inside.requestFocus();
+      await tester.pump();
+      expect(inside.hasFocus, true);
 
       await tester.sendKeyEvent(.escape);
       await tester.pumpAndSettle();
 
-      expect(find.text('content'), findsNothing);
+      expect(find.text('inside'), findsNothing);
+      expect(trigger.hasFocus, true);
     });
 
     testWidgets('escape on the trigger is not consumed when the popover is closed', (tester) async {

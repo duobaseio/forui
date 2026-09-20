@@ -338,6 +338,30 @@ void main() {
       );
     });
 
+    group('hoverFocus', () {
+      for (final hoverFocus in [true, false]) {
+        testWidgets('$hoverFocus', (tester) async {
+          final focus = autoDispose(FocusNode());
+          await tester.pumpWidget(
+            TestScaffold(
+              child: FTappable(hoverFocus: hoverFocus, focusNode: focus, onPress: () {}, child: const Text('tappable')),
+            ),
+          );
+
+          final gesture = await tester.createPointerGesture();
+          await tester.pump();
+
+          await gesture.moveTo(tester.getCenter(find.text('tappable')));
+          await tester.pumpAndSettle();
+          expect(focus.hasFocus, hoverFocus);
+
+          await gesture.moveTo(.zero);
+          await tester.pumpAndSettle();
+          expect(focus.hasFocus, false);
+        });
+      }
+    });
+
     testWidgets('platform change', (tester) async {
       late StateSetter setState;
       FPlatformVariant platform = .macOS;

@@ -92,12 +92,16 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
+  /// {@template forui.foundation.FTappable.hoverFocus}
+  /// Whether hovering focuses this tappable. Defaults to false.
+  /// {@endtemplate}
+  final bool hoverFocus;
+
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
 
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
-
   /// {@template forui.foundation.FTappable.onHoverChange}
   /// Handler called when the hover changes.
   ///
@@ -350,6 +354,7 @@ class FTappable extends StatefulWidget {
     bool? semanticsInMutuallyExclusiveGroup,
     bool excludeSemantics,
     bool autofocus,
+    bool hoverFocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
@@ -406,6 +411,7 @@ class FTappable extends StatefulWidget {
     this.semanticsInMutuallyExclusiveGroup,
     this.excludeSemantics = false,
     this.autofocus = false,
+    this.hoverFocus = false,
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
@@ -467,6 +473,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('semanticsInMutuallyExclusiveGroup', semanticsInMutuallyExclusiveGroup))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(FlagProperty('hoverFocus', value: hoverFocus, ifTrue: 'hoverFocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
@@ -733,13 +740,19 @@ class _FTappableState<T extends FTappable> extends State<T> {
             child: MouseRegion(
               cursor: _style.cursor.resolve(_current),
               onEnter: (_) {
+                if (widget.hoverFocus) {
+                  _focus.requestFocus();
+                }
                 setState(() => _update(.hovered, true));
                 widget.onHoverChange?.call(true);
               },
-              onExit: (_) => setState(() {
-                _update(.hovered, false);
+              onExit: (_) {
+                if (widget.hoverFocus) {
+                  _focus.unfocus();
+                }
+                setState(() => _update(.hovered, false));
                 widget.onHoverChange?.call(false);
-              }),
+              },
               // When in a group, the group's gesture recognizer handles primary press/long-press.
               // The Listener and primary GestureDetector callbacks are nullified.
               //
@@ -914,6 +927,7 @@ class const AnimatedTappable({
   super.semanticsInMutuallyExclusiveGroup,
   super.excludeSemantics,
   super.autofocus,
+  super.hoverFocus,
   super.focusNode,
   super.onFocusChange,
   super.onHoverChange,

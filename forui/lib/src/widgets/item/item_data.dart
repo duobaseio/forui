@@ -48,6 +48,9 @@ class FInheritedItemCallbacks extends InheritedWidget {
   static FInheritedItemCallbacks? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<FInheritedItemCallbacks>();
 
+  /// Whether hovering an item focuses it. Defaults to false.
+  final bool hoverFocus;
+
   /// Called when the pointer enters the item.
   final VoidCallback? onHoverEnter;
 
@@ -61,10 +64,19 @@ class FInheritedItemCallbacks extends InheritedWidget {
   final VoidCallback? onLongPress;
 
   /// Creates a [FInheritedItemCallbacks].
-  const new({required super.child, super.key, this.onHoverEnter, this.onHoverExit, this.onPress, this.onLongPress});
+  const new({
+    required super.child,
+    super.key,
+    this.hoverFocus = false,
+    this.onHoverEnter,
+    this.onHoverExit,
+    this.onPress,
+    this.onLongPress,
+  });
 
   @override
   bool updateShouldNotify(FInheritedItemCallbacks old) =>
+      hoverFocus != old.hoverFocus ||
       onHoverEnter != old.onHoverEnter ||
       onHoverExit != old.onHoverExit ||
       onPress != old.onPress ||
@@ -74,6 +86,7 @@ class FInheritedItemCallbacks extends InheritedWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(FlagProperty('hoverFocus', value: hoverFocus, ifTrue: 'hoverFocus'))
       ..add(ObjectFlagProperty.has('onHoverEnter', onHoverEnter))
       ..add(ObjectFlagProperty.has('onHoverExit', onHoverExit))
       ..add(ObjectFlagProperty.has('onPress', onPress))

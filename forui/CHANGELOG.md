@@ -18,6 +18,7 @@
 * Add `FItem.semanticsButton`.
 * Add `FItem.semanticsChecked`.
 * Add `FItem.semanticsInMutuallyExclusiveGroup`.
+* Add `FInheritedItemCallbacks.hoverFocus`.
 
 * Fix `FItem` advertising a no-op tap action to screen readers.
 * Fix `FItem` long-press action not exposed to screen readers when inside a group.
@@ -40,14 +41,18 @@
 
 ### `FPopover`
 * Add `FPopover.arrow`.
+* Add `FPopover.childFocusNode`.
 * Add `FPopoverStyle.arrowStyle`.
 
 
 ### `FPopoverMenu`
 * Add `FPopoverMenu.arrow`.
+* Add `FPopoverMenu.childFocusNode`.
 * Add `FSubmenuItem.submenuArrow`
 * Add `FSubmenuTile.submenuArrow`.
+* Add arrow & Home/End keyboard navigation to `FPopoverMenu`.
 
+* Change `FPopoverMenu` items to request focus when hovered.
 * Change focused items and tiles to use the hovered appearance.
 
 
@@ -85,6 +90,7 @@
 
 ### `FTappable`
 * Add `FTappable.semanticsContainer`.
+* Add `FTappable.hoverFocus`.
 
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
 
