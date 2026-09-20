@@ -276,7 +276,11 @@ class FPopoverMenu extends StatefulWidget {
     this.builder = FPopover.defaultBuilder,
     this.child,
     super.key,
-  }) : _menuBuilder = ((context, controller, style) => FItemGroup.merge(
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'Cannot provide both focusNode and traversalEdgeBehavior',
+       ),
+       _menuBuilder = ((context, controller, style) => FItemGroup.merge(
          scrollController: scrollController,
          scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
@@ -346,7 +350,11 @@ class FPopoverMenu extends StatefulWidget {
     this.builder = FPopover.defaultBuilder,
     this.child,
     super.key,
-  }) : _menuBuilder = ((context, controller, style) => FTileGroup.merge(
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'Cannot provide both focusNode and traversalEdgeBehavior',
+       ),
+       _menuBuilder = ((context, controller, style) => FTileGroup.merge(
          scrollController: scrollController,
          scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
@@ -500,7 +508,6 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
         focusNode: _focusNode,
         childFocusNode: widget.childFocusNode,
         onFocusChange: widget.onFocusChange,
-        traversalEdgeBehavior: widget.traversalEdgeBehavior,
         barrierSemanticsLabel: widget.barrierSemanticsLabel,
         barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
         cutout: widget.cutout,
