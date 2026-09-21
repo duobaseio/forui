@@ -30,6 +30,7 @@ final popover = FPopover(
   // {@category "Accessibility"}
   autofocus: null,
   focusNode: null,
+  childFocusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Popover',
   traversalEdgeBehavior: null,

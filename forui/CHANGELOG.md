@@ -1,5 +1,8 @@
 ## 0.27.0
 
+This update ships a refreshed tooltip & support for adding arrows to context menus and popovers. In addition, substantial 
+accessibility improvements and bug fixes have been made.
+
 ### `FAvatar`
 * Fix `semanticsLabel` not being announced while the image is loading or has failed to load.
 * Fix the fallback being clipped at large text scales.

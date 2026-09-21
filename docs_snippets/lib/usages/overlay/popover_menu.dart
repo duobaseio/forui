@@ -37,6 +37,7 @@ final popoverMenu = FPopoverMenu(
   // {@category "Accessibility"}
   autofocus: null,
   focusNode: null,
+  childFocusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Menu',
   traversalEdgeBehavior: null,
@@ -94,6 +95,7 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Accessibility"}
   autofocus: null,
   focusNode: null,
+  childFocusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Menu',
   traversalEdgeBehavior: null,

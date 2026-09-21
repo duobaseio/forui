@@ -7,6 +7,7 @@ final tappable = FTappable(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
+  hoverFocus: false,
   onFocusChange: (focused) {},
   semanticsLabel: 'Tappable button',
   semanticsHint: null,
@@ -16,6 +17,7 @@ final tappable = FTappable(
   semanticsChecked: null,
   semanticsExpanded: null,
   semanticsInMutuallyExclusiveGroup: null,
+  semanticsRole: null,
   excludeSemantics: false,
   shortcuts: null,
   actions: null,
@@ -68,6 +70,7 @@ final tappableStatic = FTappable.static(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
+  hoverFocus: false,
   onFocusChange: (focused) {},
   semanticsLabel: 'Tappable button',
   semanticsHint: null,
@@ -77,6 +80,7 @@ final tappableStatic = FTappable.static(
   semanticsChecked: null,
   semanticsExpanded: null,
   semanticsInMutuallyExclusiveGroup: null,
+  semanticsRole: null,
   excludeSemantics: false,
   shortcuts: null,
   actions: null,
