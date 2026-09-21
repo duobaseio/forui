@@ -15,6 +15,10 @@ import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 
 /// A context menu displays a menu at the user's pointer.
 ///
+/// ## Keyboard
+/// Shift+F10 (Control+Return on macOS) or the menu key opens the menu below the focused descendant of [child]. A [child]
+/// with no focusable descendants cannot be opened by keyboard.
+///
 /// ## Note
 /// [BrowserContextMenu.disableContextMenu] needs to be called manually on web platforms to prevent the browser's native
 /// context menu from appearing.
@@ -435,120 +439,146 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
       );
     }
 
-    return BackdropGroup(
-      child: FPointPortal(
-        control: .managed(controller: _controller.overlay),
-        point: _point,
-        anchor: menuAnchor,
-        constraints: BoxConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
-        spacing: widget.spacing,
-        overflow: widget.overflow,
-        offset: widget.offset,
-        useViewPadding: widget.useViewPadding,
-        useViewInsets: widget.useViewInsets,
-        overlayLocation: widget.overlayLocation,
-        padding: style.popoverPadding,
-        barrier: style.barrierFilter == null
-            ? null
-            : (cutout) => TapRegion(
-                groupId: widget.groupId,
-                child: FAnimatedModalBarrier(
-                  cutout: widget.cutout ? cutout : null,
-                  cutoutBuilder: widget.cutoutBuilder,
-                  animation: _controller.fade,
-                  filter: style.barrierFilter!,
-                  semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
-                  barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
-                  semanticsOnTapHint: localizations.barrierOnTapHint(localizations.contextMenuSemanticsLabel),
-                  onDismiss: widget.hideRegion == .none ? null : _hide,
+    return Shortcuts(
+      shortcuts: {
+        if (defaultTargetPlatform == .macOS)
+          const SingleActivator(.enter, control: true): const _ShowIntent()
+        else
+          const SingleActivator(.f10, shift: true): const _ShowIntent(),
+        const SingleActivator(.contextMenu): const _ShowIntent(),
+        const SingleActivator(.escape): const _HideIntent(),
+      },
+      child: Actions(
+        actions: {
+          // Keyboard-opened menus are anchored to the focused widget, matching Win32, AppKit and GTK.
+          _ShowIntent: _Action<_ShowIntent>(() => _controller.status.isDismissed, () {
+            if (context.findRenderObject() case final RenderBox box) {
+              _show(switch (FocusManager.instance.primaryFocus?.rect) {
+                final rect? when !rect.isEmpty => box.globalToLocal(
+                  direction == .ltr ? rect.bottomLeft : rect.bottomRight,
                 ),
-              ),
-        portalBuilder: (context, _) {
-          Widget popover = Semantics(
-            label: widget.semanticsLabel,
-            container: true,
-            role: .menu,
-            child: FocusScope(
-              autofocus: widget.autofocus ?? true,
-              node: _focusNode,
-              onFocusChange: widget.onFocusChange,
-              onKeyEvent: (node, event) =>
-                  event is KeyUpEvent ? .ignored : (node as FocusScopeNode).navigate(event, _active),
-              child: TapRegion(
-                groupId: _groupId,
-                onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
-                child: DecoratedBox(
-                  decoration: style.decoration,
-                  child: ClipPath(
-                    clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
-                    child: PopoverMenuScope(
-                      controller: _controller,
-                      style: style,
-                      groupId: _groupId,
-                      active: _active,
-                      // The default behavior for non-submenu trigger items.
-                      child: FInheritedItemCallbacks(
-                        semanticsRole: .menuItem,
-                        hoverFocus: true,
-                        onHoverEnter: () => _active.value = (null, false),
-                        onPress: () => _active.value = (null, false),
-                        onLongPress: () => _active.value = (null, false),
-                        // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from
-                        // accidentally leaking into the popover menu's items.
-                        //
-                        // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
-                        child: FInheritedItemData(
-                          child: ValueListenableBuilder(
-                            valueListenable: _active,
-                            builder: (_, value, child) => AnimatedOpacity(
-                              opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
-                              duration: style.menuMotion.fadeDuration,
-                              curve: style.menuMotion.fadeCurve,
-                              child: child,
+                _ => box.size.center(.zero),
+              });
+            }
+          }),
+          _HideIntent: _Action<_HideIntent>(() => _controller.status.isForwardOrCompleted, _hide),
+        },
+        child: BackdropGroup(
+          child: FPointPortal(
+            control: .managed(controller: _controller.overlay),
+            point: _point,
+            anchor: menuAnchor,
+            constraints: BoxConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
+            spacing: widget.spacing,
+            overflow: widget.overflow,
+            offset: widget.offset,
+            useViewPadding: widget.useViewPadding,
+            useViewInsets: widget.useViewInsets,
+            overlayLocation: widget.overlayLocation,
+            padding: style.popoverPadding,
+            barrier: style.barrierFilter == null
+                ? null
+                : (cutout) => TapRegion(
+                    groupId: widget.groupId,
+                    child: FAnimatedModalBarrier(
+                      cutout: widget.cutout ? cutout : null,
+                      cutoutBuilder: widget.cutoutBuilder,
+                      animation: _controller.fade,
+                      filter: style.barrierFilter!,
+                      semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
+                      barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+                      semanticsOnTapHint: localizations.barrierOnTapHint(localizations.contextMenuSemanticsLabel),
+                      onDismiss: widget.hideRegion == .none ? null : _hide,
+                    ),
+                  ),
+            portalBuilder: (context, _) {
+              Widget popover = Semantics(
+                label: widget.semanticsLabel,
+                container: true,
+                role: .menu,
+                child: FocusScope(
+                  autofocus: widget.autofocus ?? true,
+                  node: _focusNode,
+                  onFocusChange: widget.onFocusChange,
+                  onKeyEvent: (node, event) =>
+                      event is KeyUpEvent ? .ignored : (node as FocusScopeNode).navigate(event, _active),
+                  child: TapRegion(
+                    groupId: _groupId,
+                    onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
+                    child: DecoratedBox(
+                      decoration: style.decoration,
+                      child: ClipPath(
+                        clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                        child: PopoverMenuScope(
+                          controller: _controller,
+                          style: style,
+                          groupId: _groupId,
+                          active: _active,
+                          // The default behavior for non-submenu trigger items.
+                          child: FInheritedItemCallbacks(
+                            semanticsRole: .menuItem,
+                            hoverFocus: true,
+                            onHoverEnter: () => _active.value = (null, false),
+                            onPress: () => _active.value = (null, false),
+                            onLongPress: () => _active.value = (null, false),
+                            // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from
+                            // accidentally leaking into the popover menu's items.
+                            //
+                            // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
+                            child: FInheritedItemData(
+                              child: ValueListenableBuilder(
+                                valueListenable: _active,
+                                builder: (_, value, child) => AnimatedOpacity(
+                                  opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
+                                  duration: style.menuMotion.fadeDuration,
+                                  curve: style.menuMotion.fadeCurve,
+                                  child: child,
+                                ),
+                                child: widget._menuBuilder(context, _controller, style),
+                              ),
                             ),
-                            child: widget._menuBuilder(context, _controller, style),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            ),
-          );
+              );
 
-          if (motion != .disabled) {
-            popover = FadeTransition(opacity: _controller.fade, child: popover);
-          }
+              if (motion != .disabled) {
+                popover = FadeTransition(opacity: _controller.fade, child: popover);
+              }
 
-          if (motion == .all) {
-            popover = ScaleTransition(alignment: menuAnchor, scale: _controller.scale, child: popover);
-          }
+              if (motion == .all) {
+                popover = ScaleTransition(alignment: menuAnchor, scale: _controller.scale, child: popover);
+              }
 
-          // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
-          if (style.backgroundFilter case final filter?) {
-            // Confine the filter to the decoration: `.passthrough` matches its size, `ClipPath` its rounded shape.
-            popover = Stack(
-              fit: .passthrough,
-              children: [
-                Positioned.fill(
-                  child: ClipPath(
-                    clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
-                    child: AnimatedBuilder(
-                      animation: _controller.fade,
-                      builder: (context, _) =>
-                          BackdropFilter(filter: filter(context, _controller.fade.value), child: Container()),
+              // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
+              if (style.backgroundFilter case final filter?) {
+                // Confine the filter to the decoration: `.passthrough` matches its size, `ClipPath` its rounded shape.
+                popover = Stack(
+                  fit: .passthrough,
+                  children: [
+                    Positioned.fill(
+                      child: ClipPath(
+                        clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                        child: AnimatedBuilder(
+                          animation: _controller.fade,
+                          builder: (context, _) =>
+                              BackdropFilter(filter: filter(context, _controller.fade.value), child: Container()),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                popover,
-              ],
-            );
-          }
+                    popover,
+                  ],
+                );
+              }
 
-          return CallbackShortcuts(bindings: {const SingleActivator(.escape): _hide}, child: popover);
-        },
-        child: child,
+              return popover;
+            },
+            child: child,
+          ),
+        ),
       ),
     );
   }
@@ -563,5 +593,25 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
       _controller.hide();
       widget.onTapHide?.call();
     }
+  }
+}
+
+class const _ShowIntent() extends Intent;
+
+class const _HideIntent() extends Intent;
+
+class _Action<T extends Intent>(final bool Function() enabled, final VoidCallback onInvoke) extends Action<T> {
+  @override
+  bool isEnabled(T intent, [BuildContext? context]) => enabled();
+
+  @override
+  void invoke(T intent) => onInvoke();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty.has('enabled', enabled))
+      ..add(ObjectFlagProperty.has('onInvoke', onInvoke));
   }
 }

@@ -13,6 +13,7 @@
 ### `FContextMenu`
 * Add arrow & Home/End keyboard navigation to `FContextMenu`.
 * Add menu & menu item semantics roles to `FContextMenu`.
+* Add Shift+F10 (Control+Return on macOS) & menu key shortcuts to open `FContextMenu`.
 
 * Change `FContextMenu.autofocus` to default to true.
 * Change `FContextMenu` items to request focus when hovered.

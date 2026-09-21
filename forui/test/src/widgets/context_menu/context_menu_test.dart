@@ -484,6 +484,166 @@ void main() {
       });
     });
 
+    group('keyboard open', () {
+      Widget menu({TextDirection? textDirection, AlignmentGeometry menuAnchor = .topLeft, bool? autofocus}) =>
+          TestScaffold.app(
+            textDirection: textDirection,
+            child: FContextMenu(
+              secondaryPress: true,
+              menuAnchor: menuAnchor,
+              autofocus: autofocus,
+              menu: [
+                FItemGroup(
+                  children: [FItem(title: const Text('Cut'), onPress: () {})],
+                ),
+              ],
+              child: SizedBox.square(
+                dimension: 200,
+                child: Align(
+                  alignment: .topLeft,
+                  child: FButton(onPress: () {}, child: const Text('Button')),
+                ),
+              ),
+            ),
+          );
+
+      Future<void> press(WidgetTester tester, LogicalKeyboardKey key, {LogicalKeyboardKey? modifier}) async {
+        if (modifier != null) {
+          await tester.sendKeyDownEvent(modifier);
+        }
+        await tester.sendKeyEvent(key);
+        if (modifier != null) {
+          await tester.sendKeyUpEvent(modifier);
+        }
+        await tester.pumpAndSettle();
+      }
+
+      Future<void> shiftF10(WidgetTester tester) => press(tester, LogicalKeyboardKey.f10, modifier: .shiftLeft);
+
+      const nonMac = TargetPlatformVariant({.windows, .linux, .android});
+
+      for (final (name, key, modifier, variant) in [
+        ('Shift+F10', LogicalKeyboardKey.f10, LogicalKeyboardKey.shiftLeft, nonMac),
+        ('Menu', LogicalKeyboardKey.contextMenu, null, TargetPlatformVariant.all()),
+        (
+          'Control+Return',
+          LogicalKeyboardKey.enter,
+          LogicalKeyboardKey.controlLeft,
+          TargetPlatformVariant.only(.macOS),
+        ),
+      ]) {
+        testWidgets('$name opens menu', (tester) async {
+          await tester.pumpWidget(menu());
+          await focus(tester, 'Button');
+
+          await press(tester, key, modifier: modifier);
+          expect(find.text('Cut'), findsOneWidget);
+        }, variant: variant);
+      }
+
+      for (final (name, key, modifier, variant) in [
+        ('Shift+F10', LogicalKeyboardKey.f10, LogicalKeyboardKey.shiftLeft, TargetPlatformVariant.only(.macOS)),
+        ('Control+Return', LogicalKeyboardKey.enter, LogicalKeyboardKey.controlLeft, nonMac),
+        ('F10', LogicalKeyboardKey.f10, null, TargetPlatformVariant.all()),
+      ]) {
+        testWidgets('$name does not open menu', (tester) async {
+          await tester.pumpWidget(menu());
+          await focus(tester, 'Button');
+
+          await press(tester, key, modifier: modifier);
+          expect(find.text('Cut'), findsNothing);
+        }, variant: variant);
+      }
+
+      testWidgets('does not open without a focused descendant', (tester) async {
+        await tester.pumpWidget(_contextMenu(secondaryPress: true));
+
+        await shiftF10(tester);
+        expect(find.text('Cut'), findsNothing);
+      }, variant: nonMac);
+
+      testWidgets('positions menu at bottom-left of focused widget', (tester) async {
+        await tester.pumpWidget(menu());
+        await focus(tester, 'Button');
+
+        await shiftF10(tester);
+
+        final button = tester.getRect(find.byType(FButton));
+        final group = tester.getRect(find.byType(FItemGroup).first);
+        expect(group.left, closeTo(button.left, 1));
+        expect(group.top, closeTo(button.bottom, 1));
+      }, variant: nonMac);
+
+      testWidgets('positions menu at bottom-right of focused widget in RTL', (tester) async {
+        await tester.pumpWidget(menu(textDirection: .rtl, menuAnchor: AlignmentDirectional.topStart));
+        await focus(tester, 'Button');
+
+        await shiftF10(tester);
+
+        final button = tester.getRect(find.byType(FButton));
+        final group = tester.getRect(find.byType(FItemGroup).first);
+        expect(group.right, closeTo(button.right, 1));
+        expect(group.top, closeTo(button.bottom, 1));
+      }, variant: nonMac);
+
+      testWidgets('focuses menu and restores focus on Escape', (tester) async {
+        await tester.pumpWidget(menu());
+        await focus(tester, 'Button');
+
+        await shiftF10(tester);
+        await press(tester, LogicalKeyboardKey.arrowDown);
+        expect(focused(tester, 'Cut'), true);
+
+        await press(tester, LogicalKeyboardKey.escape);
+        expect(find.text('Cut'), findsNothing);
+        expect(focused(tester, 'Button'), true);
+      }, variant: nonMac);
+
+      testWidgets('Escape on trigger hides menu when autofocus is false', (tester) async {
+        await tester.pumpWidget(menu(autofocus: false));
+        await focus(tester, 'Button');
+
+        await shiftF10(tester);
+        expect(find.text('Cut'), findsOneWidget);
+        expect(focused(tester, 'Button'), true);
+
+        await press(tester, LogicalKeyboardKey.escape);
+        expect(find.text('Cut'), findsNothing);
+      }, variant: nonMac);
+
+      testWidgets('open key is ignored while menu is hiding', (tester) async {
+        await tester.pumpWidget(menu());
+        await focus(tester, 'Button');
+
+        await shiftF10(tester);
+        await press(tester, LogicalKeyboardKey.arrowDown);
+        expect(focused(tester, 'Cut'), true);
+
+        // Mid hide animation, focus is still inside the menu.
+        await tester.sendKeyEvent(LogicalKeyboardKey.escape);
+        await tester.pump(const Duration(milliseconds: 50));
+        expect(focused(tester, 'Cut'), true);
+
+        await shiftF10(tester);
+        expect(find.text('Cut'), findsNothing);
+        expect(focused(tester, 'Button'), true);
+      }, variant: nonMac);
+
+      testWidgets('open key is ignored while menu is open', (tester) async {
+        await tester.pumpWidget(menu());
+        await focus(tester, 'Button');
+
+        await shiftF10(tester);
+        await press(tester, LogicalKeyboardKey.arrowDown);
+        final before = tester.getRect(find.byType(FItemGroup).first);
+
+        await shiftF10(tester);
+        expect(find.text('Cut'), findsOneWidget);
+        expect(tester.getRect(find.byType(FItemGroup).first), before);
+        expect(focused(tester, 'Cut'), true);
+      }, variant: nonMac);
+    });
+
     testWidgets('menu & item roles', (tester) async {
       final semantics = tester.ensureSemantics();
 
