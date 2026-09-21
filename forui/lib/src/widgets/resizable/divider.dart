@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -50,7 +51,12 @@ sealed class Divider extends StatefulWidget {
     required bool focused,
     required ValueChanged<bool> onFocusChange,
   }) => Semantics(
+    slider: true,
     value: semanticFormatterCallback(controller.regions[left], controller.regions[right]),
+    increasedValue: _describe(resizePercentage),
+    decreasedValue: _describe(-resizePercentage),
+    onIncrease: () => _resize(resizePercentage),
+    onDecrease: () => _resize(-resizePercentage),
     child: FocusableActionDetector(
       mouseCursor: cursor,
       shortcuts: shortcuts,
@@ -58,19 +64,13 @@ sealed class Divider extends StatefulWidget {
       actions: {
         _Up: CallbackAction(
           onInvoke: (_) {
-            final delta = -resizePercentage * (controller.regions[left].extent.total);
-            if (controller.update(left, right, delta)) {
-              unawaited(style.hapticFeedback());
-            }
+            _resize(-resizePercentage);
             return null;
           },
         ),
         _Down: CallbackAction(
           onInvoke: (_) {
-            final delta = resizePercentage * (controller.regions[left].extent.total);
-            if (controller.update(left, right, delta)) {
-              unawaited(style.hapticFeedback());
-            }
+            _resize(resizePercentage);
             return null;
           },
         ),
@@ -82,6 +82,21 @@ sealed class Divider extends StatefulWidget {
       ),
     ),
   );
+
+  String _describe(double percentage) {
+    final resized = controller.resize(left, right, percentage * controller.regions[left].extent.total);
+    return semanticFormatterCallback(
+      resized.firstWhereOrNull((r) => r.index == left) ?? controller.regions[left],
+      resized.firstWhereOrNull((r) => r.index == right) ?? controller.regions[right],
+    );
+  }
+
+  void _resize(double percentage) {
+    if (controller.update(left, right, percentage * controller.regions[left].extent.total)) {
+      unawaited(style.hapticFeedback());
+    }
+    controller.end(left, right);
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

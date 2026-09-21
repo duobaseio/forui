@@ -35,7 +35,7 @@ part 'resizable.design.dart';
 class FResizable extends StatefulWidget {
   /// The default semantic label formatter that announces the extents of both regions.
   static String defaultSemanticFormatterCallback(FResizableRegionData left, FResizableRegionData right) =>
-      '${left.extent.current}, ${right.extent.current}';
+      '${left.extent.current.round()}, ${right.extent.current.round()}';
 
   /// The control that manages the resizing of regions. Defaults to [FResizableControl.managedCascade].
   final FResizableControl control;

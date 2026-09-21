@@ -67,6 +67,12 @@
 * Change focused items and tiles to use the hovered appearance.
 
 
+### `FResizable`
+* Fix divider not being resizable by screen readers.
+* Fix keyboard resizing not calling `onResizeEnd`.
+* Fix default semantic value announcing unrounded extents.
+
+
 ### `FSelect` & `FMultiSelect`
 * Add Backspace to clear a clearable `FSelect` while its field is focused.
 * Add Backspace to remove the last tag while a `FMultiSelect` field is focused.
