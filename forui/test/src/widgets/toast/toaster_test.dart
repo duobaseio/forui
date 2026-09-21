@@ -227,9 +227,7 @@ void main() {
   testWidgets('press pauses again after all toasts are swiped away while paused', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: FToaster(
-          child: Center(child: small('1', 'button', .bottomCenter)),
-        ),
+        child: FToaster(child: Center(child: small('1', 'button', .bottomCenter))),
       ),
     );
 
@@ -532,9 +530,7 @@ void main() {
     expect(find.text('1'), findsNothing);
   });
 
-  testWidgets('FToasterEntry.dismiss before entrance animation starts removes the toast without error', (
-    tester,
-  ) async {
+  testWidgets('FToasterEntry.dismiss before entrance animation starts removes the toast without error', (tester) async {
     late BuildContext toasterContext;
     await tester.pumpWidget(
       TestScaffold(
