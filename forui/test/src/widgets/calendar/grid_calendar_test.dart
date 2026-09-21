@@ -585,4 +585,58 @@ void main() {
       semantics.dispose();
     });
   });
+
+  group('focus traversal', () {
+    late FocusNode before;
+    late FocusNode after;
+
+    setUp(() {
+      before = FocusNode(debugLabel: 'before');
+      after = FocusNode(debugLabel: 'after');
+    });
+
+    tearDown(() {
+      before.dispose();
+      after.dispose();
+    });
+
+    Widget surrounded() => TestScaffold.app(
+      child: Column(
+        children: [
+          Focus(focusNode: before, child: const SizedBox.square(dimension: 10)),
+          FCalendar.grid(selectionControl: .managedSingle(), control: control()),
+          Focus(focusNode: after, child: const SizedBox.square(dimension: 10)),
+        ],
+      ),
+    );
+
+    testWidgets('tab leaves the calendar', (tester) async {
+      await tester.pumpWidget(surrounded());
+      before.requestFocus();
+      await tester.pump();
+
+      // Previous, header, next, day grid.
+      for (var i = 0; i < 5 && !after.hasFocus; i++) {
+        await tester.sendKeyEvent(.tab);
+        await tester.pumpAndSettle();
+      }
+
+      expect(after.hasFocus, true);
+    });
+
+    testWidgets('shift-tab leaves the calendar', (tester) async {
+      await tester.pumpWidget(surrounded());
+      after.requestFocus();
+      await tester.pump();
+
+      for (var i = 0; i < 5 && !before.hasFocus; i++) {
+        await tester.sendKeyDownEvent(.shiftLeft);
+        await tester.sendKeyEvent(.tab);
+        await tester.sendKeyUpEvent(.shiftLeft);
+        await tester.pumpAndSettle();
+      }
+
+      expect(before.hasFocus, true);
+    });
+  });
 }

@@ -10,6 +10,10 @@
 * Add `FBreadcrumbItem.collapsedTiles(arrow: ...)`.
 
 
+### `FCalendar`
+* Fix Tab & Shift+Tab not leaving the calendar.
+
+
 ### `FContextMenu`
 * Add arrow & Home/End keyboard navigation to `FContextMenu`.
 * Add menu & menu item semantics roles to `FContextMenu`.
