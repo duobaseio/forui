@@ -116,7 +116,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     super.initState();
     widget.dismissing.addListener(_startDismissing);
     if (widget.dismissing.value) {
-      _entranceDismissController.value = 1;
+      _startDismissing();
     }
 
     if (widget.duration case final duration?) {
@@ -232,7 +232,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   }
 
   void _completeSwipe(AnimationStatus status) {
-    if (status == AnimationStatus.completed) {
+    if (status == .completed) {
       // Reset the swipe fraction to zero if the swipe was not completed.
       if (_swipeFractionEnd == .zero) {
         setState(() {
@@ -242,23 +242,25 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
         });
       } else {
         // If the swipe was completed, we need to dismiss the toast.
+        widget.dismissing.removeListener(_startDismissing);
         widget.onDismiss();
       }
     }
   }
 
   void _startDismissing() {
-    if (_accessibleNavigation) {
-      // Skip animation if accessibility navigation is enabled. We defer this as it can be invoked synchronously by
-      // FToasterEntry.dismiss(), disposing the notifier wile it is still notifying its listeners.
-      scheduleMicrotask(() {
-        if (mounted) {
-          _entranceDismissController.value = 0;
-        }
-      });
-    } else {
-      _entranceDismissController.reverse();
-    }
+    scheduleMicrotask(() {
+      if (!mounted) {
+        return;
+      }
+
+      if (_accessibleNavigation) {
+        // Skip animation if accessibility navigation is enabled.
+        _entranceDismissController.value = 0;
+      } else {
+        _entranceDismissController.reverse();
+      }
+    });
   }
 
   void _resumeDismissing([Duration stagger = .zero]) {
@@ -269,7 +271,8 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   }
 
   void _dismiss(AnimationStatus status) {
-    if (status == AnimationStatus.dismissed) {
+    if (status == .dismissed) {
+      widget.dismissing.removeListener(_startDismissing);
       widget.onDismiss();
     }
   }

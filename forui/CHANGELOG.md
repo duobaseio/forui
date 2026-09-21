@@ -122,6 +122,12 @@
 * **Breaking** Remove `FTooltipStyle.shadow`.
 
 
+### `FToaster`
+* Fix `FToasterEntry.dismiss()` crashing when called before the toast's entrance animation starts.
+* Fix `onDismiss` being called twice when swiping a toast away while accessible navigation is enabled.
+* Fix pressing a toast resuming auto-dismiss instead of pausing it after all toasts were dismissed while paused.
+
+
 ## 0.26.0
 
 This update replaces the deprecated `flutter/cupertino.dart` & `flutter/material.dart` libraries with the `cupertino_ui` 
