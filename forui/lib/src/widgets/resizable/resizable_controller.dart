@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:collection/collection.dart';
+import 'package:meta/meta.dart';
 import 'package:sugar/collection_aggregate.dart';
 
 import 'package:forui/forui.dart';
@@ -65,6 +66,10 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// be performed.
   bool update(int left, int right, double delta);
 
+  /// Returns the regions resized by [delta].
+  @useResult
+  List<FResizableRegionData> resize(int left, int right, double delta);
+
   /// Notifies the region at the indexes that they and their neighbours have been resized.
   void end(int left, int right);
 }
@@ -78,18 +83,11 @@ final class _ResizableController extends FResizableController {
 
   @override
   bool update(int left, int right, double delta) {
-    final (shrink, expand, lhs) = switch (delta) {
-      < 0 => (regions[left], regions[right], false),
-      _ => (regions[right], regions[left], true),
-    };
-
-    // We always want to resize the shrunken region first. This allows us to remove any overlaps caused by shrinking a
-    // region beyond the minimum size.
-    final (shrunk, translated) = shrink.update(delta, lhs: lhs);
-    if (shrink.offset != shrunk.offset) {
-      final (expanded, _) = expand.update(translated, lhs: !lhs);
-      regions[shrunk.index] = shrunk;
-      regions[expanded.index] = expanded;
+    final resized = resize(left, right, delta);
+    if (resized.isNotEmpty) {
+      for (final region in resized) {
+        regions[region.index] = region;
+      }
 
       assert(
         regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
@@ -98,9 +96,7 @@ final class _ResizableController extends FResizableController {
         'https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
       );
 
-      if (onResizeUpdate case final onResizeUpdate?) {
-        onResizeUpdate([shrunk, expanded]);
-      }
+      onResizeUpdate?.call(resized);
       _haptic = true;
       notifyListeners();
 
@@ -113,6 +109,24 @@ final class _ResizableController extends FResizableController {
     } else {
       return false;
     }
+  }
+
+  @override
+  List<FResizableRegionData> resize(int left, int right, double delta) {
+    final (shrink, expand, lhs) = switch (delta) {
+      < 0 => (regions[left], regions[right], false),
+      _ => (regions[right], regions[left], true),
+    };
+
+    // We always want to resize the shrunken region first. This allows us to remove any overlaps caused by shrinking a
+    // region beyond the minimum size.
+    final (shrunk, translated) = shrink.update(delta, lhs: lhs);
+    if (shrink.offset == shrunk.offset) {
+      return const [];
+    }
+
+    final (expanded, _) = expand.update(translated, lhs: !lhs);
+    return [shrunk, expanded];
   }
 
   @override
@@ -132,6 +146,32 @@ final class _CascadeController extends FResizableController {
 
   @override
   bool update(int left, int right, double delta) {
+    final resized = resize(left, right, delta);
+    if (resized.isEmpty) {
+      final haptic = _haptic;
+      _haptic = false;
+      return haptic && delta.abs() >= hapticFeedbackVelocity;
+    }
+
+    for (final region in resized) {
+      regions[region.index] = region;
+    }
+
+    assert(
+      regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
+      'Current total size: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total size: ${regions[0].extent.total}. '
+      'This is likely a bug in Forui. Please file a bug report: https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
+    );
+
+    onResizeUpdate?.call(resized);
+    _haptic = true;
+    notifyListeners();
+
+    return false;
+  }
+
+  @override
+  List<FResizableRegionData> resize(int left, int right, double delta) {
     final (shrinks, expand, lhs) = switch (delta) {
       < 0 => (regions.sublist(0, right).reversed.toList(), regions[right], false),
       _ => (regions.sublist(right), regions[left], true),
@@ -154,49 +194,31 @@ final class _CascadeController extends FResizableController {
       }
     }
 
-    // All shrunk regions are already at minimum size. No need to rebuild.
+    // All shrunk regions are already at minimum size.
     if (translated == 0) {
-      final haptic = _haptic;
-      _haptic = false;
-      return haptic && delta.abs() >= hapticFeedbackVelocity;
+      return const [];
     }
 
     // Update all affected regions' offsets.
     final (expanded, _) = expand.update(translated, lhs: !lhs);
     var (:min, :max) = expanded.offset;
 
-    regions[expanded.index] = expanded;
-    final moved = onResizeUpdate == null ? null : [expanded];
-
+    final resized = [expanded];
     if (lhs) {
       for (final region in shrunks) {
         final updated = region.copyWith(minOffset: max, maxOffset: max + region.extent.current);
         (:min, :max) = updated.offset;
-
-        regions[updated.index] = updated;
-        moved?.add(updated);
+        resized.add(updated);
       }
     } else {
       for (final region in shrunks) {
         final updated = region.copyWith(minOffset: min - region.extent.current, maxOffset: min);
         (:min, :max) = updated.offset;
-
-        regions[updated.index] = updated;
-        moved?.add(updated);
+        resized.add(updated);
       }
     }
 
-    assert(
-      regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
-      'Current total size: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total size: ${regions[0].extent.total}. '
-      'This is likely a bug in Forui. Please file a bug report: https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
-    );
-
-    onResizeUpdate?.call(moved!);
-    _haptic = true;
-    notifyListeners();
-
-    return false;
+    return resized;
   }
 
   @override

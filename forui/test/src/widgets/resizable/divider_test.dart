@@ -1,8 +1,12 @@
+import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart' hide VerticalDivider;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
+import 'package:forui/src/widgets/resizable/resizable_region.dart';
 
 import '../../test_scaffold.dart';
 
@@ -150,5 +154,99 @@ void main() {
     final outline = tester.widget<FFocusedOutline>(find.byType(FFocusedOutline));
     const sentinel = FFocusedOutlineStyle(color: Color(0xFF111111), width: 9, borderRadius: .zero);
     expect(outline.style(sentinel).color, color);
+  });
+
+  group('accessibility', () {
+    Widget stub(BuildContext context, FResizableRegionData data, Widget? child) => const Align(child: Text('R'));
+
+    Widget build(Axis axis, {ValueChanged<List<FResizableRegionData>>? onResizeEnd}) => TestScaffold.app(
+      platform: .macOS,
+      child: Center(
+        child: SizedBox(
+          width: axis == .vertical ? 50 : 100,
+          height: axis == .vertical ? 100 : 50,
+          child: FResizable(
+            control: .managed(onResizeEnd: onResizeEnd),
+            crossAxisExtent: 50,
+            axis: axis,
+            resizePercentage: 0.1,
+            children: [
+              .fixed(extent: 50, minExtent: 20, builder: stub),
+              .fixed(extent: 50, minExtent: 20, builder: stub),
+            ],
+          ),
+        ),
+      ),
+    );
+
+    for (final axis in [Axis.horizontal, Axis.vertical]) {
+      final divider = axis == .horizontal ? find.byType(HorizontalDivider) : find.byType(VerticalDivider);
+      double main(Size size) => axis == .horizontal ? size.width : size.height;
+
+      group('$axis', () {
+        testWidgets('increased value stays put at the bound', (tester) async {
+          final semantics = tester.ensureSemantics();
+          await tester.pumpWidget(build(axis));
+
+          final node = tester.getSemantics(divider);
+          for (var i = 0; i < 3; i++) {
+            node.owner!.performAction(node.id, SemanticsAction.increase);
+            await tester.pumpAndSettle();
+          }
+
+          expect(tester.getSemantics(divider), isSemantics(value: '80, 20', increasedValue: '80, 20'));
+
+          semantics.dispose();
+        });
+
+        testWidgets('increase grows the first region and calls onResizeEnd', (tester) async {
+          final semantics = tester.ensureSemantics();
+          List<FResizableRegionData>? ended;
+          await tester.pumpWidget(build(axis, onResizeEnd: (regions) => ended = regions));
+
+          final node = tester.getSemantics(divider);
+          node.owner!.performAction(node.id, SemanticsAction.increase);
+          await tester.pumpAndSettle();
+
+          expect(main(tester.getSize(find.byType(FixedResizableRegion).first)), 60);
+          expect(main(tester.getSize(find.byType(FixedResizableRegion).last)), 40);
+          expect(tester.getSemantics(divider), isSemantics(value: '60, 40'));
+          expect(ended?.map((r) => r.extent.current), [60, 40]);
+
+          semantics.dispose();
+        });
+
+        testWidgets('decrease shrinks the first region and calls onResizeEnd', (tester) async {
+          final semantics = tester.ensureSemantics();
+          List<FResizableRegionData>? ended;
+          await tester.pumpWidget(build(axis, onResizeEnd: (regions) => ended = regions));
+
+          final node = tester.getSemantics(divider);
+          node.owner!.performAction(node.id, SemanticsAction.decrease);
+          await tester.pumpAndSettle();
+
+          expect(main(tester.getSize(find.byType(FixedResizableRegion).first)), 40);
+          expect(main(tester.getSize(find.byType(FixedResizableRegion).last)), 60);
+          expect(tester.getSemantics(divider), isSemantics(value: '40, 60'));
+          expect(ended?.map((r) => r.extent.current), [40, 60]);
+
+          semantics.dispose();
+        });
+
+        testWidgets('keyboard resize calls onResizeEnd', (tester) async {
+          var ended = 0;
+          await tester.pumpWidget(build(axis, onResizeEnd: (_) => ended++));
+
+          Focus.of(tester.element(find.byType(FFocusedOutline))).requestFocus();
+          await tester.pump();
+
+          await tester.sendKeyEvent(axis == .horizontal ? LogicalKeyboardKey.arrowRight : LogicalKeyboardKey.arrowDown);
+          await tester.pumpAndSettle();
+
+          expect(main(tester.getSize(find.byType(FixedResizableRegion).first)), 60);
+          expect(ended, 1);
+        });
+      });
+    }
   });
 }

@@ -8,15 +8,28 @@ import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 
 @internal
-class const SubmenuTrigger({required final FPopoverController controller, required final Widget child, super.key})
-    extends StatefulWidget {
+class const SubmenuTrigger({
+  required final FPopoverController controller,
+  required final FocusNode? focusNode,
+  required final Widget Function(
+    BuildContext context,
+    bool shown, // ignore: avoid_positional_boolean_parameters
+    Map<ShortcutActivator, Intent> shortcuts,
+    Map<Type, Action<Intent>> actions,
+  )
+  builder,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<SubmenuTrigger> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('controller', controller));
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -27,6 +40,24 @@ class _State extends State<SubmenuTrigger> {
   FPopoverMenuStyle? _style;
   int _monotonic = 0;
   bool _hovered = false;
+  late bool _shown;
+
+  @override
+  void initState() {
+    super.initState();
+    _shown = widget.controller.status.isForwardOrCompleted;
+    widget.controller.addStatusListener(_handleStatus);
+  }
+
+  @override
+  void didUpdateWidget(covariant SubmenuTrigger old) {
+    super.didUpdateWidget(old);
+    if (widget.controller != old.controller) {
+      old.controller.removeStatusListener(_handleStatus);
+      widget.controller.addStatusListener(_handleStatus);
+      _shown = widget.controller.status.isForwardOrCompleted;
+    }
+  }
 
   @override
   void didChangeDependencies() {
@@ -49,7 +80,16 @@ class _State extends State<SubmenuTrigger> {
   void dispose() {
     _active?.removeListener(_handleSiblingShow);
     _parent?.removeStatusListener(_handleParentHide);
+    widget.controller.removeStatusListener(_handleStatus);
     super.dispose();
+  }
+
+  // Controller only notifies after animation completes but we need to be notified before animation starts to avoid
+  // the trigger from flashing.
+  void _handleStatus(AnimationStatus status) {
+    if (_shown != status.isForwardOrCompleted) {
+      setState(() => _shown = status.isForwardOrCompleted);
+    }
   }
 
   // Hide this submenu without animation when a sibling becomes active, so rapid switches between siblings don't
@@ -72,6 +112,8 @@ class _State extends State<SubmenuTrigger> {
   @override
   Widget build(BuildContext context) => switch ((_active, _style)) {
     (final active?, final style?) => FInheritedItemCallbacks(
+      semanticsRole: FInheritedItemCallbacks.maybeOf(context)?.semanticsRole,
+      hoverFocus: FInheritedItemCallbacks.maybeOf(context)?.hoverFocus ?? false,
       onHoverEnter: () async {
         _hovered = true;
 
@@ -95,9 +137,32 @@ class _State extends State<SubmenuTrigger> {
         unawaited(style.hapticFeedback());
         _toggle();
       },
-      child: widget.child,
+      child: widget.builder(
+        context,
+        _shown,
+        {
+          const SingleActivator(.enter): const ActivateIntent(),
+          SingleActivator(Directionality.maybeOf(context) == .rtl ? .arrowLeft : .arrowRight): const ActivateIntent(),
+        },
+        {
+          // Keyboard activation additionally moves focus into the submenu.
+          ActivateIntent: CallbackAction<ActivateIntent>(
+            onInvoke: (_) {
+              active.value = (_key, false);
+              unawaited(widget.controller.show());
+              // We need this as submenu we want to focus is only available in the next frame.
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                if (mounted) {
+                  widget.focusNode?.nextFocus();
+                }
+              });
+              return null;
+            },
+          ),
+        },
+      ),
     ),
-    (_, _) => widget.child,
+    (_, _) => widget.builder(context, _shown, const {}, const {}),
   };
 
   void _toggle() {

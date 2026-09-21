@@ -196,5 +196,83 @@ void main() {
         matchesGoldenFile('breadcrumb/${theme.name}/shown-tile-breadcrumb.png'),
       );
     });
+
+    testWidgets('${theme.name} with focused collapsed item', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem.collapsed(
+                menu: [
+                  FItemGroup(
+                    children: [
+                      FItem(title: const Text('Documentation'), onPress: () {}),
+                      FItem(title: const Text('Themes'), onPress: () {}),
+                    ],
+                  ),
+                ],
+              ),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+              const FBreadcrumbItem(current: true, child: Text('Components')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.descendant(of: find.byType(FBreadcrumb), matching: find.byType(FPopoverMenu)));
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Themes'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('breadcrumb/${theme.name}/focused-collapsed-item-breadcrumb.png'),
+      );
+    });
+
+    testWidgets('${theme.name} with focused collapsed tile', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
+              FBreadcrumbItem.collapsedTiles(
+                menu: [
+                  FTileGroup(
+                    children: [
+                      FTile(title: const Text('Documentation'), onPress: () {}),
+                      FTile(title: const Text('Themes'), onPress: () {}),
+                    ],
+                  ),
+                ],
+              ),
+              FBreadcrumbItem(onPress: () {}, child: const Text('Core')),
+              const FBreadcrumbItem(current: true, child: Text('Components')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.descendant(of: find.byType(FBreadcrumb), matching: find.byType(FPopoverMenu)));
+      await tester.pumpAndSettle();
+
+      Focus.of(tester.element(find.text('Themes'))).requestFocus();
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('breadcrumb/${theme.name}/focused-collapsed-tile-breadcrumb.png'),
+      );
+    });
   }
 }

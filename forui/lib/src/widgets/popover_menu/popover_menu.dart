@@ -3,11 +3,13 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/popover_menu/menu_navigation.dart';
 
 part 'popover_menu.design.dart';
 
@@ -180,6 +182,9 @@ class FPopoverMenu extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusScopeNode? focusNode;
 
+  /// {@macro forui.widgets.FPopover.childFocusNode}
+  final FocusNode? childFocusNode;
+
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
@@ -260,6 +265,7 @@ class FPopoverMenu extends StatefulWidget {
     this.semanticsLabel,
     this.autofocus,
     this.focusNode,
+    this.childFocusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
     this.faded,
@@ -270,7 +276,11 @@ class FPopoverMenu extends StatefulWidget {
     this.builder = FPopover.defaultBuilder,
     this.child,
     super.key,
-  }) : _menuBuilder = ((context, controller, style) => FItemGroup.merge(
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'Cannot provide both focusNode and traversalEdgeBehavior',
+       ),
+       _menuBuilder = ((context, controller, style) => FItemGroup.merge(
          scrollController: scrollController,
          scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
@@ -329,6 +339,7 @@ class FPopoverMenu extends StatefulWidget {
     this.semanticsLabel,
     this.autofocus,
     this.focusNode,
+    this.childFocusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
     this.faded,
@@ -339,7 +350,11 @@ class FPopoverMenu extends StatefulWidget {
     this.builder = FPopover.defaultBuilder,
     this.child,
     super.key,
-  }) : _menuBuilder = ((context, controller, style) => FTileGroup.merge(
+  }) : assert(
+         focusNode == null || traversalEdgeBehavior == null,
+         'Cannot provide both focusNode and traversalEdgeBehavior',
+       ),
+       _menuBuilder = ((context, controller, style) => FTileGroup.merge(
          scrollController: scrollController,
          scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
@@ -395,6 +410,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(DiagnosticsProperty('childFocusNode', childFocusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(FlagProperty('faded', value: faded, ifTrue: 'faded'))
@@ -405,9 +421,36 @@ class FPopoverMenu extends StatefulWidget {
 class _FPopoverMenuState extends State<FPopoverMenu> {
   final Key _groupId = UniqueKey();
   final ValueNotifier<(Key? key, bool hovered)> _active = ValueNotifier((null, false));
+  FocusScopeNode? _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode =
+        widget.focusNode ??
+        .new(debugLabel: 'FPopoverMenu', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
+  }
+
+  @override
+  void didUpdateWidget(covariant FPopoverMenu old) {
+    super.didUpdateWidget(old);
+    if (widget.focusNode != old.focusNode || widget.traversalEdgeBehavior != old.traversalEdgeBehavior) {
+      if (old.focusNode == null) {
+        _focusNode?.dispose();
+      }
+
+      _focusNode =
+          widget.focusNode ??
+          .new(debugLabel: 'FPopoverMenu', traversalEdgeBehavior: widget.traversalEdgeBehavior ?? .closedLoop);
+    }
+  }
 
   @override
   void dispose() {
+    if (widget.focusNode == null) {
+      _focusNode?.dispose();
+    }
+
     _active.dispose();
     super.dispose();
   }
@@ -422,61 +465,93 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
     final groupId = widget.hideRegion == .excludeChild
         ? (widget.groupId ?? scope?.groupId ?? _groupId)
         : widget.groupId;
-    return FPopover(
-      control: widget.control,
-      style: style,
-      popoverClipBehavior: .antiAlias,
-      constraints: FPortalConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
-      popoverAnchor: widget.menuAnchor,
-      childAnchor: widget.childAnchor,
-      spacing: widget.spacing,
-      overflow: widget.overflow,
-      arrow: widget.arrow,
-      offset: widget.offset,
-      groupId: groupId,
-      hideRegion: widget.hideRegion,
-      onTapHide: widget.onTapHide,
-      autofocus: widget.autofocus,
-      focusNode: widget.focusNode,
-      onFocusChange: widget.onFocusChange,
-      traversalEdgeBehavior: widget.traversalEdgeBehavior,
-      barrierSemanticsLabel: widget.barrierSemanticsLabel,
-      barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
-      cutout: widget.cutout,
-      cutoutBuilder: widget.cutoutBuilder,
-      useViewPadding: widget.useViewPadding,
-      useViewInsets: widget.useViewInsets,
-      overlayLocation: widget.overlayLocation,
-      popoverBuilder: (context, controller) => PopoverMenuScope(
-        controller: controller,
+    final LogicalKeyboardKey close = Directionality.maybeOf(context) == .rtl ? .arrowRight : .arrowLeft;
+
+    return Focus(
+      canRequestFocus: false,
+      skipTraversal: true,
+      includeSemantics: false,
+      onKeyEvent: (_, event) {
+        if (event is KeyUpEvent) {
+          return .ignored;
+        }
+
+        // Prevents a submenu from receiving key events while its parent menu is still focused.
+        final focus = _focusNode;
+        if (focus == null || focus.context?.mounted != true || (scope != null && !focus.hasFocus)) {
+          return .ignored;
+        }
+
+        if (scope != null && event.logicalKey == close) {
+          scope.active.value = (null, false);
+          widget.childFocusNode?.requestFocus();
+          return .handled;
+        }
+
+        return focus.navigate(event, _active);
+      },
+      child: FPopover(
+        control: widget.control,
         style: style,
+        popoverClipBehavior: .antiAlias,
+        constraints: FPortalConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
+        popoverAnchor: widget.menuAnchor,
+        childAnchor: widget.childAnchor,
+        spacing: widget.spacing,
+        overflow: widget.overflow,
+        arrow: widget.arrow,
+        offset: widget.offset,
         groupId: groupId,
-        active: _active,
-        // The default behavior for non-submenu trigger items.
-        child: FInheritedItemCallbacks(
-          onHoverEnter: () => _active.value = (null, false),
-          onPress: () => _active.value = (null, false),
-          onLongPress: () => _active.value = (null, false),
-          // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally leaking
-          // into the popover menu's items.
-          //
-          // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
-          child: FInheritedItemData(
-            child: ValueListenableBuilder(
-              valueListenable: _active,
-              builder: (_, value, child) => AnimatedOpacity(
-                opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
-                duration: style.menuMotion.fadeDuration,
-                curve: style.menuMotion.fadeCurve,
-                child: child,
+        hideRegion: widget.hideRegion,
+        onTapHide: widget.onTapHide,
+        autofocus: widget.autofocus,
+        focusNode: _focusNode,
+        childFocusNode: widget.childFocusNode,
+        onFocusChange: widget.onFocusChange,
+        barrierSemanticsLabel: widget.barrierSemanticsLabel,
+        barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+        cutout: widget.cutout,
+        cutoutBuilder: widget.cutoutBuilder,
+        useViewPadding: widget.useViewPadding,
+        useViewInsets: widget.useViewInsets,
+        overlayLocation: widget.overlayLocation,
+        popoverBuilder: (context, controller) => Semantics(
+          container: true,
+          role: .menu,
+          child: PopoverMenuScope(
+            controller: controller,
+            style: style,
+            groupId: groupId,
+            active: _active,
+            // The default behavior for non-submenu trigger items.
+            child: FInheritedItemCallbacks(
+              hoverFocus: true,
+              onHoverEnter: () => _active.value = (null, false),
+              onPress: () => _active.value = (null, false),
+              onLongPress: () => _active.value = (null, false),
+              semanticsRole: .menuItem,
+              // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally
+              // leaking into the popover menu's items.
+              //
+              // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
+              child: FInheritedItemData(
+                child: ValueListenableBuilder(
+                  valueListenable: _active,
+                  builder: (_, value, child) => AnimatedOpacity(
+                    opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
+                    duration: style.menuMotion.fadeDuration,
+                    curve: style.menuMotion.fadeCurve,
+                    child: child,
+                  ),
+                  child: widget._menuBuilder(context, controller, style),
+                ),
               ),
-              child: widget._menuBuilder(context, controller, style),
             ),
           ),
         ),
+        builder: widget.builder,
+        child: widget.child,
       ),
-      builder: widget.builder,
-      child: widget.child,
     );
   }
 }
@@ -551,7 +626,11 @@ class const FPopoverMenuStyle({
                  .all(
                    .delta(
                      backgroundColor: FVariants.all(colors.card),
-                     contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
+                     contentDecoration: .delta([
+                       .base(.shapeDelta(color: colors.card)),
+                       .exact({.focused}, .shapeDelta(color: colors.secondary)),
+                     ]),
+                     focusedOutlineStyle: null,
                    ),
                  ),
                  .base(
@@ -578,6 +657,14 @@ class const FPopoverMenuStyle({
          tileGroupStyle: .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback)
              .copyWith(
                tileStyles: .delta([
+                 .all(
+                   .delta(
+                     contentDecoration: .delta([
+                       .exact({.focused}, .shapeDelta(color: colors.secondary)),
+                     ]),
+                     focusedOutlineStyle: () => null,
+                   ),
+                 ),
                  .base(
                    .delta(
                      contentStyle: .delta(

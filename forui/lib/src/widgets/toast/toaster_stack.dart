@@ -148,10 +148,11 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
               dismissing: entry.dismissing,
               onDismiss: () {
                 entry.onDismiss?.call();
-                if (mounted &&
-                    widget.entries.isEmpty &&
-                    widget.style.expandBehavior == FToasterExpandBehavior.hoverOrPress) {
-                  _controller.value = 0;
+                if (mounted && widget.entries.isEmpty) {
+                  _autoDismiss = true;
+                  if (widget.style.expandBehavior == .hoverOrPress) {
+                    _controller.value = 0;
+                  }
                 }
               },
               child: entry.builder(context, entry),

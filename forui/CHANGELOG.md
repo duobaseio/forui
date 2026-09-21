@@ -1,5 +1,8 @@
 ## 0.27.0
 
+This update ships a refreshed tooltip & support for adding arrows to context menus and popovers. In addition, substantial 
+accessibility improvements and bug fixes have been made.
+
 ### `FAvatar`
 * Fix `semanticsLabel` not being announced while the image is loading or has failed to load.
 * Fix the fallback being clipped at large text scales.
@@ -10,6 +13,19 @@
 * Add `FBreadcrumbItem.collapsedTiles(arrow: ...)`.
 
 
+### `FCalendar`
+* Fix Tab & Shift+Tab not leaving the calendar.
+
+
+### `FContextMenu`
+* Add arrow & Home/End keyboard navigation to `FContextMenu`.
+* Add menu & menu item semantics roles to `FContextMenu`.
+* Add Shift+F10 (Control+Return on macOS) & menu key shortcuts to open `FContextMenu`.
+
+* Change `FContextMenu.autofocus` to default to true.
+* Change `FContextMenu` items to request focus when hovered.
+
+
 ### `FFocusedOutline`
 * **Breaking** Fix outline being painted after a pointer click when the focus highlight is off.
 
@@ -18,6 +34,8 @@
 * Add `FItem.semanticsButton`.
 * Add `FItem.semanticsChecked`.
 * Add `FItem.semanticsInMutuallyExclusiveGroup`.
+* Add `FInheritedItemCallbacks.hoverFocus`.
+* Add `FInheritedItemCallbacks.semanticsRole`.
 
 * Fix `FItem` advertising a no-op tap action to screen readers.
 * Fix `FItem` long-press action not exposed to screen readers when inside a group.
@@ -40,13 +58,26 @@
 
 ### `FPopover`
 * Add `FPopover.arrow`.
+* Add `FPopover.childFocusNode`.
 * Add `FPopoverStyle.arrowStyle`.
 
 
 ### `FPopoverMenu`
 * Add `FPopoverMenu.arrow`.
+* Add `FPopoverMenu.childFocusNode`.
 * Add `FSubmenuItem.submenuArrow`
 * Add `FSubmenuTile.submenuArrow`.
+* Add arrow & Home/End keyboard navigation to `FPopoverMenu`.
+* Add menu & menu item semantics roles to `FPopoverMenu`.
+
+* Change `FPopoverMenu` items to request focus when hovered.
+* Change focused items and tiles to use the hovered appearance.
+
+
+### `FResizable`
+* Fix divider not being resizable by screen readers.
+* Fix keyboard resizing not calling `onResizeEnd`.
+* Fix default semantic value announcing unrounded extents.
 
 
 ### `FSelect` & `FMultiSelect`
@@ -82,7 +113,9 @@
 
 
 ### `FTappable`
+* Add `FTappable.hoverFocus`.
 * Add `FTappable.semanticsContainer`.
+* Add `FTappable.semanticsRole`.
 
 * Fix screen reader focus ring staying at the old position after scrolling when used as a text field affix.
 
@@ -100,6 +133,12 @@
 * **Breaking** Change `FTooltipStyle.padding` default from `(14, 10)` to `(12, 6)`.
 
 * **Breaking** Remove `FTooltipStyle.shadow`.
+
+
+### `FToaster`
+* Fix `FToasterEntry.dismiss()` crashing when called before the toast's entrance animation starts.
+* Fix `onDismiss` being called twice when swiping a toast away while accessible navigation is enabled.
+* Fix pressing a toast resuming auto-dismiss instead of pausing it after all toasts were dismissed while paused.
 
 
 ## 0.26.0

@@ -377,12 +377,14 @@ class FCalendar extends StatefulWidget {
 }
 
 class _State extends State<FCalendar> {
+  late FocusScopeNode _scope;
   late FCalendarController _controller;
   late FDateSelectionController<Object?> _selectionController;
 
   @override
   void initState() {
     super.initState();
+    _scope = FocusScopeNode(debugLabel: 'FCalendar', traversalEdgeBehavior: .parentScope);
     _controller = widget.control.create(_handleOnChange);
     _selectionController = widget.selectionControl.create(_handleOnSelectionChange);
   }
@@ -407,6 +409,7 @@ class _State extends State<FCalendar> {
   void dispose() {
     widget.selectionControl.dispose(_selectionController, _handleOnSelectionChange);
     widget.control.dispose(_controller, _handleOnChange);
+    _scope.dispose();
     super.dispose();
   }
 
@@ -430,6 +433,7 @@ class _State extends State<FCalendar> {
       decoration: style.decoration,
       padding: style.padding,
       child: FocusScope(
+        node: _scope,
         child: ListenableBuilder(
           listenable: _selectionController,
           builder: (_, _) => ListenableBuilder(

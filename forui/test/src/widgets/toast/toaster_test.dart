@@ -224,6 +224,33 @@ void main() {
     });
   }
 
+  testWidgets('press pauses again after all toasts are swiped away while paused', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FToaster(child: Center(child: small('1', 'button', .bottomCenter))),
+      ),
+    );
+
+    await tester.tap(find.text('button'));
+    await tester.pumpAndSettle();
+
+    // Pause, then swipe away.
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+    await tester.timedDrag(find.text('1'), const Offset(0, 200), const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+    expect(find.text('1'), findsNothing);
+
+    await tester.tap(find.text('button'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('1'));
+    await tester.pumpAndSettle();
+    await tester.pumpAndSettle(const Duration(seconds: 10));
+
+    expect(find.text('1'), findsOne);
+  });
+
   testWidgets('hover over non-first toast prevents auto-dismiss', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
@@ -479,6 +506,55 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('FToasterEntry.dismiss before first build removes the toast without error', (tester) async {
+    late BuildContext toasterContext;
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FToaster(
+          child: Builder(
+            builder: (context) {
+              toasterContext = context;
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      ),
+    );
+
+    showFToast(context: toasterContext, title: const Text('1')).dismiss();
+    await tester.pump();
+
+    expect(tester.takeException(), null);
+
+    await tester.pumpAndSettle();
+    expect(find.text('1'), findsNothing);
+  });
+
+  testWidgets('FToasterEntry.dismiss before entrance animation starts removes the toast without error', (tester) async {
+    late BuildContext toasterContext;
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FToaster(
+          child: Builder(
+            builder: (context) {
+              toasterContext = context;
+              return const SizedBox.shrink();
+            },
+          ),
+        ),
+      ),
+    );
+
+    final entry = showFToast(context: toasterContext, title: const Text('1'));
+    await tester.pump();
+    entry.dismiss();
+
+    expect(tester.takeException(), null);
+
+    await tester.pumpAndSettle();
+    expect(find.text('1'), findsNothing);
+  });
+
   group('accessibility', () {
     SemanticsNode liveRegionNode(WidgetTester tester, [String text = '1']) {
       var node = tester.getSemantics(find.text(text).last);
@@ -636,6 +712,43 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('1'), findsNothing);
+    });
+
+    testWidgets('swipe to dismiss calls onDismiss once when accessible navigation is enabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      late BuildContext toasterContext;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Builder(
+              builder: (context) {
+                toasterContext = context;
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      );
+
+      var dismissed = 0;
+      showRawFToast(
+        context: toasterContext,
+        alignment: .bottomCenter,
+        onDismiss: () => dismissed++,
+        builder: (_, _) => const SizedBox(width: 250, height: 143, child: Text('1')),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.timedDrag(find.text('1'), const Offset(0, 200), const Duration(seconds: 1));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+      expect(find.text('1'), findsNothing);
+      expect(dismissed, 1);
     });
   });
 

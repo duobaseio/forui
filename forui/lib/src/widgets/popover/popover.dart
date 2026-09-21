@@ -198,6 +198,27 @@ class FPopover extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusScopeNode? focusNode;
 
+  /// {@template forui.widgets.FPopover.childFocusNode}
+  /// The [builder]/[child]'s focus node that is focused when the popover is dismissed with the keyboard.
+  ///
+  /// The popover only requests focus on [childFocusNode]. **The same node must be passed to [builder]/[child] as well.**
+  ///
+  /// ```dart
+  /// final focusNode = FocusNode();
+  ///
+  /// FPopover(
+  ///   childFocusNode: focusNode, // (1)
+  ///   popoverBuilder: (context, controller) => const Text('Popover'),
+  ///   builder: (context, controller, child) => FButton(
+  ///     focusNode: focusNode, // (2)
+  ///     onPress: controller.toggle,
+  ///     child: const Text('Open'),
+  ///   ),
+  /// );
+  /// ```
+  /// {@endtemplate}
+  final FocusNode? childFocusNode;
+
   /// {@macro forui.foundation.doc_templates.onFocusChange}
   final ValueChanged<bool>? onFocusChange;
 
@@ -303,6 +324,7 @@ class FPopover extends StatefulWidget {
     this.onTapHide,
     this.autofocus,
     this.focusNode,
+    this.childFocusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
     this.traversalGrouped = true,
@@ -360,6 +382,7 @@ class FPopover extends StatefulWidget {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
+      ..add(DiagnosticsProperty('childFocusNode', childFocusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(FlagProperty('traversalGrouped', value: traversalGrouped, ifTrue: 'traversal grouped with child'))
@@ -458,6 +481,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
         // Dismiss on Escape from the trigger as well as the popover content when shown.
         if (_controller.status.isForwardOrCompleted && const SingleActivator(.escape).accepts(event, .instance)) {
           _hide();
+          widget.childFocusNode?.requestFocus();
           return .handled;
         }
 
@@ -561,7 +585,14 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
             }
 
             return CallbackShortcuts(
-              bindings: widget.shortcuts ?? {const SingleActivator(.escape): _hide},
+              bindings:
+                  widget.shortcuts ??
+                  {
+                    const SingleActivator(.escape): () {
+                      _hide();
+                      widget.childFocusNode?.requestFocus();
+                    },
+                  },
               child: popover,
             );
           },

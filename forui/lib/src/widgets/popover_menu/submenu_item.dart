@@ -13,7 +13,7 @@ import 'package:forui/src/widgets/popover_menu/submenu_trigger.dart';
 /// See:
 /// * [FPopoverMenu] for the parent menu widget.
 /// * [FSubmenuTile] for the tile variant suited for touch devices.
-class FSubmenuItem extends StatelessWidget with FItemMixin {
+class FSubmenuItem extends StatefulWidget with FItemMixin {
   /// The popover control.
   ///
   /// Defaults to `const FPopoverControl.managed()`.
@@ -272,61 +272,94 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
   }
 
   @override
+  State<FSubmenuItem> createState() => _FSubmenuItemState();
+}
+
+class _FSubmenuItemState extends State<FSubmenuItem> {
+  FocusNode? _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = widget.focusNode ?? FocusNode(debugLabel: 'FSubmenuItem');
+  }
+
+  @override
+  void didUpdateWidget(covariant FSubmenuItem old) {
+    super.didUpdateWidget(old);
+    if (widget.focusNode != old.focusNode) {
+      if (old.focusNode == null) {
+        _focusNode?.dispose();
+      }
+
+      _focusNode = widget.focusNode ?? FocusNode(debugLabel: 'FSubmenuItem');
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.focusNode == null) {
+      _focusNode?.dispose();
+    }
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final desktop = context.platformVariant.desktop;
     return FPopoverMenu(
-      control: control,
-      style: submenuStyle,
-      scrollController: submenuScrollController,
-      scrollCacheExtent: submenuScrollCacheExtent,
-      intrinsicWidth: submenuIntrinsicWidth ?? true,
-      dragStartBehavior: submenuDragStartBehavior,
-      maxHeight: submenuMaxHeight,
-      divider: submenuDivider,
-      menuAnchor: submenuAnchor ?? (desktop ? .topStart : .bottomCenter),
-      childAnchor: itemAnchor ?? (desktop ? .topEnd : .topCenter),
-      spacing: submenuSpacing,
-      overflow: submenuOverflow,
-      arrow: submenuArrow,
-      offset: submenuOffset,
-      hideRegion: submenuHideRegion,
-      semanticsLabel: submenuSemanticsLabel,
-      useViewPadding: submenuUseViewPadding,
-      useViewInsets: submenuUseViewInsets,
-      overlayLocation: submenuOverlayLocation,
-      autofocus: submenuAutofocus,
-      focusNode: submenuFocusNode,
-      onFocusChange: submenuOnFocusChange,
-      traversalEdgeBehavior: submenuTraversalEdgeBehavior,
-      menu: submenu,
+      control: widget.control,
+      style: widget.submenuStyle,
+      scrollController: widget.submenuScrollController,
+      scrollCacheExtent: widget.submenuScrollCacheExtent,
+      intrinsicWidth: widget.submenuIntrinsicWidth ?? true,
+      dragStartBehavior: widget.submenuDragStartBehavior,
+      maxHeight: widget.submenuMaxHeight,
+      divider: widget.submenuDivider,
+      menuAnchor: widget.submenuAnchor ?? (desktop ? .topStart : .bottomCenter),
+      childAnchor: widget.itemAnchor ?? (desktop ? .topEnd : .topCenter),
+      spacing: widget.submenuSpacing,
+      overflow: widget.submenuOverflow,
+      arrow: widget.submenuArrow,
+      offset: widget.submenuOffset,
+      hideRegion: widget.submenuHideRegion,
+      semanticsLabel: widget.submenuSemanticsLabel,
+      useViewPadding: widget.submenuUseViewPadding,
+      useViewInsets: widget.submenuUseViewInsets,
+      overlayLocation: widget.submenuOverlayLocation,
+      autofocus: widget.submenuAutofocus,
+      focusNode: widget.submenuFocusNode,
+      childFocusNode: _focusNode,
+      onFocusChange: widget.submenuOnFocusChange,
+      traversalEdgeBehavior: widget.submenuTraversalEdgeBehavior,
+      menu: widget.submenu,
       builder: (_, controller, _) => SubmenuTrigger(
         controller: controller,
-        child: ListenableBuilder(
-          listenable: controller,
-          builder: (context, _) => FItem(
-            variant: variant,
-            style: style,
-            enabled: enabled,
-            selected: controller.status.isForwardOrCompleted,
-            semanticsLabel: semanticsLabel,
-            semanticsExpanded: controller.status.isForwardOrCompleted,
-            autofocus: autofocus,
-            focusNode: focusNode,
-            onFocusChange: onFocusChange,
-            onHoverChange: onHoverChange,
-            onVariantChange: onVariantChange,
-            onLongPress: onLongPress,
-            onDoubleTap: onDoubleTap,
-            onSecondaryPress: onSecondaryPress,
-            onSecondaryLongPress: onSecondaryLongPress,
-            shortcuts: shortcuts,
-            actions: actions,
-            prefix: prefix,
-            title: title,
-            subtitle: subtitle,
-            suffix: suffix ?? context.theme.icons.chevronRight(context),
-            onPress: () {}, // This is necessary to enable the item.
-          ),
+        focusNode: _focusNode,
+        builder: (context, shown, shortcuts, actions) => FItem(
+          variant: widget.variant,
+          style: widget.style,
+          enabled: widget.enabled,
+          selected: shown,
+          semanticsLabel: widget.semanticsLabel,
+          semanticsExpanded: shown,
+          autofocus: widget.autofocus,
+          focusNode: _focusNode,
+          onFocusChange: widget.onFocusChange,
+          onHoverChange: widget.onHoverChange,
+          onVariantChange: widget.onVariantChange,
+          onLongPress: widget.onLongPress,
+          onDoubleTap: widget.onDoubleTap,
+          onSecondaryPress: widget.onSecondaryPress,
+          onSecondaryLongPress: widget.onSecondaryLongPress,
+          shortcuts: {...shortcuts, ...?widget.shortcuts},
+          actions: {...actions, ...?widget.actions},
+          prefix: widget.prefix,
+          title: widget.title,
+          subtitle: widget.subtitle,
+          suffix: widget.suffix ?? context.theme.icons.chevronRight(context),
+          onPress: () {}, // This is necessary to enable the item.
         ),
       ),
     );

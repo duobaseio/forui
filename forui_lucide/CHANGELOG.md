@@ -1,4 +1,6 @@
 ## 0.27.0
+* Update icons to Lucide 1.47.0.
+
 * Fix icons not being tree-shaken when unused on wasm.
 
 

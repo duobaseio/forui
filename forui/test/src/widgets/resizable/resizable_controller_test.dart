@@ -54,6 +54,21 @@ void main() {
       });
     }
 
+    test('resize(...) returns resized regions without applying', () {
+      final resized = controller.resize(0, 1, 100);
+
+      expect(resized.map((r) => (r.index, r.offset)), containsAll([(0, (min: 0, max: 30)), (1, (min: 30, max: 40))]));
+      expect(controller.regions[0].offset, (min: 0, max: 25));
+      expect(controller.regions[1].offset, (min: 25, max: 40));
+      expect(count, 0);
+      expect(resizeUpdate, null);
+    });
+
+    test('resize(...) returns empty when already at minimum', () {
+      controller.update(0, 1, 100);
+      expect(controller.resize(0, 1, 100), []);
+    });
+
     test('end(...) calls callback', () {
       controller.end(0, 1);
 
@@ -94,6 +109,26 @@ void main() {
         expect(resizeUpdate?.associate(by: (e) => e.index).length, length);
       });
     }
+
+    test('resize(...) cascades without applying', () {
+      final resized = controller.resize(0, 1, 100);
+
+      expect(controller.regions[0].offset, (min: 0, max: 25));
+      expect(controller.regions[1].offset, (min: 25, max: 40));
+      expect(controller.regions[2].offset, (min: 40, max: 60));
+      expect(count, 0);
+      expect(resizeUpdate, null);
+
+      controller.update(0, 1, 100);
+      expect(resized.map((r) => (r.index, r.offset)), containsAll(resizeUpdate!.map((r) => (r.index, r.offset))));
+    });
+
+    test('resize(...) returns empty when already at minimum', () {
+      controller
+        ..update(0, 1, 100)
+        ..update(0, 1, 100);
+      expect(controller.resize(0, 1, 100), []);
+    });
 
     test('end(...) calls callback', () {
       controller.end(0, 1);

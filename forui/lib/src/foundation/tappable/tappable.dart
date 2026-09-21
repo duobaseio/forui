@@ -86,11 +86,19 @@ class FTappable extends StatefulWidget {
   /// Whether this tappable belongs to a mutually exclusive group, such as a radio button. Null if not applicable.
   final bool? semanticsInMutuallyExclusiveGroup;
 
+  /// The semantics role of this tappable. Null if it has none.
+  final SemanticsRole? semanticsRole;
+
   /// Whether to replace all child semantics with this node. Defaults to false.
   final bool excludeSemantics;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
+
+  /// {@template forui.foundation.FTappable.hoverFocus}
+  /// Whether hovering focuses this tappable. Defaults to false.
+  /// {@endtemplate}
+  final bool hoverFocus;
 
   /// {@macro forui.foundation.doc_templates.focusNode}
   final FocusNode? focusNode;
@@ -348,8 +356,10 @@ class FTappable extends StatefulWidget {
     bool? semanticsChecked,
     bool? semanticsExpanded,
     bool? semanticsInMutuallyExclusiveGroup,
+    SemanticsRole? semanticsRole,
     bool excludeSemantics,
     bool autofocus,
+    bool hoverFocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
@@ -404,8 +414,10 @@ class FTappable extends StatefulWidget {
     this.semanticsChecked,
     this.semanticsExpanded,
     this.semanticsInMutuallyExclusiveGroup,
+    this.semanticsRole,
     this.excludeSemantics = false,
     this.autofocus = false,
+    this.hoverFocus = false,
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
@@ -465,8 +477,10 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('semanticsChecked', semanticsChecked))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
       ..add(DiagnosticsProperty('semanticsInMutuallyExclusiveGroup', semanticsInMutuallyExclusiveGroup))
+      ..add(EnumProperty('semanticsRole', semanticsRole))
       ..add(FlagProperty('excludeSemantics', value: excludeSemantics, ifTrue: 'excludeSemantics'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(FlagProperty('hoverFocus', value: hoverFocus, ifTrue: 'hoverFocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
@@ -700,6 +714,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
       checked: widget.semanticsChecked,
       expanded: widget.semanticsExpanded,
       inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
+      role: widget.semanticsRole,
       selected: widget.semanticsChecked == null ? widget.selected : null,
       excludeSemantics: widget.excludeSemantics,
       // When grouped (_entries != null), onTap/onLongPress are nullified so the group owns pointer gestures. We
@@ -733,13 +748,19 @@ class _FTappableState<T extends FTappable> extends State<T> {
             child: MouseRegion(
               cursor: _style.cursor.resolve(_current),
               onEnter: (_) {
+                if (widget.hoverFocus) {
+                  _focus.requestFocus();
+                }
                 setState(() => _update(.hovered, true));
                 widget.onHoverChange?.call(true);
               },
-              onExit: (_) => setState(() {
-                _update(.hovered, false);
+              onExit: (_) {
+                if (widget.hoverFocus) {
+                  _focus.unfocus();
+                }
+                setState(() => _update(.hovered, false));
                 widget.onHoverChange?.call(false);
-              }),
+              },
               // When in a group, the group's gesture recognizer handles primary press/long-press.
               // The Listener and primary GestureDetector callbacks are nullified.
               //
@@ -912,8 +933,10 @@ class const AnimatedTappable({
   super.semanticsChecked,
   super.semanticsExpanded,
   super.semanticsInMutuallyExclusiveGroup,
+  super.semanticsRole,
   super.excludeSemantics,
   super.autofocus,
+  super.hoverFocus,
   super.focusNode,
   super.onFocusChange,
   super.onHoverChange,

@@ -137,6 +137,9 @@ prepare:
 		if [ "$(package)" = "forui_lucide" ]; then \
 			sed -i '' 's/forui_lucide: ^.*/forui_lucide: ^$(version)/' forui/pubspec.yaml; \
 			echo "  Updated forui/pubspec.yaml"; \
+		elif [ "$(package)" = "forui_phosphor" ]; then \
+			sed -i '' 's/forui_phosphor: ^.*/forui_phosphor: ^$(version)/' forui/example/pubspec.yaml; \
+			echo "  Updated forui/example/pubspec.yaml"; \
 		elif [ "$(package)" = "forui" ]; then \
 			sed -i '' 's/forui: ^.*/forui: ^$(version)/' forui_hooks/pubspec.yaml; \
 			echo "  Updated forui_hooks/pubspec.yaml"; \
