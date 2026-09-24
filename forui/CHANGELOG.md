@@ -1,4 +1,4 @@
-## 0.27.1 (Next)
+## 0.27.1
 
 ### `FSelectMenuTile`
 * Fix the menu arrow's base being crossed by a border.
