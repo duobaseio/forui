@@ -184,6 +184,37 @@ void main() {
 
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/error-${theme.name}.png'));
       });
+
+      testWidgets('arrow - ${theme.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: .topCenter,
+            child: FTileGroup(
+              children: [
+                FSelectMenuTile<int>(
+                  selectControl: const .managedRadio(initial: 1),
+                  menuArrow: .childCenter,
+                  menuIntrinsicWidth: true,
+                  prefix: const Icon(FLucideIcons.calendarSync),
+                  title: const Text('Type'),
+                  details: const Text('Subscription'),
+                  menu: const [
+                    .suffix(prefix: Icon(FLucideIcons.calendarSync), title: Text('Subscription'), value: 1),
+                    .suffix(prefix: Icon(FLucideIcons.receipt), title: Text('Bill'), value: 2),
+                    .suffix(prefix: Icon(FLucideIcons.wallet), title: Text('Income'), value: 3),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Type'));
+        await tester.pumpAndSettle();
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('select-menu-tile/${theme.name}/arrow.png'));
+      });
     }
   });
 

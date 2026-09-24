@@ -1,3 +1,9 @@
+## 0.27.1 (Next)
+
+### `FSelectMenuTile`
+* Fix the menu arrow's base being crossed by a border.
+
+
 ## 0.27.0
 
 This update ships a refreshed tooltip & support for adding arrows to context menus and popovers. In addition, substantial 

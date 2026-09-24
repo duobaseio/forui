@@ -641,6 +641,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           barrierSemanticsDismissible: widget.menuBarrierSemanticsDismissible,
           cutout: widget.menuCutout,
           cutoutBuilder: widget.menuCutoutBuilder,
+          popoverClipBehavior: .antiAlias,
           popoverBuilder: (_, _) {
             if (widget._menu case final menu?) {
               return FInheritedItemData(
