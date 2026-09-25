@@ -96,13 +96,15 @@ class FBottomNavigationBar extends StatelessWidget {
       row = FTappableGroup(child: row);
     }
 
+    final bottomInset = safeAreaBottom ? 0.0 : (MediaQuery.viewPaddingOf(context).bottom * 2 / 3);
+
     Widget bar = DecoratedBox(
       decoration: style.decoration,
       child: SafeArea(
         top: safeAreaTop,
         bottom: safeAreaBottom,
         child: Padding(
-          padding: padding.copyWith(bottom: padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3)),
+          padding: padding.copyWith(bottom: padding.bottom + bottomInset),
           child: row,
         ),
       ),

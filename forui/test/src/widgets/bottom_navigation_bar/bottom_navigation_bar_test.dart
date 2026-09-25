@@ -90,4 +90,55 @@ void main() {
       );
     });
   });
+
+  group('safeAreaBottom', () {
+    testWidgets('safeAreaBottom: false adds viewPadding.bottom * 2 / 3 to inner padding', (tester) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(viewPadding: EdgeInsets.only(bottom: 48)),
+          child: TestScaffold.app(
+            child: const FBottomNavigationBar(
+              children: [FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home'))],
+            ),
+          ),
+        ),
+      );
+
+      final padding = tester.widget<Padding>(
+        find
+            .descendant(
+              of: find.descendant(of: find.byType(FBottomNavigationBar), matching: find.byType(SafeArea)),
+              matching: find.byType(Padding),
+            )
+            .at(1),
+      );
+
+      expect((padding.padding as EdgeInsets).bottom, 37.0);
+    });
+
+    testWidgets('safeAreaBottom: true does not double-pad inner padding', (tester) async {
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(viewPadding: EdgeInsets.only(bottom: 48)),
+          child: TestScaffold.app(
+            child: const FBottomNavigationBar(
+              safeAreaBottom: true,
+              children: [FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home'))],
+            ),
+          ),
+        ),
+      );
+
+      final padding = tester.widget<Padding>(
+        find
+            .descendant(
+              of: find.descendant(of: find.byType(FBottomNavigationBar), matching: find.byType(SafeArea)),
+              matching: find.byType(Padding),
+            )
+            .at(1),
+      );
+
+      expect((padding.padding as EdgeInsets).bottom, 5.0);
+    });
+  });
 }
