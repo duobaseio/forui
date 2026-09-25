@@ -1,4 +1,4 @@
-## 0.27.2 (Next)
+## 0.27.2
 
 ### `FBottomNavigationBar`
 * Fix `FBottomNavigationBar` double-padding inner content when `safeAreaBottom` is true.
