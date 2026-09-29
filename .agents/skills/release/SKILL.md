@@ -9,7 +9,7 @@ Release $0 at version $1.
 
 ## Step 1: Prepare
 
-Run `make prepare package=$0 v=$1`. If it fails, report the error and stop.
+Run `make prepare package=$0 version=$1`. If it fails, report the error and stop.
 
 ## Step 2: Commit & PR
 
@@ -35,4 +35,4 @@ git checkout main && git pull
 
 ## Step 5: Release
 
-Run `make release package=$0 v=$1 force=true`.
+Run `make release package=$0 version=$1 force=true`.

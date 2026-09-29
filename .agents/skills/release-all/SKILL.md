@@ -9,7 +9,7 @@ Release all packages (forui_lucide, forui_phosphor, forui, forui_hooks) at versi
 
 ## Step 1: Prepare
 
-Run `make prepare-all v=$0`. If it fails, report the error and stop.
+Run `make prepare-all version=$0`. If it fails, report the error and stop.
 
 ## Step 2: Commit & PR
 
@@ -35,4 +35,4 @@ git checkout main && git pull
 
 ## Step 5: Release
 
-Run `make release-all v=$0 force=true`.
+Run `make release-all version=$0 force=true`.
