@@ -1,4 +1,4 @@
-## 0.27.3 (Next)
+## 0.27.3
 
 ### `FToast`
 * Change toasts to auto-dismiss when `FAccessibility.accessibleNavigation` is true.
