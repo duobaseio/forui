@@ -425,6 +425,45 @@ void main() {
       });
     }
 
+    for (final (directions, offset) in [
+      (const [AxisDirection.left, AxisDirection.right], const Offset(-200, 0)),
+      (const [AxisDirection.left, AxisDirection.right], const Offset(200, 0)),
+      (const [AxisDirection.right, AxisDirection.left], const Offset(-200, 0)),
+      (const [AxisDirection.right, AxisDirection.left], const Offset(200, 0)),
+      (const [AxisDirection.up, AxisDirection.down], const Offset(0, -100)),
+      (const [AxisDirection.up, AxisDirection.down], const Offset(0, 100)),
+      (const [AxisDirection.down, AxisDirection.up], const Offset(0, -100)),
+      (const [AxisDirection.down, AxisDirection.up], const Offset(0, 100)),
+    ]) {
+      testWidgets('$directions with $offset - both directions on same axis - dismisses', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FToaster(
+              child: Center(
+                child: Column(mainAxisSize: .min, children: [button(.bottomCenter, directions)]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        final gesture = await tester.createPointerGesture();
+        await tester.pump();
+
+        await gesture.moveTo(tester.getCenter(find.text('3')));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.timedDrag(find.text('2'), offset, const Duration(seconds: 1));
+        await tester.pumpAndSettle();
+
+        expect(find.text('1'), findsOne);
+        expect(find.text('2'), findsNothing);
+        expect(find.text('3'), findsOne);
+      });
+    }
+
     for (final (threshold, offset, dismissed) in [
       (0.3, const Offset(-100, 0), true),
       (0.8, const Offset(-100, 0), false),
@@ -656,7 +695,7 @@ void main() {
       semantics.dispose();
     });
 
-    testWidgets('does not auto-dismiss when accessible navigation is enabled', (tester) async {
+    testWidgets('auto-dismisses when accessible navigation is enabled', (tester) async {
       tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
         accessibleNavigation: true,
       );
@@ -676,7 +715,62 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.text('1'), findsExactly(2));
 
-      await tester.pumpAndSettle(const Duration(seconds: 10)); // Well past the 5s default.
+      await tester.pump(const Duration(seconds: 6)); // Past the 5s default.
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsOne);
+    });
+
+    testWidgets('auto-dismisses when accessible navigation is enabled while shown', (tester) async {
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1')]),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsExactly(2));
+
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      await tester.pump();
+
+      await tester.pump(const Duration(seconds: 6)); // Past the 5s default.
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsOne);
+    });
+
+    testWidgets('does not auto-dismiss when duration is null and accessible navigation is enabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1', null, .bottomRight, null)]),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsExactly(2));
+
+      await tester.pump(const Duration(seconds: 10));
+      await tester.pumpAndSettle();
 
       expect(find.text('1'), findsExactly(2));
     });

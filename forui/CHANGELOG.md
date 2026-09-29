@@ -1,3 +1,11 @@
+## 0.27.3 (Next)
+
+### `FToast`
+* Change toasts to auto-dismiss when `FAccessibility.accessibleNavigation` is true.
+
+* Fix toasts not being dismissible in both directions of an axis when `swipeToDismiss` contains both.
+
+
 ## 0.27.2
 
 ### `FBottomNavigationBar`

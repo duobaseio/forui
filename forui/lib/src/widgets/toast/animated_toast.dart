@@ -168,13 +168,8 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Toasts should not auto-dismiss when accessible navigation is enabled.
     _accessibleNavigation = context.accessibility.accessibleNavigation;
     _motion = context.accessibility.motion;
-    if (_accessibleNavigation) {
-      _timer?.cancel();
-      _timer = null;
-    }
   }
 
   @override
@@ -264,7 +259,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   }
 
   void _resumeDismissing([Duration stagger = .zero]) {
-    if (widget.duration case final duration? when !_accessibleNavigation) {
+    if (widget.duration case final duration?) {
       _timer?.cancel();
       _timer = Timer(duration + stagger, _startDismissing);
     }
@@ -329,15 +324,12 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
                 }
               },
               onHorizontalDragUpdate: (details) {
-                if (widget.swipeToDismiss.contains(AxisDirection.left)) {
+                if (!disjoint(widget.swipeToDismiss, _horizontal)) {
                   setState(() {
                     final offset = _swipeFraction + Offset(details.primaryDelta! / context.size!.width, 0);
-                    _swipeFraction = Offset(offset.dx.clamp(-1.1, 0.05), offset.dy);
-                  });
-                } else if (widget.swipeToDismiss.contains(AxisDirection.right)) {
-                  setState(() {
-                    final offset = _swipeFraction + Offset(details.primaryDelta! / context.size!.width, 0);
-                    _swipeFraction = Offset(offset.dx.clamp(-0.05, 1.1), offset.dy);
+                    final min = widget.swipeToDismiss.contains(AxisDirection.left) ? -1.1 : -0.05;
+                    final max = widget.swipeToDismiss.contains(AxisDirection.right) ? 1.1 : 0.05;
+                    _swipeFraction = Offset(offset.dx.clamp(min, max), offset.dy);
                   });
                 }
               },
@@ -359,15 +351,12 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
                 }
               },
               onVerticalDragUpdate: (details) {
-                if (widget.swipeToDismiss.contains(AxisDirection.up)) {
+                if (!disjoint(widget.swipeToDismiss, _vertical)) {
                   setState(() {
                     final offset = _swipeFraction + Offset(0, details.primaryDelta! / context.size!.height);
-                    _swipeFraction = Offset(offset.dx, offset.dy.clamp(-1.1, 0.05));
-                  });
-                } else if (widget.swipeToDismiss.contains(AxisDirection.down)) {
-                  setState(() {
-                    final offset = _swipeFraction + Offset(0, details.primaryDelta! / context.size!.height);
-                    _swipeFraction = Offset(offset.dx, offset.dy.clamp(-0.05, 1.1));
+                    final min = widget.swipeToDismiss.contains(AxisDirection.up) ? -1.1 : -0.05;
+                    final max = widget.swipeToDismiss.contains(AxisDirection.down) ? 1.1 : 0.05;
+                    _swipeFraction = Offset(offset.dx, offset.dy.clamp(min, max));
                   });
                 }
               },
