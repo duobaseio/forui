@@ -233,18 +233,24 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
     var child = widget.builder(context, _controller, widget.child);
     if (hover || longPress) {
-      child = CallbackShortcuts(
-        bindings: {const SingleActivator(.escape): _exit},
-        child: Focus(
-          // This is required as onFocusChange is not called when focus is shifted from a child to a nested child.
-          onKeyEvent: (_, event) {
-            _toggle(_focus.hasFocus);
+      child = Focus(
+        onKeyEvent: (_, event) {
+          if (event.logicalKey == .escape) {
+            if (event is! KeyUpEvent && _controller.status.isForwardOrCompleted) {
+              _exit();
+              return .handled;
+            }
+
             return .ignored;
-          },
-          focusNode: _focus,
-          onFocusChange: _toggle,
-          child: child,
-        ),
+          }
+
+          // This is required as onFocusChange is not called when focus is shifted from a child to a nested child.
+          _toggle(_focus.hasFocus);
+          return .ignored;
+        },
+        focusNode: _focus,
+        onFocusChange: _toggle,
+        child: child,
       );
     }
 

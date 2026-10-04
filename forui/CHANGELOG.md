@@ -1,3 +1,10 @@
+## 0.27.4
+
+### `FTooltip`
+* Fix `FTooltip` consuming the escape key when the tooltip is hidden.
+* Fix `FTooltip` not being dismissed by the escape key when shown via focus.
+
+
 ## 0.27.3
 
 ### `FToast`

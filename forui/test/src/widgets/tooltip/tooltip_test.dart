@@ -427,5 +427,89 @@ void main() {
 
       expect(find.text('tip'), findsOneWidget);
     });
+
+    testWidgets('escape hides the tip & is consumed', (tester) async {
+      final focus = autoDispose(FocusNode());
+      var escaped = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(.escape): () => escaped = true},
+            child: FTooltip(
+              tipBuilder: (_, _) => const Text('tip'),
+              child: FButton(focusNode: focus, onPress: () {}, child: const Text('button')),
+            ),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('tip'), findsOne);
+
+      // Escape must dismiss the tip without moving focus (WCAG 1.4.13 dismissible).
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('tip'), findsNothing);
+      expect(escaped, false);
+    });
+
+    testWidgets('escape is not consumed when the tip is hidden', (tester) async {
+      final focus = autoDispose(FocusNode());
+      var escaped = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(.escape): () => escaped = true},
+            child: FTooltip(
+              tipBuilder: (_, _) => const Text('tip'),
+              child: FButton(focusNode: focus, onPress: () {}, child: const Text('button')),
+            ),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pump();
+
+      expect(find.text('tip'), findsNothing);
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(escaped, true);
+    });
+
+    testWidgets('escape closes the enclosing popover when the tip is hidden', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester, shown: true));
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            control: .managed(controller: controller),
+            autofocus: false,
+            popoverBuilder: (_, _) => FTooltip(
+              tipBuilder: (_, _) => const Text('tip'),
+              child: FButton(focusNode: focus, onPress: () {}, child: const Text('button')),
+            ),
+            child: const SizedBox.square(dimension: 10),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      focus.requestFocus();
+      await tester.pump();
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('button'), findsNothing);
+    });
   });
 }
