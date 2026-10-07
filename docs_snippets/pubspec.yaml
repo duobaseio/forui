@@ -11,7 +11,7 @@ resolution: workspace
 dependencies:
   auto_route: ^11.0.0
   collection: ^1.19.1
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^2.0.0
   cupertino_ui: ^1.0.0
   flutter:
     sdk: flutter
