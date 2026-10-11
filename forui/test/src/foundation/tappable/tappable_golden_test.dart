@@ -27,7 +27,9 @@ void main() {
       return sheet.record(
         TestScaffold(
           // Stops the sheet's per-frame repaint from reaching the bounce so that only the bounce's own repaints show.
-          child: RepaintBoundary(child: wrapped ? Padding(padding: .zero, child: tappable) : tappable),
+          child: RepaintBoundary(
+            child: wrapped ? Padding(padding: .zero, child: tappable) : tappable,
+          ),
         ),
         recording: recording,
       );
