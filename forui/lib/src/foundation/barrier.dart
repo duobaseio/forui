@@ -420,10 +420,10 @@ class _RenderSemanticsClipper extends RenderProxyBox {
 
     if (attached) {
       _clipDetailsNotifier.removeListener(markNeedsSemanticsUpdate);
+      newNotifier.addListener(markNeedsSemanticsUpdate);
     }
 
     _clipDetailsNotifier = newNotifier;
-    _clipDetailsNotifier.addListener(markNeedsSemanticsUpdate);
     markNeedsSemanticsUpdate();
   }
 

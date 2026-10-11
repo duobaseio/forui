@@ -1,3 +1,9 @@
+## 0.27.5
+
+### `FTappable`
+* Fix `FTappable` not animating its bounce after being re-parented, e.g. after a `CupertinoSheetRoute` is shown over it.
+
+
 ## 0.27.4
 
 ### `FTooltip`
