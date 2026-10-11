@@ -21,11 +21,10 @@ class const Bounce({
 }
 
 @internal
-class RenderBounce extends RenderProxyBox {
-  Animation<double> _bounce;
-  double? _bounceFloor;
-
-  new(this._bounce, this._bounceFloor) {
+class RenderBounce(var Animation<double> _bounce, var double? _bounceFloor) extends RenderProxyBox {
+  @override
+  void attach(PipelineOwner owner) {
+    super.attach(owner);
     _bounce.addListener(markNeedsPaint);
   }
 
@@ -70,8 +69,11 @@ class RenderBounce extends RenderProxyBox {
 
   set bounce(Animation<double> value) {
     if (_bounce != value) {
-      _bounce.removeListener(markNeedsPaint);
-      _bounce = value..addListener(markNeedsPaint);
+      if (attached) {
+        _bounce.removeListener(markNeedsPaint);
+        value.addListener(markNeedsPaint);
+      }
+      _bounce = value;
       markNeedsPaint();
     }
   }

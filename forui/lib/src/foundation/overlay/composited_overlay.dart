@@ -181,9 +181,12 @@ class RenderOverlayLayer extends RenderProxyBox {
       return;
     }
 
-    _notifier.removeListener(_schedule);
+    if (attached) {
+      _notifier.removeListener(_schedule);
+      value.addListener(_schedule);
+    }
+
     _notifier = value;
-    _notifier.addListener(_schedule);
   }
 
   ChildLayerLink get link => _link;
