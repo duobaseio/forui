@@ -2,6 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/overlay/composited_overlay.dart';
+import 'package:forui/src/foundation/overlay/layer.dart';
 
 import '../../test_scaffold.dart';
 
@@ -119,11 +121,47 @@ void main() {
 
       // Grow the child to 200px.
       childHeight.value = 200;
-      await tester.pump(const Duration(milliseconds: 1));
       await tester.pumpAndSettle();
 
       // The overlay Stack should now be 200px tall, so Positioned(bottom: -20) → 216.
       expect(tester.getTopLeft(find.byKey(const Key('overlay-content'))), const Offset(16, 216));
+    });
+  });
+
+  group('CompositedOverlay', () {
+    late FChangeNotifier notifier;
+
+    setUp(() => notifier = autoDispose(FChangeNotifier()));
+
+    Widget overlay() => TestScaffold.app(
+      child: CompositedOverlay(notifier: notifier, link: ChildLayerLink(), child: const SizedBox.square(dimension: 10)),
+    );
+
+    testWidgets('layout requested outside of a frame schedules a frame', (tester) async {
+      await tester.pumpWidget(overlay());
+      await tester.pumpAndSettle();
+
+      final renderObject = tester.renderObject<RenderOverlayLayer>(find.byType(CompositedOverlay));
+      expect(tester.binding.hasScheduledFrame, false);
+
+      notifier.notifyListeners();
+      expect(tester.binding.hasScheduledFrame, true);
+
+      await tester.pump();
+      expect(renderObject.debugNeedsLayout, true);
+
+      await tester.pump();
+      expect(renderObject.debugNeedsLayout, false);
+    });
+
+    testWidgets('layout requested outside of a frame is skipped when unmounted first', (tester) async {
+      await tester.pumpWidget(overlay());
+      await tester.pumpAndSettle();
+
+      notifier.notifyListeners();
+      await tester.pumpWidget(const SizedBox());
+
+      expect(tester.takeException(), null);
     });
   });
 }

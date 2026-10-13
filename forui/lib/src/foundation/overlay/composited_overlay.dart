@@ -78,10 +78,18 @@ class RenderOverlayLayer extends RenderProxyBox {
     notifier.addListener(_schedule);
   }
 
-  // Defers markNeedsLayout via scheduleTask because this is called during the child's paint, where calling
+  // Defers markNeedsLayout to the end of the frame because this is called during the child's paint, where calling
   // markNeedsLayout directly is not allowed. This means the overlay's layout may lag one frame behind the child's
-  // size — see FOverlay's "Overlay positioning & child resizing" doc for details.
-  void _schedule() => SchedulerBinding.instance.scheduleTask(markNeedsLayout, .touch);
+  // size — see FOverlay's "Overlay positioning & child resizing" doc for details. ensureVisualUpdate() only schedules
+  // a frame when called outside of one so that the callback still runs.
+  void _schedule() => SchedulerBinding.instance
+    ..addPostFrameCallback((_) {
+      // This render object may have been detached & disposed since.
+      if (attached) {
+        markNeedsLayout();
+      }
+    }, debugLabel: 'RenderOverlayLayer.markNeedsLayout')
+    ..ensureVisualUpdate();
 
   @override
   void performLayout() {

@@ -245,9 +245,6 @@ void main() {
 
       left.value = 300;
       await tester.pumpAndSettle();
-      // The portal repositions in a scheduled task that pumpAndSettle does not wait for.
-      await tester.pump(const Duration(milliseconds: 1));
-      await tester.pumpAndSettle();
 
       expect(geometry.value, (child: const Rect.fromLTWH(50, -100, 100, 100), portal: const Size(200, 50)));
       expect(phases, [SchedulerPhase.postFrameCallbacks]);

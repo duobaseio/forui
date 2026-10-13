@@ -416,12 +416,21 @@ class OverlayLayer({
 
     // Refresh the child's global offset from the render box. This is needed because RenderChildLayer.paint() may not
     // run when an intermediate repaint boundary (e.g. CustomScrollView's RenderViewport) blocks paint propagation.
-    // If the offset changed, schedule a repaint so the overflow calculation uses the fresh value.
+    // If the offset changed, schedule a repaint at the end of the frame so the overflow calculation uses the fresh
+    // value. ensureVisualUpdate() only schedules a frame when called outside of one, e.g. OffsetLayer.toImage(...), so
+    // that the callback still runs.
     if (link.childRenderBox case final child? when child.attached && child.hasSize) {
       if (child.localToGlobal(.zero) case final current when current != leader.globalOffset) {
         leader.globalOffset = current;
         if (overlayRenderBox case final overlay? when overlay.attached) {
-          SchedulerBinding.instance.scheduleTask(overlay.markNeedsPaint, .touch);
+          SchedulerBinding.instance
+            ..addPostFrameCallback((_) {
+              // The overlay may have been detached & disposed since.
+              if (overlay.attached) {
+                overlay.markNeedsPaint();
+              }
+            }, debugLabel: 'OverlayLayer.markNeedsPaint')
+            ..ensureVisualUpdate();
         }
       }
     }
