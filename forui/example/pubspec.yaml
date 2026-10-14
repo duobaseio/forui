@@ -35,7 +35,7 @@ dependencies:
   iconoir_flutter: ^7.11.1
   intl: any
   lottie: ^3.3.2
-  marionette_flutter: ^0.6.0
+  marionette_flutter: ^0.7.0
   material_ui: ^1.0.0
   remixicon: ^4.9.3
   sugar: ^4.0.0
