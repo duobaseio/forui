@@ -1,4 +1,4 @@
-## 0.27.6 (Next)
+## 0.27.6
 
 ### `FOverlay`
 * Fix `FOverlay` mutating a disposed render object when unmounted right after its child moves.
