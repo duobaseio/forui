@@ -254,4 +254,46 @@ void main() {
       expect(phases, [SchedulerPhase.postFrameCallbacks]);
     });
   });
+
+  group('scroll', () {
+    // Without repaint boundaries, the child is repainted when scrolled & RenderOverlayLayer lays out the portal again.
+    // With them, the child is only composited at a new offset & OverlayLayer repaints the portal.
+    for (final repaintBoundaries in [false, true]) {
+      testWidgets('unmounted before the portal is updated, repaint boundaries $repaintBoundaries', (tester) async {
+        final controller = autoDispose(ScrollController());
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: SizedBox(
+              height: 400,
+              child: ListView(
+                controller: controller,
+                addRepaintBoundaries: repaintBoundaries,
+                children: [
+                  const SizedBox(height: 200),
+                  Center(
+                    child: FPortal(
+                      control: .lifted(shown: true, onChange: (_) {}),
+                      portalBuilder: (_, _, _) => const Text('portal'),
+                      child: const SizedBox.square(dimension: 40),
+                    ),
+                  ),
+                  const SizedBox(height: 1000),
+                ],
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        controller.jumpTo(20);
+        await tester.pump();
+
+        await tester.pumpWidget(const SizedBox());
+        await tester.pump(const Duration(milliseconds: 1));
+
+        expect(tester.takeException(), null);
+      });
+    }
+  });
 }

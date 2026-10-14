@@ -443,8 +443,7 @@ void main() {
       await tester.pumpAndSettle();
 
       scrollController.jumpTo(150);
-      await tester.pump(const Duration(milliseconds: 1));
-      await tester.pump(const Duration(milliseconds: 1));
+      await tester.pumpAndSettle();
 
       await expectLater(
         find.byType(TestScaffold),
@@ -484,8 +483,7 @@ void main() {
       await tester.pumpAndSettle();
 
       scrollController.jumpTo(150);
-      await tester.pump(const Duration(milliseconds: 1));
-      await tester.pump(const Duration(milliseconds: 1));
+      await tester.pumpAndSettle();
 
       await expectLater(
         find.byType(TestScaffold),

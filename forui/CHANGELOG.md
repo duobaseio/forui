@@ -1,8 +1,15 @@
 ## 0.27.6 (Next)
 
-### `FOverlay`, `FPortal` & `FPointPortal`
-* Fix overlays (and dependents like `FPopover`, `FSelect`, and `FTooltip`) mutating a disposed render object when
-  unmounted right after their child moves.
+### `FOverlay`
+* Fix `FOverlay` mutating a disposed render object when unmounted right after its child moves.
+
+
+### `FPointPortal`
+* Fix `FPointPortal` mutating a disposed render object when unmounted right after its child moves.
+
+
+### `FPortal`
+* Fix `FPortal` mutating a disposed render object when unmounted right after its child moves.
 
 
 ## 0.27.5

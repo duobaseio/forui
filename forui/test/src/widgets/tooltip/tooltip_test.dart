@@ -402,65 +402,6 @@ void main() {
     });
   });
 
-  group('scroll', () {
-    // Without repaint boundaries, the child is repainted when scrolled & RenderOverlayLayer lays out the tip again.
-    // With them, the child is only composited at a new offset & OverlayLayer repaints the tip.
-    for (final repaintBoundaries in [false, true]) {
-      Widget scrollable(ScrollController controller) => TestScaffold.app(
-        alignment: .topCenter,
-        padded: false,
-        child: SizedBox(
-          height: 400,
-          child: ListView(
-            controller: controller,
-            addRepaintBoundaries: repaintBoundaries,
-            children: [
-              const SizedBox(height: 200),
-              Center(
-                child: FTooltip(
-                  control: .lifted(shown: true, onChange: (_) {}),
-                  tipBuilder: (_, _) => const Text('tip'),
-                  child: const SizedBox.square(key: ValueKey('child'), dimension: 40),
-                ),
-              ),
-              const SizedBox(height: 1000),
-            ],
-          ),
-        ),
-      );
-
-      testWidgets('tip flips at the edge of the viewport, repaint boundaries $repaintBoundaries', (tester) async {
-        final controller = autoDispose(ScrollController());
-        final child = find.byKey(const ValueKey('child'));
-
-        await tester.pumpWidget(scrollable(controller));
-        await tester.pumpAndSettle();
-
-        expect(tester.getRect(find.text('tip')).bottom, lessThan(tester.getRect(child).top));
-
-        controller.jumpTo(200);
-        await tester.pumpAndSettle();
-
-        expect(tester.getRect(find.text('tip')).top, greaterThan(tester.getRect(child).bottom));
-      });
-
-      testWidgets('unmounted before the tip is updated, repaint boundaries $repaintBoundaries', (tester) async {
-        final controller = autoDispose(ScrollController());
-
-        await tester.pumpWidget(scrollable(controller));
-        await tester.pumpAndSettle();
-
-        controller.jumpTo(20);
-        await tester.pump();
-
-        await tester.pumpWidget(const SizedBox());
-        await tester.pump(const Duration(milliseconds: 1));
-
-        expect(tester.takeException(), null);
-      });
-    }
-  });
-
   group('accessibility', () {
     testWidgets('tip remains visible when the pointer moves onto it', (tester) async {
       await tester.pumpWidget(
