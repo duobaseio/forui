@@ -44,7 +44,7 @@ dependencies:
   forui:
   forui_cli:
   forui_phosphor:
-  marionette_flutter: ^0.6.0
+  marionette_flutter: ^0.7.0
   hugeicons: ^1.1.7
   tabler_icons_plus: ^3.44.0
   remixicon: ^4.9.3
