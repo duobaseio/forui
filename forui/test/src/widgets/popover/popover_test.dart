@@ -720,5 +720,79 @@ void main() {
 
       expect(escaped, true);
     });
+
+    for (final (motion, disableAnimations) in [
+      (FAccessibilityMotion.all, false),
+      (FAccessibilityMotion.all, true),
+      (FAccessibilityMotion.reduced, false),
+      (FAccessibilityMotion.reduced, true),
+    ]) {
+      testWidgets('fades in over its entrance duration - $motion, disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final controller = autoDispose(FPopoverController(vsync: tester));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            accessibility: FAccessibility(accessibleNavigation: false, motion: motion, focusHighlight: false),
+            child: FPopover(
+              control: .managed(controller: controller),
+              popoverBuilder: (_, _) => const Text('content'),
+              child: const SizedBox.square(dimension: 10),
+            ),
+          ),
+        );
+
+        unawaited(controller.show());
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 50));
+
+        // The fade follows FAccessibility.motion, not the platform's disableAnimations.
+        final fade = find.ancestor(of: find.text('content'), matching: find.byType(FadeTransition)).first;
+        expect(tester.widget<FadeTransition>(fade).opacity.value, 0.5);
+
+        await tester.pumpAndSettle();
+      });
+    }
+
+    for (final disableAnimations in [false, true]) {
+      testWidgets('shows & hides instantly under disabled motion - disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final controller = autoDispose(FPopoverController(vsync: tester));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            accessibility: const FAccessibility(accessibleNavigation: false, motion: .disabled, focusHighlight: false),
+            child: FPopover(
+              control: .managed(controller: controller),
+              popoverBuilder: (_, _) => const Text('content'),
+              child: const SizedBox.square(dimension: 10),
+            ),
+          ),
+        );
+
+        // No time elapses: the transition's durations are zero.
+        unawaited(controller.show());
+        await tester.pump();
+        expect(controller.status, AnimationStatus.completed);
+        expect(find.text('content'), findsOne);
+
+        unawaited(controller.hide());
+        await tester.pump();
+        expect(controller.status, AnimationStatus.dismissed);
+
+        await tester.pumpAndSettle();
+        expect(find.text('content'), findsNothing);
+      });
+    }
   });
 }

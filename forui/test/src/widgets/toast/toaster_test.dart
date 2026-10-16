@@ -6,6 +6,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/toast/animated_toast.dart';
+import 'package:forui/src/widgets/toast/animated_toaster.dart';
 import 'package:forui/src/widgets/toast/toaster.dart';
 
 import '../../test_scaffold.dart';
@@ -844,6 +845,40 @@ void main() {
       expect(find.text('1'), findsNothing);
       expect(dismissed, 1);
     });
+
+    for (final disableAnimations in [false, true]) {
+      testWidgets('expands the stack over its duration under all motion - disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            accessibility: const FAccessibility(accessibleNavigation: false, motion: .all, focusHighlight: false),
+            child: FToaster(
+              child: Center(
+                child: Column(mainAxisSize: .min, children: [small('1', 'button', .bottomRight, null)]),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('1'));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 200));
+
+        // The stack's expansion follows FAccessibility.motion, not the platform's disableAnimations.
+        expect(tester.widget<AnimatedToaster>(find.byType(AnimatedToaster)).expand, Curves.easeOutCubic.transform(0.5));
+
+        await tester.pumpAndSettle();
+      });
+    }
   });
 
   group('scope liveness', () {

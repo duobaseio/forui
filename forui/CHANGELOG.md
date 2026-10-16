@@ -1,3 +1,64 @@
+## 0.27.7 (Next)
+
+### `FAccordionItem`
+* Fix `FAccordionItem` animating at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FContextMenu`
+* Fix `FContextMenu` animating at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+* Fix `FContextMenu` not showing and hiding instantly when `FAccessibility.motion` is disabled.
+
+
+### `FDeterminateProgress`
+* Fix `FDeterminateProgress` animating at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FDialog`
+* Fix `FDialogRoute` animating at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FLabel`
+* Fix `FLabel` animating its error at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FPopover`
+* Fix `FPopover` (and `FSelect`, `FAutocomplete`) animating at 5% of its duration when the platform disables
+  animations and `FAccessibility.motion` is not disabled.
+* Fix `FPopover` (and `FSelect`, `FAutocomplete`) not showing and hiding instantly when `FAccessibility.motion` is
+  disabled.
+
+
+### `FSheet` & `FPersistentSheet`
+* Fix `FSheet` and `FPersistentSheet` animating at 5% of their duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FSidebarItem`
+* Fix `FSidebarItem` animating at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FTappable`
+* Fix `FTappable` bouncing at 5% of its duration when the platform disables animations and `FAccessibility.motion`
+  is not disabled.
+
+
+### `FToast`
+* Fix the toast stack expanding and collapsing at 5% of its duration when the platform disables animations and
+  `FAccessibility.motion` is not disabled.
+
+
+### `FTooltip`
+* Fix `FTooltip` animating at 5% of its duration when the platform disables animations and `FAccessibility.motion`
+  is not disabled.
+* Fix `FTooltip` not showing and hiding instantly when `FAccessibility.motion` is disabled.
+
+
 ## 0.27.6
 
 ### `FOverlay`

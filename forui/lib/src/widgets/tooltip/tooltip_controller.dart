@@ -23,6 +23,7 @@ class FTooltipController extends FChangeNotifier {
   late Animation<double> _fade;
   late Animation<double> _scale;
   FTooltipMotion _motion;
+  bool _disabled = false;
 
   /// Creates a [FTooltipController] with the given [vsync] and [shown].
   new({required TickerProvider vsync, bool shown = false}) : _motion = const FTooltipMotion() {
@@ -35,6 +36,8 @@ class FTooltipController extends FChangeNotifier {
       value: shown ? 1 : 0,
       duration: _motion.entranceDuration,
       reverseDuration: _motion.exitDuration,
+      // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
+      animationBehavior: .preserve,
     );
     _curveFade = CurvedAnimation(parent: _animation, curve: _motion.fadeInCurve, reverseCurve: _motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: _motion.expandCurve, reverseCurve: _motion.collapseCurve);
@@ -118,11 +121,12 @@ extension InternalTooltipController on FTooltipController {
 
   Animation<double> get scale => _scale;
 
-  void updateMotion(FTooltipMotion motion) {
-    if (_motion != motion) {
+  void updateMotion(FTooltipMotion motion, FAccessibilityMotion accessibility) {
+    final disabled = accessibility == .disabled;
+    if (_motion != motion || _disabled != disabled) {
       _animation
-        ..duration = motion.entranceDuration
-        ..reverseDuration = motion.exitDuration;
+        ..duration = disabled ? .zero : motion.entranceDuration
+        ..reverseDuration = disabled ? .zero : motion.exitDuration;
       _curveFade
         ..curve = motion.fadeInCurve
         ..reverseCurve = motion.fadeOutCurve;
@@ -132,6 +136,7 @@ extension InternalTooltipController on FTooltipController {
       _scale = motion.scaleTween.animate(_curveScale);
       _fade = motion.fadeTween.animate(_curveFade);
       _motion = motion;
+      _disabled = disabled;
     }
   }
 }

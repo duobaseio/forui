@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/accessibility.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
 
 part 'persistent_sheet.design.dart';
@@ -111,6 +112,7 @@ FPersistentSheetController showFPersistentSheet({
   final controller = FPersistentSheetController._(
     vsync: state,
     style: sheetStyle,
+    animationBehavior: AccessibilityScopeElement.transitionBehavior(state.context),
     key: key,
     keepAliveOffstage: keepAliveOffstage,
     setState: (function) {
@@ -170,11 +172,12 @@ class FPersistentSheetController {
   new _({
     required TickerProvider vsync,
     required FSheetStyle style,
+    required AnimationBehavior animationBehavior,
     required this._onDispose,
     required this.key,
     required this.keepAliveOffstage,
     required this.setState,
-  }) : _controller = Sheet.createAnimationController(vsync, style.motion) {
+  }) : _controller = Sheet.createAnimationController(vsync, style.motion, animationBehavior) {
     if (kFlutterMemoryAllocationsEnabled) {
       FlutterMemoryAllocations.instance.dispatchObjectCreated(
         library: 'package:flutter/forui.dart',

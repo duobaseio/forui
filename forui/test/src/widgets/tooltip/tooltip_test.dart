@@ -511,5 +511,79 @@ void main() {
 
       expect(find.text('button'), findsNothing);
     });
+
+    for (final (motion, disableAnimations) in [
+      (FAccessibilityMotion.all, false),
+      (FAccessibilityMotion.all, true),
+      (FAccessibilityMotion.reduced, false),
+      (FAccessibilityMotion.reduced, true),
+    ]) {
+      testWidgets('fades in over its entrance duration - $motion, disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final controller = autoDispose(FTooltipController(vsync: tester));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            accessibility: FAccessibility(accessibleNavigation: false, motion: motion, focusHighlight: false),
+            child: FTooltip(
+              control: .managed(controller: controller),
+              tipBuilder: (_, _) => const Text('tip'),
+              child: const SizedBox.square(dimension: 20),
+            ),
+          ),
+        );
+
+        unawaited(controller.show());
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 50));
+
+        // The fade follows FAccessibility.motion, not the platform's disableAnimations.
+        final fade = find.ancestor(of: find.text('tip'), matching: find.byType(FadeTransition)).first;
+        expect(tester.widget<FadeTransition>(fade).opacity.value, 0.5);
+
+        await tester.pumpAndSettle();
+      });
+    }
+
+    for (final disableAnimations in [false, true]) {
+      testWidgets('shows & hides instantly under disabled motion - disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final controller = autoDispose(FTooltipController(vsync: tester));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            accessibility: const FAccessibility(accessibleNavigation: false, motion: .disabled, focusHighlight: false),
+            child: FTooltip(
+              control: .managed(controller: controller),
+              tipBuilder: (_, _) => const Text('tip'),
+              child: const SizedBox.square(dimension: 20),
+            ),
+          ),
+        );
+
+        // No time elapses: the transition's durations are zero.
+        unawaited(controller.show());
+        await tester.pump();
+        expect(controller.status, AnimationStatus.completed);
+        expect(find.text('tip'), findsOne);
+
+        unawaited(controller.hide());
+        await tester.pump();
+        expect(controller.status, AnimationStatus.dismissed);
+
+        await tester.pumpAndSettle();
+        expect(find.text('tip'), findsNothing);
+      });
+    }
   });
 }

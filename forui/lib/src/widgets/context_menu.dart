@@ -336,7 +336,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _controller.updateMotion(_style.motion);
+    _controller.updateMotion(_style.motion, context.accessibility.motion);
   }
 
   FPopoverMenuStyle get _style => widget.style(context.theme.popoverMenuStyle);
@@ -363,7 +363,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
       _controller.removeStatusListener(_handleStatus);
       _controller = controller..addStatusListener(_handleStatus);
     }
-    _controller.updateMotion(_style.motion);
+    _controller.updateMotion(_style.motion, context.accessibility.motion);
   }
 
   @override
