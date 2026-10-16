@@ -400,5 +400,32 @@ void main() {
 
       semantics.dispose();
     });
+
+    for (final disableAnimations in [false, true]) {
+      testWidgets('fades the error in over its duration under all motion - disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        Widget build(Set<FFormFieldVariant> variants) => TestScaffold(
+          accessibility: const FAccessibility(accessibleNavigation: false, motion: .all, focusHighlight: false),
+          child: FLabel(layout: .vertical, variants: variants, error: const Text('Error'), child: const Text('Child')),
+        );
+
+        await tester.pumpWidget(build({}));
+        await tester.pumpWidget(build({.error}));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 50));
+
+        // The error's fade follows FAccessibility.motion, not the platform's disableAnimations.
+        final fade = find.ancestor(of: find.text('Error'), matching: find.byType(FadeTransition)).first;
+        expect(tester.widget<FadeTransition>(fade).opacity.value, FLabelMotion.defaultErrorFadeTween.transform(0.5));
+
+        await tester.pumpAndSettle();
+      });
+    }
   });
 }

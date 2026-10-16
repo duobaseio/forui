@@ -1426,5 +1426,70 @@ void main() {
 
       semantics.dispose();
     });
+
+    for (final (motion, disableAnimations) in [
+      (FAccessibilityMotion.all, false),
+      (FAccessibilityMotion.all, true),
+      (FAccessibilityMotion.reduced, false),
+      (FAccessibilityMotion.reduced, true),
+    ]) {
+      testWidgets('bounces over its duration - $motion, disableAnimations: $disableAnimations', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final key = GlobalKey<AnimatedTappableState>();
+        await tester.pumpWidget(
+          TestScaffold(
+            accessibility: FAccessibility(accessibleNavigation: false, motion: motion, focusHighlight: false),
+            child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onPress: () {}),
+          ),
+        );
+
+        final gesture = await tester.press(find.byType(AnimatedTappable));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 50));
+
+        // The bounce follows FAccessibility.motion, not the platform's disableAnimations.
+        expect(
+          key.currentState?.bounce.value,
+          FTappableMotion.defaultBounceTween.transform(Curves.easeOutQuart.transform(0.5)),
+        );
+
+        await gesture.up();
+        await tester.pumpAndSettle();
+      });
+    }
+
+    for (final disableAnimations in [false, true]) {
+      testWidgets('skips the bounce instantly under disabled motion - disableAnimations: $disableAnimations', (
+        tester,
+      ) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final key = GlobalKey<AnimatedTappableState>();
+        await tester.pumpWidget(
+          TestScaffold(
+            accessibility: const FAccessibility(accessibleNavigation: false, motion: .disabled, focusHighlight: false),
+            child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onPress: () {}),
+          ),
+        );
+
+        final gesture = await tester.press(find.byType(AnimatedTappable));
+        await tester.pump();
+        expect(key.currentState?.bounce.status, AnimationStatus.completed);
+        expect(key.currentState?.bounce.value, 1.0);
+
+        await gesture.up();
+        await tester.pump();
+        expect(key.currentState?.bounce.status, AnimationStatus.dismissed);
+
+        await tester.pumpAndSettle();
+      });
+    }
   });
 }
