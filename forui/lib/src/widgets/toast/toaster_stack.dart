@@ -43,10 +43,12 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
+    // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
     _controller = AnimationController(
       vsync: this,
       duration: widget.style.motion.expandDuration,
       reverseDuration: widget.style.motion.collapseDuration,
+      animationBehavior: .preserve,
     )..addListener(() => setState(() {}));
     _expand = CurvedAnimation(
       parent: _controller,

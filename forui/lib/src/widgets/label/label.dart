@@ -204,17 +204,20 @@ abstract class LabelState<T extends Label> extends State<T> with TickerProviderS
     super.initState();
     final motion = widget.style.labelMotion;
     final value = widget.variants.contains(FFormFieldVariant.error) ? 1.0 : 0.0;
+    // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
     _sizeController = AnimationController(
       vsync: this,
       value: value,
       duration: motion.errorExpandDuration,
       reverseDuration: motion.errorCollapseDuration,
+      animationBehavior: .preserve,
     )..addStatusListener(_clearError);
     _fadeController = AnimationController(
       vsync: this,
       value: value,
       duration: motion.errorFadeInDuration,
       reverseDuration: motion.errorFadeOutDuration,
+      animationBehavior: .preserve,
     )..addStatusListener(_clearError);
     _curvedSize = CurvedAnimation(
       parent: _sizeController,

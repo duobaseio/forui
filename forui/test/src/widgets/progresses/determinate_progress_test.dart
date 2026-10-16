@@ -77,5 +77,33 @@ void main() {
 
       expect(tester.getSemantics(find.bySemanticsLabel('progress')), isSemantics(value: '90%'));
     });
+
+    for (final (motion, disableAnimations) in [
+      (FAccessibilityMotion.all, false),
+      (FAccessibilityMotion.all, true),
+      (FAccessibilityMotion.reduced, false),
+      (FAccessibilityMotion.reduced, true),
+    ]) {
+      testWidgets('fills over its duration - $motion, disableAnimations: $disableAnimations', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            accessibility: FAccessibility(accessibleNavigation: false, motion: motion, focusHighlight: false),
+            child: const FDeterminateProgress(value: 1),
+          ),
+        );
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 500));
+
+        // The fill follows FAccessibility.motion, not the platform's disableAnimations.
+        expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.5);
+
+        await tester.pumpAndSettle();
+      });
+    }
   });
 }

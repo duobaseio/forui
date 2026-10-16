@@ -160,17 +160,20 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 
       final reduceMotion = motion != .all;
       final disableMotion = motion == .disabled;
+      // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
       _controller = AnimationController(
         vsync: this,
         value: _expanded ? 1.0 : 0.0,
         duration: reduceMotion ? .zero : style.motion.expandDuration,
         reverseDuration: reduceMotion ? .zero : style.motion.collapseDuration,
+        animationBehavior: .preserve,
       );
       _fadeController = AnimationController(
         vsync: this,
         value: _expanded ? 1.0 : 0.0,
         duration: disableMotion ? .zero : style.motion.expandDuration,
         reverseDuration: disableMotion ? .zero : style.motion.collapseDuration,
+        animationBehavior: .preserve,
       );
       _curvedReveal = CurvedAnimation(
         curve: style.motion.expandCurve,

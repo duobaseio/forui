@@ -23,6 +23,7 @@ class FPopoverController extends FChangeNotifier {
   late Animation<double> _scale;
   late Animation<double> _fade;
   FPopoverMotion _motion;
+  bool _disabled = false;
 
   /// Creates a [FPopoverController] with the given [vsync] and [shown].
   new({required TickerProvider vsync, bool shown = false}) : _motion = const FPopoverMotion() {
@@ -35,6 +36,8 @@ class FPopoverController extends FChangeNotifier {
       value: shown ? 1 : 0,
       duration: _motion.entranceDuration,
       reverseDuration: _motion.exitDuration,
+      // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
+      animationBehavior: .preserve,
     );
     _curveFade = CurvedAnimation(parent: _animation, curve: _motion.fadeInCurve, reverseCurve: _motion.fadeOutCurve);
     _curveScale = CurvedAnimation(parent: _animation, curve: _motion.expandCurve, reverseCurve: _motion.collapseCurve);
@@ -122,11 +125,12 @@ extension InternalFPopoverController on FPopoverController {
 
   void removeStatusListener(AnimationStatusListener listener) => _animation.removeStatusListener(listener);
 
-  void updateMotion(FPopoverMotion motion) {
-    if (_motion != motion) {
+  void updateMotion(FPopoverMotion motion, FAccessibilityMotion accessibility) {
+    final disabled = accessibility == .disabled;
+    if (_motion != motion || _disabled != disabled) {
       _animation
-        ..duration = motion.entranceDuration
-        ..reverseDuration = motion.exitDuration;
+        ..duration = disabled ? .zero : motion.entranceDuration
+        ..reverseDuration = disabled ? .zero : motion.exitDuration;
       _curveFade
         ..curve = motion.fadeInCurve
         ..reverseCurve = motion.fadeOutCurve;
@@ -136,6 +140,7 @@ extension InternalFPopoverController on FPopoverController {
       _scale = motion.scaleTween.animate(_curveScale);
       _fade = motion.fadeTween.animate(_curveFade);
       _motion = motion;
+      _disabled = disabled;
     }
   }
 }

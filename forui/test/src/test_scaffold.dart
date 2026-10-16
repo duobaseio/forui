@@ -131,6 +131,7 @@ class TestScaffold extends StatelessWidget {
 
   final FThemeData theme;
   final FPlatformVariant? platform;
+  final FAccessibility? accessibility;
   final Color? background;
   final Locale? locale;
   final TextDirection? textDirection;
@@ -143,6 +144,7 @@ class TestScaffold extends StatelessWidget {
   new({
     required this.child,
     this.platform,
+    this.accessibility,
     this.textDirection,
     this.alignment = .center,
     this.padded = true,
@@ -161,6 +163,7 @@ class TestScaffold extends StatelessWidget {
   new app({
     required this.child,
     this.platform,
+    this.accessibility,
     this.locale,
     this.textDirection,
     this.alignment = .center,
@@ -178,6 +181,7 @@ class TestScaffold extends StatelessWidget {
 
   new blue({required this.child, this.platform, this.alignment = .center, super.key})
     : theme = _default.light.touch,
+      accessibility = null,
       background = blueScreen.colors.background,
       locale = null,
       textDirection = null,
@@ -195,6 +199,7 @@ class TestScaffold extends StatelessWidget {
         supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
           platform: platform,
+          accessibility: accessibility,
           data: theme,
           textDirection: textDirection,
           child: Container(
@@ -208,6 +213,7 @@ class TestScaffold extends StatelessWidget {
     } else {
       return FTheme(
         platform: platform,
+        accessibility: accessibility,
         data: theme,
         textDirection: textDirection,
         child: Container(

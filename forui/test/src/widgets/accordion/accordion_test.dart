@@ -204,5 +204,32 @@ void main() {
 
       expect(tester.getSemantics(find.text('Title')), isSemantics(hasExpandedState: true, isExpanded: true));
     });
+
+    for (final disableAnimations in [false, true]) {
+      testWidgets('expands over its duration under all motion - disableAnimations: $disableAnimations', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            accessibility: const FAccessibility(accessibleNavigation: false, motion: .all, focusHighlight: false),
+            child: const FAccordion(
+              children: [FAccordionItem(title: Text('Title'), child: Text('Content'))],
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Title'));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+
+        // The expansion follows FAccessibility.motion, not the platform's disableAnimations.
+        expect(tester.widget<FCollapsible>(find.byType(FCollapsible)).value, Curves.easeOutCubic.transform(0.5));
+
+        await tester.pumpAndSettle();
+      });
+    }
   });
 }

@@ -413,7 +413,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _controller.updateMotion(widget.style(context.theme.popoverStyle).motion);
+    _controller.updateMotion(widget.style(context.theme.popoverStyle).motion, context.accessibility.motion);
   }
 
   @override
@@ -434,7 +434,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
     }
 
     _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
-    _controller.updateMotion(widget.style(context.theme.popoverStyle).motion);
+    _controller.updateMotion(widget.style(context.theme.popoverStyle).motion, context.accessibility.motion);
   }
 
   @override
