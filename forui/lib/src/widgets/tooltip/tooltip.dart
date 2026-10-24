@@ -207,7 +207,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   void _updateStyle() {
     final group = TooltipGroupScope.maybeOf(context);
     _style = widget.style(group?.style ?? context.theme.tooltipStyle);
-    _controller.updateMotion(_style.motion);
+    _controller.updateMotion(_style.motion, context.accessibility.motion);
   }
 
   @override

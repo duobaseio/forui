@@ -331,6 +331,54 @@ void main() {
       });
     });
   });
+
+  group('accessibility', () {
+    for (final above in [true, false]) {
+      for (final (motion, disableAnimations) in [
+        (FAccessibilityMotion.all, false),
+        (FAccessibilityMotion.all, true),
+        (FAccessibilityMotion.reduced, false),
+        (FAccessibilityMotion.reduced, true),
+      ]) {
+        testWidgets("fades in over the route's entrance duration - $motion ${above ? 'above' : 'below'} the navigator, "
+            'disableAnimations: $disableAnimations', (tester) async {
+          tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+            disableAnimations: disableAnimations,
+          );
+          addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+          final accessibility = FAccessibility(accessibleNavigation: false, motion: motion, focusHighlight: false);
+          final button = Builder(
+            builder: (context) => FButton(
+              onPress: () => showFDialog(
+                context: context,
+                builder: (context, style, animation) =>
+                    FDialog(style: style, animation: animation, builder: (_, _) => const Text('dialog')),
+              ),
+              child: const Text('button'),
+            ),
+          );
+
+          await tester.pumpWidget(
+            TestScaffold.app(
+              accessibility: above ? accessibility : null,
+              child: above ? button : FAccessibilityScope(data: accessibility, child: button),
+            ),
+          );
+
+          await tester.tap(find.text('button'));
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 75));
+
+          // The fade follows FAccessibility.motion, not the platform's disableAnimations.
+          final fade = find.ancestor(of: find.text('dialog'), matching: find.byType(FadeTransition)).first;
+          expect(tester.widget<FadeTransition>(fade).opacity.value, 0.5);
+
+          await tester.pumpAndSettle();
+        });
+      }
+    }
+  });
 }
 
 Widget _confirmation(BuildContext _, FDialogStyle _) => const Text('Are you absolutely sure?');

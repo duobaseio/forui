@@ -71,7 +71,8 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
+    // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
+    _controller = AnimationController(vsync: this, animationBehavior: .preserve);
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/accessibility.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/clippers.dart';
 import 'package:forui/src/theme/variant.dart';
@@ -141,6 +142,15 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
            return dialog;
          },
        );
+
+  @override
+  AnimationController createAnimationController() => AnimationController(
+    duration: transitionDuration,
+    reverseDuration: reverseTransitionDuration,
+    debugLabel: debugLabel,
+    vsync: navigator!,
+    animationBehavior: AccessibilityScopeElement.transitionBehavior(navigator!.context, capturedFTheme?.accessibility),
+  );
 
   @override
   Widget buildModalBarrier() {
