@@ -12,10 +12,11 @@ abstract class TimeParser extends Parser {
   final NumberFormat _minute;
   final int _hourDigit;
   final int _hourEnd;
+  final int _hourStart;
 
   factory(DateFormat format) => format.pattern!.contains('a') ? Time12Parser(format) : Time24Parser(format);
 
-  new _(DateFormat format, this._hour, this._hourDigit, this._hourEnd)
+  new _(DateFormat format, this._hour, this._hourDigit, this._hourEnd, this._hourStart)
     : _minute = NumberFormat('00', format.locale),
       super(_split(format.pattern!));
 
@@ -29,13 +30,13 @@ abstract class TimeParser extends Parser {
       case _ when current.isEmpty:
         return ('HH', false);
 
-      case final hour? when 1 <= hour && hour <= _hourEnd:
+      case final hour? when _hourStart <= hour && hour <= _hourEnd:
         return (_hour.format(hour), _hourDigit <= hour);
 
       // Replace rather than append.
       case _?:
         final hour = _hour.parse(current);
-        if (1 <= hour && hour <= _hourEnd) {
+        if (_hourStart <= hour && hour <= _hourEnd) {
           return (_hour.format(hour), _hourDigit <= hour);
         } else {
           return (previous, false);
@@ -99,7 +100,7 @@ class Time12Parser extends TimeParser {
         DateFormat('a', format.locale).format(_morning).toLowerCase(),
         DateFormat('a', format.locale).format(_afternoon).toLowerCase(),
       ],
-      super._(format, NumberFormat(format.pattern!.contains('hh') ? '00' : '#0', format.locale), 2, 12);
+      super._(format, NumberFormat(format.pattern!.contains('hh') ? '00' : '#0', format.locale), 2, 12, 1);
 
   @override
   @protected
@@ -157,7 +158,7 @@ class Time12Parser extends TimeParser {
 @internal
 class Time24Parser extends TimeParser {
   new(DateFormat format)
-    : super._(format, NumberFormat(format.pattern!.contains('HH') ? '00' : '#0', format.locale), 3, 23);
+    : super._(format, NumberFormat(format.pattern!.contains('HH') ? '00' : '#0', format.locale), 3, 23, 0);
 
   @override
   @protected
