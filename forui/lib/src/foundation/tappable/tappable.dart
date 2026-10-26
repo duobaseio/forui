@@ -983,6 +983,12 @@ class const AnimatedTappable({
 
 @internal
 class AnimatedTappableState extends _FTappableState<AnimatedTappable> with SingleTickerProviderStateMixin {
+  static const _noMotion = FTappableMotion(
+    bounceDownDuration: .zero,
+    bounceUpDuration: .zero,
+    bounceTween: FTappableMotion.noBounceTween,
+  );
+
   @visibleForTesting
   late Animation<double> bounce;
 
@@ -993,7 +999,8 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @override
   void initState() {
     super.initState();
-    _bounceController = AnimationController(vsync: this);
+    // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
+    _bounceController = AnimationController(vsync: this, animationBehavior: .preserve);
     _curvedBounce = CurvedAnimation(parent: _bounceController, curve: Curves.linear);
   }
 
@@ -1010,7 +1017,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   void _setupBounceAnimation() {
-    final motion = context.accessibility.motion == .disabled ? FTappableMotion.none : _style.motion;
+    final motion = context.accessibility.motion == .disabled ? _noMotion : _style.motion;
     if (_motion != motion) {
       _motion = motion;
       _bounceController
