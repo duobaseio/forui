@@ -35,7 +35,7 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^2.0.0
   forui:
-  marionette_flutter: ^0.6.0
+  marionette_flutter: ^0.7.0
   material_ui: ^1.0.0
   cupertino_ui: ^1.0.0
 

@@ -1,8 +1,10 @@
-## 0.27.6
+## 0.27.7
 
 ### `FTimeField`
-* Fix `FTimeField` with `hour24: true` rejecting an hour of `0`, preventing midnight (`00:xx`) from being typed.
+* Fix 24-hour `FTimeField` rejecting `0`-hour.
 
+
+## 0.27.6
 
 ### `FOverlay`
 * Fix `FOverlay` mutating a disposed render object when unmounted right after its child moves.
