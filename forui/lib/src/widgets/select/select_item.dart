@@ -59,7 +59,6 @@ mixin FSelectItemMixin on Widget {
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
-    // ignore: avoid_positional_boolean_parameters
     Widget? Function(BuildContext context, bool selected) suffixBuilder = _defaultSuffixBuilder,
     Key? key,
   }) => .new(
@@ -339,7 +338,6 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
-    // ignore: avoid_positional_boolean_parameters
     Widget? Function(BuildContext context, bool selected) suffixBuilder,
     Key? key,
   }) = _SelectItem<T>;
@@ -355,7 +353,6 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
-    // ignore: avoid_positional_boolean_parameters
     Widget? Function(BuildContext context, bool selected) suffixBuilder,
     Key? key,
   }) = FSelectItem<T>;
@@ -461,7 +458,6 @@ class _SelectItem<T> extends FSelectItem<T> {
   final Widget? subtitle;
   final Widget title;
 
-  // ignore: avoid_positional_boolean_parameters
   final Widget? Function(BuildContext context, bool selected) suffixBuilder;
 
   const new({

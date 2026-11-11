@@ -334,7 +334,6 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.arrow,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
-    this.onTapHide,
     this.cutout = true,
     this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
@@ -346,7 +345,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.onVariantChange,
     this.traversalEdgeBehavior = .closedLoop,
     super.key,
-  }) : itemMenu = null,
+  }) : onTapHide = null,
+       itemMenu = null,
        tileMenu = menu;
 
   @override
