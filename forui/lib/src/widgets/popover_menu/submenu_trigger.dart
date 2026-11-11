@@ -13,7 +13,7 @@ class const SubmenuTrigger({
   required final FocusNode? focusNode,
   required final Widget Function(
     BuildContext context,
-    bool shown, // ignore: avoid_positional_boolean_parameters
+    bool shown,
     Map<ShortcutActivator, Intent> shortcuts,
     Map<Type, Action<Intent>> actions,
   )

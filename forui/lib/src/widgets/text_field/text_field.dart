@@ -18,9 +18,12 @@ import 'package:forui/src/widgets/text_field/text_field_control.dart';
 /// [focused] is whether the text field is currently focused.
 ///
 /// See [FTextField.counterBuilder].
-typedef FTextFieldCounterBuilder =
-    // ignore: avoid_positional_boolean_parameters
-    Widget? Function(BuildContext context, int currentLength, int? maxLength, bool focused);
+typedef FTextFieldCounterBuilder = Widget? Function(
+  BuildContext context,
+  int currentLength,
+  int? maxLength,
+  bool focused,
+);
 
 /// A callback for decorating a field. It should always use the given field.
 ///

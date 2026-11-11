@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_positional_boolean_parameters
-
 import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
