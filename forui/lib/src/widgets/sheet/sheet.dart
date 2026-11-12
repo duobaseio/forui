@@ -3,13 +3,22 @@ import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/accessibility.dart';
 import 'package:forui/src/widgets/sheet/gesture_detector.dart';
 import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 @internal
 class Sheet extends StatefulWidget {
-  static AnimationController createAnimationController(TickerProvider vsync, FSheetMotion motion) =>
-      AnimationController(duration: motion.expandDuration, reverseDuration: motion.collapseDuration, vsync: vsync);
+  static AnimationController createAnimationController(
+    TickerProvider vsync,
+    FSheetMotion motion,
+    AnimationBehavior animationBehavior,
+  ) => AnimationController(
+    duration: motion.expandDuration,
+    reverseDuration: motion.collapseDuration,
+    vsync: vsync,
+    animationBehavior: animationBehavior,
+  );
 
   final AnimationController? controller;
   final Animation<double>? animation;
@@ -77,7 +86,13 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style.motion);
+    _controller =
+        widget.controller ??
+        Sheet.createAnimationController(
+          this,
+          widget.style.motion,
+          AccessibilityScopeElement.transitionBehavior(context),
+        );
     _animation = widget.animation ?? _controller.view;
     _curve = widget.style.motion.curve;
     _controller.addStatusListener(_onSettle);
@@ -92,7 +107,13 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         _controller.dispose();
       }
 
-      _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style.motion);
+      _controller =
+          widget.controller ??
+          Sheet.createAnimationController(
+            this,
+            widget.style.motion,
+            AccessibilityScopeElement.transitionBehavior(context),
+          );
       _animation = widget.animation ?? _controller.view;
       _curve = widget.style.motion.curve;
       _dragging = false;

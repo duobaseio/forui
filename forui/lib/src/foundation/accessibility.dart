@@ -203,6 +203,14 @@ class AccessibilityScopeElement extends InheritedModelElement<_Aspect> {
   static ValueListenable<FAccessibility>? of(BuildContext context) =>
       (context.getElementForInheritedWidgetOfExactType<_AccessibilityScope>() as AccessibilityScopeElement?)?.notifier;
 
+  /// Returns the [AnimationBehavior] of a route or sheet transition shown from [context], or with [captured] if given.
+  ///
+  /// The transition is gated on [FAccessibility.motion], so it is preserved unless motion is disabled. Otherwise,
+  /// Flutter shortens it to 5% of its duration when the platform disables animations, even if [FAccessibility.motion]
+  /// is overridden to [FAccessibilityMotion.reduced] or [FAccessibilityMotion.all].
+  static AnimationBehavior transitionBehavior(BuildContext context, [ValueListenable<FAccessibility>? captured]) =>
+      (captured ?? of(context))?.value.motion == .disabled ? .normal : .preserve;
+
   final ValueNotifier<FAccessibility> notifier;
 
   new(_AccessibilityScope super.widget) : notifier = ValueNotifier(widget.data);

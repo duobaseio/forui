@@ -7,6 +7,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/accessibility.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
 
@@ -248,7 +249,11 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       _animationController = transitionAnimationController;
       willDisposeAnimationController = false;
     } else {
-      _animationController = Sheet.createAnimationController(navigator!, style.motion);
+      _animationController = Sheet.createAnimationController(
+        navigator!,
+        style.motion,
+        AccessibilityScopeElement.transitionBehavior(navigator!.context, capturedFTheme?.accessibility),
+      );
     }
 
     return _animationController!;

@@ -108,7 +108,8 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this);
+    // Motion is gated on FAccessibility.motion, so the platform's disableAnimations must not shorten it.
+    _controller = AnimationController(vsync: this, animationBehavior: .preserve);
     _curvedReveal = CurvedAnimation(curve: Curves.linear, parent: _controller);
     _curvedIconRotation = CurvedAnimation(curve: Curves.linear, parent: _controller);
   }

@@ -3,6 +3,7 @@ import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/sheet/persistent_sheet.dart';
+import 'package:forui/src/widgets/sheet/shifted_sheet.dart';
 
 import '../../test_scaffold.dart';
 
@@ -264,4 +265,52 @@ void main() {
       expect(find.text('sheet'), findsOne);
     });
   }
+
+  group('accessibility', () {
+    for (final (motion, disableAnimations) in [
+      (FAccessibilityMotion.all, false),
+      (FAccessibilityMotion.all, true),
+      (FAccessibilityMotion.reduced, false),
+      (FAccessibilityMotion.reduced, true),
+    ]) {
+      testWidgets('enters over its expand duration - $motion, disableAnimations: $disableAnimations', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = FakeAccessibilityFeatures(
+          disableAnimations: disableAnimations,
+        );
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            accessibility: FAccessibility(accessibleNavigation: false, motion: motion, focusHighlight: false),
+            child: FSheets(
+              child: Builder(
+                builder: (context) => FButton(
+                  onPress: () {
+                    autoDispose(
+                      showFPersistentSheet(context: context, side: .btt, builder: (_, _) => const Text('sheet')),
+                    );
+                  },
+                  child: const Text('button'),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+
+        // The slide (all) and cross-fade (reduced) follow FAccessibility.motion, not the platform's disableAnimations.
+        final progress = Curves.easeOutCubic.transform(0.5);
+        final value = tester.widget<ShiftedSheet>(find.byType(ShiftedSheet)).value;
+        final opacity = tester
+            .widget<Opacity>(find.ancestor(of: find.text('sheet'), matching: find.byType(Opacity)).first)
+            .opacity;
+        expect((value, opacity), motion == .all ? (progress, 1.0) : (1.0, progress));
+
+        await tester.pumpAndSettle();
+      });
+    }
+  });
 }
