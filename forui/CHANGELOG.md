@@ -11,6 +11,21 @@ This update requires Flutter 3.50.0 and Dart 3.14.0.
 * Fix `FBreadcrumbItem.collapsedTiles(...)` not exposing `onTapHide`.
 
 
+### `FItem` & `FTile`
+* Add `FItemContentStyle.titleSoftWrap`.
+* Add `FItemContentStyle.titleOverflow`.
+* Add `FItemContentStyle.titleMaxLines`.
+* Add `FItemContentStyle.titleTextHeightBehavior`.
+* Add `FItemContentStyle.subtitleSoftWrap`.
+* Add `FItemContentStyle.subtitleOverflow`.
+* Add `FItemContentStyle.subtitleMaxLines`.
+* Add `FItemContentStyle.subtitleTextHeightBehavior`.
+* Add `FRawItemContentStyle.childSoftWrap`.
+* Add `FRawItemContentStyle.childOverflow`.
+* Add `FRawItemContentStyle.childMaxLines`.
+* Add `FRawItemContentStyle.childTextHeightBehavior`.
+
+
 ### `FOtpField`
 * Fix `FOtpField` items being laid out in reverse order in RTL.
 

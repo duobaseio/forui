@@ -78,21 +78,19 @@ class ItemContent extends StatelessWidget {
           children: [
             DefaultTextStyle.merge(
               style: style.titleTextStyle.resolve(variants),
-              textHeightBehavior: const TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
-              ),
-              overflow: .ellipsis,
+              softWrap: style.titleSoftWrap,
+              overflow: style.titleOverflow,
+              maxLines: style.titleMaxLines,
+              textHeightBehavior: style.titleTextHeightBehavior,
               child: title,
             ),
             if (subtitle case final subtitle?)
               DefaultTextStyle.merge(
                 style: style.subtitleTextStyle.resolve(variants),
-                textHeightBehavior: const TextHeightBehavior(
-                  applyHeightToFirstAscent: false,
-                  applyHeightToLastDescent: false,
-                ),
-                overflow: .ellipsis,
+                softWrap: style.subtitleSoftWrap,
+                overflow: style.subtitleOverflow,
+                maxLines: style.subtitleMaxLines,
+                textHeightBehavior: style.subtitleTextHeightBehavior,
                 child: subtitle,
               ),
           ],
@@ -182,6 +180,38 @@ class FItemContentStyle({
   ///
   /// {@macro forui.widgets.item.ItemContentStyle}
   @override required final EdgeInsetsGeometry unsuffixedPadding,
+
+  /// Whether the title wraps at soft line breaks. Defaults to true.
+  @override final bool titleSoftWrap = true,
+
+  /// The title's overflow. Defaults to [TextOverflow.ellipsis].
+  @override final TextOverflow titleOverflow = .ellipsis,
+
+  /// The title's max lines. Defaults to null.
+  @override final int? titleMaxLines,
+
+  /// The title's text height behavior. Defaults to not applying height to the first ascent and last descent.
+  @override
+  final TextHeightBehavior titleTextHeightBehavior = const TextHeightBehavior(
+    applyHeightToFirstAscent: false,
+    applyHeightToLastDescent: false,
+  ),
+
+  /// Whether the subtitle wraps at soft line breaks. Defaults to true.
+  @override final bool subtitleSoftWrap = true,
+
+  /// The subtitle's overflow. Defaults to [TextOverflow.ellipsis].
+  @override final TextOverflow subtitleOverflow = .ellipsis,
+
+  /// The subtitle's max lines. Defaults to null.
+  @override final int? subtitleMaxLines,
+
+  /// The subtitle's text height behavior. Defaults to not applying height to the first ascent and last descent.
+  @override
+  final TextHeightBehavior subtitleTextHeightBehavior = const TextHeightBehavior(
+    applyHeightToFirstAscent: false,
+    applyHeightToLastDescent: false,
+  ),
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 8.
   ///

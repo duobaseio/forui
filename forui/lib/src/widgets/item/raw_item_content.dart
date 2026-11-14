@@ -63,8 +63,10 @@ class RawItemContent extends StatelessWidget {
         const SizedBox(),
       DefaultTextStyle.merge(
         style: style.childTextStyle.resolve(variants),
-        textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false),
-        overflow: .ellipsis,
+        softWrap: style.childSoftWrap,
+        overflow: style.childOverflow,
+        maxLines: style.childMaxLines,
+        textHeightBehavior: style.childTextHeightBehavior,
         child: child,
       ),
       const SizedBox(),
@@ -101,6 +103,22 @@ class FRawItemContentStyle({
 
   /// The content's padding.
   @override required final EdgeInsetsGeometry padding,
+
+  /// Whether the child wraps at soft line breaks. Defaults to true.
+  @override final bool childSoftWrap = true,
+
+  /// The child's overflow. Defaults to [TextOverflow.ellipsis].
+  @override final TextOverflow childOverflow = .ellipsis,
+
+  /// The child's max lines. Defaults to null.
+  @override final int? childMaxLines,
+
+  /// The child's text height behavior. Defaults to not applying height to the first ascent and last descent.
+  @override
+  final TextHeightBehavior childTextHeightBehavior = const TextHeightBehavior(
+    applyHeightToFirstAscent: false,
+    applyHeightToLastDescent: false,
+  ),
 
   /// The horizontal spacing between the prefix icon and child. Defaults to 8.
   ///
