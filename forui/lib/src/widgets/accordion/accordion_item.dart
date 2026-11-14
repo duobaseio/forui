@@ -13,6 +13,9 @@ mixin FAccordionItemMixin on Widget;
 /// See:
 /// * https://forui.dev/docs/widgets/data/accordion for working examples.
 class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
+  /// The default divider builder. Uses [FAccordionStyle.dividerStyle].
+  static Widget defaultDividerBuilder(BuildContext _, FAccordionStyle style) => FDivider(style: style.dividerStyle);
+
   /// The accordion's style. Defaults to the enclosing [FAccordion]'s style.
   ///
   /// To modify the current style:
@@ -60,6 +63,9 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// {@macro forui.foundation.FTappable.onVariantChange}
   final FTappableVariantChangeCallback? onVariantChange;
 
+  /// The divider below the item. Defaults to [defaultDividerBuilder].
+  final Widget Function(BuildContext context, FAccordionStyle style) dividerBuilder;
+
   /// The child.
   final Widget child;
 
@@ -75,6 +81,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     this.onFocusChange,
     this.onHoverChange,
     this.onVariantChange,
+    this.dividerBuilder = defaultDividerBuilder,
     super.key,
   });
 
@@ -91,7 +98,8 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange));
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
+      ..add(ObjectFlagProperty.has('dividerBuilder', dividerBuilder));
   }
 }
 
@@ -230,7 +238,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             ),
           ),
         ),
-        FDivider(style: style.dividerStyle),
+        widget.dividerBuilder(context, style),
       ],
     );
   }

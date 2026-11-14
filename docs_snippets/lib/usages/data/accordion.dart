@@ -29,6 +29,7 @@ final accordionItem = FAccordionItem(
   title: const Text('Title'),
   icon: const Icon(FLucideIcons.chevronDown),
   initiallyExpanded: false,
+  dividerBuilder: FAccordionItem.defaultDividerBuilder,
   child: const Text('Content'),
   // {@endcategory}
 );

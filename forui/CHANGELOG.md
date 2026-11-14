@@ -2,6 +2,10 @@
 
 This update requires Flutter 3.50.0 and Dart 3.14.0.
 
+### `FAccordion`
+* Add `FAccordionItem.dividerBuilder`.
+
+
 ### `FBreadcrumb`
 * Fix `FBreadcrumbItem.collapsedTiles(...)` not exposing `onTapHide`.
 
