@@ -165,6 +165,9 @@ class const FAccordionStyle({
   /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 16)`.
   @override final EdgeInsetsGeometry titlePadding = const .symmetric(vertical: 16),
 
+  /// The vertical alignment of the title and icon. Defaults to [CrossAxisAlignment.start].
+  @override final CrossAxisAlignment titleCrossAxisAlignment = .start,
+
   /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 16)`.
   @override final EdgeInsetsGeometry childPadding = const .only(bottom: 16),
 
