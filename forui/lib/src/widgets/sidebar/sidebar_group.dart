@@ -104,7 +104,7 @@ class FSidebarGroup extends StatelessWidget {
                         onLongPress: onActionLongPress,
                         builder: (_, variants, child) =>
                             IconTheme(data: style.actionStyle.resolve(variants), child: child!),
-                        child: action!,
+                        child: action,
                       )
                     else
                       const SizedBox(),

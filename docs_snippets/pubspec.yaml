@@ -4,8 +4,8 @@ publish_to: 'none'
 version: 0.0.0
 
 environment:
-  sdk: ">=3.13.0-0 <4.0.0"
-  flutter: ">=3.47.0-0"
+  sdk: ">=3.14.0 <4.0.0"
+  flutter: ">=3.50.0"
 resolution: workspace
 
 dependencies:
@@ -25,7 +25,6 @@ dependencies:
   intl: any
   marionette_flutter: ^0.7.0
   material_ui: ^1.0.0
-  sugar: ^4.0.0
 
 dev_dependencies:
   analyzer: ^13.3.0

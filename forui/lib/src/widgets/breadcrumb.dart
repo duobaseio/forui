@@ -486,7 +486,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         dragStartBehavior: widget.dragStartBehavior,
         semanticsLabel: widget.menuSemanticsLabel,
         divider: widget.divider,
-        menu: widget.tileMenu!,
+        menu: widget.tileMenu,
         child: child,
       );
     }

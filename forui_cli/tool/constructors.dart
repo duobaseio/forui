@@ -282,7 +282,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
       return;
     }
 
-    matches[_name!] = ConstructorMatch(root: _roots.contains(_name!), constructor: constructor, wrapped: _wrapped);
+    matches[_name!] = ConstructorMatch(root: _roots.contains(_name), constructor: constructor, wrapped: _wrapped);
 
     // Constructors typically consist of:
     // * Factory constructors

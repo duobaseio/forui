@@ -200,7 +200,7 @@ class TestScaffold extends StatelessWidget {
           child: Container(
             color: background ?? theme.colors.background,
             padding: padded ? const .all(16) : null,
-            child: child!,
+            child: child,
           ),
         ),
         home: Align(alignment: alignment, child: child),

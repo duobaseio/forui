@@ -149,7 +149,7 @@ class DeltaClass {
       (f) => f
         ..modifier = .final$
         ..type = refer(type)
-        ..name = field.name!,
+        ..name = field.name,
     );
   }
 

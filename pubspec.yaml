@@ -1,7 +1,7 @@
 name: _
 environment:
-  sdk: ">=3.13.0-0 <4.0.0"
-  flutter: ">=3.47.0-0"
+  sdk: ">=3.14.0 <4.0.0"
+  flutter: ">=3.50.0"
 workspace:
   - create
   - docs_snippets
@@ -14,4 +14,4 @@ workspace:
   - spotlight
 
 dev_dependencies:
-  flint: ^2.16.2
+  flint: ^2.17.0

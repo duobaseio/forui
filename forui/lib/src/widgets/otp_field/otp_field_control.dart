@@ -137,7 +137,7 @@ class FOtpController extends TextEditingController {
       spans.add(WidgetSpan(alignment: .middle, child: child));
     }
 
-    return TextSpan(children: Directionality.of(context) == .ltr ? spans : spans.reversed.toList());
+    return TextSpan(children: spans);
   }
 
   /// Handles the traversal of the OTP items when the user presses the left or right arrow key.

@@ -26,7 +26,7 @@ class TappableGroupPage extends Example {
                 border: .all(color: context.theme.colors.border),
               ),
               padding: const .symmetric(vertical: 8.0, horizontal: 12),
-              child: child!,
+              child: child,
             ),
             child: Text(label, style: context.theme.typography.body.sm),
           ),

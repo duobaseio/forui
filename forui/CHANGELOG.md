@@ -1,7 +1,13 @@
 ## 0.28.0
 
+This update requires Flutter 3.50.0 and Dart 3.14.0.
+
 ### `FBreadcrumb`
 * Fix `FBreadcrumbItem.collapsedTiles(...)` not exposing `onTapHide`.
+
+
+### `FOtpField`
+* Fix `FOtpField` items being laid out in reverse order in RTL.
 
 
 ## 0.27.7
