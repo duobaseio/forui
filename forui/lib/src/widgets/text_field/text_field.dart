@@ -19,7 +19,6 @@ import 'package:forui/src/widgets/text_field/text_field_control.dart';
 ///
 /// See [FTextField.counterBuilder].
 typedef FTextFieldCounterBuilder =
-    // ignore: avoid_positional_boolean_parameters
     Widget? Function(BuildContext context, int currentLength, int? maxLength, bool focused);
 
 /// A callback for decorating a field. It should always use the given field.
@@ -726,7 +725,6 @@ class FTextField extends StatelessWidget {
   ///
   /// Historically, this field also controlled the toolbar. This is now handled by [contextMenuBuilder] instead. However,
   /// for backwards compatibility, when [selectionControls] is set to an object that does not mix in
-  // ignore: deprecated_member_use
   /// [TextSelectionHandleControls], [contextMenuBuilder] is ignored and the [TextSelectionControls.buildToolbar] method
   /// is used instead.
   /// {@endtemplate}

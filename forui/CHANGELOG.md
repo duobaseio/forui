@@ -1,3 +1,9 @@
+## 0.28.0
+
+### `FBreadcrumb`
+* Fix `FBreadcrumbItem.collapsedTiles(...)` not exposing `onTapHide`.
+
+
 ## 0.27.7
 
 ### `FTimeField`

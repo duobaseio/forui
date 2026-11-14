@@ -8,7 +8,6 @@ import 'package:forui/src/foundation/tappable/tappable.dart';
 
 import '../../test_scaffold.dart';
 
-// ignore: avoid_positional_boolean_parameters
 Set<FTappableVariant> set(bool enabled) => {if (!enabled) .disabled, .android};
 
 void main() {

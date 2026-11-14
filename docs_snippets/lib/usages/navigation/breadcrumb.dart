@@ -94,6 +94,7 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   arrow: .childCenter,
   offset: .zero,
   hideRegion: .excludeChild,
+  onTapHide: () {},
   cutout: true,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   intrinsicWidth: true,

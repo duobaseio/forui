@@ -182,6 +182,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPopoverHideRegion hideRegion,
     bool cutout,
     void Function(Path path, Rect bounds) cutoutBuilder,
+    VoidCallback? onTapHide,
     bool autofocus,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,

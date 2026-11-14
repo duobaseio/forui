@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_ignore
+
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -339,7 +341,6 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
-    // ignore: avoid_positional_boolean_parameters
     Widget? Function(BuildContext context, bool selected) suffixBuilder,
     Key? key,
   }) = _SelectItem<T>;

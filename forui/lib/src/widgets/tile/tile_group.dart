@@ -448,7 +448,6 @@ class FTileGroupStyle({
     ),
     dividerColor: .all(colors.border),
     dividerWidth: style.borderWidth,
-    slideableTiles: const .all(true),
     slidePressHapticFeedback: hapticFeedback.selectionClick,
     labelTextStyle: FVariants.from(
       typography.body.sm.copyWith(
