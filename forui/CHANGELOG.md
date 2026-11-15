@@ -30,6 +30,14 @@ This update requires Flutter 3.50.0 and Dart 3.14.0.
 * Fix `FOtpField` items being laid out in reverse order in RTL.
 
 
+### `FSheet` & `FPersistentSheet`
+* **Breaking** Change bottom sheets to extend behind keyboards as iOS 26+ keyboards are translucent & rounded. Wrap the 
+  sheet's content in a `SafeArea` to keep it above the keyboard.
+* **Breaking** Rename `FModalSheetRoute(resizeToAvoidBottomInset: ...)` to `FModalSheetRoute(avoidBottomInset: ...)`.
+* **Breaking** Rename `FModalSheetRoute.resizeToAvoidBottomInset` to `FModalSheetRoute.avoidBottomInset`.
+* **Breaking** Rename `showFPersistentSheet(resizeToAvoidBottomInset: ...)` to `showFPersistentSheet(avoidBottomInset: ...)`.
+* **Breaking** Rename `showFSheet(resizeToAvoidBottomInset: ...)` to `showFSheet(avoidBottomInset: ...)`. .
+
 ## 0.27.7
 
 ### `FTimeField`

@@ -9,7 +9,7 @@ final show = showFSheet(
   mainAxisMaxRatio: 9 / 16,
   constraints: const BoxConstraints(),
   useSafeArea: false,
-  resizeToAvoidBottomInset: true,
+  avoidBottomInset: true,
   // {@endcategory}
   // {@category "Behavior"}
   draggable: true,
@@ -38,7 +38,7 @@ final route = FModalSheetRoute<void>(
   mainAxisMaxRatio: 9 / 16,
   constraints: const BoxConstraints(),
   useSafeArea: false,
-  resizeToAvoidBottomInset: true,
+  avoidBottomInset: true,
   // {@endcategory}
   // {@category "Behavior"}
   draggable: true,

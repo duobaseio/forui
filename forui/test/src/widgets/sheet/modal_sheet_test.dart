@@ -154,6 +154,37 @@ void main() {
     });
   }
 
+  testWidgets('bottom view inset change does not remount content', (tester) async {
+    addTearDown(tester.view.reset);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: Builder(
+          builder: (context) => FButton.icon(
+            child: const Icon(FLucideIcons.chevronRight),
+            onPress: () => showFSheet(
+              context: context,
+              side: .btt,
+              builder: (_) => const FTextField(autofocus: true),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byType(FButton));
+    await tester.pumpAndSettle();
+    final state = tester.state(find.byType(EditableText));
+
+    tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+    await tester.pumpAndSettle();
+    expect(tester.state(find.byType(EditableText)), same(state));
+
+    tester.view.viewInsets = FakeViewPadding.zero;
+    await tester.pumpAndSettle();
+    expect(tester.state(find.byType(EditableText)), same(state));
+  });
+
   group('scope liveness', () {
     testWidgets('content observes theme changes while open', (tester) async {
       FThemeData? seen;

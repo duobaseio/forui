@@ -30,8 +30,10 @@ part 'persistent_sheet.design.dart';
 /// is [FLayout.ttb] or [FLayout.btt]. Consider setting [mainAxisMaxRatio] to null if this sheet has a scrollable child,
 /// i.e. [ListView], along the main axis, to have the sheet be draggable.
 ///
-/// [resizeToAvoidBottomInset] determines whether the sheet should avoid the system's bottom view inset, typically the
-/// keyboard, by shifting the entire sheet upwards. Defaults to true.
+/// [avoidBottomInset] determines whether the sheet should avoid the system's bottom view inset, typically the keyboard,
+/// by exposing it to the [builder] as bottom padding. Like a home indicator, the inset is not covered by [useSafeArea].
+/// Wrap the sheet's content in a [SafeArea] to keep it above the inset. This is only applied if [side] is [FLayout.btt].
+/// Default to true.
 ///
 /// [anchorPoint] is used to pick the closest sub-screen.
 ///
@@ -83,7 +85,7 @@ FPersistentSheetController showFPersistentSheet({
   bool draggable = true,
   Offset? anchorPoint,
   bool useSafeArea = false,
-  bool resizeToAvoidBottomInset = true,
+  bool avoidBottomInset = true,
   bool keepAliveOffstage = false,
   VoidCallback? onClosing,
   Key? key,
@@ -135,7 +137,7 @@ FPersistentSheetController showFPersistentSheet({
         draggable: draggable,
         anchorPoint: anchorPoint,
         useSafeArea: useSafeArea,
-        resizeToAvoidBottomInset: resizeToAvoidBottomInset,
+        avoidBottomInset: avoidBottomInset,
         builder: (context) => builder(context, controller),
         onChange: null,
         onClosing: onClosing,
