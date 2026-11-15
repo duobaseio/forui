@@ -307,7 +307,7 @@ abstract class LabelState<T extends Label> extends State<T> with TickerProviderS
               validationResult: .invalid,
               liveRegion: !MediaQuery.supportsAnnounceOf(context), // Mimic Material's TextField behavior.
               tagForChildren: RenderLabelSemantics.errorTag,
-              child: error!,
+              child: error,
             ),
           ),
         ),

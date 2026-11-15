@@ -264,16 +264,16 @@ class RenderAnimatedToaster extends RenderBox
       final alignmentBegin = data.alignment.begin ??= .zero;
       // We don't set data.alignment.end as this constantly changes.
       final alignmentEnd = Offset(frontX - thisX, frontY - thisY);
-      final alignment = data.alignment.value = .lerp(alignmentBegin, alignmentEnd, data.transition)!;
+      final alignment = data.alignment.value = .lerp(alignmentBegin, alignmentEnd, data.transition);
 
       // Calculate the amount to shift the toast such that it protrudes slightly above the toast in front.
       final begin = data.protrusion.begin ??= style.collapsedProtrusion * (log(data.index.previous + 1) / log(2));
       final end = data.protrusion.end ??= style.collapsedProtrusion * (log(data.index.current + 1) / log(2));
-      final protrusion = data.protrusion.value = lerpDouble(begin, end, data.transition)!;
+      final protrusion = data.protrusion.value = lerpDouble(begin, end, data.transition);
 
       context.pushTransform(
         needsCompositing,
-        data.offset + offset + (alignment + collapsedAlignTransform * protrusion) * (1 - expand),
+        data.offset + offset + (alignment! + collapsedAlignTransform * protrusion!) * (1 - expand),
         .diagonal3Values(scaleX, scaleY, 1.0),
         (context, offset) => context.paintChild(current!, offset),
       );

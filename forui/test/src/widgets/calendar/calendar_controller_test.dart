@@ -24,7 +24,7 @@ void main() {
     });
 
     test('normalizes currentMonth to the first of the initial month', () {
-      final controller = autoDispose(FGridCalendarController(initial: .utc(2024, 7, 15), today: .utc(2024, 7, 1)));
+      final controller = autoDispose(FGridCalendarController(initial: .utc(2024, 7, 15), today: .utc(2024, 7)));
       expect(controller.currentMonth, DateTime.utc(2024, 7));
     });
 

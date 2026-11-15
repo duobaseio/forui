@@ -16,7 +16,7 @@ void main() {
     controller = null;
   });
 
-  group('resizeToAvoidBottomInset', () {
+  group('avoidBottomInset', () {
     testWidgets('shifts up', (tester) async {
       await tester.pumpWidget(
         MediaQuery(
@@ -38,7 +38,7 @@ void main() {
                             border: .all(color: context.theme.colors.primary),
                             color: context.theme.colors.background,
                           ),
-                          child: const Center(child: Text('Sheet')),
+                          child: const SafeArea(top: false, child: Center(child: Text('Sheet'))),
                         ),
                       );
                     },
@@ -59,7 +59,7 @@ void main() {
     testWidgets('does not overflow', (tester) async {
       await tester.pumpWidget(
         MediaQuery(
-          data: const MediaQueryData(viewInsets: .only(bottom: 1000)),
+          data: const MediaQueryData(viewInsets: .only(bottom: 400)),
           child: TestScaffold.app(
             child: FSheets(
               child: Builder(
@@ -77,7 +77,7 @@ void main() {
                             border: .all(color: context.theme.colors.primary),
                             color: context.theme.colors.background,
                           ),
-                          child: const Center(child: Text('Sheet')),
+                          child: const SafeArea(top: false, child: Center(child: Text('Sheet'))),
                         ),
                       );
                     },

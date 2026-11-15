@@ -63,7 +63,7 @@ class _VerticalLabelState extends LabelState<VerticalLabel> {
                 duration: motion.textStyleTransitionDuration,
                 curve: motion.textStyleTransitionCurve,
                 textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-                child: Semantics(tagForChildren: RenderLabelSemantics.descriptionTag, child: widget.description!),
+                child: Semantics(tagForChildren: RenderLabelSemantics.descriptionTag, child: widget.description),
               ),
             ),
           if (error != null) animatedError(context, const TextHeightBehavior(applyHeightToFirstAscent: false)),

@@ -153,7 +153,7 @@ void main() {
     // start (15 Jul) and end (10 Sep) both fall mid-month, so the start month (Jul) and end month (Sep) are
     // only partially in range. August is shown initially so the single-year month grid lands on 2024.
     FGridSplitCalendarControl monthControl() =>
-        control(start: .utc(2024, 7, 15), today: .utc(2024, 8, 1), initial: .utc(2024, 8, 1), end: .utc(2024, 9, 10));
+        control(start: .utc(2024, 7, 15), today: .utc(2024, 8), initial: .utc(2024, 8), end: .utc(2024, 9, 10));
 
     // start (15 Jul 2024) and end (10 Mar 2026) both fall mid-year, so the start year (2024) and end year
     // (2026) are only partially in range. January 2025 is shown initially so the year grid lands on 2020-2029.

@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  group('resizeToAvoidBottomInset', () {
+  group('avoidBottomInset', () {
     testWidgets('shifts up', (tester) async {
       await tester.pumpWidget(
         MediaQuery(
@@ -25,7 +25,7 @@ void main() {
                     height: .infinity,
                     width: .infinity,
                     color: context.theme.colors.background,
-                    child: const Center(child: Text('Sheet')),
+                    child: const SafeArea(top: false, child: Center(child: Text('Sheet'))),
                   ),
                 ),
               ),
@@ -43,7 +43,7 @@ void main() {
     testWidgets('does not overflow', (tester) async {
       await tester.pumpWidget(
         MediaQuery(
-          data: const MediaQueryData(viewInsets: .only(bottom: 1000)),
+          data: const MediaQueryData(viewInsets: .only(bottom: 400)),
           child: TestScaffold.app(
             child: Builder(
               builder: (context) => FButton.icon(
@@ -55,7 +55,7 @@ void main() {
                     height: .infinity,
                     width: .infinity,
                     color: context.theme.colors.background,
-                    child: const Center(child: Text('Sheet')),
+                    child: const SafeArea(top: false, child: Center(child: Text('Sheet'))),
                   ),
                 ),
               ),

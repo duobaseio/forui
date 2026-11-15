@@ -99,7 +99,7 @@ class FScaffold extends StatelessWidget {
     var child = this.child;
 
     final Widget footer = this.footer != null
-        ? DecoratedBox(decoration: style.footerDecoration, child: this.footer!)
+        ? DecoratedBox(decoration: style.footerDecoration, child: this.footer)
         : const SizedBox();
 
     if (childPad) {
@@ -123,7 +123,7 @@ class FScaffold extends StatelessWidget {
                     children: [
                       Column(
                         children: [
-                          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header!),
+                          if (header != null) DecoratedBox(decoration: style.headerDecoration, child: header),
                           Expanded(child: child),
                         ],
                       ),

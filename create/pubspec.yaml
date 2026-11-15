@@ -19,7 +19,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.13.0-0 <4.0.0"
+  sdk: ">=3.14.0 <4.0.0"
+  flutter: ">=3.50.0"
 
 resolution: workspace
 
@@ -45,7 +46,7 @@ dependencies:
   forui_cli:
   forui_phosphor:
   marionette_flutter: ^0.7.0
-  hugeicons: ^1.1.7
+  hugeicons: ^4.0.0
   tabler_icons_plus: ^3.44.0
   remixicon: ^4.9.3
   iconoir_flutter: ^7.11.1

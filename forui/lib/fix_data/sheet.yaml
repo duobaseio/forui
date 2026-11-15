@@ -1,0 +1,45 @@
+version: 1
+transforms:
+  # FModalSheetRoute
+  - title: 'Rename FModalSheetRoute(resizeToAvoidBottomInset: ...) to FModalSheetRoute(avoidBottomInset: ...)'
+    date: 2026-11-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FModalSheetRoute
+    changes:
+      - kind: renameParameter
+        oldName: 'resizeToAvoidBottomInset'
+        newName: 'avoidBottomInset'
+
+  - title: 'Rename FModalSheetRoute.resizeToAvoidBottomInset to FModalSheetRoute.avoidBottomInset'
+    date: 2026-11-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'resizeToAvoidBottomInset'
+      inClass: FModalSheetRoute
+    changes:
+      - kind: rename
+        newName: 'avoidBottomInset'
+
+  # showFPersistentSheet
+  - title: 'Rename showFPersistentSheet(resizeToAvoidBottomInset: ...) to showFPersistentSheet(avoidBottomInset: ...)'
+    date: 2026-11-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      function: 'showFPersistentSheet'
+    changes:
+      - kind: renameParameter
+        oldName: 'resizeToAvoidBottomInset'
+        newName: 'avoidBottomInset'
+
+  # showFSheet
+  - title: 'Rename showFSheet(resizeToAvoidBottomInset: ...) to showFSheet(avoidBottomInset: ...)'
+    date: 2026-11-15
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      function: 'showFSheet'
+    changes:
+      - kind: renameParameter
+        oldName: 'resizeToAvoidBottomInset'
+        newName: 'avoidBottomInset'

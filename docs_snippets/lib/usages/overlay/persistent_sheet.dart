@@ -9,7 +9,7 @@ final show = showFPersistentSheet(
   mainAxisMaxRatio: 9 / 16,
   constraints: const BoxConstraints(),
   useSafeArea: false,
-  resizeToAvoidBottomInset: true,
+  avoidBottomInset: true,
   anchorPoint: null,
   // {@endcategory}
   // {@category "Behavior"}

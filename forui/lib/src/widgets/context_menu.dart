@@ -484,7 +484,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
                       cutout: widget.cutout ? cutout : null,
                       cutoutBuilder: widget.cutoutBuilder,
                       animation: _controller.fade,
-                      filter: style.barrierFilter!,
+                      filter: style.barrierFilter,
                       semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
                       barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
                       semanticsOnTapHint: localizations.barrierOnTapHint(localizations.contextMenuSemanticsLabel),

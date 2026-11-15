@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 
 import 'package:material_ui/material_ui.dart';
@@ -20,7 +22,7 @@ class Sheet extends StatefulWidget {
   final Offset? anchorPoint;
   final bool draggable;
   final bool useSafeArea;
-  final bool resizeToAvoidBottomInset;
+  final bool avoidBottomInset;
   final WidgetBuilder builder;
   final ValueChanged<Size>? onChange;
   final VoidCallback? onClosing;
@@ -35,7 +37,7 @@ class Sheet extends StatefulWidget {
     required this.anchorPoint,
     required this.draggable,
     required this.useSafeArea,
-    required this.resizeToAvoidBottomInset,
+    required this.avoidBottomInset,
     required this.builder,
     required this.onChange,
     required this.onClosing,
@@ -58,9 +60,7 @@ class Sheet extends StatefulWidget {
       ..add(DiagnosticsProperty('anchorPoint', anchorPoint))
       ..add(FlagProperty('draggable', value: draggable, ifTrue: 'draggable'))
       ..add(FlagProperty('useSafeArea', value: useSafeArea, ifTrue: 'useSafeArea'))
-      ..add(
-        FlagProperty('resizeToAvoidBottomInset', value: resizeToAvoidBottomInset, ifTrue: 'resizeToAvoidBottomInset'),
-      )
+      ..add(FlagProperty('avoidBottomInset', value: avoidBottomInset, ifTrue: 'avoidBottomInset'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(ObjectFlagProperty.has('onClosing', onClosing));
@@ -111,6 +111,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     assert(debugCheckHasMediaQuery(context));
 
+    final bottomViewInset = widget.avoidBottomInset && widget.side == .btt
+        ? MediaQuery.viewInsetsOf(context).bottom
+        : 0.0;
+
     Widget sheet = DisplayFeatureSubScreen(
       anchorPoint: widget.anchorPoint,
       child: Align(
@@ -123,7 +127,12 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         heightFactor: widget.side.vertical ? 1 : null,
         widthFactor: widget.side.vertical ? null : 1,
         child: ConstrainedBox(
-          constraints: widget.constraints,
+          constraints: bottomViewInset == 0
+              ? widget.constraints
+              : widget.constraints.copyWith(
+                  minHeight: widget.constraints.minHeight + bottomViewInset,
+                  maxHeight: widget.constraints.maxHeight + bottomViewInset,
+                ),
           child: NotificationListener<DraggableScrollableNotification>(
             key: _key,
             onNotification: (notification) {
@@ -132,7 +141,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
               }
               return false;
             },
-            child: widget.builder(context),
+            child: Builder(builder: widget.builder),
           ),
         ),
       ),
@@ -153,6 +162,19 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         child: sheet,
       );
     }
+
+    final data = MediaQuery.of(context);
+    final bottom = max(data.viewPadding.bottom, bottomViewInset);
+    sheet = MediaQuery(
+      data: bottomViewInset == 0
+          ? data
+          : data.copyWith(
+              padding: data.padding.copyWith(bottom: bottom),
+              viewPadding: data.viewPadding.copyWith(bottom: bottom),
+              viewInsets: data.viewInsets.copyWith(bottom: 0),
+            ),
+      child: sheet,
+    );
 
     sheet = switch ((widget.side, widget.useSafeArea)) {
       (.ttb, true) => SafeArea(top: false, child: sheet),
@@ -185,7 +207,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
               // 1 is the resting position and 0 is off-screen. A drag (including a drag-to-dismiss) tracks a real
               // translation.
               value: !_dragging && motion != .all ? 1.0 : progress,
-              bottomViewInset: widget.resizeToAvoidBottomInset ? MediaQuery.viewInsetsOf(context).bottom : 0,
+              bottomViewInset: bottomViewInset,
               mainAxisMaxRatio: widget.mainAxisMaxRatio,
               onChange: widget.onChange,
               child: Opacity(opacity: !_dragging && motion == .reduced ? progress : 1.0, child: child),

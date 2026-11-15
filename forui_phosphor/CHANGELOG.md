@@ -1,3 +1,7 @@
+## 0.28.0
+This update requires Flutter 3.50.0 and Dart 3.14.0.
+
+
 ## 0.27.0
 * Fix icons not being tree-shaken when unused on wasm.
 

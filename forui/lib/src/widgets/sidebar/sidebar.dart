@@ -192,11 +192,11 @@ class _FSidebarState extends State<FSidebar> {
             constraints: style.constraints,
             child: Column(
               children: [
-                if (widget.header != null) Padding(padding: style.headerPadding, child: widget.header!),
+                if (widget.header != null) Padding(padding: style.headerPadding, child: widget.header),
                 Expanded(
                   child: Padding(padding: style.contentPadding, child: widget.child),
                 ),
-                if (widget.footer != null) Padding(padding: style.footerPadding, child: widget.footer!),
+                if (widget.footer != null) Padding(padding: style.footerPadding, child: widget.footer),
               ],
             ),
           ),
