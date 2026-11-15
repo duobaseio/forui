@@ -10,10 +10,10 @@ importers:
     dependencies:
       '@next/third-parties':
         specifier: ^16.3.4
-        version: 16.4.5(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)
+        version: 16.4.6(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)
       '@opennextjs/cloudflare':
         specifier: 1.20.16
-        version: 1.20.16(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@26.6.6))
+        version: 1.20.16(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)(wrangler@4.159.0(@types/node@26.6.6))
       '@radix-ui/react-accordion':
         specifier: ^1.2.20
         version: 1.3.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -108,14 +108,14 @@ importers:
         specifier: ^8.6.0
         version: 8.6.0(react@19.3.1)
       fumadocs-core:
-        specifier: 16.18.3
-        version: 16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7)
+        specifier: 16.18.4
+        version: 16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7)
       fumadocs-mdx:
-        specifier: 15.5.2
-        version: 15.5.2(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.3.0)(fumadocs-core@16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)
+        specifier: 15.5.3
+        version: 15.5.3(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.3.0)(fumadocs-core@16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)
       fumadocs-ui:
-        specifier: 16.18.3
-        version: 16.18.3(@types/mdx@2.0.14)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(fumadocs-core@16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)
+        specifier: 16.18.4
+        version: 16.18.4(@types/mdx@2.0.14)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(fumadocs-core@16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5)
       input-otp:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -126,8 +126,8 @@ importers:
         specifier: ^12.0.0
         version: 12.3.0
       next:
-        specifier: 16.4.5
-        version: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: 16.4.6
+        version: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -196,8 +196,8 @@ importers:
         specifier: ^10.0.0
         version: 10.14.0(jiti@2.7.0)(supports-color@10.2.2)
       eslint-config-next:
-        specifier: 16.4.5
-        version: 16.4.5(@typescript-eslint/parser@8.72.0(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3))(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
+        specifier: 16.4.6
+        version: 16.4.6(@typescript-eslint/parser@8.72.0(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3))(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3)
       postcss:
         specifier: ^8.5.28
         version: 8.5.32
@@ -215,7 +215,7 @@ importers:
         version: 6.0.3
       wrangler:
         specifier: ^4.151.3
-        version: 4.158.0(@types/node@26.6.6)
+        version: 4.159.0(@types/node@26.6.6)
 
 packages:
 
@@ -571,32 +571,32 @@ packages:
       workerd:
         optional: true
 
-  '@cloudflare/workerd-darwin-64@1.20261104.1':
-    resolution: {integrity: sha512-5Bl+P1HT1/Ezk7Yrhyd+QkJ4VC/3naO0L3so/AkpgdaAHG3bmUmcCJBAtwH7O4JdVt8SMfm6EV89seiPpdjHJQ==}
+  '@cloudflare/workerd-darwin-64@1.20261109.1':
+    resolution: {integrity: sha512-ROhX8FGSXImzap1nC1hHpXTJpvD59jo14+q03f1irGOYmlnMgEXUlMfpM7p6vHiOFLmSXr+1mRM3th7ji8mLzA==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [darwin]
 
-  '@cloudflare/workerd-darwin-arm64@1.20261104.1':
-    resolution: {integrity: sha512-2fM+0klAjspAQ3Jl0iw0gVyGpNnkvPiZ50WHigPLhWQRiS+zhabFXVR07zz1RaPGkJHrMjEpWoEfjjm8nU5IOg==}
+  '@cloudflare/workerd-darwin-arm64@1.20261109.1':
+    resolution: {integrity: sha512-sJJzc4XBpALCPUgI3c8Xj/3Z3Q2l07aiflSyL1oM2R6oO5ZX2zT/4S0ykbcKNVSOgkAfVOxJtsJ4JE6f6//ICQ==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [darwin]
 
-  '@cloudflare/workerd-linux-64@1.20261104.1':
-    resolution: {integrity: sha512-VgpZIOooZHjSxjEZIJ1hkyt/jTfL3KeavkWCc0x7xxVu9zgkplaJF78Iv6CzoCTamQXyZeBaRQHS2bbAc70Vgg==}
+  '@cloudflare/workerd-linux-64@1.20261109.1':
+    resolution: {integrity: sha512-eIxylodRwwOc9NR0SEjyNqlibkUAUkzfPdoJG+d1UG7A2cMqZNBe+do0auzJBD8ISecZIiVSHKW+ceAj2aoKaw==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [linux]
 
-  '@cloudflare/workerd-linux-arm64@1.20261104.1':
-    resolution: {integrity: sha512-uEBJJHh2SbeQauRGrad7tIFIrpUQ5LUqZX40l7IKwYd0yeemvsno8f57w34Bx/pPpaSsNYVcV5oNFVbv+v/BOw==}
+  '@cloudflare/workerd-linux-arm64@1.20261109.1':
+    resolution: {integrity: sha512-PjP/eLwruDRD8GIFLRIS+6PhZqtxi7k4dSOoGK7pZGL2HTUMXuaCrClXinPW9jjbhWOiThyxZkpBvO2rdDxxVQ==}
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
 
-  '@cloudflare/workerd-windows-64@1.20261104.1':
-    resolution: {integrity: sha512-b/fnEU1leVm8UrI2EHQ4MSrK2vmnWdR1jefRyEUDZe3ucpKY0PWi4bVxWh5niZdlL0MIc4C5tXNXTlAMZpKDdA==}
+  '@cloudflare/workerd-windows-64@1.20261109.1':
+    resolution: {integrity: sha512-dBgjXtuNcqcSsI7FEASYAGk0FXaZrKeVcCjUzNuYVKpYM1u34DYzKRHzvS62X40OeJjhMs93VluNCSauJgvpuA==}
     engines: {node: '>=16'}
     cpu: [x64]
     os: [win32]
@@ -1098,66 +1098,66 @@ packages:
       '@emnapi/core': ^1.7.1 || ^2.0.0-alpha.4
       '@emnapi/runtime': ^1.7.1 || ^2.0.0-alpha.4
 
-  '@next/env@16.4.5':
-    resolution: {integrity: sha512-JwSPwpdkZL5VMl2jA/q+JI8MZdweAL3xmw5/tb9y/TLtmS0YXZnmYDzSihwk8xTj1OL+WM53gTqaj96yuLp6Xw==}
+  '@next/env@16.4.6':
+    resolution: {integrity: sha512-SunBjJ6t+oBtecS3dTjdVuMhUogP5wD/vrGL5EVuQYM1iS4O5ilL51HkiJ3sPjMzRHiCChvr4dbaSJbR7F3lxA==}
 
-  '@next/eslint-plugin-next@16.4.5':
-    resolution: {integrity: sha512-dNmc4y4En/34tWxaBFF2tG/R9GeiRwVPf7v8Az/Pqk8FcT4Uv0ePmrZKvWBL2nFy1QprPgJW+6XjfyV6jbRV3Q==}
+  '@next/eslint-plugin-next@16.4.6':
+    resolution: {integrity: sha512-HdqERVOafOD8JaUSAkwf9aSu/1rsHlkN8C5GcXYBH3C/z1MxBhZFxB5rz/xqMMRiIj7r9tIv8OCLQ9JWUxCvWA==}
 
-  '@next/swc-darwin-arm64@16.4.5':
-    resolution: {integrity: sha512-W5TniBzWKASbNNwHZ/S/f1MxQUXU/LdjklVMWA0Ujbfl7SZnUzFls45hO0i/sF7Bx1jJBWp7WWmoQajXtX/O8A==}
+  '@next/swc-darwin-arm64@16.4.6':
+    resolution: {integrity: sha512-kJ4VVZkley17xKaJx72QN2IBqjrj7zenCQZaUF0l9ShS/1Mt2kW4+Z5KGG6vgr3L/J562xTOizVyM1iA/u5nlg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@16.4.5':
-    resolution: {integrity: sha512-uWq4qkHapBDS1oFltWS4YxTb9pLHAtLNcpbuK6SmRsebLYZqpBML/j/C0op+50JYGTpZgVL/DWNt/6oWlamrrw==}
+  '@next/swc-darwin-x64@16.4.6':
+    resolution: {integrity: sha512-eIPGZIqC+8JKaeZmvnCANJQF4xWkkHqSnAAajtFxgwDMAOnCgxNvP52SeWZ41PyVwoe+Le/NQuZSaQ8j7YshSA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@16.4.5':
-    resolution: {integrity: sha512-FdRcyOx5u5P51mlAqLB9EXdd8jZO5fsdHtk4BAQSkqOywCsbTNN/rmw+jO7pnmjNdAtu2AG46NzbCL2FPDrrgw==}
+  '@next/swc-linux-arm64-gnu@16.4.6':
+    resolution: {integrity: sha512-9nI6O8vvczH2D9ZNdMGqb/3NuT15T9ksOZnAmx9/gjF2cOi74+xxyf1Hk96uIMfm14c9y6wHeBq6SH8g6udvcA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
 
-  '@next/swc-linux-arm64-musl@16.4.5':
-    resolution: {integrity: sha512-cyvmmgtRXR8aGVT86wi9Py53IlfyCx7P2fZxuAXAoTummDnhKtUyjrMeXfapqp4qgD+gT5RqyGD/VfA16jEK7Q==}
+  '@next/swc-linux-arm64-musl@16.4.6':
+    resolution: {integrity: sha512-7/qPhTxDp2ScluOJOhLuhWmlA17o1yZ0SIgpISBCpBxXgtnK4+KGywBpFkfLPiU1rnSM1faFGzYkH6i7JdTrqA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
     libc: [musl]
 
-  '@next/swc-linux-x64-gnu@16.4.5':
-    resolution: {integrity: sha512-hPc+Fl+N22DAvqZHq559NmamXboOX5Lu8I5Wl0DezfrhTk1Zz21NQeYoZDmNI/NjTcrdsVxM72Fzn2lI+Q+vAw==}
+  '@next/swc-linux-x64-gnu@16.4.6':
+    resolution: {integrity: sha512-oOpbNa8XOW1qCGd9VvzC4fbkkRxEls7/WI6tz+YHC0xRA7KpV1U7DrAnCPjzVyOk/karzWEepCOcTIDmwK8FwQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
 
-  '@next/swc-linux-x64-musl@16.4.5':
-    resolution: {integrity: sha512-gbACYE8IP/jlprNTpiWXHb8N9CofOzpnEwH2SrIz1dUbiJf1FbDssDupCAPeP1Taxe8mgG20sGZamJI7KFOdZw==}
+  '@next/swc-linux-x64-musl@16.4.6':
+    resolution: {integrity: sha512-aM8CZ+OR2EwXaAYw7KGkW2GDmNDsLBIRe1MMRZCJPTdw/xhTD0IMUVO4sf3KqrzuRouGzwwLZn34+gFeVXiUQA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
     libc: [musl]
 
-  '@next/swc-win32-arm64-msvc@16.4.5':
-    resolution: {integrity: sha512-+8gj++ZMo8H20Xh2ijjNqyFk5LPLw0AC4Fs4Tq/G94rjjQXhOjN4jgSWsWKPFsyY26hfIeemJIwKtMxOsp5GBA==}
+  '@next/swc-win32-arm64-msvc@16.4.6':
+    resolution: {integrity: sha512-U0p7/tEtqvHX2crhd841CDwKtp5CFkKXVjOhmfccR3Pvp64sj8KBwRqsvltqLOwVBbj0NtkxwXSDpEHYGbxeXQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@16.4.5':
-    resolution: {integrity: sha512-qNZj66pYXnaWLiF9R9GUbfBdrCv7kC6TaZfIwB2KH5WPc/8pEM3nVOj8hpQhWJU8S94rlH5MPDcX15+RrgUhiw==}
+  '@next/swc-win32-x64-msvc@16.4.6':
+    resolution: {integrity: sha512-3ZG15/5WIdlTQsIEvc9sPTTSL5XFrlLklIKmfF4fwsDnoAhu6NcBDXsk3mbGxNyo6aVLEGex+fHCv2MahY7a9g==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
 
-  '@next/third-parties@16.4.5':
-    resolution: {integrity: sha512-O6uK4ZIhbHIt/yFRrdL0Nx7rcPrhcG08oWCXz/avUrFWIEqouu48hkZ8iwlW3ilXrXxtceZSI3vK8o6Rq9oPzg==}
+  '@next/third-parties@16.4.6':
+    resolution: {integrity: sha512-Pp2FLFGkiy6FwLcuVTK1U/TNoZuC/+MK31wcp+MAM4dwjoGKufF3RxvgtnTlkBI14Oq1HSyeBqEw0KVoSsZlmg==}
     peerDependencies:
       next: ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
       react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
@@ -3305,8 +3305,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-config-next@16.4.5:
-    resolution: {integrity: sha512-mvh39zYLoNjpT5tVmf8xZu7i5lEOb5jN5cW6qD9OpeCp4GEEOeYta0Z2XyKiD0pYdlvm5/Td6Bi890maPRlIjg==}
+  eslint-config-next@16.4.6:
+    resolution: {integrity: sha512-IBGGrVf9E6pL0NGL0hmeicVGeSyv1VEzIWq6IecDqkw+YFByhEtDJS9u1r6s6a1VxK6rssh69KyNFQUgfaacqw==}
     peerDependencies:
       eslint: '>=9.0.0'
       typescript: '>=3.3.1'
@@ -3565,8 +3565,8 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
-  fumadocs-core@16.18.3:
-    resolution: {integrity: sha512-N8t+fW5XjtijM8vthi7ahAqDQ0RIMXa3/CrAIQRvb7H7r4Z8YKP9BxgTH4pW05SfPtSwmt5oy3WQG9VrPR1Vmw==}
+  fumadocs-core@16.18.4:
+    resolution: {integrity: sha512-HNwf451fHCDGMp/i+2KEmqny6vypDhkG6o3ewMs+uhU562+Cf7ck4Bv1T2J+mvviVLeQ1wW6tWoajp5S6KNr5A==}
     peerDependencies:
       '@mdx-js/mdx': '*'
       '@mixedbread/sdk': 0.x.x
@@ -3633,8 +3633,8 @@ packages:
       zod:
         optional: true
 
-  fumadocs-mdx@15.5.2:
-    resolution: {integrity: sha512-e5Xo1tovpqAtaykFAnDefaJHc/38Uztq/2pTLIRjsWhAousCLu3nwoHyOWhrwzo28G2JDeoAjJVhQIBF6IvQ6w==}
+  fumadocs-mdx@15.5.3:
+    resolution: {integrity: sha512-IYUCkfO79rjohwJXEok1oyEz/rmyaQgDclrrKY37na5n4PCF7dPQxXJSHwscmHP0Zz5ynSDyqrQHV55Ga48+dg==}
     hasBin: true
     peerDependencies:
       '@fumadocs/satteri': 0.x.x
@@ -3673,12 +3673,12 @@ packages:
       vite:
         optional: true
 
-  fumadocs-ui@16.18.3:
-    resolution: {integrity: sha512-J1UJpK+RsB9iNyz8S2yURgpx2PPKXRNEREK8894TnFfIMKxOhc5xYBUmIOdvNaYrkWpMZH+2lUFGTdSeelo1JA==}
+  fumadocs-ui@16.18.4:
+    resolution: {integrity: sha512-EXVEp3C5uaR5Xx8+0fRpQptoJhQn4nENojXyyp1hSuzOdd5+BRyuKUMPk56CSxl+0hgh9yYFCMOK7oqD5C34wg==}
     peerDependencies:
       '@types/mdx': '*'
       '@types/react': '*'
-      fumadocs-core: 16.18.3
+      fumadocs-core: 16.18.4
       next: 16.x.x
       react: ^19.2.0
       react-dom: ^19.2.0
@@ -4425,9 +4425,14 @@ packages:
     resolution: {integrity: sha512-Lbgzdk0h4juoQ9fCKXW4by0UJqj+nOOrI9MJ1sSj4nI8aI2eo1qmvQEie4VD1glsS250n15LsWsYtCugiStS5A==}
     engines: {node: '>=18'}
 
-  miniflare@5.20261104.0-beta:
-    resolution: {integrity: sha512-pYZ2n85+FYUb7s0oIVcQxO63/+wgaknm+A/kQjctJqshvHPJs3UtnzaIZ7xrrHMOk8atD7yAfauf6G9VAv7Upg==}
-    engines: {node: '>=22.0.0'}
+  miniflare@5.20261109.0-beta:
+    resolution: {integrity: sha512-mS60bC8hdUnbTpb3f5zxQtdxEAjPRFIlzMqOomOrb8b8WE+kq3+LdoHftkEhwL7c/IWd7don2jLhJRY9SxjyQA==}
+    engines: {node: '>=22.12.0'}
+    peerDependencies:
+      kerberos: ^2.0.0
+    peerDependenciesMeta:
+      kerberos:
+        optional: true
 
   minimatch@10.2.6:
     resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
@@ -4501,8 +4506,8 @@ packages:
       react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
       react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
 
-  next@16.4.5:
-    resolution: {integrity: sha512-rmdfsWosjTUO+6R0S3KokoIk6Kj0sWDRTe86tZHdqaWH/oXq/udX3/4xb+YQi7aWbyEFoglDU54kaifLCdXbBw==}
+  next@16.4.6:
+    resolution: {integrity: sha512-QZJiYhaZLJMo2KpkQGQIwvmd79WVsAWeYIU554a8d7zArS3si/IRy3lBNV/rtYhE70oLwdLYhPAXLPx8HwcwtA==}
     engines: {node: '>=20.9.0'}
     hasBin: true
     peerDependencies:
@@ -5333,17 +5338,17 @@ packages:
     resolution: {integrity: sha512-BN22B5eaMMI9UMtjrGd5g5eCYPpCPDUy0FJXbYsaT5zYxjFOckS53SQDE3pWkVoWpHXVb3BrYcEN4Twa55B5cA==}
     engines: {node: '>=0.10.0'}
 
-  workerd@1.20261104.1:
-    resolution: {integrity: sha512-JuiKY9k/4V4UE2xsupaTvZ1SF6o2a8sg+/zfq/DaSDwvH+o7t2ZEFuIWNEnryfeFdP47/tz/p828Kvl4ptPlrA==}
+  workerd@1.20261109.1:
+    resolution: {integrity: sha512-gEqHTBDsqn3fIYrlnGobonu57xGOP1TgvNN/7qKhuexn+lxA41kRqe8aq6f/4ZrK/ydiDjL8pl5De/yAJwFwxg==}
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.158.0:
-    resolution: {integrity: sha512-qZdTxIOU8smBVTHzTJVwHiPZB2lJ9+Js79fqKK05l+AbU5hXLWLUHO6oO1vni5G4hjYQTSBAHoGHtSocWPG0FA==}
-    engines: {node: '>=22.0.0'}
+  wrangler@4.159.0:
+    resolution: {integrity: sha512-5XE9FKel1RoVU/mtiDpLSDE1xF1reifP0F16UFuTHCYIpUusrBM1RBOhBTOquP4/mB3HzkC2EdbY2QKxAz35fA==}
+    engines: {node: '>=22.12.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^5.20261104.1
+      '@cloudflare/workers-types': ^5.20261109.1
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -6156,25 +6161,25 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
-  '@cloudflare/unenv-preset@2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261104.1)':
+  '@cloudflare/unenv-preset@2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261109.1)':
     dependencies:
       unenv: 2.0.0-rc.24
     optionalDependencies:
-      workerd: 1.20261104.1
+      workerd: 1.20261109.1
 
-  '@cloudflare/workerd-darwin-64@1.20261104.1':
+  '@cloudflare/workerd-darwin-64@1.20261109.1':
     optional: true
 
-  '@cloudflare/workerd-darwin-arm64@1.20261104.1':
+  '@cloudflare/workerd-darwin-arm64@1.20261109.1':
     optional: true
 
-  '@cloudflare/workerd-linux-64@1.20261104.1':
+  '@cloudflare/workerd-linux-64@1.20261109.1':
     optional: true
 
-  '@cloudflare/workerd-linux-arm64@1.20261104.1':
+  '@cloudflare/workerd-linux-arm64@1.20261109.1':
     optional: true
 
-  '@cloudflare/workerd-windows-64@1.20261104.1':
+  '@cloudflare/workerd-windows-64@1.20261109.1':
     optional: true
 
   '@cspotcode/source-map-support@0.8.1':
@@ -6582,42 +6587,42 @@ snapshots:
       '@tybys/wasm-util': 0.10.4
     optional: true
 
-  '@next/env@16.4.5': {}
+  '@next/env@16.4.6': {}
 
-  '@next/eslint-plugin-next@16.4.5(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))':
+  '@next/eslint-plugin-next@16.4.6(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))':
     dependencies:
       '@eslint-community/eslint-utils': 4.9.1(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))
       fast-glob: 3.3.1
     transitivePeerDependencies:
       - eslint
 
-  '@next/swc-darwin-arm64@16.4.5':
+  '@next/swc-darwin-arm64@16.4.6':
     optional: true
 
-  '@next/swc-darwin-x64@16.4.5':
+  '@next/swc-darwin-x64@16.4.6':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@16.4.5':
+  '@next/swc-linux-arm64-gnu@16.4.6':
     optional: true
 
-  '@next/swc-linux-arm64-musl@16.4.5':
+  '@next/swc-linux-arm64-musl@16.4.6':
     optional: true
 
-  '@next/swc-linux-x64-gnu@16.4.5':
+  '@next/swc-linux-x64-gnu@16.4.6':
     optional: true
 
-  '@next/swc-linux-x64-musl@16.4.5':
+  '@next/swc-linux-x64-musl@16.4.6':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@16.4.5':
+  '@next/swc-win32-arm64-msvc@16.4.6':
     optional: true
 
-  '@next/swc-win32-x64-msvc@16.4.5':
+  '@next/swc-win32-x64-msvc@16.4.6':
     optional: true
 
-  '@next/third-parties@16.4.5(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)':
+  '@next/third-parties@16.4.6(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)':
     dependencies:
-      next: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1
       third-party-capital: 1.0.20
 
@@ -6650,7 +6655,7 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@opennextjs/aws@4.1.15(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)':
+  '@opennextjs/aws@4.1.15(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)':
     dependencies:
       '@ast-grep/napi': 0.45.3
       '@aws-sdk/client-cloudfront': 3.984.0
@@ -6666,26 +6671,26 @@ snapshots:
       cookie: 1.1.1
       esbuild: 0.28.2
       express: 5.3.0(supports-color@10.2.2)
-      next: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       path-to-regexp: 6.3.0
       urlpattern-polyfill: 10.1.0
       yaml: 2.9.1
     transitivePeerDependencies:
       - supports-color
 
-  '@opennextjs/cloudflare@1.20.16(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)(wrangler@4.158.0(@types/node@26.6.6))':
+  '@opennextjs/cloudflare@1.20.16(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)(wrangler@4.159.0(@types/node@26.6.6))':
     dependencies:
       '@ast-grep/napi': 0.45.3
       '@dotenvx/dotenvx': 2.38.2
-      '@opennextjs/aws': 4.1.15(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)
+      '@opennextjs/aws': 4.1.15(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(supports-color@10.2.2)
       ci-info: 4.4.0
       cloudflare: 4.5.0
       comment-json: 4.6.2
       enquirer: 2.4.1
       glob: 13.0.6
-      next: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       ts-tqdm: 0.8.6
-      wrangler: 4.158.0(@types/node@26.6.6)
+      wrangler: 4.159.0(@types/node@26.6.6)
       yargs: 18.2.0
     transitivePeerDependencies:
       - diff
@@ -8983,9 +8988,9 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-config-next@16.4.5(@typescript-eslint/parser@8.72.0(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3))(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3):
+  eslint-config-next@16.4.6(@typescript-eslint/parser@8.72.0(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3))(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)(typescript@6.0.3):
     dependencies:
-      '@next/eslint-plugin-next': 16.4.5(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))
+      '@next/eslint-plugin-next': 16.4.6(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))
       eslint: 10.14.0(jiti@2.7.0)(supports-color@10.2.2)
       eslint-import-resolver-node: 0.3.10(supports-color@10.2.2)
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0)(eslint@10.14.0(jiti@2.7.0)(supports-color@10.2.2))(supports-color@10.2.2)
@@ -9364,7 +9369,7 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
-  fumadocs-core@16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7):
+  fumadocs-core@16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7):
     dependencies:
       '@fumari/image-size': 0.1.1
       estree-util-value-to-estree: 3.5.0
@@ -9392,14 +9397,14 @@ snapshots:
       '@types/mdast': 4.0.4
       '@types/react': 19.3.0
       lucide-react: 1.70.0(@types/react@19.3.0)(react@19.3.1)
-      next: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
       zod: 4.6.7
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-mdx@15.5.2(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.3.0)(fumadocs-core@16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(supports-color@10.2.2):
+  fumadocs-mdx@15.5.3(@types/mdast@4.0.4)(@types/mdx@2.0.14)(@types/react@19.3.0)(fumadocs-core@16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react@19.3.1)(supports-color@10.2.2):
     dependencies:
       '@mdx-js/mdx': 3.1.1(supports-color@10.2.2)
       '@standard-schema/spec': 1.1.0
@@ -9408,7 +9413,7 @@ snapshots:
       chokidar: 6.0.0
       esbuild: 0.28.2
       estree-util-value-to-estree: 3.5.0
-      fumadocs-core: 16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7)
+      fumadocs-core: 16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7)
       github-slugger: 2.0.0
       magic-string: 1.4.5
       mdast-util-from-markdown: 2.1.0(supports-color@10.2.2)
@@ -9428,12 +9433,12 @@ snapshots:
       '@types/mdast': 4.0.4
       '@types/mdx': 2.0.14
       '@types/react': 19.3.0
-      next: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       react: 19.3.1
     transitivePeerDependencies:
       - supports-color
 
-  fumadocs-ui@16.18.3(@types/mdx@2.0.14)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(fumadocs-core@16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5):
+  fumadocs-ui@16.18.4(@types/mdx@2.0.14)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(fumadocs-core@16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(tailwindcss@4.3.5):
     dependencies:
       '@fuma-translate/react': 1.0.2(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       '@fumadocs/tailwind': 0.1.5(tailwindcss@4.3.5)
@@ -9449,7 +9454,7 @@ snapshots:
       '@radix-ui/react-tabs': 1.2.1(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       class-variance-authority: 0.7.1
       cn: 0.5.2
-      fumadocs-core: 16.18.3(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7)
+      fumadocs-core: 16.18.4(@mdx-js/mdx@3.1.1(supports-color@10.2.2))(@types/estree-jsx@1.0.5)(@types/hast@3.0.5)(@types/mdast@4.0.4)(@types/react@19.3.0)(lucide-react@1.70.0(@types/react@19.3.0)(react@19.3.1))(next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1))(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(supports-color@10.2.2)(zod@4.6.7)
       lucide-react: 1.70.0(@types/react@19.3.0)(react@19.3.1)
       motion: 14.12.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next-themes: 0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
@@ -9461,7 +9466,7 @@ snapshots:
     optionalDependencies:
       '@types/mdx': 2.0.14
       '@types/react': 19.3.0
-      next: 16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      next: 16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
     transitivePeerDependencies:
       - '@types/react-dom'
       - remix
@@ -10496,12 +10501,12 @@ snapshots:
     dependencies:
       mime-db: 1.54.0
 
-  miniflare@5.20261104.0-beta(@types/node@26.6.6):
+  miniflare@5.20261109.0-beta(@types/node@26.6.6):
     dependencies:
       '@cspotcode/source-map-support': 0.8.1
       sharp: 0.35.5(@types/node@26.6.6)
       undici: 7.30.1
-      workerd: 1.20261104.1
+      workerd: 1.20261109.1
       ws: 8.21.0
       youch: 4.1.0-beta.10
     transitivePeerDependencies:
@@ -10562,9 +10567,9 @@ snapshots:
       react: 19.3.1
       react-dom: 19.3.1(react@19.3.1)
 
-  next@16.4.5(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  next@16.4.6(@babel/core@7.29.7(supports-color@10.2.2))(@types/node@26.6.6)(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
-      '@next/env': 16.4.5
+      '@next/env': 16.4.6
       '@swc/helpers': 0.5.23
       baseline-browser-mapping: 2.11.31
       caniuse-lite: 1.0.30001819
@@ -10573,14 +10578,14 @@ snapshots:
       react-dom: 19.3.1(react@19.3.1)
       styled-jsx: 5.1.6(@babel/core@7.29.7(supports-color@10.2.2))(react@19.3.1)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 16.4.5
-      '@next/swc-darwin-x64': 16.4.5
-      '@next/swc-linux-arm64-gnu': 16.4.5
-      '@next/swc-linux-arm64-musl': 16.4.5
-      '@next/swc-linux-x64-gnu': 16.4.5
-      '@next/swc-linux-x64-musl': 16.4.5
-      '@next/swc-win32-arm64-msvc': 16.4.5
-      '@next/swc-win32-x64-msvc': 16.4.5
+      '@next/swc-darwin-arm64': 16.4.6
+      '@next/swc-darwin-x64': 16.4.6
+      '@next/swc-linux-arm64-gnu': 16.4.6
+      '@next/swc-linux-arm64-musl': 16.4.6
+      '@next/swc-linux-x64-gnu': 16.4.6
+      '@next/swc-linux-x64-musl': 16.4.6
+      '@next/swc-win32-arm64-msvc': 16.4.6
+      '@next/swc-win32-x64-msvc': 16.4.6
       sharp: 0.35.5(@types/node@26.6.6)
     transitivePeerDependencies:
       - '@babel/core'
@@ -11657,30 +11662,31 @@ snapshots:
 
   word-wrap@1.2.5: {}
 
-  workerd@1.20261104.1:
+  workerd@1.20261109.1:
     optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20261104.1
-      '@cloudflare/workerd-darwin-arm64': 1.20261104.1
-      '@cloudflare/workerd-linux-64': 1.20261104.1
-      '@cloudflare/workerd-linux-arm64': 1.20261104.1
-      '@cloudflare/workerd-windows-64': 1.20261104.1
+      '@cloudflare/workerd-darwin-64': 1.20261109.1
+      '@cloudflare/workerd-darwin-arm64': 1.20261109.1
+      '@cloudflare/workerd-linux-64': 1.20261109.1
+      '@cloudflare/workerd-linux-arm64': 1.20261109.1
+      '@cloudflare/workerd-windows-64': 1.20261109.1
 
-  wrangler@4.158.0(@types/node@26.6.6):
+  wrangler@4.159.0(@types/node@26.6.6):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
-      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261104.1)
+      '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261109.1)
       '@cspotcode/source-map-support': 0.8.1
       blake3-wasm: 2.1.5
       esbuild: 0.28.2
-      miniflare: 5.20261104.0-beta(@types/node@26.6.6)
+      miniflare: 5.20261109.0-beta(@types/node@26.6.6)
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
-      workerd: 1.20261104.1
+      workerd: 1.20261109.1
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:
       - '@types/node'
       - bufferutil
+      - kerberos
       - utf-8-validate
 
   wrap-ansi@7.0.0:
