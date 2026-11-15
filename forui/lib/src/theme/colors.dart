@@ -135,6 +135,7 @@ final class const FColors._({
 
   final Map<Object, ThemeExtension<dynamic>> _extensions = const {},
 }) with Diagnosticable {
+  /// Creates a [FColors].
   this
     : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'hoverLighten must be between 0 and 1.'),
       assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'hoverDarken must be between 0 and 1.'),

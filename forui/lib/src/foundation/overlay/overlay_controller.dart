@@ -33,6 +33,7 @@ class const FOverlayManagedControl({
   /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override final bool? initial,
 }) extends FOverlayControl with _$FOverlayManagedControlMixin {
+  /// Creates a [FOverlayManagedControl].
   this
     : assert(
         controller == null || initial == null,
