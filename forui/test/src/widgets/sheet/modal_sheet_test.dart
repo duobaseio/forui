@@ -162,11 +162,7 @@ void main() {
         child: Builder(
           builder: (context) => FButton.icon(
             child: const Icon(FLucideIcons.chevronRight),
-            onPress: () => showFSheet(
-              context: context,
-              side: .btt,
-              builder: (_) => const FTextField(autofocus: true),
-            ),
+            onPress: () => showFSheet(context: context, side: .btt, builder: (_) => const FTextField(autofocus: true)),
           ),
         ),
       ),
