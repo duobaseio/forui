@@ -34,7 +34,7 @@ dev_dependencies:
   analyzer: ^13.3.0
   code_builder: ^4.10.1
   collection: ^1.18.0
-  flint: ^2.17.0
+  flint: '>=2.17.0 <2.18.0'
   lints: ^6.0.0
   material_ui: ^1.0.0
   sugar: ^4.0.0

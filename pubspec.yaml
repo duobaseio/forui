@@ -14,4 +14,4 @@ workspace:
   - spotlight
 
 dev_dependencies:
-  flint: ^2.17.0
+  flint: '>=2.17.0 <2.18.0'
