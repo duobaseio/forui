@@ -1,3 +1,9 @@
+## 0.28.1 (Next)
+
+### `FTileGroup`
+* Fix `FTileGroupStyle.inherit(...)` description and error text styles not fully inheriting `typography.body.xs2`.
+
+
 ## 0.28.0
 
 This update requires Flutter 3.50.0 and Dart 3.14.0.

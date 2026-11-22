@@ -99,6 +99,43 @@ void main() {
     expect(count, 1);
   });
 
+  for (final (name, theme) in [('touch', FTheme.neutral.light.touch), ('desktop', FTheme.neutral.light.desktop)]) {
+    test('$name FTileGroupStyle.inherit(...) uses typography.body.xs2 for description and error', () {
+      final typography = theme.typography.copyWith(
+        body: theme.typography.body.copyWith(
+          xs2: theme.typography.body.xs2.copyWith(fontFamily: 'Custom', fontWeight: .w700, letterSpacing: 2),
+        ),
+      );
+
+      final style = FTileGroupStyle.inherit(
+        colors: theme.colors,
+        typography: typography,
+        style: theme.style,
+        hapticFeedback: theme.hapticFeedback,
+      );
+
+      final formField = theme.style.formFieldStyle;
+      for (final (actual, expected) in [
+        (style.descriptionTextStyle.base, formField.descriptionTextStyle.base),
+        (
+          style.descriptionTextStyle.resolve({FFormFieldVariant.disabled}),
+          formField.descriptionTextStyle.resolve({FFormFieldVariant.disabled}),
+        ),
+        (style.errorTextStyle.base, formField.errorTextStyle.base),
+        (
+          style.errorTextStyle.resolve({FFormFieldErrorVariant.disabled}),
+          formField.errorTextStyle.resolve({FFormFieldErrorVariant.disabled}),
+        ),
+      ]) {
+        expect(actual.fontFamily, 'Custom');
+        expect(actual.fontWeight, FontWeight.w700);
+        expect(actual.letterSpacing, 2);
+        expect(actual.fontSize, typography.body.xs2.fontSize);
+        expect(actual.color, expected.color);
+      }
+    });
+  }
+
   group('design system', skip: !Platform.isMacOS, () {
     for (final (variant, name) in [(FItemVariant.primary, 'normal'), (FItemVariant.destructive, 'destructive')]) {
       testWidgets('touch $name tile has consistent height', (tester) async {
