@@ -574,6 +574,18 @@ void main() {
       semantics.dispose();
     });
 
+    testWidgets('day cell is focusable', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(calendar(selectionControl: .managedSingle(), control: control()));
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Monday, July 15, 2024')),
+        isSemantics(hasTapAction: true, hasFocusAction: true, isFocusable: true),
+      );
+
+      semantics.dispose();
+    });
+
     testWidgets('day cell label includes the weekday and today status', (tester) async {
       final semantics = tester.ensureSemantics();
       await tester.pumpWidget(calendar(selectionControl: .managedSingle(), control: control()));

@@ -700,6 +700,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   Widget build(BuildContext context) {
     var tappable = _decorate(context, widget.builder(context, _current, widget.child));
+    // Below Focus and the gesture detector so that only the child's semantics are excluded.
+    tappable = ExcludeSemantics(excluding: widget.excludeSemantics, child: tappable);
     if (!widget.selectable) {
       tappable = SelectionContainer.disabled(child: tappable);
     }
@@ -716,12 +718,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
       inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
       role: widget.semanticsRole,
       selected: widget.semanticsChecked == null ? widget.selected : null,
-      excludeSemantics: widget.excludeSemantics,
       // When grouped (_entries != null), onTap/onLongPress are nullified so the group owns pointer gestures. We
       // forward onPress/onLongPress so screen readers can activate the control. Leave them null otherwise to avoid
       // double-numbering.
-      onTap: (widget.excludeSemantics || _entries != null) ? widget._onPress : null,
-      onLongPress: (widget.excludeSemantics || _entries != null) ? widget.onLongPress : null,
+      onTap: _entries != null ? widget._onPress : null,
+      onLongPress: _entries != null ? widget.onLongPress : null,
       // Below Semantics so Shortcuts merge into single container. Workaround a repositioning bug on scroll.
       child: Shortcuts(
         shortcuts: widget.shortcuts,

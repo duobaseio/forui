@@ -238,9 +238,9 @@ void main() {
   });
 
   group('accessibility', () {
-    // FButton sets excludeSemantics when semanticsLabel is non-null, which would
-    // otherwise drop SemanticsAction.tap (#1144).
-    testWidgets('semanticsLabel keeps a single tap action', (tester) async {
+    // FButton sets excludeSemantics when semanticsLabel is non-null, which would otherwise drop the tap action (#1144)
+    // and focusability (#1248).
+    testWidgets('semanticsLabel keeps a single tap action and focusability', (tester) async {
       final semantics = tester.ensureSemantics();
       var presses = 0;
 
@@ -250,7 +250,10 @@ void main() {
         ),
       );
 
-      expect(tester.getSemantics(find.text('Visible')), isSemantics(label: 'Save', hasTapAction: true));
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Save')),
+        isSemantics(label: 'Save', hasTapAction: true, hasFocusAction: true, isFocusable: true),
+      );
       expect(find.semantics.byAction(SemanticsAction.tap), findsOneWidget);
 
       tester.semantics.tap(find.semantics.byLabel('Save'));
