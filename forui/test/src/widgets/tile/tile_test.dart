@@ -136,6 +136,38 @@ void main() {
     });
   }
 
+  test('FTileGroupStyle.inherit(...) uses formFieldStyle colors for description and error', () {
+    final theme = FTheme.neutral.light.touch;
+    const base = TextStyle(color: Color(0xFF000001));
+    final style = FTileGroupStyle.inherit(
+      colors: theme.colors,
+      typography: theme.typography,
+      style: theme.style.copyWith(
+        formFieldStyle: FFormFieldStyle(
+          labelTextStyle: theme.style.formFieldStyle.labelTextStyle,
+          descriptionTextStyle: FVariants.from(
+            base,
+            variants: {
+              [.disabled]: const .delta(color: Color(0xFF000002)),
+            },
+          ),
+          errorTextStyle: FVariants.from(
+            base,
+            variants: {
+              [.disabled]: const .delta(color: Color(0xFF000003)),
+            },
+          ),
+        ),
+      ),
+      hapticFeedback: theme.hapticFeedback,
+    );
+
+    expect(style.descriptionTextStyle.base.color, const Color(0xFF000001));
+    expect(style.descriptionTextStyle.resolve({FFormFieldVariant.disabled}).color, const Color(0xFF000002));
+    expect(style.errorTextStyle.base.color, const Color(0xFF000001));
+    expect(style.errorTextStyle.resolve({FFormFieldErrorVariant.disabled}).color, const Color(0xFF000003));
+  });
+
   group('design system', skip: !Platform.isMacOS, () {
     for (final (variant, name) in [(FItemVariant.primary, 'normal'), (FItemVariant.destructive, 'destructive')]) {
       testWidgets('touch $name tile has consistent height', (tester) async {

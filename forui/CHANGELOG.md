@@ -1,6 +1,9 @@
 ## 0.28.1 (Next)
 
 ### `FTileGroup`
+* Change `FTileGroupStyle.inherit(...)` description and error text styles to only inherit colors from
+  `FStyle.formFieldStyle`.
+
 * Fix `FTileGroupStyle.inherit(...)` description and error text styles not fully inheriting `typography.body.xs2`.
 
 

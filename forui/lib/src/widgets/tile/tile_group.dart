@@ -490,13 +490,21 @@ class FTileGroupStyle({
         color: style.formFieldStyle.descriptionTextStyle.base.color ?? colors.mutedForeground,
       ),
       variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+        [.disabled]: .delta(
+          color:
+              style.formFieldStyle.descriptionTextStyle.resolve({FFormFieldVariant.disabled}).color ??
+              colors.disable(colors.mutedForeground),
+        ),
       },
     ),
     errorTextStyle: FVariants.from(
       typography.body.xs2.copyWith(color: style.formFieldStyle.errorTextStyle.base.color ?? colors.error),
       variants: {
-        [.disabled]: .delta(color: colors.disable(colors.error)),
+        [.disabled]: .delta(
+          color:
+              style.formFieldStyle.errorTextStyle.resolve({FFormFieldVariant.disabled}).color ??
+              colors.disable(colors.error),
+        ),
       },
     ),
   );
