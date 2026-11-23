@@ -1,5 +1,9 @@
 ## 0.28.1 (Next)
 
+### `FScaffold`
+* Fix `FScaffold` throwing when the bottom view inset is taller than the scaffold.
+
+
 ### `FTileGroup`
 * Change `FTileGroupStyle.inherit(...)` description and error text styles to only inherit colors from
   `FStyle.formFieldStyle`.
