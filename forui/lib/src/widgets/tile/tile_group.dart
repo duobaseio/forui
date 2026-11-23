@@ -485,11 +485,27 @@ class FTileGroupStyle({
         },
       ),
     ),
-    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-      .all(.delta(fontSize: typography.body.xs2.fontSize, height: typography.body.xs2.height)),
-    ]),
-    errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-      .all(.delta(fontSize: typography.body.xs2.fontSize, height: typography.body.xs2.height)),
-    ]),
+    descriptionTextStyle: FVariants.from(
+      typography.body.xs2.copyWith(
+        color: style.formFieldStyle.descriptionTextStyle.base.color ?? colors.mutedForeground,
+      ),
+      variants: {
+        [.disabled]: .delta(
+          color:
+              style.formFieldStyle.descriptionTextStyle.resolve({FFormFieldVariant.disabled}).color ??
+              colors.disable(colors.mutedForeground),
+        ),
+      },
+    ),
+    errorTextStyle: FVariants.from(
+      typography.body.xs2.copyWith(color: style.formFieldStyle.errorTextStyle.base.color ?? colors.error),
+      variants: {
+        [.disabled]: .delta(
+          color:
+              style.formFieldStyle.errorTextStyle.resolve({FFormFieldVariant.disabled}).color ??
+              colors.disable(colors.error),
+        ),
+      },
+    ),
   );
 }
