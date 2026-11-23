@@ -32,5 +32,22 @@ void main() {
       expect(iconTheme.color, testIconColor);
       expect(iconTheme.size, testIconSize);
     });
+
+    for (final size in [Size.zero, const Size(400, 200)]) {
+      testWidgets('bottom view inset taller than scaffold - $size', (tester) async {
+        tester.view.devicePixelRatio = 1;
+        tester.view.physicalSize = size;
+        tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+        addTearDown(tester.view.reset);
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: const FScaffold(header: Text('header'), footer: Text('footer'), child: Text('body')),
+          ),
+        );
+
+        expect(tester.takeException(), null);
+      });
+    }
   });
 }

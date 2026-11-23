@@ -1,5 +1,21 @@
 ## 0.28.1 (Next)
 
+### `FButton`
+* Fix `FButton` with a `semanticsLabel` not being focusable by assistive technologies.
+
+
+### `FCalendar` & `FLineCalendar`
+* Fix dates not being focusable by assistive technologies.
+
+
+### `FScaffold`
+* Fix `FScaffold` throwing when the bottom view inset is taller than the scaffold.
+
+
+### `FTappable`
+* Fix `FTappable(excludeSemantics: true)` not being focusable by assistive technologies.
+
+
 ### `FTileGroup`
 * Change `FTileGroupStyle.inherit(...)` description and error text styles to only inherit colors from
   `FStyle.formFieldStyle`.

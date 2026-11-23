@@ -250,7 +250,7 @@ class _RenderScaffold extends RenderBox
     final footer = lastChild!..layout(footerConstraints, parentUsesSize: true);
     final footerHeight = _resizeToAvoidBottomInset ? max(insets.bottom, footer.size.height) : footer.size.height;
 
-    final othersHeight = constraints.maxHeight - footerHeight;
+    final othersHeight = max(0.0, constraints.maxHeight - footerHeight);
     others.layout(constraints.copyWith(minHeight: 0, maxHeight: othersHeight));
 
     others.data.offset = .zero;

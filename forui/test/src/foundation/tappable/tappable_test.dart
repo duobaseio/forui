@@ -1379,9 +1379,8 @@ void main() {
       );
     });
 
-    // excludeSemantics drops GestureDetector tap from the tree; Semantics.onTap must
-    // compensate so Voice Control / screen readers can still activate the control.
-    testWidgets('excludeSemantics keeps a single tap action on the labelled node', (tester) async {
+    // excludeSemantics must only drop the child's semantics, not the tappable's own actions and focusability (#1248).
+    testWidgets('excludeSemantics keeps a single tap action and focusability on the labelled node', (tester) async {
       final semantics = tester.ensureSemantics();
       var presses = 0;
 
@@ -1396,7 +1395,10 @@ void main() {
         ),
       );
 
-      expect(tester.getSemantics(find.text('tappable')), isSemantics(label: 'Save', hasTapAction: true));
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Save')),
+        isSemantics(label: 'Save', hasTapAction: true, hasFocusAction: true, isFocusable: true),
+      );
       expect(find.semantics.byAction(SemanticsAction.tap), findsOneWidget);
 
       tester.semantics.tap(find.semantics.byLabel('Save'));

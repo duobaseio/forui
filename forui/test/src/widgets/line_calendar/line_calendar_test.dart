@@ -31,6 +31,23 @@ void main() {
       semantics.dispose();
     });
 
+    testWidgets('day is focusable', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('November 29, 2024')),
+        isSemantics(hasTapAction: true, hasFocusAction: true, isFocusable: true),
+      );
+
+      semantics.dispose();
+    });
+
     testWidgets("day's label includes its today status", (tester) async {
       final semantics = tester.ensureSemantics();
       await tester.pumpWidget(
