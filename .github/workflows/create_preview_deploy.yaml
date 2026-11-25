@@ -80,7 +80,7 @@ jobs:
           issue-number: ${{ steps.meta.outputs.pr_number }}
           comment-author: 'auto-maid[bot]'
           body-includes: 'Create Preview'
-      - uses: chuhlomin/render-template@v1.12
+      - uses: chuhlomin/render-template@v1.13
         id: render-markdown
         with:
           template: .github/create_preview_template.md
